@@ -1,0 +1,1682 @@
+[
+  {
+    "id": "P1",
+    "type": "Pulse",
+    "name": "浮脈",
+    "description": "輕取即得，重按稍弱而不空",
+    "category": "浮脈類",
+    "main_disease": "表證，亦主虛證",
+    "symptoms": [
+      "惡寒",
+      "發熱",
+      "頭痛",
+      "乏力",
+      "急性肺炎早期",
+      "急性腎炎水腫",
+      "急性腸胃炎",
+      "感冒初期",
+      "流清涕",
+      "腹瀉",
+      "腹痛",
+      "面部浮腫",
+      "鼻塞"
+    ],
+    "knowledge_chain": "浮脈（輕取即得，重按稍弱而不空）屬於浮脈類，主要對應表證，亦主虛證，常見現代病症有惡寒, 發熱, 頭痛, 乏力, 急性肺炎早期, 急性腎炎水腫, 急性腸胃炎, 感冒初期, 流清涕, 腹瀉, 腹痛, 面部浮腫, 鼻塞。",
+    "neo4j_id": "P1",
+    "category_id": "PC1",
+    "main_disease_id": "MD1",
+    "symptom_ids": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12",
+      "S13"
+    ],
+    "reference_links": {
+      "pulse_category": "PC1",
+      "main_disease": "MD1",
+      "symptoms": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S13"
+      ]
+    },
+    "name_en": "Floating pulse",
+    "description_en": "Light touch is effective, heavy pressure is less effective but not ineffective.",
+    "category_en": "Floating pulse category",
+    "main_disease_en": "treating both manifestation and root",
+    "symptoms_en": [
+      "Chill",
+      "Fever",
+      "Headache",
+      "Asthemia",
+      "Early stage of acute pneumonia",
+      "Acute Nephritic Edema",
+      "Acute gastroenteritis",
+      "Onset of a cold",
+      "Rhinorrhea",
+      "Diarrhea",
+      "Abdominal pain",
+      "Facial edema",
+      "Nasal congestion"
+    ],
+    "knowledge_chain_en": "Floating pulse (light touch, heavy press slightly weak but not empty) belongs to the floating pulse category, mainly corresponding to superficial symptoms, and also dominates deficiency symptoms. Common modern diseases include cold, fever, headache, weakness, early acute pneumonia, acute nephritis edema, acute gastroenteritis, initial common cold, clear nasal discharge, diarrhea, abdominal pain, facial edema, and nasal congestion."
+  },
+  {
+    "id": "P2",
+    "type": "Pulse",
+    "name": "洪脈",
+    "description": "洪脈極大，狀若波濤洶湧，來盛去衰",
+    "category": "浮脈類",
+    "main_disease": "氣分熱盛",
+    "symptoms": [
+      "高熱",
+      "口渴",
+      "煩躁",
+      "心跳加速",
+      "大量出汗",
+      "心煩易怒",
+      "極度口渴",
+      "面紅喘粗",
+      "高燒不退"
+    ],
+    "knowledge_chain": "洪脈（洪脈極大，狀若波濤洶湧，來盛去衰）屬於浮脈類，主要對應氣分熱盛，常見現代病症有高熱, 口渴, 煩躁, 心跳加速, 大量出汗, 心煩易怒, 極度口渴, 面紅喘粗, 高燒不退。",
+    "neo4j_id": "P2",
+    "category_id": "PC1",
+    "main_disease_id": "MD2",
+    "symptom_ids": [
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "reference_links": {
+      "pulse_category": "PC1",
+      "main_disease": "MD2",
+      "symptoms": [
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22"
+      ]
+    },
+    "name_en": "Rushing pulse",
+    "description_en": "The pulse is extremely large, like a turbulent wave, with a strong and weak beat.",
+    "category_en": "Superficial vein thrombosis",
+    "main_disease_en": "Exuberance of Qi and Blood due to Heat",
+    "symptoms_en": [
+      "Hyperpyrexia",
+      "Thirst",
+      "Irritability",
+      "Tachycardia",
+      "Hyperhidrosis",
+      "Irritability",
+      "Excessive thirst",
+      "Flushed and panting",
+      "Prolonged fever"
+    ],
+    "knowledge_chain_en": "Surging pulse (extremely large, like surging waves) belongs to the floating pulse category, mainly corresponding to the heat of the qi division, and common modern diseases include high fever, dry mouth, irritability, rapid heartbeat, excessive sweating, irritability, extreme dry mouth, flushed face and coarse breathing, and persistent high fever."
+  },
+  {
+    "id": "P3",
+    "type": "Pulse",
+    "name": "濡脈",
+    "description": "浮而細軟",
+    "category": "浮脈類",
+    "main_disease": "諸虛，又主濕",
+    "symptoms": [
+      "乏力",
+      "氣虛乏力",
+      "自汗",
+      "浮腫",
+      "泄瀉",
+      "四肢沉重",
+      "氣血虛",
+      "濕重感",
+      "脾胃虛弱",
+      "腹脹",
+      "關節酸痛",
+      "面色蒼白",
+      "食欲不振"
+    ],
+    "knowledge_chain": "濡脈（浮而細軟）屬於浮脈類，主要對應諸虛，又主濕，常見現代病症有乏力, 氣虛乏力, 自汗, 浮腫, 泄瀉, 四肢沉重, 氣血虛, 濕重感, 脾胃虛弱, 腹脹, 關節酸痛, 面色蒼白, 食欲不振。",
+    "neo4j_id": "P3",
+    "category_id": "PC1",
+    "main_disease_id": "MD3",
+    "symptom_ids": [
+      "S4",
+      "S23",
+      "S24",
+      "S25",
+      "S26",
+      "S27",
+      "S28",
+      "S29",
+      "S30",
+      "S31",
+      "S32",
+      "S33",
+      "S34"
+    ],
+    "reference_links": {
+      "pulse_category": "PC1",
+      "main_disease": "MD3",
+      "symptoms": [
+        "S4",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S27",
+        "S28",
+        "S29",
+        "S30",
+        "S31",
+        "S32",
+        "S33",
+        "S34"
+      ]
+    },
+    "name_en": "Replenishing Pulse",
+    "description_en": "Delicate and floating",
+    "category_en": "Superficial vein thrombosis",
+    "main_disease_en": "Governance of Emptiness, also in charge of Dampness",
+    "symptoms_en": [
+      "Asthemia",
+      "Lack of energy",
+      "Spontaneous sweating",
+      "Edema",
+      "Diarrhea",
+      "Heavy limbs",
+      "Deficiency of Qi and Blood",
+      "Humid Heavy Feeling",
+      "Splenogastric asthenia",
+      "Abdominal distension",
+      "Arthralgia",
+      "pale complexion",
+      "Anorexia"
+    ],
+    "knowledge_chain_en": "Ruo Mai (floating and fine pulse) belongs to the floating pulse category, mainly corresponding to various deficiencies, and is also in charge of dampness, commonly seen modern diseases include lack of strength, Qi deficiency, spontaneous sweating, edema, diarrhea, heavy limbs, Qi and blood deficiency, feeling of heaviness due to dampness, weakness of spleen and stomach, abdominal distension, joint pain, pale complexion, and poor appetite."
+  },
+  {
+    "id": "P4",
+    "type": "Pulse",
+    "name": "散脈",
+    "description": "浮散無根，至數不齊",
+    "category": "浮脈類",
+    "main_disease": "元氣離散",
+    "symptoms": [
+      "極度虛脫",
+      "脈微欲絕",
+      "倦怠乏力",
+      "休克",
+      "出血",
+      "危重狀態",
+      "心跳不穩",
+      "臨產或流產徵兆",
+      "陣痛"
+    ],
+    "knowledge_chain": "散脈（浮散無根，至數不齊）屬於浮脈類，主要對應元氣離散，常見現代病症有極度虛脫, 脈微欲絕, 倦怠乏力, 休克, 出血, 危重狀態, 心跳不穩, 臨產或流產徵兆, 陣痛。",
+    "neo4j_id": "P4",
+    "category_id": "PC1",
+    "main_disease_id": "MD4",
+    "symptom_ids": [
+      "S35",
+      "S36",
+      "S37",
+      "S38",
+      "S39",
+      "S40",
+      "S41",
+      "S42",
+      "S43"
+    ],
+    "reference_links": {
+      "pulse_category": "PC1",
+      "main_disease": "MD4",
+      "symptoms": [
+        "S35",
+        "S36",
+        "S37",
+        "S38",
+        "S39",
+        "S40",
+        "S41",
+        "S42",
+        "S43"
+      ]
+    },
+    "name_en": "Defensive Qi",
+    "description_en": "Drifting without a root, to the number not uniform",
+    "category_en": "Superficial vein thrombosis",
+    "main_disease_en": "Qi deviation",
+    "symptoms_en": [
+      "Exhaustion",
+      "Thready pulse",
+      "Lassitude",
+      "Shock",
+      "Hemorrhage",
+      "Critically ill",
+      "Arrhythmia",
+      "Signs of labor or miscarriage",
+      "Labor pain"
+    ],
+    "knowledge_chain_en": "Dissipated pulse (floating and rootless, with irregular beats) belongs to the floating pulse category, mainly corresponding to the dispersion of yuan qi, and common modern diseases include extreme deficiency, micro pulse, fatigue, shock, bleeding, critical condition, arrhythmia, signs of impending delivery or abortion, and labor pain."
+  },
+  {
+    "id": "P5",
+    "type": "Pulse",
+    "name": "孔脈",
+    "description": "浮大中空，如按蔥管",
+    "category": "浮脈類",
+    "main_disease": "失血，傷陰",
+    "symptoms": [
+      "面色蒼白",
+      "大量失血",
+      "低血壓",
+      "口乾",
+      "外傷",
+      "月經過多",
+      "盜汗",
+      "血容量不足",
+      "陰虛耗傷",
+      "頭暈",
+      "口乾咽燥"
+    ],
+    "knowledge_chain": "孔脈（浮大中空，如按蔥管）屬於浮脈類，主要對應失血，傷陰，常見現代病症有面色蒼白, 大量失血, 低血壓, 口乾, 外傷, 月經過多, 盜汗, 血容量不足, 陰虛耗傷, 頭暈, 口乾咽燥。",
+    "neo4j_id": "P5",
+    "category_id": "PC1",
+    "main_disease_id": "MD5",
+    "symptom_ids": [
+      "S33",
+      "S44",
+      "S45",
+      "S46",
+      "S47",
+      "S48",
+      "S49",
+      "S50",
+      "S51",
+      "S52",
+      "S53"
+    ],
+    "reference_links": {
+      "pulse_category": "PC1",
+      "main_disease": "MD5",
+      "symptoms": [
+        "S33",
+        "S44",
+        "S45",
+        "S46",
+        "S47",
+        "S48",
+        "S49",
+        "S50",
+        "S51",
+        "S52",
+        "S53"
+      ]
+    },
+    "name_en": "Meridian",
+    "description_en": "Floating large intestine, like pressing a scallion tube",
+    "category_en": "Floating pulse category",
+    "main_disease_en": "Hemorrhage, injury of Yin",
+    "symptoms_en": [
+      "pale complexion",
+      "Massive hemorrhage",
+      "Hypotension",
+      "Xerostomia",
+      "Trauma",
+      "Menorrhagia",
+      "Night sweat",
+      "Hypovolemia",
+      "Yin deficiency with injury",
+      "Dizziness",
+      "Xerostomia"
+    ],
+    "knowledge_chain_en": "Kong Mai (floating, large, empty, like pressing on a scallion stalk) belongs to the floating pulse category, mainly corresponding to blood loss, injury to yin, and common modern diseases include pale complexion, massive blood loss, hypotension, dry mouth, trauma, excessive menstruation, night sweats, insufficient blood volume, yin deficiency and injury, dizziness, and dry mouth and throat."
+  },
+  {
+    "id": "P6",
+    "type": "Pulse",
+    "name": "革脈",
+    "description": "脈來弦急中空，如按鼓皮",
+    "category": "浮脈類",
+    "main_disease": "亡血，失精，半產，漏下",
+    "symptoms": [
+      "失血過多",
+      "遺精",
+      "月經不調",
+      "白帶過多",
+      "嚴重失血",
+      "帶下過多",
+      "滑精",
+      "產後過多出血",
+      "體力透支"
+    ],
+    "knowledge_chain": "革脈（脈來弦急中空，如按鼓皮）屬於浮脈類，主要對應亡血，失精，半產，漏下，常見現代病症有失血過多, 遺精, 月經不調, 白帶過多, 嚴重失血, 帶下過多, 滑精, 產後過多出血, 體力透支。",
+    "neo4j_id": "P6",
+    "category_id": "PC1",
+    "main_disease_id": "MD6",
+    "symptom_ids": [
+      "S54",
+      "S55",
+      "S56",
+      "S57",
+      "S58",
+      "S59",
+      "S60",
+      "S61",
+      "S62"
+    ],
+    "reference_links": {
+      "pulse_category": "PC1",
+      "main_disease": "MD6",
+      "symptoms": [
+        "S54",
+        "S55",
+        "S56",
+        "S57",
+        "S58",
+        "S59",
+        "S60",
+        "S61",
+        "S62"
+      ]
+    },
+    "name_en": "Pulse of the skin",
+    "description_en": "The pulse comes urgently in the middle, empty, like pressing on a drumhead",
+    "category_en": "Superficial vein thrombosis",
+    "main_disease_en": "Abortion, miscarriage, stillbirth, and premature birth",
+    "symptoms_en": [
+      "Hemorrhagic shock",
+      "Nocturnal emission",
+      "Dysmenorrhea",
+      "Leucorrhea",
+      "Severe hemorrhage",
+      "Leucorrhea",
+      "Spermatorrhea",
+      "Postpartum hemorrhage",
+      "Physical exhaustion"
+    ],
+    "knowledge_chain_en": "Rapid pulse (the pulse comes from the urgent middle empty, like pressing the drum skin) belongs to the floating pulse category, mainly corresponding to blood loss, sperm loss, miscarriage, and excessive vaginal discharge. Common modern diseases include excessive blood loss, seminal emission, menstrual irregularity, excessive leukorrhea, severe blood loss, excessive vaginal discharge, premature ejaculation, postpartum hemorrhage, and physical exhaustion."
+  },
+  {
+    "id": "P7",
+    "type": "Pulse",
+    "name": "沉脈",
+    "description": "輕取不應，重按始得",
+    "category": "沉脈類",
+    "main_disease": "裏證",
+    "symptoms": [
+      "腹痛",
+      "腹脹",
+      "便秘",
+      "寒凝腹痛或腎痛",
+      "心衰水腫",
+      "慢性消耗",
+      "慢性肝病",
+      "深部臟腑病變",
+      "結核"
+    ],
+    "knowledge_chain": "沉脈（輕取不應，重按始得）屬於沉脈類，主要對應裏證，常見現代病症有腹痛, 腹脹, 便秘, 寒凝腹痛或腎痛, 心衰水腫, 慢性消耗, 慢性肝病, 深部臟腑病變, 結核。",
+    "neo4j_id": "P7",
+    "category_id": "PC2",
+    "main_disease_id": "MD7",
+    "symptom_ids": [
+      "S11",
+      "S31",
+      "S63",
+      "S64",
+      "S65",
+      "S66",
+      "S67",
+      "S68",
+      "S69"
+    ],
+    "reference_links": {
+      "pulse_category": "PC2",
+      "main_disease": "MD7",
+      "symptoms": [
+        "S11",
+        "S31",
+        "S63",
+        "S64",
+        "S65",
+        "S66",
+        "S67",
+        "S68",
+        "S69"
+      ]
+    },
+    "name_en": "Hepatic vein",
+    "description_en": "Gentle touch is ineffective, but heavy pressure is effective",
+    "category_en": "Brachyura",
+    "main_disease_en": "Nei Zheng",
+    "symptoms_en": [
+      "Abdominal pain",
+      "Abdominal distension",
+      "Constipation",
+      "Cold pain in the abdomen or low back",
+      "Congestive edema",
+      "Chronic wasting",
+      "Chronic liver disease",
+      "Visceral lesions",
+      "Tuberculosis"
+    ],
+    "knowledge_chain_en": "Deep pulse (light touch does not respond, heavy pressure starts to get) belongs to the deep pulse category, mainly corresponding to internal evidence, common modern diseases include abdominal pain, abdominal distension, constipation, cold congested abdominal pain or kidney pain, heart failure edema, chronic consumption, chronic liver disease, deep visceral disease, tuberculosis."
+  },
+  {
+    "id": "P8",
+    "type": "Pulse",
+    "name": "伏脈",
+    "description": "重手推筋按骨始得",
+    "category": "沉脈類",
+    "main_disease": "邪閉，厥證，痛極，又主陽衰",
+    "symptoms": [
+      "寒厥",
+      "劇烈疼痛",
+      "昏迷",
+      "嚴重疼痛",
+      "四肢冰冷",
+      "心源性休克",
+      "感染性休克",
+      "昏厥前兆"
+    ],
+    "knowledge_chain": "伏脈（重手推筋按骨始得）屬於沉脈類，主要對應邪閉，厥證，痛極，又主陽衰，常見現代病症有寒厥, 劇烈疼痛, 昏迷, 嚴重疼痛, 四肢冰冷, 心源性休克, 感染性休克, 昏厥前兆。",
+    "neo4j_id": "P8",
+    "category_id": "PC2",
+    "main_disease_id": "MD8",
+    "symptom_ids": [
+      "S70",
+      "S71",
+      "S72",
+      "S73",
+      "S74",
+      "S75",
+      "S76",
+      "S77"
+    ],
+    "reference_links": {
+      "pulse_category": "PC2",
+      "main_disease": "MD8",
+      "symptoms": [
+        "S70",
+        "S71",
+        "S72",
+        "S73",
+        "S74",
+        "S75",
+        "S76",
+        "S77"
+      ]
+    },
+    "name_en": "Fu pulse",
+    "description_en": "Only with strong hand and pressing on the bones can one begin",
+    "category_en": "Brachyura",
+    "main_disease_en": "Obstruction, syncope, extreme pain, and also in charge of yang decline",
+    "symptoms_en": [
+      "Chill",
+      "Excruciating pain",
+      "Coma",
+      "Severe pain",
+      "Limb coldness",
+      "Cardiogenic shock",
+      "Septic shock",
+      "Prodrome of syncope"
+    ],
+    "knowledge_chain_en": "The Fu pulse, which belongs to the sunken pulse category, mainly corresponds to evil closure, syncope, extreme pain, and also dominates yang decline. Common modern diseases include cold syncope, severe pain, coma, severe pain, limb coldness, cardiogenic shock, septic shock, and pre-syncopal symptoms."
+  },
+  {
+    "id": "P9",
+    "type": "Pulse",
+    "name": "牢脈",
+    "description": "沉按實大弦長",
+    "category": "沉脈類",
+    "main_disease": "陰寒內實，疝氣徵瑕",
+    "symptoms": [
+      "腹痛劇烈",
+      "疝氣腫塊",
+      "陰囊疼痛",
+      "寒冷加重腹股溝痛",
+      "疝氣或結石引起的劇烈刺痛"
+    ],
+    "knowledge_chain": "牢脈（沉按實大弦長）屬於沉脈類，主要對應陰寒內實，疝氣徵瑕，常見現代病症有腹痛劇烈, 疝氣腫塊, 陰囊疼痛, 寒冷加重腹股溝痛, 疝氣或結石引起的劇烈刺痛。",
+    "neo4j_id": "P9",
+    "category_id": "PC2",
+    "main_disease_id": "MD9",
+    "symptom_ids": [
+      "S78",
+      "S79",
+      "S80",
+      "S81",
+      "S82"
+    ],
+    "reference_links": {
+      "pulse_category": "PC2",
+      "main_disease": "MD9",
+      "symptoms": [
+        "S78",
+        "S79",
+        "S80",
+        "S81",
+        "S82"
+      ]
+    },
+    "name_en": "Lao pulse",
+    "description_en": "Pressing down on the large string and making it long",
+    "category_en": "Brachyura",
+    "main_disease_en": "Cold invading the interior, hernia qi deficiency syndrome",
+    "symptoms_en": [
+      "Severe abdominal pain",
+      "Hernia",
+      "Scrotal pain",
+      "Cold aggravates inguinal pain",
+      "Colic"
+    ],
+    "knowledge_chain_en": "Roux Mai (Chen An Shi Da Xian Chang) belongs to the category of Chen Mai, mainly corresponding to internal cold and dampness, hernia, and often seen in modern diseases such as severe abdominal pain, hernia, scrotal pain, coldness aggravating groin pain, and severe colic caused by hernia or stones."
+  },
+  {
+    "id": "P10",
+    "type": "Pulse",
+    "name": "弱脈",
+    "description": "極軟而沉細",
+    "category": "沉脈類",
+    "main_disease": "氣血不足",
+    "symptoms": [
+      "乏力",
+      "面色蒼白",
+      "頭暈",
+      "心悸",
+      "倦怠無力",
+      "氣短心悸",
+      "體虛乏力"
+    ],
+    "knowledge_chain": "弱脈（極軟而沉細）屬於沉脈類，主要對應氣血不足，常見現代病症有乏力, 面色蒼白, 頭暈, 心悸, 倦怠無力, 氣短心悸, 體虛乏力。",
+    "neo4j_id": "P10",
+    "category_id": "PC2",
+    "main_disease_id": "MD10",
+    "symptom_ids": [
+      "S4",
+      "S33",
+      "S52",
+      "S83",
+      "S84",
+      "S85",
+      "S86"
+    ],
+    "reference_links": {
+      "pulse_category": "PC2",
+      "main_disease": "MD10",
+      "symptoms": [
+        "S4",
+        "S33",
+        "S52",
+        "S83",
+        "S84",
+        "S85",
+        "S86"
+      ]
+    },
+    "name_en": "Weak pulse",
+    "description_en": "Extremely soft and delicate",
+    "category_en": "Brachyura",
+    "main_disease_en": "Deficiency of Qi and Blood",
+    "symptoms_en": [
+      "Asthemia",
+      "pale complexion",
+      "Dizziness",
+      "Palpitations",
+      "Lassitude",
+      "Shortness of breath and palpitations",
+      "Asthenia"
+    ],
+    "knowledge_chain_en": "Weak pulse (extremely soft and fine) belongs to the sunken pulse category, mainly corresponding to insufficient qi and blood, common modern diseases include lack of strength, pale complexion, dizziness, palpitations, fatigue, shortness of breath and palpitations, physical weakness."
+  },
+  {
+    "id": "P11",
+    "type": "Pulse",
+    "name": "遲脈",
+    "description": "一息三至，脈來遲慢",
+    "category": "遲脈類",
+    "main_disease": "寒證",
+    "symptoms": [
+      "面色蒼白",
+      "畏寒",
+      "肢冷",
+      "寒性胃痛",
+      "畏寒肢冷",
+      "關節僵硬"
+    ],
+    "knowledge_chain": "遲脈（一息三至，脈來遲慢）屬於遲脈類，主要對應寒證，常見現代病症有面色蒼白, 畏寒, 肢冷, 寒性胃痛, 畏寒肢冷, 關節僵硬。",
+    "neo4j_id": "P11",
+    "category_id": "PC3",
+    "main_disease_id": "MD11",
+    "symptom_ids": [
+      "S33",
+      "S87",
+      "S88",
+      "S89",
+      "S90",
+      "S91"
+    ],
+    "reference_links": {
+      "pulse_category": "PC3",
+      "main_disease": "MD11",
+      "symptoms": [
+        "S33",
+        "S87",
+        "S88",
+        "S89",
+        "S90",
+        "S91"
+      ]
+    },
+    "name_en": "Bradycardia",
+    "description_en": "One breath three arrivals, the pulse comes slow",
+    "category_en": "Bradyarrhythmia",
+    "main_disease_en": "Cold syndrome",
+    "symptoms_en": [
+      "pale complexion",
+      "Chilliness",
+      "Limb coldness",
+      "Gastric cold syndrome",
+      "Cold limbs",
+      "Joint stiffness"
+    ],
+    "knowledge_chain_en": "Delayed pulse (one breath three arrivals, the pulse comes slowly) belongs to the delayed pulse category, mainly corresponding to cold syndrome, common modern diseases include pale complexion, fear of cold, cold limbs, cold stomach pain, fear of cold and cold limbs, and joint stiffness."
+  },
+  {
+    "id": "P12",
+    "type": "Pulse",
+    "name": "緩脈",
+    "description": "一息四至，來去怠緩",
+    "category": "遲脈類",
+    "main_disease": "主濕，脾胃虛弱",
+    "symptoms": [
+      "腹瀉",
+      "濕重感",
+      "身體困重",
+      "食慾不振",
+      "消化不良",
+      "脾虛腹脹",
+      "身重",
+      "頭重"
+    ],
+    "knowledge_chain": "緩脈（一息四至，來去怠緩）屬於遲脈類，主要對應主濕，脾胃虛弱，常見現代病症有腹瀉, 濕重感, 身體困重, 食慾不振, 消化不良, 脾虛腹脹, 身重, 頭重。",
+    "neo4j_id": "P12",
+    "category_id": "PC3",
+    "main_disease_id": "MD12",
+    "symptom_ids": [
+      "S10",
+      "S29",
+      "S92",
+      "S93",
+      "S94",
+      "S95",
+      "S96",
+      "S97"
+    ],
+    "reference_links": {
+      "pulse_category": "PC3",
+      "main_disease": "MD12",
+      "symptoms": [
+        "S10",
+        "S29",
+        "S92",
+        "S93",
+        "S94",
+        "S95",
+        "S96",
+        "S97"
+      ]
+    },
+    "name_en": "Bradycardia",
+    "description_en": "One breath, four arrivals, coming and going are sluggish",
+    "category_en": "Bradyarrhythmia",
+    "main_disease_en": "Dampness, Spleen and Stomach deficiency",
+    "symptoms_en": [
+      "Diarrhea",
+      "Humid feel",
+      "Lead leg",
+      "Anorexia",
+      "Indigestion",
+      "Spleen deficiency with abdominal distension",
+      "Body weight",
+      "Cephalalgia"
+    ],
+    "knowledge_chain_en": "Slow pulse (one breath four to, come and go listlessly) belongs to the slow pulse category, mainly corresponding to the main dampness, spleen and stomach weakness, common modern diseases include diarrhea, heavy dampness, body heaviness, poor appetite, indigestion, spleen weakness abdominal distension, body heaviness, and head heaviness."
+  },
+  {
+    "id": "P13",
+    "type": "Pulse",
+    "name": "澀脈",
+    "description": "遲細而短，往來艱澀，與滑脈正反",
+    "category": "遲脈類",
+    "main_disease": "傷精，血少，氣滯血瘀",
+    "symptoms": [
+      "遺精",
+      "貧血",
+      "胸悶刺痛",
+      "水腫",
+      "痛經",
+      "痰飲",
+      "瘀青",
+      "胃脹",
+      "血瘀",
+      "食積"
+    ],
+    "knowledge_chain": "澀脈（遲細而短，往來艱澀，與滑脈正反）屬於遲脈類，主要對應傷精，血少，氣滯血瘀，常見現代病症有遺精, 貧血, 胸悶刺痛, 水腫, 痛經, 痰飲, 瘀青, 胃脹, 血瘀, 食積。",
+    "neo4j_id": "P13",
+    "category_id": "PC3",
+    "main_disease_id": "MD13",
+    "symptom_ids": [
+      "S55",
+      "S98",
+      "S99",
+      "S100",
+      "S101",
+      "S102",
+      "S103",
+      "S104",
+      "S105",
+      "S106"
+    ],
+    "reference_links": {
+      "pulse_category": "PC3",
+      "main_disease": "MD13",
+      "symptoms": [
+        "S55",
+        "S98",
+        "S99",
+        "S100",
+        "S101",
+        "S102",
+        "S103",
+        "S104",
+        "S105",
+        "S106"
+      ]
+    },
+    "name_en": "Astringent pulse",
+    "description_en": "Slow and short, with difficulty coming and going, and in opposition to the Slippery Pulse",
+    "category_en": "Bradyarrhythmia",
+    "main_disease_en": "Damage to the essence, insufficient blood, qi stagnation and blood stasis",
+    "symptoms_en": [
+      "Nocturnal emission",
+      "Anemia",
+      "Precardial catch syndrome",
+      "Edema",
+      "Dysmenorrhea",
+      "Sputum drinking",
+      "Bruise",
+      "Bloating",
+      "Hematoma",
+      "Food accumulation"
+    ],
+    "knowledge_chain_en": "Ruo Mai (slow and fine, with difficulty coming and going, opposite of Shu Mai) belongs to the slow pulse category, mainly corresponding to injury of the essence, blood deficiency, qi stagnation and blood stasis, common modern diseases include spermatorrhea, anemia, chest tightness and pain, edema, dysmenorrhea, phlegm, ecchymosis, gastric distension, blood stasis, and food accumulation."
+  },
+  {
+    "id": "P14",
+    "type": "Pulse",
+    "name": "結脈",
+    "description": "脈來緩慢而有不規則的間歇",
+    "category": "遲脈類",
+    "main_disease": "陰盛氣結，寒痰血瘀",
+    "symptoms": [
+      "痛經",
+      "寒痛",
+      "痰多",
+      "血瘀腫塊",
+      "寒痞痛",
+      "腫塊",
+      "腹脹痞滿"
+    ],
+    "knowledge_chain": "結脈（脈來緩慢而有不規則的間歇）屬於遲脈類，主要對應陰盛氣結，寒痰血瘀，常見現代病症有痛經, 寒痛, 痰多, 血瘀腫塊, 寒痞痛, 腫塊, 腹脹痞滿。",
+    "neo4j_id": "P14",
+    "category_id": "PC3",
+    "main_disease_id": "MD14",
+    "symptom_ids": [
+      "S101",
+      "S107",
+      "S108",
+      "S109",
+      "S110",
+      "S111",
+      "S112"
+    ],
+    "reference_links": {
+      "pulse_category": "PC3",
+      "main_disease": "MD14",
+      "symptoms": [
+        "S101",
+        "S107",
+        "S108",
+        "S109",
+        "S110",
+        "S111",
+        "S112"
+      ]
+    },
+    "name_en": "ligation",
+    "description_en": "The pulse comes slowly with irregular intervals",
+    "category_en": "Bradyarrhythmia",
+    "main_disease_en": "Exuberant Yin, Qi stagnation, cold hemorrhagic blood stasis",
+    "symptoms_en": [
+      "Dysmenorrhea",
+      "Cold pain",
+      "Excessive sputum",
+      "Hematoma",
+      "Epigastric pain",
+      "Tumor",
+      "Abdominal distension"
+    ],
+    "knowledge_chain_en": "Slow pulse with irregular intervals belongs to the slow pulse category, mainly corresponding to Yin excess Qi knot, cold phlegm blood stasis, common modern diseases include dysmenorrhea, cold pain, excessive phlegm, blood stasis masses, cold abdominal pain, masses, abdominal distension."
+  },
+  {
+    "id": "P15",
+    "type": "Pulse",
+    "name": "數脈",
+    "description": "一息脈來五至以上",
+    "category": "數脈類",
+    "main_disease": "熱證",
+    "symptoms": [
+      "高熱",
+      "口渴",
+      "煩躁",
+      "心悸",
+      "煩渴",
+      "尿赤",
+      "多汗",
+      "發燒"
+    ],
+    "knowledge_chain": "數脈（一息脈來五至以上）屬於數脈類，主要對應熱證，常見現代病症有高熱, 口渴, 煩躁, 心悸, 煩渴, 尿赤, 多汗, 發燒。",
+    "neo4j_id": "P15",
+    "category_id": "PC4",
+    "main_disease_id": "MD15",
+    "symptom_ids": [
+      "S14",
+      "S15",
+      "S16",
+      "S83",
+      "S113",
+      "S114",
+      "S115",
+      "S116"
+    ],
+    "reference_links": {
+      "pulse_category": "PC4",
+      "main_disease": "MD15",
+      "symptoms": [
+        "S14",
+        "S15",
+        "S16",
+        "S83",
+        "S113",
+        "S114",
+        "S115",
+        "S116"
+      ]
+    },
+    "name_en": "Pulse diagnosis",
+    "description_en": "More than five breaths per pulse",
+    "category_en": "Pulse diagnosis",
+    "main_disease_en": "Heat Syndrome",
+    "symptoms_en": [
+      "Hyperpyrexia",
+      "Thirst",
+      "Irritability",
+      "Palpitations",
+      "Thirst",
+      "Hematuria",
+      "Hyperhidrosis",
+      "Fever"
+    ],
+    "knowledge_chain_en": "Rapid pulse (more than five beats per breath) belongs to the rapid pulse category, mainly corresponding to heat syndrome, common modern diseases include high fever, dry mouth, irritability, palpitations, thirst, dark urine, excessive sweating, fever."
+  },
+  {
+    "id": "P16",
+    "type": "Pulse",
+    "name": "促脈",
+    "description": "脈來急促而有不規則的間歇",
+    "category": "數脈類",
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "knowledge_chain": "促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "neo4j_id": "P16",
+    "category_id": "PC4",
+    "main_disease_id": "MD16",
+    "symptom_ids": [
+      "S14",
+      "S117",
+      "S118",
+      "S121",
+      "S122",
+      "S123",
+      "S124"
+    ],
+    "reference_links": {
+      "pulse_category": "PC4",
+      "main_disease": "MD16",
+      "symptoms": [
+        "S14",
+        "S117",
+        "S118",
+        "S121",
+        "S122",
+        "S123",
+        "S124"
+      ]
+    },
+    "name_en": "Promoting Qi and Blood Circulation",
+    "description_en": "The pulse comes urgently with irregular intervals",
+    "category_en": "Pulse diagnosis",
+    "main_disease_en": "Exuberant Yang, Qi Stagnation and Blood Stasis",
+    "symptoms_en": [
+      "Hyperpyrexia",
+      "Chest tightness",
+      "Purpura",
+      "Gastric spasm",
+      "Palpitations and shortness of breath",
+      "Acute inflammatory pain",
+      "Acute chest pain"
+    ],
+    "knowledge_chain_en": "Rapid pulse (pulse comes urgently and has irregular intervals) belongs to the rapid pulse category, mainly corresponding to excessive yang heat, qi stagnation and blood stasis, common modern diseases include high fever, chest tightness, blood stasis purpura, such as gastric cramps, palpitations and shortness of breath, acute inflammatory pain, acute chest pain."
+  },
+  {
+    "id": "P17",
+    "type": "Pulse",
+    "name": "疾脈",
+    "description": "脈來急疾，一息七八至",
+    "category": "數脈類",
+    "main_disease": "陽極陰竭，元氣將脫",
+    "symptoms": [
+      "脈微欲絕",
+      "四肢厥冷",
+      "神志不清",
+      "休克前兆",
+      "危重虛脫",
+      "微弱氣息"
+    ],
+    "knowledge_chain": "疾脈（脈來急疾，一息七八至）屬於數脈類，主要對應陽極陰竭，元氣將脫，常見現代病症有脈微欲絕, 四肢厥冷, 神志不清, 休克前兆, 危重虛脫, 微弱氣息。",
+    "neo4j_id": "P17",
+    "category_id": "PC4",
+    "main_disease_id": "MD17",
+    "symptom_ids": [
+      "S36",
+      "S119",
+      "S120",
+      "S125",
+      "S126",
+      "S127"
+    ],
+    "reference_links": {
+      "pulse_category": "PC4",
+      "main_disease": "MD17",
+      "symptoms": [
+        "S36",
+        "S119",
+        "S120",
+        "S125",
+        "S126",
+        "S127"
+      ]
+    },
+    "name_en": "Rapid pulse",
+    "description_en": "The pulse comes rapidly, with seven or eight beats per breath.",
+    "category_en": "Pulse diagnosis",
+    "main_disease_en": "Exhaustion of Yang, the Primordial Qi is about to be severed",
+    "symptoms_en": [
+      "Thready pulse",
+      "Limb coldness",
+      "Altered mental status",
+      "Pre-shock state",
+      "Collapse",
+      "Faint breath"
+    ],
+    "knowledge_chain_en": "Rapid pulse (the pulse comes quickly, 7-8 beats per breath) belongs to the rapid pulse category, mainly corresponding to extreme deficiency of yin, impending loss of primordial qi, often seen in modern diseases such as faint pulse, limb chill, altered consciousness, pre-shock, critical collapse, and weak breathing."
+  },
+  {
+    "id": "P18",
+    "type": "Pulse",
+    "name": "動脈",
+    "description": "脈形如豆，滑數有力",
+    "category": "數脈類",
+    "main_disease": "主驚，主痛",
+    "symptoms": [
+      "驚悸",
+      "劇痛",
+      "急性神經痛",
+      "恐慌發作",
+      "抽筋痙攣"
+    ],
+    "knowledge_chain": "動脈（脈形如豆，滑數有力）屬於數脈類，主要對應主驚，主痛，常見現代病症有驚悸, 劇痛, 急性神經痛, 恐慌發作, 抽筋痙攣。",
+    "neo4j_id": "P18",
+    "category_id": "PC4",
+    "main_disease_id": "MD18",
+    "symptom_ids": [
+      "S128",
+      "S129",
+      "S130",
+      "S131",
+      "S132"
+    ],
+    "reference_links": {
+      "pulse_category": "PC4",
+      "main_disease": "MD18",
+      "symptoms": [
+        "S128",
+        "S129",
+        "S130",
+        "S131",
+        "S132"
+      ]
+    },
+    "name_en": "Artery",
+    "description_en": "Pulse is like a bean, slippery and powerful",
+    "category_en": "Pulse diagnosis",
+    "main_disease_en": "Sudden alarm, Sudden pain",
+    "symptoms_en": [
+      "Thrill",
+      "Agony",
+      "Acute neuralgia",
+      "Panic attack",
+      "Muscle cramp"
+    ],
+    "knowledge_chain_en": "Pulse (pulse like beans, smooth and powerful) belongs to the number pulse category, mainly corresponding to the main shock, the main pain, and common modern diseases such as palpitations, severe pain, acute neuralgia, panic attacks, and muscle spasms."
+  },
+  {
+    "id": "P19",
+    "type": "Pulse",
+    "name": "虛脈",
+    "description": "三部脈舉之無力，按之空虛",
+    "category": "虛脈類",
+    "main_disease": "虛證",
+    "symptoms": [
+      "乏力",
+      "腹脹",
+      "心悸",
+      "氣虛自汗",
+      "易感冒",
+      "氣血虛弱",
+      "脾虛"
+    ],
+    "knowledge_chain": "虛脈（三部脈舉之無力，按之空虛）屬於虛脈類，主要對應虛證，常見現代病症有乏力, 腹脹, 心悸, 氣虛自汗, 易感冒, 氣血虛弱, 脾虛。",
+    "neo4j_id": "P19",
+    "category_id": "PC5",
+    "main_disease_id": "MD19",
+    "symptom_ids": [
+      "S4",
+      "S31",
+      "S83",
+      "S133",
+      "S134",
+      "S135",
+      "S136"
+    ],
+    "reference_links": {
+      "pulse_category": "PC5",
+      "main_disease": "MD19",
+      "symptoms": [
+        "S4",
+        "S31",
+        "S83",
+        "S133",
+        "S134",
+        "S135",
+        "S136"
+      ]
+    },
+    "name_en": "Minute of the pulse",
+    "description_en": "Three pulses are lifted without strength, pressed with emptiness",
+    "category_en": "Empty Pulse Category",
+    "main_disease_en": "Deficiency Syndrome",
+    "symptoms_en": [
+      "Asthemia",
+      "Abdominal distension",
+      "Palpitations",
+      "Spontaneous sweating due to Qi deficiency",
+      "Prone to colds",
+      "Deficiency of Qi and Blood",
+      "Splenasthenia"
+    ],
+    "knowledge_chain_en": "Weak pulse (three pulse lift no force, press empty) belongs to the weak pulse category, mainly corresponding to virtual proof, common modern diseases have lack of strength, abdominal distension, palpitations, qi deficiency spontaneous sweating, easy to catch a cold, qi and blood deficiency, spleen deficiency."
+  },
+  {
+    "id": "P20",
+    "type": "Pulse",
+    "name": "細脈",
+    "description": "脈細如線，但應指明顯",
+    "category": "虛脈類",
+    "main_disease": "氣血兩虛，諸虛勞損，主濕",
+    "symptoms": [
+      "浮腫",
+      "氣血虛弱",
+      "疲乏",
+      "休克感",
+      "呼吸微弱",
+      "暈厥",
+      "極度虛弱"
+    ],
+    "knowledge_chain": "細脈（脈細如線，但應指明顯）屬於虛脈類，主要對應氣血兩虛，諸虛勞損，主濕，常見現代病症有浮腫, 氣血虛弱, 疲乏, 休克感, 呼吸微弱, 暈厥, 極度虛弱。",
+    "neo4j_id": "P20",
+    "category_id": "PC5",
+    "main_disease_id": "MD20",
+    "symptom_ids": [
+      "S25",
+      "S135",
+      "S137",
+      "S138",
+      "S139",
+      "S140",
+      "S141"
+    ],
+    "reference_links": {
+      "pulse_category": "PC5",
+      "main_disease": "MD20",
+      "symptoms": [
+        "S25",
+        "S135",
+        "S137",
+        "S138",
+        "S139",
+        "S140",
+        "S141"
+      ]
+    },
+    "name_en": "Fine vessel",
+    "description_en": "The pulse is as thin as a thread, but the pulse should be obvious.",
+    "category_en": "Empty Pulse Category",
+    "main_disease_en": "Qi and Blood Deficiency, various deficiencies and damage, governed by Dampness",
+    "symptoms_en": [
+      "Edema",
+      "Deficiency of Qi and Blood",
+      "Fatigue",
+      "Sense of crisis",
+      "Breathlessness",
+      "Syncope",
+      "Profound weakness"
+    ],
+    "knowledge_chain_en": "Fine pulse (the pulse is as thin as a thread, but it should be clearly visible) belongs to the category of deficient pulse, mainly corresponding to the deficiency of both qi and blood, various types of deficiency and consumption, and dampness, commonly seen modern diseases include edema, deficiency of qi and blood, fatigue, shock, weak breathing, syncope, and extreme weakness."
+  },
+  {
+    "id": "P21",
+    "type": "Pulse",
+    "name": "微脈",
+    "description": "極細極軟，按之欲絕，若有若無",
+    "category": "虛脈類",
+    "main_disease": "陽衰少氣，陰陽氣血諸虛",
+    "symptoms": [
+      "畏寒",
+      "貧血",
+      "水腫",
+      "氣短乏力",
+      "面色萎黃",
+      "慢性虛耗",
+      "甲低"
+    ],
+    "knowledge_chain": "微脈（極細極軟，按之欲絕，若有若無）屬於虛脈類，主要對應陽衰少氣，陰陽氣血諸虛，常見現代病症有畏寒, 貧血, 水腫, 氣短乏力, 面色萎黃, 慢性虛耗, 甲低。",
+    "neo4j_id": "P21",
+    "category_id": "PC5",
+    "main_disease_id": "MD21",
+    "symptom_ids": [
+      "S87",
+      "S98",
+      "S100",
+      "S142",
+      "S143",
+      "S144",
+      "S145"
+    ],
+    "reference_links": {
+      "pulse_category": "PC5",
+      "main_disease": "MD21",
+      "symptoms": [
+        "S87",
+        "S98",
+        "S100",
+        "S142",
+        "S143",
+        "S144",
+        "S145"
+      ]
+    },
+    "name_en": "Microcirculation",
+    "description_en": "very fine and soft, pressed to the vanishing point, as if there and yet not there",
+    "category_en": "Empty Pulse Category",
+    "main_disease_en": "Deficiency of both Qi and Blood, or Deficiency of Yin and Yang",
+    "symptoms_en": [
+      "Chilliness",
+      "Anemia",
+      "Edema",
+      "Shortness of breath and lack of energy",
+      "Sallow complexion",
+      "Chronic exhaustion",
+      "Hypokalemia"
+    ],
+    "knowledge_chain_en": "The feeble pulse, which is extremely fine and soft to the touch, belongs to the category of deficient pulses and is mainly associated with yang deficiency, qi deficiency, and various deficiencies of yin and yang, qi, and blood. Common modern diseases include fear of cold, anemia, edema, shortness of breath, lack of strength, sallow complexion, chronic consumption, and hypothyroidism."
+  },
+  {
+    "id": "P22",
+    "type": "Pulse",
+    "name": "代脈",
+    "description": "脈來有規律的間歇，間歇時間較長",
+    "category": "虛脈類",
+    "main_disease": "臟氣衰微，跌打損傷",
+    "symptoms": [
+      "恐慌發作",
+      "臟器功能減退",
+      "外傷瘀血腫痛",
+      "跌打損傷後疼痛",
+      "陣發性房顫"
+    ],
+    "knowledge_chain": "代脈（脈來有規律的間歇，間歇時間較長）屬於虛脈類，主要對應臟氣衰微，跌打損傷，常見現代病症有恐慌發作, 臟器功能減退, 外傷瘀血腫痛, 跌打損傷後疼痛, 陣發性房顫。",
+    "neo4j_id": "P22",
+    "category_id": "PC5",
+    "main_disease_id": "MD22",
+    "symptom_ids": [
+      "S131",
+      "S146",
+      "S147",
+      "S148",
+      "S149"
+    ],
+    "reference_links": {
+      "pulse_category": "PC5",
+      "main_disease": "MD22",
+      "symptoms": [
+        "S131",
+        "S146",
+        "S147",
+        "S148",
+        "S149"
+      ]
+    },
+    "name_en": "Pulse-taking",
+    "description_en": "Remittent pulse with regular intervals, and the intervals are relatively long",
+    "category_en": "Empty Pulse Category",
+    "main_disease_en": "Visceral Qi Collapse, Traumatic Injury",
+    "symptoms_en": [
+      "Panic attack",
+      "Organ dysfunction",
+      "Hematoma and pain due to trauma",
+      "Post-traumatic pain",
+      "Paroxysmal atrial fibrillation"
+    ],
+    "knowledge_chain_en": "Intermittent pulse belongs to the category of Deficient pulse, mainly corresponding to the decline of visceral gas, trauma, and common modern diseases such as panic attacks, decreased organ function, traumatic hematoma and pain, post-traumatic pain, and paroxysmal atrial fibrillation."
+  },
+  {
+    "id": "P23",
+    "type": "Pulse",
+    "name": "短脈",
+    "description": "首尾俱短，不能滿部",
+    "category": "虛脈類",
+    "main_disease": "有力為氣鬱，無力為氣損",
+    "symptoms": [
+      "乏力",
+      "胸悶",
+      "脅痛",
+      "氣短",
+      "氣虛喘促",
+      "胃腸脹氣"
+    ],
+    "knowledge_chain": "短脈（首尾俱短，不能滿部）屬於虛脈類，主要對應有力為氣鬱，無力為氣損，常見現代病症有乏力, 胸悶, 脅痛, 氣短, 氣虛喘促, 胃腸脹氣。",
+    "neo4j_id": "P23",
+    "category_id": "PC5",
+    "main_disease_id": "MD23",
+    "symptom_ids": [
+      "S4",
+      "S117",
+      "S150",
+      "S151",
+      "S152",
+      "S153"
+    ],
+    "reference_links": {
+      "pulse_category": "PC5",
+      "main_disease": "MD23",
+      "symptoms": [
+        "S4",
+        "S117",
+        "S150",
+        "S151",
+        "S152",
+        "S153"
+      ]
+    },
+    "name_en": "Bradycardia",
+    "description_en": "Too short at both ends",
+    "category_en": "Empty Pulse Category",
+    "main_disease_en": "Excessiveness leads to Qi stagnation, while deficiency leads to Qi deficiency.",
+    "symptoms_en": [
+      "Asthhenia",
+      "Chest tightness",
+      "Costal pain",
+      "Dyspnea",
+      "Dyspnea due to Qi deficiency",
+      "Bloating"
+    ],
+    "knowledge_chain_en": "Short pulse (both head and tail are short and cannot be full) belongs to the virtual pulse category, mainly corresponding to strong power as qi depression, weak power as qi damage, common modern diseases include lack of strength, chest tightness, rib pain, shortness of breath, qi deficiency and shortness of breath, abdominal distension."
+  },
+  {
+    "id": "P24",
+    "type": "Pulse",
+    "name": "實脈",
+    "description": "三部脈舉按皆有力",
+    "category": "實脈類",
+    "main_disease": "實證",
+    "symptoms": [
+      "高熱",
+      "口渴",
+      "腹脹",
+      "寒痛",
+      "實熱",
+      "實寒",
+      "急性炎症",
+      "高血壓"
+    ],
+    "knowledge_chain": "實脈（三部脈舉按皆有力）屬於實脈類，主要對應實證，常見現代病症有高熱, 口渴, 腹脹, 寒痛, 實熱, 實寒, 急性炎症, 高血壓。",
+    "neo4j_id": "P24",
+    "category_id": "PC6",
+    "main_disease_id": "MD24",
+    "symptom_ids": [
+      "S14",
+      "S15",
+      "S31",
+      "S107",
+      "S154",
+      "S155",
+      "S156",
+      "S157"
+    ],
+    "reference_links": {
+      "pulse_category": "PC6",
+      "main_disease": "MD24",
+      "symptoms": [
+        "S14",
+        "S15",
+        "S31",
+        "S107",
+        "S154",
+        "S155",
+        "S156",
+        "S157"
+      ]
+    },
+    "name_en": "Pulse",
+    "description_en": "Three Pulse Diagnosis with Forceful Pressing",
+    "category_en": "Siphonophorae",
+    "main_disease_en": "Empirical",
+    "symptoms_en": [
+      "Hyperpyrexia",
+      "Thirst",
+      "Abdominal distension",
+      "Cold pain",
+      "sensible heat",
+      "Deficiency-cold",
+      "Acute inflammation",
+      "Hypertension"
+    ],
+    "knowledge_chain_en": "Replete pulse (three parts of the pulse are all strong) belongs to the replete pulse category, mainly corresponding to replete syndrome, common modern diseases include high fever, thirst, abdominal distension, cold pain, replete heat, replete cold, acute inflammation, hypertension."
+  },
+  {
+    "id": "P25",
+    "type": "Pulse",
+    "name": "滑脈",
+    "description": "往來流利，如盤走珠，應指圓滑",
+    "category": "實脈類",
+    "main_disease": "痰飲，時滯，實熱",
+    "symptoms": [
+      "高熱",
+      "痰多",
+      "胸悶",
+      "孕期暈吐",
+      "痰多胸悶",
+      "痰濕咳嗽",
+      "食積胃脹"
+    ],
+    "knowledge_chain": "滑脈（往來流利，如盤走珠，應指圓滑）屬於實脈類，主要對應痰飲，時滯，實熱，常見現代病症有高熱, 痰多, 胸悶, 孕期暈吐, 痰多胸悶, 痰濕咳嗽, 食積胃脹。",
+    "neo4j_id": "P25",
+    "category_id": "PC6",
+    "main_disease_id": "MD25",
+    "symptom_ids": [
+      "S14",
+      "S108",
+      "S117",
+      "S158",
+      "S159",
+      "S160",
+      "S161"
+    ],
+    "reference_links": {
+      "pulse_category": "PC6",
+      "main_disease": "MD25",
+      "symptoms": [
+        "S14",
+        "S108",
+        "S117",
+        "S158",
+        "S159",
+        "S160",
+        "S161"
+      ]
+    },
+    "name_en": "Holland",
+    "description_en": "Smooth and fluent, like a bead rolling on a plate, responding to the finger with ease.",
+    "category_en": "Siphonophorae",
+    "main_disease_en": "Saliva intake, occasional stagnation, excess heat",
+    "symptoms_en": [
+      "Hyperpyrexia",
+      "Excessive sputum",
+      "Chest tightness",
+      "Morning sickness",
+      "Excessive sputum and chest tightness",
+      "Wet cough",
+      "Food accumulation and stomach distension"
+    ],
+    "knowledge_chain_en": "Slippery pulse, which belongs to the replete pulse category, mainly corresponds to phlegm, retention, and replete heat. Common modern diseases include high fever, excessive phlegm, chest tightness, morning sickness during pregnancy, excessive phlegm and chest tightness, phlegm and cough, and food accumulation and abdominal distension."
+  },
+  {
+    "id": "P26",
+    "type": "Pulse",
+    "name": "緊脈",
+    "description": "脈來繃急，狀如牽繩轉索",
+    "category": "實脈類",
+    "main_disease": "主寒，主痛，主宿食",
+    "symptoms": [
+      "腹痛",
+      "畏寒",
+      "寒性胃痛",
+      "胃脹",
+      "痰冷咳嗽",
+      "肌肉痙攣"
+    ],
+    "knowledge_chain": "緊脈（脈來繃急，狀如牽繩轉索）屬於實脈類，主要對應主寒，主痛，主宿食，常見現代病症有腹痛, 畏寒, 寒性胃痛, 胃脹, 痰冷咳嗽, 肌肉痙攣。",
+    "neo4j_id": "P26",
+    "category_id": "PC6",
+    "main_disease_id": "MD26",
+    "symptom_ids": [
+      "S11",
+      "S87",
+      "S89",
+      "S104",
+      "S162",
+      "S163"
+    ],
+    "reference_links": {
+      "pulse_category": "PC6",
+      "main_disease": "MD26",
+      "symptoms": [
+        "S11",
+        "S87",
+        "S89",
+        "S104",
+        "S162",
+        "S163"
+      ]
+    },
+    "name_en": "Tight pulse",
+    "description_en": "The pulse comes tightly and is like a twisted rope.",
+    "category_en": "Siphonophorae",
+    "main_disease_en": "governing cold, governing pain, governing stagnated food",
+    "symptoms_en": [
+      "Abdominal pain",
+      "Chilliness",
+      "Gastric cold syndrome",
+      "Bloating",
+      "Chronic bronchitis",
+      "Muscle spasm"
+    ],
+    "knowledge_chain_en": "Tight pulse (the pulse is urgent, like a twisted rope) belongs to the solid pulse category, mainly corresponding to chills, pain, food stagnation, and common modern diseases such as abdominal pain, fear of cold, cold stomach pain, stomach distension, cold cough, and muscle cramps."
+  },
+  {
+    "id": "P27",
+    "type": "Pulse",
+    "name": "長脈",
+    "description": "首尾端直，超過本位",
+    "category": "實脈類",
+    "main_disease": "肝陽有餘，陽盛內熱等有餘之證",
+    "symptoms": [
+      "頭暈目眩",
+      "煩躁易怒",
+      "口苦",
+      "偏頭痛",
+      "面紅目赤",
+      "高血壓頭暈"
+    ],
+    "knowledge_chain": "長脈（首尾端直，超過本位）屬於實脈類，主要對應肝陽有餘，陽盛內熱等有餘之證，常見現代病症有頭暈目眩, 煩躁易怒, 口苦, 偏頭痛, 面紅目赤, 高血壓頭暈。",
+    "neo4j_id": "P27",
+    "category_id": "PC6",
+    "main_disease_id": "MD27",
+    "symptom_ids": [
+      "S164",
+      "S165",
+      "S166",
+      "S167",
+      "S168",
+      "S169"
+    ],
+    "reference_links": {
+      "pulse_category": "PC6",
+      "main_disease": "MD27",
+      "symptoms": [
+        "S164",
+        "S165",
+        "S166",
+        "S167",
+        "S168",
+        "S169"
+      ]
+    },
+    "name_en": "Pulse",
+    "description_en": "End-to-end exceeds its position",
+    "category_en": "Sphygmology",
+    "main_disease_en": "Liver Yang excess, excess heat due to Yang excess",
+    "symptoms_en": [
+      "Dizziness and blurred vision",
+      "Irritability",
+      "Bitter taste",
+      "Migraine",
+      "Flushed with excitement",
+      "Hypertensive syncope"
+    ],
+    "knowledge_chain_en": "Long pulse (straight at both ends, exceeding its position) belongs to the solid pulse category, mainly corresponding to liver yang excess, yin deficiency and internal heat excess, and often seen in modern diseases such as dizziness, irritability, bitter taste, migraine, facial flushing, and hypertension."
+  },
+  {
+    "id": "P28",
+    "type": "Pulse",
+    "name": "弦脈",
+    "description": "端直以長，如按琴弦",
+    "category": "實脈類",
+    "main_disease": "肝膽病，諸痛，痰飲，瘧疾",
+    "symptoms": [
+      "痰多",
+      "偏頭痛",
+      "肝區脹痛",
+      "全身痛",
+      "寒熱往來",
+      "瘧疾",
+      "肝炎",
+      "膽結石"
+    ],
+    "knowledge_chain": "弦脈（端直以長，如按琴弦）屬於實脈類，主要對應肝膽病，諸痛，痰飲，瘧疾，常見現代病症有痰多, 偏頭痛, 肝區脹痛, 全身痛, 寒熱往來, 瘧疾, 肝炎, 膽結石。",
+    "neo4j_id": "P28",
+    "category_id": "PC6",
+    "main_disease_id": "MD28",
+    "symptom_ids": [
+      "S108",
+      "S167",
+      "S170",
+      "S171",
+      "S172",
+      "S173",
+      "S174",
+      "S175"
+    ],
+    "reference_links": {
+      "pulse_category": "PC6",
+      "main_disease": "MD28",
+      "symptoms": [
+        "S108",
+        "S167",
+        "S170",
+        "S171",
+        "S172",
+        "S173",
+        "S174",
+        "S175"
+      ]
+    },
+    "name_en": "String vessels",
+    "description_en": "Straight and long, like pressing the strings of a zither",
+    "category_en": "Siphonophorae",
+    "main_disease_en": "Hepatobiliary disease, various pains, drooling, malaria",
+    "symptoms_en": [
+      "Excessive sputum",
+      "Migraine",
+      "Hepatalgia",
+      "Myalgia",
+      "Alternating fever and chills",
+      "Malaria",
+      "Hepatitis",
+      "Gallstones"
+    ],
+    "knowledge_chain_en": "String pulse (straight and long, like pressing a guitar string) belongs to the solid pulse category, mainly corresponding to liver and gallbladder diseases, various pains, phlegm, malaria, and common modern diseases such as excessive phlegm, migraine, liver region swelling and pain, whole body pain, alternating chills and fever, malaria, hepatitis, and gallstones."
+  }
+]

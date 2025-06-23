@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 你自訂的 bg-gradient-custom，保留在這裡 */
+.bg-gradient-custom {
+  background: linear-gradient(135deg, #FCFAF1 0%, #F8F6EF 50%, #FCFAF1 100%);
+}
