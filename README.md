@@ -25,7 +25,7 @@ backend/
 ├── llm/
 │   ├── prompt_builder.py           ← Prompt 組裝/組合（for LLM）
 │   ├── llm_executor.py             ← 發送 prompt 給 LLM 模型、解析結構
-│   └── embedding_local.py          ← 本地嵌入（可選）
+│   └── embedding.py                ← 向量嵌入
 ├── prompt/
 │   └── template.txt                ← Prompt 樣板外部管理（選用）
 ├── data/                           ← 病歷原始 JSON
