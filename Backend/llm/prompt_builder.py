@@ -55,3 +55,19 @@ def build_custom_prompt(summary: str, instruction: str) -> str:
     輸入摘要+自訂指令產生自由風格prompt
     """
     return f"{instruction}\n\n【病歷摘要】\n{summary}"
+
+def build_integrated_prompt(query, case_results=None, pulsepj_results=None):
+    msg = [f"# 使用者問題\n{query.strip()}"]
+    if case_results:
+        msg.append("\n# 相似案例")
+        for case in case_results[:3]:  # 最多舉3個
+            summary = case.get('summary', '').replace('\n', '')
+            # 若有診斷結果也可加
+            dx = case.get('llm_struct', {}).get('主病', '')
+            msg.append(f"- {summary}{' → 診斷為'+dx[0][0] if dx else ''}")
+    if pulsepj_results:
+        msg.append("\n# 脈象知識補充")
+        for p in pulsepj_results[:2]:
+            msg.append(f"{p.get('name', '')}：{p.get('description', '')}。常見於主病：{p.get('main_disease', '')}")
+    msg.append("\n請根據以上資訊進行分析與建議（條列出可能證型及鑑別點）。")
+    return "\n".join(msg)

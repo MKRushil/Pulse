@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
+import logging
 
 # 引入分層模組服務
 from cases.case_storage import save_case_data
@@ -10,6 +11,7 @@ from cases.case_diagnosis import diagnose_case
 from cbr.query_router import route_query
 
 app = FastAPI()
+logging.basicConfig(level=logging.INFO)
 
 # 1. 儲存病歷
 @app.post("/api/case/save")
@@ -30,9 +32,13 @@ async def diagnose_case_entry(request: Request):
 
 # 4. 查詢診斷（使用案例推理）
 @app.post("/api/query")
-async def query_entry(request: Request):
+async def query_endpoint(request: Request):
     data = await request.json()
-    return route_query(data)
+    logging.info("收到查詢請求: %s", data)
+    ...
+    result = route_query(data)
+    logging.info("回傳查詢結果: %s", result)
+    return result
 
 # 5. 掛載靜態網頁資料夾（前端 build 結果）
 static_dir = os.path.join(os.path.dirname(__file__), "..", "ui")

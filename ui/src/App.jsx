@@ -8,24 +8,37 @@ function QAHome() {
   const [loading, setLoading] = useState(false);
 
   async function sendQuery() {
-    if (!query.trim()) return;
-    setLoading(true);
-    setReply("思考中...");
-    setPulseTable([]);
-    try {
-      const res = await fetch('/api/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query }),
-      });
-      const data = await res.json();
-      setReply(data.reply || "查無相關回應，請重新輸入。");
-      setPulseTable(data.pulse_results || []);
-    } catch {
-      setReply("查詢失敗，請稍後再試。");
-    }
-    setLoading(false);
+  if (!query.trim()) return;
+  setLoading(true);
+  setReply("思考中...");
+  setPulseTable([]);
+  try {
+    const res = await fetch('/api/query', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query,patient_id: patient_id }),
+    });
+    const data = await res.json();
+    // 新增 log
+    console.log('API回傳', data);
+
+    // 正確抓取 results.PulsePJ, results.case
+    const pulseList = (data.results && data.results.PulsePJ) ? data.results.PulsePJ : [];
+    const caseList = (data.results && data.results.case) ? data.results.case : [];
+    // 優先顯示 dialog，否則根據查詢有無結果顯示
+    setReply(
+      data.dialog ||
+      data.reply ||
+      (pulseList.length > 0 || caseList.length > 0 ? "已找到相關脈象與病例結果如下：" : "查無相關回應，請重新輸入。")
+    );
+    // 合併顯示所有結果
+    setPulseTable([...pulseList, ...caseList]);
+  } catch {
+    setReply("查詢失敗，請稍後再試。");
   }
+  setLoading(false);
+}
+
 
   return (
     <div className="flex flex-col items-center p-4 bg-gradient-custom min-h-[70vh]">

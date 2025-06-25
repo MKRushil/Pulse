@@ -4,8 +4,10 @@
 - 排序、聚合、去重
 - 支援分支排序、聚合權重、自訂去重策略
 - 新增 pulsepj_to_struct()：將脈象知識庫物件 mapping 成統一格式
+- 加入 logging，異常時可即時追蹤
 """
 import json
+import logging
 
 def sort_cases_by_weight(cases, key="主病", weight_idx=1):
     """
@@ -21,7 +23,8 @@ def sort_cases_by_weight(cases, key="主病", weight_idx=1):
                 llm_struct = json.loads(llm_struct)
             weights = [float(w[weight_idx]) for w in llm_struct.get(key, []) if len(w) > weight_idx]
             return max(weights) if weights else 0
-        except Exception:
+        except Exception as e:
+            logging.warning("sort_cases_by_weight 權重排序錯誤: %s, item: %s", str(e), item)
             return 0
     return sorted(cases, key=get_weight, reverse=True)
 
@@ -51,18 +54,21 @@ def aggregate_cases(*case_lists):
 
 def pulsepj_to_struct(pulse_item):
     """
-    將 PulsePJ（脈象知識庫物件）mapping 成與病例資料一致格式，方便統一回傳給前端或 LLM
-    產出 summary、llm_struct（主病、症狀、知識鏈）等欄位
+    將 pulsePJ（脈象知識庫物件）mapping 成與病例資料一致格式，方便統一回傳給前端或 LLM
+    產出 summary、llm_struct（主病、知識鏈）等欄位
     """
-    summary = f"{pulse_item.get('name','')}：{pulse_item.get('description','')}；主病：{pulse_item.get('main_disease','')}；現代病症：{','.join(pulse_item.get('symptoms',[]))}"
-    llm_struct = {
-        "主病": [(pulse_item.get("main_disease",""), 1)],
-        "症狀": pulse_item.get("symptoms",[]),
-        "知識鏈": pulse_item.get("knowledge_chain","")
-    }
-    return {
-        "case_id": pulse_item.get("id", pulse_item.get("neo4j_id", "")),
-        "summary": summary,
-        "llm_struct": llm_struct,
-        **pulse_item   # 保留所有原始欄位，前端若需展開可直接使用
-    }
+    try:
+        summary = f"{pulse_item.get('name','')}：{pulse_item.get('description','')}；主病：{pulse_item.get('main_disease','')}"
+        llm_struct = {
+            "主病": [(pulse_item.get("main_disease",""), 1)],
+            "知識鏈": pulse_item.get("knowledge_chain","")
+        }
+        return {
+            "case_id": pulse_item.get("neo4j_id", ""),
+            "summary": summary,
+            "llm_struct": llm_struct,
+            **pulse_item   # 保留所有原始欄位，前端若需展開可直接使用
+        }
+    except Exception as e:
+        logging.error("pulsepj_to_struct 轉換錯誤: %s, item: %s", str(e), pulse_item)
+        return {}

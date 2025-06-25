@@ -1,0 +1,80 @@
+{
+  "basic": {
+    "name": "戴志瑋",
+    "gender": "男",
+    "age": "33",
+    "id": "A123",
+    "phone": "0970571228",
+    "address": "Resit Galip Cad. Rabat Sok. No:16 G.O.P."
+  },
+  "inspection": {
+    "bodyShape": [],
+    "faceColor": [
+      "面色蒼白",
+      "唇紅微乾",
+      "精神萎靡"
+    ],
+    "faceOther": "",
+    "eye": [
+      "目睛赤"
+    ],
+    "skin": [
+      "無特殊"
+    ]
+  },
+  "inquiry": {
+    "sleep": [
+      "難入眠"
+    ],
+    "spirit": [
+      "煩躁不安"
+    ],
+    "symptoms": [
+      "喉嚨痛",
+      "發燒",
+      "腹瀉"
+    ],
+    "mainSymptom": "喉嚨非常燒",
+    "mainSeverity": 8,
+    "otherSymptom": ""
+  },
+  "pulse": {
+    "左寸": {
+      "types": [
+        "沉"
+      ],
+      "note": ""
+    },
+    "左關": {
+      "types": [
+        "沉"
+      ],
+      "note": ""
+    },
+    "左尺": {
+      "types": [
+        "浮"
+      ],
+      "note": ""
+    },
+    "右寸": {
+      "types": [
+        "浮"
+      ],
+      "note": ""
+    },
+    "右關": {
+      "types": [
+        "沉",
+        "有力"
+      ],
+      "note": ""
+    },
+    "右尺": {
+      "types": [
+        "遲"
+      ],
+      "note": ""
+    }
+  }
+}

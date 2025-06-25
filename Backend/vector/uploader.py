@@ -1,68 +1,67 @@
-# vector/uploader.py
 """
-模組說明：
-本檔案負責將「病歷（原始資料）＋診斷摘要＋推理權重」整合後，自動上傳至 Weaviate 或其他向量庫。
-
-流程：
-1. 載入病歷原始檔（如 ./data/20250621_1234.json）
-2. 解析診斷結果（摘要/主病/次病/權重等）
-3. 呼叫 embedding.py 產生語意向量（支援 case/PCD 多種 class）
-4. 調用 schema.py 取得向量庫 schema 及連線
-5. 組合資料並上傳至 Weaviate
-6. 支援附加時間戳、追蹤 ID，並保留所有原始資訊
-
-套件需求：
-- weaviate-client（Python 官方）
-- numpy
-- 自訂 embedding.py/schema.py
-
-可配合 case_storage.py 自動觸發，每筆診斷即時入庫，支援語意檢索與 CBR。
+負責將病歷與診斷推理整合，並上傳到 Weaviate（支援 Case/PCD）
+- 支援個人欄位展平，便於快查、匿名處理、向量查詢
+- 支援 llm_struct, raw_case 以字串形式存入
 """
+
 import os
 import json
 from datetime import datetime
 from vector.embedding import generate_embedding
 from vector.schema import get_weaviate_client, get_case_schema
 
-# 設定：是否要同時存 PCD（個案）與 case（通用）兩種 class
 UPLOAD_CASE_CLASS = True
 UPLOAD_PCD_CLASS = True
 
-# 上傳主流程
+def flatten_case_data(case_data):
+    """
+    將病歷中的 basic 欄位與常見欄位展平（以利儲存、查詢）
+    """
+    flat = {}
+    # 基本資料
+    for k in ["name", "gender", "age", "phone", "address"]:
+        flat[k] = case_data.get("basic", {}).get(k, "")
+    # 可擴充檢查、問診等欄位
+    # ex: flat.update(case_data.get("inspection", {}))
+    # id → patient_id
+    flat["patient_id"] = case_data.get("basic", {}).get("id", "")
+    return flat
 
 def upload_case_vector(case_path: str, diagnosis_result: dict):
     """
-    將病歷原始資料 + 診斷摘要 + 推理權重結構整合，產生語意向量，
-    並上傳至 Weaviate。
-    參數：
-    - case_path: 原始病歷 JSON 檔案路徑
-    - diagnosis_result: 診斷結果 dict（來自 case_diagnosis.py）
+    上傳病歷資料到 Weaviate，並支援個資展平與 llm_struct/json 字串化
     """
     if not os.path.exists(case_path):
         print(f"[Uploader] 病歷檔案不存在: {case_path}")
         return
+
     with open(case_path, 'r', encoding='utf-8') as f:
         case_data = json.load(f)
 
-    # 取得摘要/推理結構
     llm_struct = diagnosis_result.get("llm_struct", {})
     summary = diagnosis_result.get("summary", "")
     timestamp = diagnosis_result.get("timestamp") or datetime.now().isoformat()
 
-    # 1. 組合資料 (可根據 schema.py 動態擴充)
+    # 展平個人資訊
+    flat_person = flatten_case_data(case_data)
+
+    # 組合資料
     record = {
         "case_id": os.path.basename(case_path),
         "timestamp": timestamp,
         "summary": summary,
-        "llm_struct": llm_struct,
-        "raw_case": case_data
+        "llm_struct": json.dumps(llm_struct, ensure_ascii=False),  # 字串
+        "raw_case": json.dumps(case_data, ensure_ascii=False),     # 字串
+        **flat_person
     }
 
-    # 2. 語意向量產生（可自定義：全文摘要/多欄合併/主次病分開）
+    # 語意向量產生
     embed_text = summary or json.dumps(case_data, ensure_ascii=False)
     embedding = generate_embedding(embed_text, input_type="passage")
+    if hasattr(embedding, 'tolist'):
+        embedding = embedding.tolist()
 
-    # 3. 上傳到 Weaviate
+    # 上傳 Weaviate
     client = get_weaviate_client()
     case_schema = get_case_schema()
     if UPLOAD_CASE_CLASS:

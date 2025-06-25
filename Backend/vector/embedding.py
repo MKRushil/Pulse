@@ -8,6 +8,7 @@
 """
 from openai import OpenAI
 import numpy as np
+import logging
 from config import EMBEDDING_API_KEY, EMBEDDING_BASE_URL, EMBEDDING_MODEL_NAME
 
 # 初始化 NVIDIA OpenAI 兼容 client
@@ -32,5 +33,6 @@ def generate_embedding(text: str, input_type: str = "passage"):
         emb = response.data[0].embedding
         return np.array(emb, dtype=np.float32)
     except Exception as e:
+        logging.error("產生嵌入向量失敗: %s, text: %s", str(e), text)
         print(f"[Embedding] 產生嵌入失敗: {e}")
         return None
