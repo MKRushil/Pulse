@@ -1,115 +1,61 @@
-import React, { useState } from "react";
-import TCMExamForm from "./TCMForm"; // 請確保路徑正確
-
-function QAHome() {
-  const [query, setQuery] = useState("");
-  const [reply, setReply] = useState("請在下方輸入您的健康問題，會根據脈象知識回應您。");
-  const [pulseTable, setPulseTable] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  async function sendQuery() {
-  if (!query.trim()) return;
-  setLoading(true);
-  setReply("思考中...");
-  setPulseTable([]);
-  try {
-    const res = await fetch('/api/query', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query,patient_id: patient_id }),
-    });
-    const data = await res.json();
-    // 新增 log
-    console.log('API回傳', data);
-
-    // 正確抓取 results.PulsePJ, results.case
-    const pulseList = (data.results && data.results.PulsePJ) ? data.results.PulsePJ : [];
-    const caseList = (data.results && data.results.case) ? data.results.case : [];
-    // 優先顯示 dialog，否則根據查詢有無結果顯示
-    setReply(
-      data.dialog ||
-      data.reply ||
-      (pulseList.length > 0 || caseList.length > 0 ? "已找到相關脈象與病例結果如下：" : "查無相關回應，請重新輸入。")
-    );
-    // 合併顯示所有結果
-    setPulseTable([...pulseList, ...caseList]);
-  } catch {
-    setReply("查詢失敗，請稍後再試。");
-  }
-  setLoading(false);
-}
+import { useState } from "react";
+import DiagnosisChat from "./DiagnosisChat";
+import CaseChat from "./CaseChat";
+import TCMExamForm from "./TCMForm";
+import BrowseCases from "./BrowseCases";
+import ReasoningView from "./ReasoningView";
+import {
+  MessageCircle,
+  User,
+  PlusCircle,
+  FileText,
+  BrainCog
+} from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 
-  return (
-    <div className="flex flex-col items-center p-4 bg-gradient-custom min-h-[70vh]">
-      <h2 className="text-4xl font-extrabold text-gray-800 mb-4">中醫輔助系統</h2>
-      <p className="text-md text-gray-600 mb-10">為您提供中醫健康諮詢與病例管理。</p>
-      <div className="w-full max-w-2xl bg-white rounded-lg p-6 mb-6 shadow-lg">
-        <h3 className="text-xl font-bold text-gray-700 mb-4 text-center">回答</h3>
-        <div className="bg-gray-100 text-gray-600 p-4 rounded-md mb-4 border border-gray-200 min-h-[60px]">
-          {loading ? <span className="animate-pulse text-blue-400">思考中...</span> : reply}
-        </div>
-        {pulseTable.length > 0 && (
-          <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md mt-2">
-            <thead>
-              <tr>
-                <th className="py-2 px-4 bg-gray-100 text-gray-700 font-semibold text-left">脈名</th>
-                <th className="py-2 px-4 bg-gray-100 text-gray-700 font-semibold text-left">說明</th>
-                <th className="py-2 px-4 bg-gray-100 text-gray-700 font-semibold text-left">主病</th>
-                <th className="py-2 px-4 bg-gray-100 text-gray-700 font-semibold text-left">知識鏈</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pulseTable.map((item, idx) => (
-                <tr key={idx}>
-                  <td className="py-2 px-4">{item.name || ''}</td>
-                  <td className="py-2 px-4">{item.description || ''}</td>
-                  <td className="py-2 px-4">{item.main_disease || ''}</td>
-                  <td className="py-2 px-4">{item.knowledge_chain || ''}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-      <div className="w-full max-w-2xl bg-gray-100 rounded-lg p-3 flex items-center space-x-3 shadow-xl border border-gray-200">
-        <button onClick={() => setQuery("")}
-          className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-200" title="清除輸入">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-        </button>
-        <input
-          type="text"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          onKeyDown={e => { if (e.key === "Enter") sendQuery(); }}
-          placeholder="請輸入您的健康問題或中醫查詢..."
-          className="flex-grow p-2 bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none"
-        />
-        <button onClick={sendQuery}
-          className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-200" title="送出">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a7 7 0 017-7V7a7 7 0 01-7 7z"/></svg>
-        </button>
-      </div>
-    </div>
-  );
-}
+
+const menuItems = [
+  { name: "診斷對話", icon: <MessageCircle size={22} />, key: "diagnosis" },
+  { name: "個案對話", icon: <User size={22} />, key: "case" },
+  { name: "新增病歷", icon: <PlusCircle size={22} />, key: "add" },
+  { name: "瀏覽病歷", icon: <FileText size={22} />, key: "view" },
+  { name: "推理檢視", icon: <BrainCog size={22} />, key: "reasoning" },
+];
 
 export default function App() {
-  const [page, setPage] = useState('home');
+  const [selected, setSelected] = useState("diagnosis");
   return (
-    <div className="min-h-screen bg-[#FCFAF1]">
-      {/* 導覽列 */}
-      <header className="h-16 bg-gray-100 flex items-center justify-between px-4 shadow-md">
-        <h1 className="text-xl font-bold text-gray-700 md:text-2xl">中醫系統平台</h1>
-        <div className="flex items-center space-x-4">
-          <button onClick={() => setPage('home')}
-            className={`py-2 px-4 rounded-md font-semibold transition ${page === 'home' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>首頁</button>
-          <button onClick={() => setPage('case')}
-            className={`py-2 px-4 rounded-md font-semibold transition ${page === 'case' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>病例表</button>
+    <div className="flex h-screen bg-gradient-custom text-blue-900">
+      {/* 側邊功能列 */}
+      <aside className="w-64 bg-white/90 flex flex-col border-r border-blue-100 shadow-xl">
+        <div className="text-2xl font-extrabold text-blue-900 text-center py-6 border-b border-blue-100 tracking-wider">
+          中醫輔助系統
         </div>
-      </header>
-      <main>
-        {page === 'home' ? <QAHome /> : <TCMExamForm />}
+        <nav className="flex-1">
+          <ul>
+            {menuItems.map((item) => (
+              <li
+                key={item.key}
+                onClick={() => setSelected(item.key)}
+                className={`flex items-center px-8 py-4 cursor-pointer rounded-r-2xl font-bold text-lg transition-all duration-200 select-none
+                  ${selected === item.key ? "bg-blue-100 text-blue-700 shadow-inner" : "text-gray-700 hover:bg-blue-50"}`}
+              >
+                <span className="mr-3">{item.icon}</span>
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="px-8 py-4 text-xs text-blue-300 border-t border-blue-100">v1.0</div>
+      </aside>
+      {/* 右側內容區 */}
+      <main className="flex-1 flex flex-col bg-transparent min-h-0">
+        {selected === "diagnosis" && <DiagnosisChat />}
+        {selected === "case" && <CaseChat />}
+        {selected === "add" && <div className="p-4 w-full flex flex-col items-center overflow-y-auto"><TCMExamForm /></div>}
+        {selected === "view" && <BrowseCases />}
+        {selected === "reasoning" && <ReasoningView />}
       </main>
     </div>
   );

@@ -8,7 +8,9 @@ import logging
 from cases.case_storage import save_case_data
 from cases.case_diagnosis import diagnose_case
 #from cases.result_listing import list_all_results
-from cbr.query_router import route_query
+#from cbr.query_router import route_query
+from cbr.spiral_a import spiral_a_query
+
 
 app = FastAPI()
 logging.basicConfig(level=logging.INFO)
@@ -31,14 +33,35 @@ async def diagnose_case_entry(request: Request):
 #     return list_all_results()
 
 # 4. 查詢診斷（使用案例推理）
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+import logging
+
+app = FastAPI()
+logging.basicConfig(level=logging.INFO)
+
 @app.post("/api/query")
 async def query_endpoint(request: Request):
+    print("進入 /api/query")
     data = await request.json()
-    logging.info("收到查詢請求: %s", data)
-    ...
-    result = route_query(data)
-    logging.info("回傳查詢結果: %s", result)
-    return result
+    print("收到資料:", data)
+    patient_id = data.get("patient_id")
+    question = data.get("question") or data.get("query")
+    logging.info(f"收到查詢請求: patient_id={patient_id}, question={question}")
+
+    if patient_id:
+        logging.info(f"進行個案查詢，patient_id={patient_id}")
+        return JSONResponse({
+            "type": "case",
+            "patient_id": patient_id,
+            "answer": f"這是針對個案 {patient_id} 的回覆，問句為：{question}"
+        })
+    else:
+        logging.info("進行一般診斷對話（spiral_a 查詢）")
+        result = spiral_a_query(question)
+        print("spiral_a return 結果:", result)
+        return JSONResponse(result)
+
 
 # 5. 掛載靜態網頁資料夾（前端 build 結果）
 static_dir = os.path.join(os.path.dirname(__file__), "..", "ui")
