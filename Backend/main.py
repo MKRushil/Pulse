@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
+import logging
 import os
 import logging
 
@@ -33,12 +34,6 @@ async def diagnose_case_entry(request: Request):
 #     return list_all_results()
 
 # 4. 查詢診斷（使用案例推理）
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-import logging
-
-app = FastAPI()
-logging.basicConfig(level=logging.INFO)
 
 @app.post("/api/query")
 async def query_endpoint(request: Request):
