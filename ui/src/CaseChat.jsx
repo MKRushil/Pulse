@@ -1,72 +1,94 @@
 import { useState, useRef, useEffect } from "react";
 import { User, SendHorizontal, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown"; // 新增支援 markdown
 
 export default function CaseChat() {
-  // 狀態管理
+  // 狀態
   const [locked, setLocked] = useState(false); // 是否已鎖定個案
   const [idInput, setIdInput] = useState("");
   const [input, setInput] = useState("");
-  const [patient, setPatient] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const [patient, setPatient] = useState(null); // 病人資訊
+  const [messages, setMessages] = useState([]); // 訊息記錄
   const [loading, setLoading] = useState(false);
   const [idError, setIdError] = useState("");
   const idInputRef = useRef(null);
   const chatInputRef = useRef(null);
   const chatEndRef = useRef(null);
 
-  // 模擬病患查詢資料
-  const mockPatients = [
-    { id: "A1234", name: "林小明", gender: "男", age: 35, lastVisit: "2025-06-15" },
-    { id: "B9876", name: "王美麗", gender: "女", age: 42, lastVisit: "2025-05-29" },
-  ];
-
-  // 自動聚焦
+  // 輸入框自動聚焦
   useEffect(() => {
     if (!locked && idInputRef.current) idInputRef.current.focus();
     if (locked && chatInputRef.current) chatInputRef.current.focus();
   }, [locked]);
 
+  // 捲動至底部
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  // 查詢個案（只用前4碼）
-  const handleSearch = () => {
-    if (!/^[A-Z][0-9]{3}$/.test(idInput.trim())) {
+  // 個案查詢（呼叫API）
+  const handleSearch = async () => {
+    if (!/^[A-Z][0-9]{3,}/.test(idInput.trim())) {
       setIdError("格式錯誤，請輸入1碼大寫英+3碼數字");
       return;
     }
     setIdError("");
-    const found = mockPatients.find(p => p.id.startsWith(idInput.trim()));
-    if (!found) {
-      setMessages([{ from: "bot", text: "查無此病人，請確認前4碼。" }]);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/patient/info", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ patient_id: idInput.trim() })
+      });
+      const data = await res.json();
+      if (!data.found) {
+        setMessages([{ from: "bot", text: "查無此病人，請確認前4碼。" }]);
+        setIdInput("");
+        setLoading(false);
+        return;
+      }
+      setPatient(data.patient);
+      setLocked(true);
+      setMessages([
+        { from: "bot", text: `您好，這裡是${data.patient.name}的專屬對話。請輸入您的問題或補充資訊。` },
+      ]);
       setIdInput("");
-      return;
+    } catch {
+      setIdError("伺服器連線失敗，請稍候再試。");
     }
-    setPatient(found);
-    setLocked(true);
-    setMessages([
-      { from: "bot", text: `您好，這裡是${found.name}的專屬對話。請輸入您的問題或補充資訊。` },
-    ]);
-    setIdInput("");
+    setLoading(false);
   };
 
-  // 聊天送出
-  const handleSend = () => {
+  // 個案專屬聊天送出
+  const handleSend = async () => {
     if (!input.trim() || loading || !patient) return;
     setMessages((m) => [...m, { from: "user", text: input }]);
     setLoading(true);
     setInput("");
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: input,
+          patient_id: patient.id // 關鍵：每次都帶 patient_id
+        })
+      });
+      const data = await res.json();
       setMessages((m) => [
         ...m,
         {
           from: "bot",
-          text: `【AI回覆】您的補充內容：「${input}」已記錄，若需進一步診斷請詳述症狀。`,
+          text: data.dialog || data.answer || "[系統] 未取得回應，請稍候再試。",
         },
       ]);
-      setLoading(false);
-    }, 1000);
+    } catch {
+      setMessages((m) => [
+        ...m,
+        { from: "bot", text: "[系統錯誤] 無法取得診斷結果，請確認網路或稍後再試。" },
+      ]);
+    }
+    setLoading(false);
   };
 
   // 退出
@@ -78,6 +100,12 @@ export default function CaseChat() {
     setIdInput("");
     setIdError("");
     if (idInputRef.current) idInputRef.current.focus();
+  };
+
+  // 輸入欄 enter 提交
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    locked ? handleSend() : handleSearch();
   };
 
   return (
@@ -116,7 +144,7 @@ export default function CaseChat() {
       {/* 下方唯一輸入欄，分段顯示+自動 focus */}
       <form
         className="flex items-center gap-2 p-6 border-t border-blue-100 bg-white/80"
-        onSubmit={e => { e.preventDefault(); locked ? handleSend() : handleSearch(); }}
+        onSubmit={handleFormSubmit}
       >
         {!locked ? (
           <>
@@ -125,7 +153,7 @@ export default function CaseChat() {
               ref={idInputRef}
               value={idInput}
               onChange={e => setIdInput(e.target.value.toUpperCase())}
-              maxLength={4}
+              maxLength={10}
               className={`flex-1 rounded-xl bg-blue-50 px-4 py-3 outline-none text-lg text-blue-900 placeholder:text-blue-400 border ${idError ? 'border-red-400' : 'border-blue-200'}`}
               placeholder="請輸入病人身分證前4碼（大寫英數）..."
               autoFocus
@@ -155,6 +183,7 @@ export default function CaseChat() {
   );
 }
 
+// 支援 markdown 的 ChatBubble
 function ChatBubble({ msg }) {
   return (
     <div className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
@@ -169,7 +198,10 @@ function ChatBubble({ msg }) {
           : "after:left-[-10px] after:border-r-[14px] after:border-r-blue-100 after:border-t-[14px] after:border-t-transparent"}
         `}
       >
-        {msg.text}
+        {/* AI回覆 markdown 渲染 */}
+        {msg.from === "bot"
+          ? <ReactMarkdown>{msg.text}</ReactMarkdown>
+          : msg.text}
       </div>
     </div>
   );
