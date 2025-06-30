@@ -128,9 +128,9 @@ export default function TCMExamForm() {
     inquiry: {
       sleep: [],
       spirit: [],
+      chiefComplaint: "",   // 主訴
+      presentIllness: "",  // 現病史
       symptoms: [],
-      mainSymptom: "",
-      mainSeverity: 5,
       otherSymptom: ""
     }
   });
@@ -239,19 +239,41 @@ export default function TCMExamForm() {
       <Section title="問診">
         <MultiCheckbox options={sleepOptions} label="睡眠" value={form.inquiry.sleep} onChange={v => handleChange('inquiry', 'sleep', v)} />
         <MultiCheckbox options={spiritOptions} label="精神" value={form.inquiry.spirit} onChange={v => handleChange('inquiry', 'spirit', v)} />
-        <div className="mb-4 flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2">
-            <label className="font-semibold text-blue-700">主病</label>
-            <input className="border rounded p-1 w-32 mr-2 bg-blue-50" placeholder="主病" value={form.inquiry.mainSymptom} onChange={e => handleChange('inquiry', 'mainSymptom', e.target.value)} />
+        <div className="mb-4 flex flex-col gap-4">
+          <div>
+            <label className="font-semibold text-blue-700 mb-2 block">主訴</label>
+            <input
+              className="border rounded p-1 w-full bg-blue-50"
+              placeholder="請輸入主訴（如：咳嗽三天，咽癢）"
+              value={form.inquiry.chiefComplaint}
+              onChange={e => handleChange('inquiry', 'chiefComplaint', e.target.value)}
+              required
+            />
           </div>
-          <div className="flex items-center gap-2">
-            <label className="font-semibold text-blue-700">嚴重度：</label>
-            <input type="range" min="0" max="10" value={form.inquiry.mainSeverity} onChange={e => handleChange('inquiry', 'mainSeverity', Number(e.target.value))} />
-            <span className="ml-2 text-blue-900 font-semibold">{form.inquiry.mainSeverity}</span>
+          <div>
+            <label className="font-semibold text-blue-700 mb-2 block">現病史</label>
+            <textarea
+              className="border rounded p-1 w-full bg-blue-50"
+              placeholder="請輸入現病史或相關症狀發展（可多行）"
+              value={form.inquiry.presentIllness}
+              onChange={e => handleChange('inquiry', 'presentIllness', e.target.value)}
+              rows={2}
+            />
           </div>
+          {/* 症狀複選與其他補充可保留或合併 */}
+          <MultiCheckbox
+            options={symptomOptions}
+            label="症狀（可複選）"
+            value={form.inquiry.symptoms}
+            onChange={v => handleChange('inquiry', 'symptoms', v)}
+          />
+          <input
+            className="border rounded p-1 w-64 bg-blue-50"
+            placeholder="其它症狀補充"
+            value={form.inquiry.otherSymptom}
+            onChange={e => handleChange('inquiry', 'otherSymptom', e.target.value)}
+          />
         </div>
-        <MultiCheckbox options={symptomOptions} label="次要症狀（可複選）" value={form.inquiry.symptoms} onChange={v => handleChange('inquiry', 'symptoms', v)} />
-        <input className="border rounded p-1 w-64 bg-blue-50" placeholder="其它症狀補充" value={form.inquiry.otherSymptom} onChange={e => handleChange('inquiry', 'otherSymptom', e.target.value)} />
       </Section>
       <Section title="脈診">
         <PulseTable value={pulse} onChange={setPulse} />
