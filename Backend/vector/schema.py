@@ -7,6 +7,10 @@ import weaviate
 from config import WEAVIATE_URL, WV_API_KEY
 from weaviate.auth import AuthApiKey
 
+# ⬇️ class 名稱集中管理
+CASE_CLASS_NAME = "Case"
+PCD_CLASS_NAME = "PCD"
+PULSE_CLASS_NAME = "PulsePJ"
 
 def get_weaviate_client():
     """
@@ -14,15 +18,16 @@ def get_weaviate_client():
     """
     client = weaviate.Client(
         url=WEAVIATE_URL,
-        auth_client_secret=weaviate.AuthApiKey(api_key=WV_API_KEY)
+        auth_client_secret=AuthApiKey(api_key=WV_API_KEY)
     )
     return client
 
 def get_case_schema():
     """
-    回傳所有使用中的 class 名稱（統一管理，方便維護）
+    回傳各資料類別的 class 名稱定義
     """
     return {
-        "case": "Case",   # 通用病例向量
-        "PCD": "PCD"      # 個人診斷向量
+        "case": CASE_CLASS_NAME,
+        "PCD": PCD_CLASS_NAME,
+        "pulse": PULSE_CLASS_NAME
     }

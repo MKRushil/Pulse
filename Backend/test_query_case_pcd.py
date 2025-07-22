@@ -9,11 +9,20 @@ import sys, os
 client = get_weaviate_client()
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+def get_all_properties(class_name):
+    schema = client.schema.get()
+    classes = schema.get("classes", [])
+    for c in classes:
+        if c.get("class") == class_name:
+            return [prop["name"] for prop in c.get("properties", [])]
+    return []
 
+def print_objects(class_name, limit=5):
+    props = get_all_properties(class_name)
+    if not props:
+        print(f"找不到 {class_name} 的 schema 或無 properties")
+        return
 
-
-def print_objects(class_name, props, limit=2):
-    client = get_weaviate_client()
     results = client.query.get(class_name, props).with_limit(limit).do()
     hits = results.get("data", {}).get("Get", {}).get(class_name, [])
     print(f"\n===== {class_name} (前{limit}筆) =====")
@@ -25,9 +34,5 @@ def print_objects(class_name, props, limit=2):
             print(f"{k}: {v}")
 
 if __name__ == "__main__":
-    # 你可根據 schema 調整要看的欄位
-    case_props = ["case_id", "timestamp", "summary", "llm_struct"]
-    pcd_props = ["case_id", "timestamp", "summary", "llm_struct",'raw_case','name','phone','address','gender','age','patient_id']
-
-    print_objects("Case", case_props, limit=2)
-    print_objects("PCD", pcd_props, limit=2)
+    print_objects("Case", limit=5)
+    print_objects("PCD", limit=5)
