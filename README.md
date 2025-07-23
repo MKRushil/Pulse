@@ -150,3 +150,34 @@ AI 條列回覆診斷總結、主次病推理、臨床建議（dialog）
 * 支援多步推理、AI 臨床推理整合（CBR + RAG + LLM）
 * 推理流程與資料來源皆可追溯（Explainable AI）
 * 前端支援推理樹狀結構、病例/脈象查詢詳表、AI 條列式臨床診斷建議
+
+## 7️⃣ 環境變數設定
+
+專案中的 API 金鑰、資料庫連線等敏感資訊皆改以環境變數管理。請依照下列步驟設定：
+
+1. 依照 `.env.example` 內容建立 `.env` 檔，填入實際的金鑰與資料庫帳密。
+2. 啟動應用程式前，載入 `.env`（例如 `source .env`）。
+
+```
+$ cp .env.example .env
+$ # 編輯 .env 後載入環境變數
+$ source .env
+```
+
+這些環境變數會被 `Backend/config.py` 及其他腳本讀取，用於連接 LLM、Weaviate 與資料庫。
+
+## 8️⃣ 安裝與執行
+
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+$ source .env
+$ uvicorn Backend.main:app --reload
+```
+
+如有撰寫測試，可使用 `pytest` 執行：
+
+```bash
+$ pytest
+```

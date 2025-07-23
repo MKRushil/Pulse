@@ -1,11 +1,12 @@
 import mysql.connector
+import os
 
-# 建立連線
+# 建立連線，從環境變數讀取資料庫設定
 conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="0970571228",
-    database="patient"
+    host=os.getenv("DB_HOST", "localhost"),
+    user=os.getenv("DB_USER", "root"),
+    password=os.getenv("DB_PASSWORD", ""),
+    database=os.getenv("DB_NAME", "patient"),
 )
 
 cursor = conn.cursor()
