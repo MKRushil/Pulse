@@ -1,14 +1,21 @@
-LLM_API_URL = "https://integrate.api.nvidia.com/v1"
-LLM_API_KEY = "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"
-LLM_MODEL_NAME = "meta/llama-3.3-70b-instruct"
+"""集中管理系統設定，從環境變數讀取敏感資訊"""
+import os
 
-EMBEDDING_MODEL_NAME = "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1"
-EMBEDDING_API_KEY = "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"
-EMBEDDING_BASE_URL = "https://integrate.api.nvidia.com/v1"
+LLM_API_URL = os.getenv("LLM_API_URL", "https://integrate.api.nvidia.com/v1")
+LLM_API_KEY = os.getenv("LLM_API_KEY", "")
+LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "meta/llama-3.3-70b-instruct")
 
-WV_HTTP_HOST   = "localhost"
-WV_HTTP_PORT   = 8080
-WV_HTTP_SECURE = False          # 必須補這一行，True=用https, False=用http
-WV_API_KEY     = "key-admin"    # 你的API金鑰
-WEAVIATE_URL = "http://localhost:8080"
+EMBEDDING_MODEL_NAME = os.getenv(
+    "EMBEDDING_MODEL_NAME",
+    "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1",
+)
+EMBEDDING_API_KEY = os.getenv("EMBEDDING_API_KEY", "")
+EMBEDDING_BASE_URL = os.getenv("EMBEDDING_BASE_URL", "https://integrate.api.nvidia.com/v1")
+
+WV_HTTP_HOST = os.getenv("WV_HTTP_HOST", "localhost")
+WV_HTTP_PORT = int(os.getenv("WV_HTTP_PORT", "8080"))
+WV_HTTP_SECURE = os.getenv("WV_HTTP_SECURE", "false").lower() == "true"
+WV_API_KEY = os.getenv("WV_API_KEY", "")
+WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
+
 

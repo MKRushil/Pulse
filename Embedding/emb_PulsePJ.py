@@ -6,15 +6,18 @@
 - 直接寫入 Weaviate (PulsePJ)
 """
 import json
+import os
 import requests
 import weaviate
 
-EMBEDDING_MODEL_NAME = "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1"
-EMBEDDING_API_KEY = "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"
-EMBEDDING_BASE_URL = "https://integrate.api.nvidia.com/v1"
+EMBEDDING_MODEL_NAME = os.getenv(
+    "EMBEDDING_MODEL_NAME", "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1"
+)
+EMBEDDING_API_KEY = os.getenv("EMBEDDING_API_KEY", "")
+EMBEDDING_BASE_URL = os.getenv("EMBEDDING_BASE_URL", "https://integrate.api.nvidia.com/v1")
 
-WEAVIATE_URL = "http://localhost:8080"
-WV_API_KEY = "key-admin"
+WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
+WV_API_KEY = os.getenv("WV_API_KEY", "")
 
 client = weaviate.Client(
     url=WEAVIATE_URL,

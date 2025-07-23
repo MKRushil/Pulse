@@ -1,9 +1,10 @@
 import weaviate
+import os
 from weaviate.auth import AuthApiKey
 
-# 直接寫入你的 Weaviate 設定（可換成你的實際值）
-WEAVIATE_URL = "http://localhost:8080"  # 或遠端網址
-WV_API_KEY = "key-admin"  # 如未啟用可設 None
+# 從環境變數讀取 Weaviate 設定
+WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
+WV_API_KEY = os.getenv("WV_API_KEY", "")  # 如未啟用可設空字串
 
 client = weaviate.Client(
     url=WEAVIATE_URL,

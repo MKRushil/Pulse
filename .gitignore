@@ -1,0 +1,11 @@
+__pycache__/
+.env
+*.pyc
+*.pyo
+*.pyd
+.env.local
+.DS_Store
+# Node
+ui/node_modules/
+# results
+Backend/result/

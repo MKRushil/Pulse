@@ -5,10 +5,11 @@
 - 支援查詢 _additional.vector 以驗證嵌入成功
 """
 import weaviate
+import os
 import json
 
-WEAVIATE_URL = "http://localhost:8080"
-WV_API_KEY = "key-admin"
+WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
+WV_API_KEY = os.getenv("WV_API_KEY", "")
 
 client = weaviate.Client(
     url=WEAVIATE_URL,

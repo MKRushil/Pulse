@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+weaviate-client
+openai
+requests
+numpy
+mysql-connector-python
