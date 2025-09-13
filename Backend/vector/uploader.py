@@ -1,111 +1,121 @@
-# vector/uploader.py（同步更新欄位結構，對應 PulsePJ + LLM 雙軌推理結果）
-import os
-import json
-from datetime import datetime
-import time
-from vector.embedding import generate_embedding
-from vector.schema import get_weaviate_client, get_case_schema
+# -*- coding: utf-8 -*-
+from __future__ import annotations
+from typing import Any, Dict, List
+import os, time, json, hashlib, logging
+from vector.schema import get_weaviate_client
 
-UPLOAD_CASE_CLASS = True
-UPLOAD_PCD_CLASS = True
+logger = logging.getLogger(__name__)
 
-def is_valid_llm_struct(llm_struct):
-    if not llm_struct or not isinstance(llm_struct, dict):
+CLASS_NAME = "Case"
+TAG_FIELDS = ["inspection_tags", "inquiry_tags", "pulse_tags"]
+DX_FIELDS = ["diagnosis_main", "diagnosis_sub"]
+
+
+def _sha256_short(s: str, n: int = 12) -> str:
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()[:n]
+
+# ---- schema introspection ----
+
+def _get_class_props(client, class_name: str) -> Dict[str, List[str]]:
+    schema = client.schema.get()
+    for c in schema.get("classes", []):
+        if c.get("class") == class_name:
+            return {p["name"]: p.get("dataType", []) for p in c.get("properties", [])}
+    return {}
+
+_def_array_markers = {"text[]", "string[]"}
+
+def _is_array_prop(datatype: List[str]) -> bool:
+    if not datatype:  # defensive
         return False
-    if any([
-        llm_struct.get("主病"),
-        llm_struct.get("次病"),
-        llm_struct.get("推理說明"),
-    ]):
-        return True
-    return False
+    # weaviate 版本差異：可能回傳 "text[]" 或 "string[]"
+    return any(dt in _def_array_markers or dt.endswith("[]") for dt in datatype)
 
-def upload_case_vector(case_path: str, diagnosis_result: dict):
-    start_time = time.time()
-    print(f"[Uploader] 開始處理檔案：{case_path}")
+# ---- value coercion ----
 
-    if not os.path.exists(case_path):
-        print(f"[Uploader] 病歷檔案不存在: {case_path}")
-        return
+def _to_list_str(v) -> List[str]:
+    if v is None:
+        return []
+    if isinstance(v, (list, tuple)):
+        return [str(x).strip() for x in v if str(x).strip()]
+    s = str(v).strip()
+    return [s] if s else []
 
-    with open(case_path, 'r', encoding='utf-8') as f:
-        case_data = json.load(f)
 
-    llm_struct = diagnosis_result.get("llm_struct", {})
-    summary = diagnosis_result.get("summary_segments")
-    summary_text = diagnosis_result.get("summary")
-    timestamp = diagnosis_result.get("timestamp") or datetime.now().isoformat()
+def _to_joined_text(v) -> str:
+    if v is None:
+        return ""
+    if isinstance(v, (list, tuple)):
+        items = [str(x).strip() for x in v if str(x).strip()]
+        return "、".join(items)
+    return str(v)
 
-    if not summary_text or not is_valid_llm_struct(llm_struct):
-        print(f"[Uploader] summary 或 llm_struct 為空或無效，不進行上傳: {os.path.basename(case_path)}")
-        return
 
-    print("[Uploader] 載入 diagnosis_result 完成，準備組合資料")
+def _coerce_by_schema(props: Dict[str, List[str]], field: str, value: Any):
+    """根據 schema 決定回傳 list[str] 或 str。未知欄位預設原值。"""
+    if field not in props:
+        return value
+    if _is_array_prop(props[field]):
+        return _to_list_str(value)
+    else:
+        return _to_joined_text(value)
 
-    case_raw_case = {
-        "inspection": case_data.get("inspection", {}),
-        "inquiry": case_data.get("inquiry", {}),
-        "pulse": case_data.get("pulse", {})
-    }
 
-    record = {
-        "case_id": os.path.basename(case_path),
-        "timestamp": timestamp,
-        "summary": summary_text,
-        "summary_segments": json.dumps(summary, ensure_ascii=False),
-        "llm_struct": json.dumps(llm_struct, ensure_ascii=False),
-        "main_disease": diagnosis_result.get("main_disease", ""),
-        "sub_diseases": json.dumps(diagnosis_result.get("sub_diseases", []), ensure_ascii=False),
-        "semantic_scores": json.dumps(diagnosis_result.get("semantic_scores", {}), ensure_ascii=False),
-        "embedding": diagnosis_result.get("embedding"),
-        "raw_case": json.dumps(case_raw_case, ensure_ascii=False),
-        "source_model": diagnosis_result.get("source_model", ""),
-        "source_score_method": diagnosis_result.get("source_score_method", ""),
-        "llm_main_disease": diagnosis_result.get("llm_main_disease", ""),
-        "formula_main_disease": diagnosis_result.get("formula_main_disease", ""),
-        "score_error_formula": diagnosis_result.get("score_error_formula", 0)
-    }
+# ---- main uploader ----
 
-    print("[Uploader] 整合 Case 向量資料完成，準備上傳")
-
-    case_schema = get_case_schema()
+def upload_case_vector(*, view: Dict[str, Any], diag: Dict[str, Any], file_path: str, req_id: str) -> str:
     client = get_weaviate_client()
 
-    if UPLOAD_CASE_CLASS:
-        try:
-            client.data_object.create(record, class_name=case_schema["case"])
-            print(f"[Uploader] Case 上傳成功：{record['case_id']}\n")
-        except Exception as e:
-            print(f"[Uploader] Case 上傳失敗：{record['case_id']}，錯誤：{e}")
+    props = _get_class_props(client, CLASS_NAME)
 
-    if UPLOAD_PCD_CLASS:
-        basic = case_data.get("basic", {})
-        pcd_record = {
-            "case_id": os.path.basename(case_path),
-            "timestamp": timestamp,
-            "summary": summary_text,
-            "llm_struct": json.dumps(llm_struct, ensure_ascii=False),
-            "patient_id": basic.get("id", ""),
-            "name": basic.get("name", ""),
-            "age": str(basic.get("age", "")),
-            "gender": basic.get("gender", ""),
-            "phone": basic.get("phone", ""),
-            "address": basic.get("address", ""),
-            "main_disease": diagnosis_result.get("main_disease", ""),
-            "sub_diseases": json.dumps(diagnosis_result.get("sub_diseases", []), ensure_ascii=False),
-            "semantic_scores": json.dumps(diagnosis_result.get("semantic_scores", {}), ensure_ascii=False),
-            "embedding": diagnosis_result.get("embedding"),
-            "source_model": diagnosis_result.get("source_model", ""),
-            "source_score_method": diagnosis_result.get("source_score_method", ""),
-            "llm_main_disease": diagnosis_result.get("llm_main_disease", ""),
-            "formula_main_disease": diagnosis_result.get("formula_main_disease", ""),
-            "score_error_formula": diagnosis_result.get("score_error_formula", 0)
-        }
-        try:
-            client.data_object.create(pcd_record, class_name=case_schema["PCD"])
-            print(f"[Uploader] PCD 上傳成功：{pcd_record['case_id']}\n")
-        except Exception as e:
-            print(f"[Uploader] PCD 上傳失敗：{pcd_record['case_id']}，錯誤：{e}")
+    case_id = _sha256_short(os.path.basename(file_path), 12)
+    ts_iso = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-    total_time = time.time() - start_time
-    print(f"[Uploader] 上傳流程結束：{record['case_id']}，總耗時：{total_time:.2f} 秒\n")
+    # 取嵌入（相容兩種鍵名）
+    emb = diag.get("embedding") or (diag.get("embeddings") or {}).get("summary_vec")
+    if not emb:
+        raise ValueError("summary embedding 缺失，無法上傳向量物件")
+
+    # llm_struct → 字串
+    llm_struct = diag.get("llm_struct")
+    if isinstance(llm_struct, (dict, list)):
+        llm_struct = json.dumps(llm_struct, ensure_ascii=False)
+
+    # age 一律字串化（schema 可能為 text）
+    raw_age = view.get("age")
+    age_str = "" if raw_age is None else str(raw_age)
+    logger.info("[%s] [4/4 upload] age before send: value=%r type=%s → send as str='%s'", req_id, raw_age, type(raw_age).__name__, age_str)
+
+    summary_text = diag.get("summary_text") or view.get("summary_text") or ""
+
+    # 先組 base 物件
+    obj: Dict[str, Any] = {
+        "case_id": case_id,
+        "timestamp": ts_iso,
+        "age": age_str,
+        "gender": view.get("gender") or "",
+        "chief_complaint": view.get("chief_complaint") or "",
+        "present_illness": view.get("present_illness") or "",
+        "provisional_dx": view.get("provisional_dx") or "",
+        "pulse_text": view.get("pulse_text") or "",
+        "summary_text": summary_text,
+        "summary": summary_text,  # 舊查詢鏡像
+        # 先放原值，稍後根據 schema 強制轉型
+        "inspection_tags": view.get("inspection_tags"),
+        "inquiry_tags": view.get("inquiry_tags"),
+        "pulse_tags": view.get("pulse_tags"),
+        # 診斷（可能為 list 或 str，由下方統一轉型）
+        "diagnosis_main": [m.get("name", m) if isinstance(m, dict) else m for m in (diag.get("diagnosis_main") or [])],
+        "diagnosis_sub":  [s.get("name", s) if isinstance(s, dict) else s for s in (diag.get("diagnosis_sub") or [])],
+        "llm_struct": llm_struct or "",
+    }
+
+    # 依 schema 自動適配欄位型別（避免 422）
+    for f in TAG_FIELDS + DX_FIELDS:
+        if f in obj:
+            obj[f] = _coerce_by_schema(props, f, obj[f])
+
+    logger.info("[%s] [4/4 upload] prepare record", req_id)
+    client.data_object.create(data_object=obj, class_name=CLASS_NAME, vector=emb)
+    logger.info("[%s] [4/4 upload] Case created de-identified id=%s", req_id, case_id)
+    return case_id

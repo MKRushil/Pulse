@@ -1,0 +1,52 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="第 1 页" id="Z_483h5J6SB3IvfKELFN">
+    <mxGraphModel dx="444" dy="494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-39" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="210" y="350" width="450" height="401.5" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-32" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;strong style=&quot;background-color: transparent; color: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));&quot; data-end=&quot;423&quot; data-start=&quot;413&quot;&gt;STEP 1&lt;/strong&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));&quot;&gt;：&lt;/span&gt;&lt;/div&gt;&lt;strong data-end=&quot;445&quot; data-start=&quot;427&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;strong style=&quot;background-color: transparent; color: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));&quot; data-end=&quot;445&quot; data-start=&quot;427&quot;&gt;多層屬性檢索與多案例集合召回&lt;/strong&gt;&lt;/div&gt;&lt;/strong&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));&quot;&gt;依據病人脈象、主訴、現病史等特徵，分層多維檢索案例庫，召回一組高相關案例&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFF66;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-39">
+          <mxGeometry x="290" width="156" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-35" value="" style="group" vertex="1" connectable="0" parent="lP40AWmFvuuOZSWI9bkA-39">
+          <mxGeometry y="40" width="450" height="361.5" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="170" as="sourcePoint" />
+            <mxPoint x="350" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="175" as="sourcePoint" />
+            <mxPoint x="175" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-18" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.arc;startAngle=0.20272076219022264;endAngle=2.4;rotation=-90;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry x="105" y="82.90899999999996" width="192.9375" height="174.165" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-28" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.arc;startAngle=0;endAngle=0.7730476249162135;rotation=-90;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry x="116.81250000000001" y="97.74999999999999" width="139.125" height="144.5" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-30" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.arc;startAngle=0.5033152483999501;endAngle=0.9794252440875133;rotation=0;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry x="140" y="153" width="75.46000000000001" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-36" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;strong data-end=&quot;509&quot; data-start=&quot;499&quot;&gt;STEP 2&lt;/strong&gt;：&lt;br&gt;&lt;strong data-end=&quot;529&quot; data-start=&quot;513&quot;&gt;多案例動態加權與融合協商&lt;/strong&gt;&lt;br&gt;針對召回的多個案例，進行屬性加權、知識融合、動態排序，形成最適合目前問題的案例集合方案&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#66FFB3;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry x="290" y="220" width="156" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-37" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;strong data-end=&quot;593&quot; data-start=&quot;583&quot;&gt;STEP 3&lt;/strong&gt;：&lt;br&gt;&lt;strong data-end=&quot;612&quot; data-start=&quot;597&quot;&gt;案例應用與回饋監控&lt;/strong&gt;&lt;br&gt;應用多案例融合產生的診斷建議，實際輔助臨床決策。若醫師/用戶對結果不滿意，可依需求調整聚合條件（如排除案例、加重某屬性），系統將根據回饋進行新一輪多案例聚合推理，直到用戶滿意&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#9999FF;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry x="-70" y="210" width="156" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-38" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;strong data-end=&quot;675&quot; data-start=&quot;665&quot;&gt;STEP 4&lt;/strong&gt;：&lt;br&gt;&lt;strong data-end=&quot;693&quot; data-start=&quot;679&quot;&gt;知識庫更新與案例優化&lt;/strong&gt;&lt;br&gt;系統記錄每輪聚合與用戶回饋資訊，並根據臨床回饋與效果評估，對知識庫中的相關案例進行細化、合併、加權優化，持續提升後續推理效果&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="lP40AWmFvuuOZSWI9bkA-35">
+          <mxGeometry x="-70" y="-30" width="156" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="lP40AWmFvuuOZSWI9bkA-40" value="中醫脈診案例知識庫&lt;div&gt;（病例案例 / 正確回答反饋案例）&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99CCFF;fontColor=#ffffff;strokeColor=#001DBC;" vertex="1" parent="1">
+          <mxGeometry x="300" y="200" width="190" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

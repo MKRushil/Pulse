@@ -1,0 +1,52 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="第 1 页" id="gvVL4D6DaB_V9sEtelo8">
+    <mxGraphModel dx="1090" dy="593" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pkVro-Gz9tli7bkvIin1-1" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;用戶/醫師輸入&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFF66;" parent="1" vertex="1">
+          <mxGeometry x="280" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="pkVro-Gz9tli7bkvIin1-2" target="pkVro-Gz9tli7bkvIin1-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-2" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#66FF66;" parent="1" vertex="1">
+          <mxGeometry x="200" y="200" width="290" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="pkVro-Gz9tli7bkvIin1-3" target="pkVro-Gz9tli7bkvIin1-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-3" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;問題資訊解析&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;(特徵抽取)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#97D077;" parent="1" vertex="1">
+          <mxGeometry x="280" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="pkVro-Gz9tli7bkvIin1-4" target="pkVro-Gz9tli7bkvIin1-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-4" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;資訊檢查&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;(是否缺少關鍵特徵與主訴)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#97D077;" parent="1" vertex="1">
+          <mxGeometry x="260" y="340" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="pkVro-Gz9tli7bkvIin1-5" target="pkVro-Gz9tli7bkvIin1-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-5" value="&lt;font color=&quot;#000000&quot;&gt;任務拆解與參數設定&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#97D077;" parent="1" vertex="1">
+          <mxGeometry x="280" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-6" value="&lt;font color=&quot;#000000&quot;&gt;具有spiral CBR&amp;nbsp;model 的多輪互動引導&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#97D077;" parent="1" vertex="1">
+          <mxGeometry x="280" y="540" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.484;entryY=-0.003;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="pkVro-Gz9tli7bkvIin1-1" target="pkVro-Gz9tli7bkvIin1-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-11" value="Agentive AI" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="170" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="pkVro-Gz9tli7bkvIin1-12" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;多案例聚合推理&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+          <mxGeometry x="285" y="680" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vfu4sOyrFx9OMsvqvfyl-1" value="具有Spiral&amp;nbsp; CBR model 的 Agentive AI" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="860" width="210" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

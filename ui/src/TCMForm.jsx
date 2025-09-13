@@ -1,3 +1,7 @@
+// 修改版 TCMForm.jsx
+// 1. 已刪除「症狀（可複選）、其它症狀補充」部分
+// 2. 新增「暫定診斷結果」欄位（可填寫）
+
 import React, { useState } from "react";
 
 const bodyShapes = ["正常", "瘦", "胖"];
@@ -16,9 +20,6 @@ const sleepOptions = [
 ];
 const spiritOptions = [
   "正常", "提不起勁", "情緒亢奮", "煩躁不安", "壓力大"
-];
-const symptomOptions = [
-  "咳嗽", "喉嚨痛", "發燒", "腹瀉", "頭痛", "鼻塞", "胸悶", "腹脹", "失眠"
 ];
 
 const pulseOptionsByPosition = {
@@ -130,8 +131,8 @@ export default function TCMExamForm() {
       spirit: [],
       chiefComplaint: "",   // 主訴
       presentIllness: "",  // 現病史
-      symptoms: [],
-      otherSymptom: ""
+      // 已移除 symptoms 與 otherSymptom
+      tentativeDiagnosis: "" // 新增暫定診斷結果
     }
   });
   const [pulse, setPulse] = useState(initialPulse);
@@ -178,7 +179,7 @@ export default function TCMExamForm() {
       setForm({
         basic: { name: "", gender: "", age: "", id: "", phone: "", address: "" },
         inspection: { bodyShape: [], faceColor: [], faceOther: "", eye: [], skin: [] },
-        inquiry: { sleep: [], spirit: [], symptoms: [], mainSymptom: "", mainSeverity: 5, otherSymptom: "" },
+        inquiry: { sleep: [], spirit: [], chiefComplaint: "", presentIllness: "", tentativeDiagnosis: "" },
       });
       setPulse(initialPulse);
     } catch (err) {
@@ -191,7 +192,7 @@ export default function TCMExamForm() {
     setForm({
       basic: { name: "", gender: "", age: "", id: "", phone: "", address: "" },
       inspection: { bodyShape: [], faceColor: [], faceOther: "", eye: [], skin: [] },
-      inquiry: { sleep: [], spirit: [], symptoms: [], mainSymptom: "", mainSeverity: 5, otherSymptom: "" },
+      inquiry: { sleep: [], spirit: [], chiefComplaint: "", presentIllness: "", tentativeDiagnosis: "" },
     });
     setPulse(initialPulse);
   }
@@ -260,19 +261,15 @@ export default function TCMExamForm() {
               rows={2}
             />
           </div>
-          {/* 症狀複選與其他補充可保留或合併 */}
-          <MultiCheckbox
-            options={symptomOptions}
-            label="症狀（可複選）"
-            value={form.inquiry.symptoms}
-            onChange={v => handleChange('inquiry', 'symptoms', v)}
-          />
-          <input
-            className="border rounded p-1 w-64 bg-blue-50"
-            placeholder="其它症狀補充"
-            value={form.inquiry.otherSymptom}
-            onChange={e => handleChange('inquiry', 'otherSymptom', e.target.value)}
-          />
+          <div>
+            <label className="font-semibold text-blue-700 mb-2 block">暫定診斷結果</label>
+            <input
+              className="border rounded p-1 w-full bg-blue-50"
+              placeholder="請輸入暫定診斷結果（如：風熱感冒、脾虛）"
+              value={form.inquiry.tentativeDiagnosis}
+              onChange={e => handleChange('inquiry', 'tentativeDiagnosis', e.target.value)}
+            />
+          </div>
         </div>
       </Section>
       <Section title="脈診">

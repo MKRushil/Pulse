@@ -1,33 +1,29 @@
 """
-模組說明：
-- 提供 Weaviate client 連線工具
-- 定義各資料 class 名稱與 schema
+Weaviate 連線與 Case 類別名稱集中管理（僅保留 Case）。
+加上 timeout 與環境變數覆寫，避免上傳卡住。
 """
+import os
 import weaviate
-from config import WEAVIATE_URL, WV_API_KEY
+from config import WEAVIATE_URL as CFG_WEAVIATE_URL, WV_API_KEY as CFG_WV_API_KEY
 from weaviate.auth import AuthApiKey
 
-# ⬇️ class 名稱集中管理
 CASE_CLASS_NAME = "Case"
-PCD_CLASS_NAME = "PCD"
-PULSE_CLASS_NAME = "PulsePJ"
 
 def get_weaviate_client():
-    """
-    初始化 Weaviate client，支援 API key 驗證
-    """
+    # 允許用環境變數覆寫設定，部署更彈性
+    url = os.getenv("WEAVIATE_URL", CFG_WEAVIATE_URL)
+    api_key = os.getenv("WV_API_KEY", CFG_WV_API_KEY)
+    # 設定合理的連線/讀取逾時，避免請求卡住
+    timeout = (
+        int(os.getenv("WV_CONNECT_TIMEOUT", "5")),
+        int(os.getenv("WV_READ_TIMEOUT", "10")),
+    )
     client = weaviate.Client(
-        url=WEAVIATE_URL,
-        auth_client_secret=AuthApiKey(api_key=WV_API_KEY)
+        url=url,
+        auth_client_secret=AuthApiKey(api_key=api_key),
+        timeout_config=timeout,
     )
     return client
 
 def get_case_schema():
-    """
-    回傳各資料類別的 class 名稱定義
-    """
-    return {
-        "case": CASE_CLASS_NAME,
-        "PCD": PCD_CLASS_NAME,
-        "pulse": PULSE_CLASS_NAME
-    }
+    return {"case": CASE_CLASS_NAME}

@@ -17,10 +17,10 @@ import ReactMarkdown from "react-markdown";
 
 const menuItems = [
   { name: "診斷對話", icon: <MessageCircle size={22} />, key: "diagnosis" },
-  { name: "個案對話", icon: <User size={22} />, key: "case" },
+  // { name: "個案對話", icon: <User size={22} />, key: "case" },
   { name: "新增病歷", icon: <PlusCircle size={22} />, key: "add" },
-  { name: "瀏覽病歷", icon: <FileText size={22} />, key: "view" },
-  { name: "推理檢視", icon: <BrainCog size={22} />, key: "reasoning" },
+  // { name: "瀏覽病歷", icon: <FileText size={22} />, key: "view" },
+  // { name: "推理檢視", icon: <BrainCog size={22} />, key: "reasoning" },
 ];
 
 export default function App() {

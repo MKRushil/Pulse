@@ -1,152 +1,64 @@
-中醫智慧輔助診斷系統 —— Backend & CBR+LLM 流程說明
+中醫智慧輔助診斷系統 —— 單一路由 & 去識別化新增流程
 
-# 1️⃣ 檔案文字架構圖
+本系統已簡化為：單一路由查詢（spiral）＋去識別化的新增病例處理鏈（DCIP）。
+
+## 1) 目錄與模組
 
 ```
-backend/
-├── main.py                          ← FastAPI 路由入口
-├── config.py                        ← API/模型/向量庫連線設定
+Backend/
+├── main.py                 ← FastAPI 入口（/api/case/save、/api/query、/healthz）
+├── config.py               ← API/模型/向量庫連線設定
 ├── cases/
-│   ├── case_storage.py             ← 病歷儲存與診斷流程
-│   ├── case_diagnosis.py           ← 病歷摘要、主次病推理、權重分析
-│   └── result_listing.py           ← 歷史診斷列表（暫未啟用）
-├── vector/
-│   ├── uploader.py                 ← 向量資料自動上傳 Weaviate
-│   ├── cleaner.py                  ← 匿名化（去個資）向量處理
-│   ├── schema.py                   ← Weaviate schema 管理
-│   └── embedding.py                ← 產生查詢/入庫語意向量
+│   ├── case_storage.py     ← 新增病例總控（save→normalize→triage→upload）
+│   └── case_diagnosis.py   ← 簡化診斷（主/次病與權重）＋嵌入
 ├── cbr/
-│   ├── query_router.py             ← 自動選擇 A/B 流程（是否含個人 ID）
-│   ├── spiral_a.py                 ← 方案A：無身分，查詢 Case + PulsePJ
-│   ├── spiral_b.py                 ← 方案B：有身分，查詢 PCD + Case + PulsePJ
-│   ├── utils.py                    ← 聚合、排序、去重等工具
-│   ├── reasoning_logger.py         ← 推理流程/推理鏈紀錄、可視化支持
-│   └── tree_builder.py             ← 推理樹結構生成
+│   ├── spiral.py           ← 單一路由查詢：Case + PulsePJ 檢索、聚合、LLM
+│   ├── utils.py            ← 排序、聚合、去重、PulsePJ 映射
+│   └── tree_builder.py     ← 推理樹結構
 ├── llm/
-│   ├── prompt_builder.py           ← Prompt 組裝/組合（for LLM）
-│   ├── llm_executor.py             ← 發送 prompt 給 LLM 模型、解析結構
-│   └── embedding.py                ← 向量嵌入
-├── prompt/
-│   └── template.txt                ← Prompt 樣板外部管理（選用）
-├── data/                           ← 病歷原始 JSON
-├── result/                         ← 診斷摘要與推理結果
-ui/                                 ← 前端（index.html、main.js…）
+│   ├── prompt_builder.py   ← Prompt 組裝
+│   └── llm_executor.py     ← LLM 呼叫與回應解析
+├── vector/
+│   ├── embedding.py        ← 產生查詢/入庫嵌入向量
+│   ├── uploader.py         ← 去識別 Case 上傳（匿名 case_id）
+│   └── schema.py           ← Weaviate 連線（僅保留 Case）
+└── data/, logs/, result/   ← 原始病例、日誌與輸出
 ```
 
-# 2️⃣ 整體檔案流程圖
+## 2) 新增病例處理鏈（DCIP）
 
 ```
-[前端表單]
-    ↓
-POST /api/case/save   ← main.py
-    ↓
-[ cases/case_storage.py ]  (儲存→診斷→上傳向量)
-    ↓
-[ cases/case_diagnosis.py ]
-    ↓
-[ vector/uploader.py → schema.py → embedding.py ]
-    ↓
-病歷、診斷、權重資料 進入向量庫（Case/PCD）
-
-用戶查詢（問診/模擬推理）
-    ↓
-POST /api/query    ← main.py
-    ↓
-[ cbr/query_router.py ]  → 自動選擇 A/B 流程
-    ↓                 ↙
-spiral_a.py       spiral_b.py
-（匿名查詢）      （有身分查詢）
-    ↓                 ↓
-  查詢 Case/PulsePJ    查詢 PCD→Case→PulsePJ
-    ↓                 ↓
-[ llm/prompt_builder.py ]
-    ↓
-[ llm/llm_executor.py ]
-    ↓
-LLM AI 綜合推理
-    ↓
-回傳 dialog + 推理鏈給前端
+前端 TCMForm → POST /api/case/save → cases/case_storage.save_case_data
+  [1/4 save]  寫原始 JSON → Backend/data/{timestamp_id}.json
+  [2/4 normalize] 去識別視圖（age/gender/chief/present/provisional）
+  [3/4 triage]   產出主/次病與權重（預設 0.7/0.3）＋ embedding
+  [4/4 upload]   上傳 Weaviate「Case」類別（匿名 case_id）
 ```
 
-# 3️⃣ 對話整體流程圖
+## 3) 查詢（單一路由 spiral）
 
 ```
-使用者問題/症狀（如：最近總是頭暈、氣短，脈象偏細弱…）
-    ↓
-API 查詢（/api/query）
-    ↓
-CBR 系統查詢相關案例與脈象知識（Case/PulsePJ/PCD）
-    ↓
-推理鏈組裝（reasoning_chain、tree）
-    ↓
-Prompt Builder 組合所有摘要
-    ↓
-送至 LLM（大模型）AI 綜合分析
-    ↓
-AI 條列回覆診斷總結、主次病推理、臨床建議（dialog）
-    ↓
-前端顯示（dialog + 資料表格/推理鏈樹狀可視化）
+POST /api/query → cbr/spiral.run(question, patient_ctx?)
+  嵌入 question → 檢索 Case + PulsePJ → 聚合與 Prompt → LLM 回覆（dialog + llm_struct）
+  可回 reasoning_chain 與樹狀結構（tree）供可視化
 ```
 
-# 4️⃣ 病例整體流程圖與檔案流向
+## 4) Weaviate Schema（Case）
 
-```
-[前端送出病例表單]          ↓
-    main.py  (POST /api/case/save)
-         ↓
-   cases/case_storage.py
-         ↓
-1. 儲存至 ./data/
-2. 呼叫 cases/case_diagnosis.py 生成摘要與主次病、權重
-3. 自動上傳向量資料（vector/uploader.py）→ Weaviate
-4. 回傳診斷結果給前端
-5. result/ 目錄保存語意摘要、推理結構
-```
+- 主要欄位：`case_id`（匿名）、`timestamp`、`age`、`gender`、`summary`、
+  `chief_complaint`、`present_illness`、`provisional_dx`、
+  `diagnosis_main`、`diagnosis_sub`、`embedding`
+- 兼容欄位：`llm_struct`、`main_disease`、`sub_diseases`、`semantic_scores`、
+  `source_model`、`source_score_method` 等
+- 建議先執行 `Backend/vector/weaviate_schema_create.py` 以建立 `Case` 類別
 
-# 5️⃣ 主要檔案與API/功能說明
+## 5) 開發與啟動
 
-## main.py
+- 後端：`uvicorn Backend.main:app --reload`
+- 前端：`cd ui && npm install && npm run dev`（Vite 代理 `/api` → `:8000`）
 
-| 路由                   | 功能說明                |
-| -------------------- | ------------------- |
-| POST /api/case/save  | 儲存病歷 JSON（含時間與 ID）  |
-| POST /api/diagnose   | 執行病歷摘要與模型推理         |
-| GET /api/result/list | 列出歷史診斷結果            |
-| POST /api/query      | 查詢（自動選擇 A/B 案例推理流程） |
-| GET /                | 回傳前端首頁 index.html   |
-| GET /static/...      | 掛載靜態前端檔案            |
+## 6) 變更紀要（簡）
 
-## cases/case\_storage.py
-
-病歷儲存模組：接收前端表單（結構固定），儲存 JSON 至 ./data/（含時間戳、身分末四碼），執行診斷摘要並上傳向量庫，回傳完整診斷結果與檔名。
-
-## cases/case\_diagnosis.py
-
-病歷語意摘要與主次病推理，萃取主病、次病與計算權重，可串接 LLM AI 協助摘要推理。
-
-## vector/
-
-* uploader.py：整合診斷、權重、病例資料，自動上傳至 Weaviate 向量庫（含時間戳）
-* schema.py：Weaviate schema 初始化、class 建立、結構查詢
-* embedding.py：產生語意向量（查詢/入庫）
-
-## cbr/
-
-* query\_router.py：判斷查詢內容，自動選擇 spiral\_a（匿名查詢）或 spiral\_b（個人化查詢）
-* spiral\_a.py：方案A：查 Case/PulsePJ，無身分資訊，整合推理給 LLM
-* spiral\_b.py：方案B：查 PCD→Case→PulsePJ，根據個人資料串推理
-* utils.py：聚合排序、去重、脈象知識 mapping 統一格式
-* reasoning\_logger.py：推理鏈紀錄，流程樹狀資料結構組成，方便前端可視化
-* tree\_builder.py：將推理鏈 reasoning\_chain 組成樹狀結構（供前端展示）
-
-## llm/
-
-* prompt\_builder.py：Prompt 組裝模組，支援 build\_prompt\_from\_case、build\_spiral\_prompt\_from\_cases、build\_integrated\_prompt 等方式，亦可匯入 template.txt 樣板
-* llm\_executor.py：負責呼叫 LLM 模型（NVIDIA/OpenAI/本地），正規解析主病/次病/權重/推理說明，回傳結構化與原始資料
-
-# 6️⃣ 系統特色與擴充
-
-* 支援病例資料存儲、向量化自動搜尋、權重推理與推理鏈完整紀錄
-* 支援多步推理、AI 臨床推理整合（CBR + RAG + LLM）
-* 推理流程與資料來源皆可追溯（Explainable AI）
-* 前端支援推理樹狀結構、病例/脈象查詢詳表、AI 條列式臨床診斷建議
+- 合併查詢為單一路由：刪除 `cbr/spiral_b.py` 與 `cbr/query_router.py`
+- Weaviate 僅保留 Case：`vector/schema.py` 僅輸出 Case；`weaviate_schema_create.py` 只建立 Case
+- 新增病例入庫改為去識別化：不上傳個資（不建 PCD），匿名 `case_id`

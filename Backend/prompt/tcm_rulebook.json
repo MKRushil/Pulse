@@ -1,0 +1,43 @@
+{
+  "version": "v1.0",
+  "weights": {
+    "symptom": 1.0,
+    "inspection": 1.2,
+    "pulse": 1.3,
+    "chief_bonus": 0.5,
+    "provisional": 0.15
+  },
+  "thresholds": {
+    "main": 0.45,
+    "sub": 0.30
+  },
+  "diseases": [
+    {
+      "label": "肝鬱化火",
+      "symptoms": ["心煩", "易怒", "胸悶", "口苦", "失眠", "多夢", "急躁"],
+      "inspection": ["面色微紅", "唇紅微乾", "目赤", "舌紅"],
+      "pulse": ["弦", "數"]
+    },
+    {
+      "label": "心脾兩虛",
+      "symptoms": ["失眠", "多夢", "健忘", "心悸", "倦怠", "食慾差"],
+      "inspection": ["面色淡黃", "舌淡"],
+      "pulse": ["細", "弱"]
+    },
+    {
+      "label": "痰濕",
+      "symptoms": ["胸悶", "胃脹", "噁心", "食慾下降", "困倦", "頭重如裹"],
+      "inspection": ["舌苔厚膩", "面部油膩"],
+      "pulse": ["滑", "濡"]
+    },
+    {
+      "label": "心腎不交",
+      "symptoms": ["難入睡", "心悸", "健忘", "盜汗", "腰膝酸軟"],
+      "inspection": ["舌紅少苔"],
+      "pulse": ["細", "數"]
+    }
+  ],
+  "learned_adjustments": {
+    "notes": "預留：之後可寫入學習後的權重/同義字/脈象映射等。"
+  }
+}

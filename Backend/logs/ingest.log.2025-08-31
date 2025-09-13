@@ -1,0 +1,104 @@
+2025-08-31 00:28:33,903 [INFO] backend.main - Application shutdown.
+2025-08-31 00:28:37,159 [INFO] backend.main - Application startup.
+2025-08-31 00:29:11,306 [INFO] backend.main - Application shutdown.
+2025-08-31 00:29:14,174 [INFO] backend.main - Application startup.
+2025-08-31 01:41:23,861 [INFO] backend.main - Application shutdown.
+2025-08-31 01:41:26,917 [INFO] backend.main - Application startup.
+2025-08-31 01:41:59,798 [INFO] backend.main - Application shutdown.
+2025-08-31 01:42:02,717 [INFO] backend.main - Application startup.
+2025-08-31 02:02:41,987 [INFO] backend.main - Application shutdown.
+2025-08-31 02:02:44,865 [INFO] backend.main - Application startup.
+2025-08-31 02:05:47,419 [INFO] root - [20250831_020547_9174] [1/4 save] saved original file=20250831_020547_9174.json
+2025-08-31 02:05:47,420 [INFO] cases.normalizer - [normalize] de-identified view ready gender= age=0
+2025-08-31 02:05:47,420 [INFO] root - [20250831_020547_9174] [2/4 normalize] gender= age=0
+2025-08-31 02:05:49,212 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-08-31 02:05:49,726 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2025-08-31 02:05:49,727 [ERROR] root - 產生嵌入向量失敗: Error code: 400 - {'error': 'Your request cannot be validated, it is incorrect. detail=Input list must be non-empty and all elements must be non-empty.'}, text: 
+2025-08-31 02:05:50,044 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-08-31 02:05:50,045 [INFO] root - [20250831_020547_9174] [3/4 triage] main=[] sub=[]
+2025-08-31 03:32:27,036 [INFO] backend.main - Application shutdown.
+2025-08-31 03:32:30,417 [INFO] backend.main - Application startup.
+2025-08-31 03:32:35,470 [INFO] cases.case_storage - [20250831_033235_5469] [1/4 save] saved original file=20250831_033235_5469.json
+2025-08-31 03:32:35,470 [INFO] cases.normalizer - [normalize] de-identified view ready gender= age=0
+2025-08-31 03:32:35,470 [INFO] cases.case_storage - [20250831_033235_5469] [2/4 normalize] gender= age=0
+2025-08-31 03:32:37,977 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-08-31 03:32:38,498 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2025-08-31 03:32:38,500 [ERROR] root - 產生嵌入向量失敗: Error code: 400 - {'error': 'Your request cannot be validated, it is incorrect. detail=Input list must be non-empty and all elements must be non-empty.'}, text: 
+2025-08-31 03:32:38,882 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-08-31 03:32:38,884 [INFO] cases.case_storage - [20250831_033235_5469] [3/4 triage] main=[] sub=[]
+2025-08-31 03:32:38,923 [INFO] vector.uploader - [20250831_033235_5469] [4/4 upload] prepare record
+2025-08-31 03:32:38,924 [INFO] vector.uploader - [20250831_033235_5469] [4/4 upload] ready to create Case object
+2025-08-31 03:32:38,938 [ERROR] cases.case_storage - [20250831_033235_5469] [4/4 upload] failed: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text property 'age' on class 'Case': not a string, but json.Number"}]}.
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 54, in save_case_data
+    case_id = upload_case_vector(view=view, diag=diag, file_path=fpath, req_id=req_id)
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 67, in upload_case_vector
+    client.data_object.create(data_object=obj, class_name=class_name, vector=emb)
+  File "C:\Users\a0970\anaconda3\envs\Rag\lib\site-packages\weaviate\data\crud_data.py", line 159, in create
+    raise UnexpectedStatusCodeException("Creating object", response)
+weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text property 'age' on class 'Case': not a string, but json.Number"}]}.
+2025-08-31 03:35:35,447 [INFO] backend.main - Application shutdown.
+2025-08-31 03:35:38,248 [INFO] backend.main - Application startup.
+2025-08-31 03:35:40,648 [INFO] backend.main - Application shutdown.
+2025-08-31 03:35:43,270 [INFO] backend.main - Application startup.
+2025-08-31 03:39:18,098 [INFO] cases.case_storage - [20250831_033918_8098] [1/4 save] saved original file=20250831_033918_8098.json
+2025-08-31 03:39:18,098 [INFO] cases.normalizer - [normalize] de-identified view ready gender= age=0
+2025-08-31 03:39:18,098 [INFO] cases.case_storage - [20250831_033918_8098] [2/4 normalize] gender= age=0
+2025-08-31 03:39:19,787 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-08-31 03:39:20,338 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2025-08-31 03:39:20,338 [ERROR] root - 產生嵌入向量失敗: Error code: 400 - {'error': 'Your request cannot be validated, it is incorrect. detail=Input list must be non-empty and all elements must be non-empty.'}, text: 
+2025-08-31 03:39:20,655 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-08-31 03:39:20,656 [INFO] cases.case_storage - [20250831_033918_8098] [3/4 triage] main=[] sub=[]
+2025-08-31 03:39:20,687 [INFO] vector.uploader - [20250831_033918_8098] [4/4 upload] age before send: value=0 type=int → send as str='0'
+2025-08-31 03:39:20,687 [INFO] vector.uploader - [20250831_033918_8098] [4/4 upload] prepare record
+2025-08-31 03:39:20,692 [ERROR] cases.case_storage - [20250831_033918_8098] [4/4 upload] failed: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text property 'diagnosis_main' on class 'Case': not a string, but []interface {}"}]}.
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 54, in save_case_data
+    case_id = upload_case_vector(view=view, diag=diag, file_path=fpath, req_id=req_id)
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 67, in upload_case_vector
+    client.data_object.create(data_object=obj, class_name=class_name, vector=emb)
+  File "C:\Users\a0970\anaconda3\envs\Rag\lib\site-packages\weaviate\data\crud_data.py", line 159, in create
+    raise UnexpectedStatusCodeException("Creating object", response)
+weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text property 'diagnosis_main' on class 'Case': not a string, but []interface {}"}]}.
+2025-08-31 03:50:07,383 [INFO] backend.main - Application shutdown.
+2025-08-31 03:50:10,341 [INFO] backend.main - Application startup.
+2025-08-31 03:50:16,814 [INFO] backend.main - Application shutdown.
+2025-08-31 03:50:36,796 [INFO] backend.main - Application startup.
+2025-08-31 03:51:06,343 [INFO] backend.main - Application shutdown.
+2025-08-31 03:51:07,837 [INFO] backend.main - Application startup.
+2025-08-31 03:51:15,297 [INFO] backend.main - Application shutdown.
+2025-08-31 03:51:16,920 [INFO] backend.main - Application startup.
+2025-08-31 03:51:33,033 [INFO] backend.main - Application shutdown.
+2025-08-31 03:51:34,527 [INFO] backend.main - Application startup.
+2025-08-31 03:53:19,388 [INFO] backend.main - Application shutdown.
+2025-08-31 03:53:23,563 [INFO] backend.main - Application startup.
+2025-08-31 04:11:56,948 [INFO] backend.main - Application shutdown.
+2025-08-31 04:15:08,856 [INFO] backend.main - Application startup.
+2025-08-31 04:15:28,813 [INFO] backend.main - Application shutdown.
+2025-08-31 04:15:30,285 [INFO] backend.main - Application startup.
+2025-08-31 04:18:15,631 [INFO] backend.main - Application shutdown.
+2025-08-31 04:18:17,025 [INFO] backend.main - Application startup.
+2025-08-31 04:20:37,040 [INFO] cases.case_storage - [20250831_042037_7039] [1/4 save] saved original file=20250831_042037_7039.json
+2025-08-31 04:20:37,041 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=34
+2025-08-31 04:20:37,041 [INFO] cases.case_storage - [20250831_042037_7039] [2/4 normalize] gender=女 age=34
+2025-08-31 04:20:37,042 [INFO] cases.case_diagnosis - [triage] main=['肝鬱化火，心脾兩虛'] sub=['肝鬱', '氣虛']
+2025-08-31 04:20:37,043 [INFO] cases.case_storage - [20250831_042037_7039] [3/4 triage] main=['肝鬱化火，心脾兩虛'] sub=['肝鬱', '氣虛']
+2025-08-31 04:20:37,104 [INFO] vector.uploader - [20250831_042037_7039] [4/4 upload] age before send: value=34 type=int → send as str='34'
+2025-08-31 04:20:37,104 [INFO] vector.uploader - [20250831_042037_7039] [4/4 upload] prepare record
+2025-08-31 04:20:37,174 [INFO] vector.uploader - [20250831_042037_7039] [4/4 upload] Case created de-identified id=18a8015de601
+2025-08-31 04:32:13,920 [INFO] backend.main - Application shutdown.
+2025-08-31 04:32:15,533 [INFO] backend.main - Application startup.
+2025-08-31 18:00:19,145 [INFO] backend.main - Application shutdown.
+2025-08-31 18:00:20,967 [INFO] backend.main - Application startup.
+2025-08-31 18:02:21,552 [INFO] backend.main - Application shutdown.
+2025-08-31 18:02:23,240 [INFO] backend.main - Application startup.
+2025-08-31 18:06:28,318 [INFO] backend.main - Application shutdown.
+2025-08-31 18:06:29,977 [INFO] backend.main - Application startup.
+2025-08-31 18:10:14,172 [INFO] cases.case_storage - [20250831_181014_4171] [1/4 save] saved original file=20250831_181014_4171.json
+2025-08-31 18:10:14,172 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=34
+2025-08-31 18:10:14,172 [INFO] cases.case_storage - [20250831_181014_4171] [2/4 normalize] gender=女 age=34
+2025-08-31 18:10:14,173 [INFO] cases.case_diagnosis - [triage] main=['肝鬱化火，心脾兩虛'] sub=['肝鬱', '氣虛']
+2025-08-31 18:10:14,173 [INFO] cases.case_storage - [20250831_181014_4171] [3/4 triage] main=['肝鬱化火，心脾兩虛'] sub=['肝鬱', '氣虛']
+2025-08-31 18:10:14,197 [INFO] vector.uploader - [20250831_181014_4171] [4/4 upload] age before send: value=34 type=int → send as str='34'
+2025-08-31 18:10:14,197 [INFO] vector.uploader - [20250831_181014_4171] [4/4 upload] prepare record
+2025-08-31 18:10:14,290 [INFO] vector.uploader - [20250831_181014_4171] [4/4 upload] Case created de-identified id=eaad8053dd67

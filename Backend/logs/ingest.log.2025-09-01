@@ -1,0 +1,92 @@
+2025-09-01 02:31:44,207 [INFO] backend.main - Application shutdown.
+2025-09-01 02:31:45,886 [INFO] backend.main - Application startup.
+2025-09-01 02:32:21,120 [INFO] backend.main - Application shutdown.
+2025-09-01 02:32:22,797 [INFO] backend.main - Application startup.
+2025-09-01 02:48:50,739 [INFO] cases.case_storage - [20250901_024850_0738] [1/4 save] saved original file=20250901_024850_0738.json
+2025-09-01 02:48:50,739 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 02:48:50,739 [INFO] cases.case_storage - [20250901_024850_0738] [2/4 normalize] gender=男 age=67
+2025-09-01 02:48:50,749 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook.json version=v1.0 rules=4
+2025-09-01 02:48:50,750 [ERROR] cases.case_storage - [20250901_024850_0738] DCIP failed: 'list' object has no attribute 'tolist'
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 44, in save_case_data
+    diag = diagnose_triage(view)
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_diagnosis.py", line 269, in diagnose_triage
+    "embedding": emb.tolist() if emb is not None else None,
+AttributeError: 'list' object has no attribute 'tolist'
+2025-09-01 02:54:00,901 [INFO] backend.main - Application shutdown.
+2025-09-01 02:54:02,390 [INFO] backend.main - Application startup.
+2025-09-01 02:57:06,070 [INFO] cases.case_storage - [20250901_025706_6069] [1/4 save] saved original file=20250901_025706_6069.json
+2025-09-01 02:57:06,070 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 02:57:06,070 [INFO] cases.case_storage - [20250901_025706_6069] [2/4 normalize] gender=男 age=67
+2025-09-01 02:57:06,082 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook_v1.1.json version=1.1 rules=520
+2025-09-01 02:57:06,089 [ERROR] cases.case_storage - [20250901_025706_6069] DCIP failed: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 46, in save_case_data
+    [m.get("name") for m in (diag.get("diagnosis_main") or [])],
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 46, in <listcomp>
+    [m.get("name") for m in (diag.get("diagnosis_main") or [])],
+AttributeError: 'str' object has no attribute 'get'
+2025-09-01 03:07:01,824 [INFO] backend.main - Application shutdown.
+2025-09-01 03:07:03,540 [INFO] backend.main - Application startup.
+2025-09-01 03:39:08,723 [INFO] cases.case_storage - [20250901_033908_7227] [1/4 save] saved original file=20250901_033908_7227.json
+2025-09-01 03:39:08,724 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 03:39:08,724 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 03:39:08,724 [INFO] cases.case_storage - [20250901_033908_7227] [2/4 normalize] gender=男 age=67
+2025-09-01 03:39:08,739 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook_v1.1.json version=1.1 rules=520
+2025-09-01 03:39:08,744 [INFO] cases.case_storage - [20250901_033908_7227] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-01 03:39:08,800 [INFO] vector.uploader - [20250901_033908_7227] [4/4 upload] age before send: value=67 type=int → send as str='67'
+2025-09-01 03:39:08,800 [ERROR] cases.case_storage - [20250901_033908_7227] [4/4 upload] failed: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 71, in save_case_data
+    case_id = upload_case_vector(view=view, diag=diag, file_path=data_path, req_id=req_id)
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 62, in upload_case_vector
+    "diagnosis_main": _as_text([m.get("name") for m in (diag.get("diagnosis_main") or [])]),
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 62, in <listcomp>
+    "diagnosis_main": _as_text([m.get("name") for m in (diag.get("diagnosis_main") or [])]),
+AttributeError: 'str' object has no attribute 'get'
+2025-09-01 03:42:45,124 [INFO] backend.main - Application shutdown.
+2025-09-01 03:42:46,737 [INFO] backend.main - Application startup.
+2025-09-01 03:44:31,400 [INFO] cases.case_storage - [20250901_034431_3992] [1/4 save] saved original file=20250901_034431_3992.json
+2025-09-01 03:44:31,400 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 03:44:31,401 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 03:44:31,401 [INFO] cases.case_storage - [20250901_034431_3992] [2/4 normalize] gender=男 age=67
+2025-09-01 03:44:31,404 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook_v1.1.json version=1.1 rules=520
+2025-09-01 03:44:31,410 [INFO] cases.case_storage - [20250901_034431_3992] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-01 03:44:31,438 [INFO] vector.uploader - [20250901_034431_3992] [4/4 upload] age before send: value=67 type=int → send as str='67'
+2025-09-01 03:44:31,438 [INFO] vector.uploader - [20250901_034431_3992] [4/4 upload] prepare record
+2025-09-01 03:44:31,439 [INFO] vector.uploader - [20250901_034431_3992] [4/4 upload] ready to create Case object
+2025-09-01 03:44:31,501 [ERROR] vector.uploader - [20250901_034431_3992] [4/4 upload] failed to create Case: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text array property 'inquiry_tags' on class 'Case': not a text array, but string"}]}.
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 155, in upload_case_vector
+    client.data_object.create(data_object=obj, class_name=class_name, vector=emb)
+  File "C:\Users\a0970\anaconda3\envs\Rag\lib\site-packages\weaviate\data\crud_data.py", line 159, in create
+    raise UnexpectedStatusCodeException("Creating object", response)
+weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text array property 'inquiry_tags' on class 'Case': not a text array, but string"}]}.
+2025-09-01 03:44:31,502 [ERROR] cases.case_storage - [20250901_034431_3992] [4/4 upload] failed: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text array property 'inquiry_tags' on class 'Case': not a text array, but string"}]}.
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 71, in save_case_data
+    case_id = upload_case_vector(view=view, diag=diag, file_path=data_path, req_id=req_id)
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 155, in upload_case_vector
+    client.data_object.create(data_object=obj, class_name=class_name, vector=emb)
+  File "C:\Users\a0970\anaconda3\envs\Rag\lib\site-packages\weaviate\data\crud_data.py", line 159, in create
+    raise UnexpectedStatusCodeException("Creating object", response)
+weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected status code: 422, with response body: {'error': [{'message': "invalid object: invalid text array property 'inquiry_tags' on class 'Case': not a text array, but string"}]}.
+2025-09-01 03:47:43,035 [INFO] backend.main - Application shutdown.
+2025-09-01 03:47:44,603 [INFO] backend.main - Application startup.
+2025-09-01 03:49:21,068 [INFO] cases.case_storage - [20250901_034921_0683] [1/4 save] saved original file=20250901_034921_0683.json
+2025-09-01 03:49:21,069 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 03:49:21,069 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=67
+2025-09-01 03:49:21,069 [INFO] cases.case_storage - [20250901_034921_0683] [2/4 normalize] gender=男 age=67
+2025-09-01 03:49:21,072 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook_v1.1.json version=1.1 rules=520
+2025-09-01 03:49:21,080 [INFO] cases.case_storage - [20250901_034921_0683] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-01 03:49:21,127 [INFO] vector.uploader - [20250901_034921_0683] [4/4 upload] age before send: value=67 type=int → send as str='67'
+2025-09-01 03:49:21,127 [INFO] vector.uploader - [20250901_034921_0683] [4/4 upload] prepare record
+2025-09-01 03:49:21,199 [INFO] vector.uploader - [20250901_034921_0683] [4/4 upload] Case created de-identified id=9c321aa64aa7
+2025-09-01 04:09:03,430 [INFO] cases.case_storage - [20250901_040903_4295] [1/4 save] saved original file=20250901_040903_4295.json
+2025-09-01 04:09:03,430 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=44
+2025-09-01 04:09:03,430 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=44
+2025-09-01 04:09:03,431 [INFO] cases.case_storage - [20250901_040903_4295] [2/4 normalize] gender=女 age=44
+2025-09-01 04:09:03,437 [INFO] cases.case_storage - [20250901_040903_4295] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-01 04:09:03,469 [INFO] vector.uploader - [20250901_040903_4295] [4/4 upload] age before send: value=44 type=int → send as str='44'
+2025-09-01 04:09:03,470 [INFO] vector.uploader - [20250901_040903_4295] [4/4 upload] prepare record
+2025-09-01 04:09:03,531 [INFO] vector.uploader - [20250901_040903_4295] [4/4 upload] Case created de-identified id=70ba8a8845ce
