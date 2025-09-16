@@ -1,0 +1,55 @@
+2025-09-15 23:30:46 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:30:47 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 23:30:47 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 23:30:49 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:30:49 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:30:49 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:30:49 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:30:50 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:30:50 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:30:50 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:30:50 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:30:51 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:30:51 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:30:51 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:30:51 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 5 個相關脈診知識
+2025-09-15 23:30:51 [    INFO] s_cbr.api_manager - 綜合搜尋完成 - Cases: 0, Pulse: 5, 最佳相似度: 0.597
+2025-09-15 23:31:36 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:31:37 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 23:31:37 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 23:35:48 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:35:48 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 23:35:48 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 23:35:50 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:50 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:35:50 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:50 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 3 個相關脈診知識
+2025-09-15 23:35:51 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:51 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:35:51 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:51 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 3 個相關脈診知識
+2025-09-15 23:35:51 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:51 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:35:52 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:52 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 3 個相關脈診知識
+2025-09-15 23:35:52 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:52 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:35:53 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:53 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 3 個相關脈診知識
+2025-09-15 23:35:53 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:53 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 23:35:53 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 23:35:53 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 5 個相關脈診知識
+2025-09-15 23:35:53 [    INFO] s_cbr.api_manager - 綜合搜尋完成 - Cases: 0, Pulse: 5, 最佳相似度: 0.597
+2025-09-15 23:46:47 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:46:48 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 23:46:48 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:56:19 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 00:56:19 [   ERROR] s_cbr.api_manager - 客戶端初始化失敗: AsyncClient.__init__() got an unexpected keyword argument 'retries'
+2025-09-16 01:02:07 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 01:02:07 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.1 兼容版初始化完成
+2025-09-16 01:53:35 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 01:53:36 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:36 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:36 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:36 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項

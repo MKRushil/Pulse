@@ -12,6 +12,7 @@ v1.0 功能：
 
 from typing import Dict, Any, List, Optional
 import asyncio
+import time
 from s_cbr.utils.api_manager import SCBRAPIManager
 from s_cbr.config.scbr_config import SCBRConfig
 from s_cbr.utils.spiral_logger import SpiralLogger
@@ -33,17 +34,16 @@ class Step1CaseFinder:
         self.api_manager = SCBRAPIManager()
         self.logger = SpiralLogger.get_logger("Step1CaseFinder")
         self.version = "1.0"
-        
         self.logger.info(f"STEP 1 案例搜尋器 v{self.version} 初始化完成")
     
     async def find_most_similar_case(self, patient_analysis: Dict[str, Any], 
-                                   search_criteria: Dict[str, Any] = None) -> Dict[str, Any]:
+                                    search_criteria: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         尋找最相似的案例 v1.0
         
         v1.0 流程：
         1. 分析患者特徵
-        2. 構建搜尋策略
+        2. 構建搜尋策略  
         3. 並行搜尋 Case 和 PulsePJ
         4. 綜合評估和排序
         5. 返回最佳匹配結果
@@ -55,18 +55,37 @@ class Step1CaseFinder:
         返回：
             包含最佳匹配案例和相關脈診知識的字典
         """
+        
+        # 🟢 加強輸入驗證
+        if not patient_analysis:
+            self.logger.error("患者分析數據為空")
+            return self._create_empty_result("患者分析數據缺失")
+        
+        if not isinstance(patient_analysis, dict):
+            self.logger.error("患者分析數據格式錯誤")
+            return self._create_empty_result("數據格式錯誤")
+        
         self.logger.info("開始執行 STEP 1: 尋找高相關案例")
         
         try:
             # v1.0 Step 1.1: 準備搜尋查詢
             search_query = self._prepare_search_query(patient_analysis, search_criteria)
             
-            # v1.0 Step 1.2: 執行綜合搜尋
+            # 🟢 檢查查詢是否有效
+            if not search_query or not search_query.get('text'):
+                self.logger.warning("搜尋查詢為空，使用備用策略")
+                return self._create_empty_result("搜尋條件不足")
+            
+            # v1.0 Step 1.2: 執行綜合搜尋 🟢 修復參數名稱
             search_results = await self.api_manager.comprehensive_search(
-                query_text=search_query['text'],
-                patient_context=search_query['context']
+                query=search_query['text'],  # 🟢 修正: query_text → query
             )
             
+            # 🟢 加強結果檢查
+            if not search_results:
+                self.logger.error("搜尋結果為None")
+                return self._create_empty_result("搜尋系統異常")
+                
             if search_results.get('error'):
                 self.logger.error(f"搜尋執行失敗: {search_results['error']}")
                 return self._create_empty_result(search_results['error'])
@@ -81,7 +100,6 @@ class Step1CaseFinder:
             final_result = self._generate_search_report(best_match, analysis_result, search_results)
             
             self.logger.info(f"STEP 1 完成 - 找到最佳匹配案例，相似度: {final_result.get('similarity', 0):.3f}")
-            
             return final_result
             
         except Exception as e:
@@ -89,7 +107,7 @@ class Step1CaseFinder:
             return self._create_error_result(str(e))
     
     def _prepare_search_query(self, patient_analysis: Dict[str, Any], 
-                            search_criteria: Dict[str, Any] = None) -> Dict[str, str]:
+                             search_criteria: Dict[str, Any] = None) -> Dict[str, str]:
         """
         準備搜尋查詢 v1.0
         
@@ -98,6 +116,7 @@ class Step1CaseFinder:
         - 構建結構化查詢上下文
         - 優化搜尋效果
         """
+        
         # 提取主要症狀
         main_symptoms = patient_analysis.get('主要症狀', [])
         if isinstance(main_symptoms, str):
@@ -143,7 +162,7 @@ class Step1CaseFinder:
         }
     
     def _analyze_search_results(self, search_results: Dict[str, Any], 
-                              patient_analysis: Dict[str, Any]) -> Dict[str, Any]:
+                               patient_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """
         分析搜尋結果 v1.0
         
@@ -153,6 +172,7 @@ class Step1CaseFinder:
         - 案例與脈診的整合度評估
         - 患者特徵匹配度計算
         """
+        
         similar_cases = search_results.get('similar_cases', [])
         pulse_knowledge = search_results.get('pulse_knowledge', [])
         integration_analysis = search_results.get('integration_analysis', {})
@@ -173,7 +193,7 @@ class Step1CaseFinder:
         
         # v1.0 綜合信心度算法
         analysis['overall_confidence'] = (
-            case_confidence * 0.5 +
+            case_confidence * 0.5 + 
             pulse_confidence * 0.3 + 
             integration_confidence * 0.2
         )
@@ -198,6 +218,7 @@ class Step1CaseFinder:
     
     def _analyze_case_matches(self, cases: List[Dict], patient_analysis: Dict) -> Dict[str, Any]:
         """分析 Case 匹配結果 v1.0"""
+        
         if not cases:
             return {
                 'total_cases': 0,
@@ -228,6 +249,7 @@ class Step1CaseFinder:
     
     def _analyze_pulse_matches(self, pulse_knowledge: List[Dict], patient_analysis: Dict) -> Dict[str, Any]:
         """分析 PulsePJ 匹配結果 v1.0"""
+        
         if not pulse_knowledge:
             return {
                 'total_knowledge': 0,
@@ -273,6 +295,7 @@ class Step1CaseFinder:
     
     def _identify_case_patterns(self, case: Dict, patient_analysis: Dict) -> List[str]:
         """識別案例匹配模式 v1.0"""
+        
         patterns = []
         
         # 年齡匹配
@@ -304,6 +327,7 @@ class Step1CaseFinder:
     
     def _calculate_pulse_relevance(self, pulse: Dict, patient_symptoms: List[str]) -> float:
         """計算脈診相關性 v1.0"""
+        
         if not patient_symptoms:
             return 0.0
         
@@ -327,12 +351,12 @@ class Step1CaseFinder:
     
     def _select_best_match(self, analysis_result: Dict[str, Any]) -> Dict[str, Any]:
         """選擇最佳匹配案例 v1.0"""
+        
         case_analysis = analysis_result['case_analysis']
         pulse_analysis = analysis_result['pulse_analysis']
         
         # 主要基於 Case 匹配結果
         best_case = case_analysis.get('best_match')
-        
         if not best_case:
             self.logger.warning("未找到匹配的 Case 案例")
             return {
@@ -358,9 +382,10 @@ class Step1CaseFinder:
         }
     
     def _generate_search_report(self, best_match: Dict[str, Any], 
-                              analysis_result: Dict[str, Any],
-                              search_results: Dict[str, Any]) -> Dict[str, Any]:
+                               analysis_result: Dict[str, Any], 
+                               search_results: Dict[str, Any]) -> Dict[str, Any]:
         """生成搜尋報告 v1.0"""
+        
         return {
             'found_case': best_match['case'] is not None,
             'best_match': best_match['case'],
@@ -378,6 +403,7 @@ class Step1CaseFinder:
     
     def _determine_confidence_level(self, confidence: float) -> str:
         """確定信心等級 v1.0"""
+        
         if confidence >= 0.8:
             return 'high'
         elif confidence >= 0.6:
@@ -389,6 +415,7 @@ class Step1CaseFinder:
     
     def _generate_search_recommendation(self, best_match: Dict, analysis_result: Dict) -> str:
         """生成搜尋建議 v1.0"""
+        
         confidence = best_match.get('confidence', 0.0)
         matching_factors = best_match.get('matching_factors', [])
         risk_factors = analysis_result.get('risk_factors', [])
@@ -405,6 +432,7 @@ class Step1CaseFinder:
     # 備選搜尋策略 v1.0
     async def find_with_relaxed_criteria(self, relaxed_criteria: Dict[str, Any]) -> Dict[str, Any]:
         """使用放寬條件搜尋 v1.0"""
+        
         self.logger.info("執行放寬條件搜尋")
         
         try:
@@ -419,10 +447,9 @@ class Step1CaseFinder:
             relaxed_query = relaxed_criteria.get('query_text', '')
             relaxed_context = relaxed_criteria.get('context', {})
             
-            # 執行搜尋
+            # 執行搜尋 🟢 修復參數名稱
             search_results = await self.api_manager.comprehensive_search(
-                query_text=relaxed_query,
-                patient_context=relaxed_context
+                query=relaxed_query,  # 🟢 修正: query_text → query
             )
             
             if search_results.get('error'):
@@ -449,6 +476,7 @@ class Step1CaseFinder:
     # 工具方法
     def _create_empty_result(self, reason: str = "無匹配結果") -> Dict[str, Any]:
         """創建空結果 v1.0"""
+        
         return {
             'found_case': False,
             'best_match': None,
@@ -460,6 +488,7 @@ class Step1CaseFinder:
     
     def _create_error_result(self, error_message: str) -> Dict[str, Any]:
         """創建錯誤結果 v1.0"""
+        
         return {
             'found_case': False,
             'error': True,

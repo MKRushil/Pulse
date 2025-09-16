@@ -1,0 +1,63 @@
+2025-09-14 02:04:36,711 [INFO] backend.main - Application startup.
+2025-09-14 02:07:05,855 [INFO] backend.main - Application shutdown.
+2025-09-14 02:07:07,655 [INFO] backend.main - Application startup.
+2025-09-14 02:08:01,349 [INFO] backend.main - Application shutdown.
+2025-09-14 02:08:02,982 [INFO] backend.main - Application startup.
+2025-09-14 02:08:48,560 [INFO] backend.main - Application shutdown.
+2025-09-14 02:08:50,075 [INFO] backend.main - Application startup.
+2025-09-14 02:10:21,185 [INFO] backend.main - Application shutdown.
+2025-09-14 02:10:23,189 [INFO] backend.main - Application startup.
+2025-09-14 03:08:16,467 [INFO] backend.main - Application shutdown.
+2025-09-14 03:08:18,049 [INFO] backend.main - Application startup.
+2025-09-14 03:15:01,361 [INFO] backend.main - Application shutdown.
+2025-09-14 03:15:02,889 [INFO] backend.main - Application startup.
+2025-09-14 03:16:30,440 [INFO] backend.main - Application shutdown.
+2025-09-14 03:16:31,944 [INFO] backend.main - Application startup.
+2025-09-14 03:23:28,129 [INFO] backend.main - Application shutdown.
+2025-09-14 03:23:29,883 [INFO] backend.main - Application startup.
+2025-09-14 03:24:06,437 [INFO] backend.main - Application shutdown.
+2025-09-14 03:24:08,060 [INFO] backend.main - Application startup.
+2025-09-14 04:13:25,925 [INFO] backend.main - Application shutdown.
+2025-09-14 04:13:27,538 [INFO] backend.main - Application startup.
+2025-09-14 04:14:00,237 [INFO] backend.main - Application shutdown.
+2025-09-14 04:14:01,816 [INFO] backend.main - Application startup.
+2025-09-14 04:14:26,798 [INFO] backend.main - Application shutdown.
+2025-09-14 04:14:28,289 [INFO] backend.main - Application startup.
+2025-09-14 04:14:53,719 [INFO] backend.main - Application shutdown.
+2025-09-14 04:14:55,176 [INFO] backend.main - Application startup.
+2025-09-14 04:15:15,967 [INFO] backend.main - Application shutdown.
+2025-09-14 04:15:17,529 [INFO] backend.main - Application startup.
+2025-09-14 04:15:37,111 [INFO] backend.main - Application shutdown.
+2025-09-14 04:15:38,684 [INFO] backend.main - Application startup.
+2025-09-14 04:20:08,899 [INFO] backend.main - Application shutdown.
+2025-09-14 04:20:10,377 [INFO] backend.main - Application startup.
+2025-09-14 04:20:28,308 [INFO] backend.main - Application shutdown.
+2025-09-14 04:20:29,811 [INFO] backend.main - Application startup.
+2025-09-14 04:34:13,811 [INFO] backend.main - Application shutdown.
+2025-09-14 04:34:15,324 [INFO] backend.main - Application startup.
+2025-09-14 23:09:58,008 [INFO] backend.main - Application shutdown.
+2025-09-14 23:10:00,469 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: cannot import name 'MonitoringAgent' from 's_cbr.agents.monitoring_agent' (C:\work\系統-中醫\Pulse-project\Backend\s_cbr\agents\monitoring_agent.py)
+2025-09-14 23:10:00,475 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-14 23:10:00,476 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-14 23:10:00,476 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-14 23:10:00,476 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-14 23:10:00,476 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-14 23:10:00,476 [INFO] backend.main - Application startup completed.
+2025-09-14 23:10:23,861 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-14 23:10:23,861 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-14 23:10:25,538 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: cannot import name 'MonitoringAgent' from 's_cbr.agents.monitoring_agent' (C:\work\系統-中醫\Pulse-project\Backend\s_cbr\agents\monitoring_agent.py)
+2025-09-14 23:10:25,543 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-14 23:10:25,543 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-14 23:10:25,543 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-14 23:10:25,543 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-14 23:10:25,543 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-14 23:10:25,543 [INFO] backend.main - Application startup completed.
+2025-09-14 23:10:49,955 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-14 23:10:49,955 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-14 23:10:51,663 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: cannot import name 'MonitoringAgent' from 's_cbr.agents.monitoring_agent' (C:\work\系統-中醫\Pulse-project\Backend\s_cbr\agents\monitoring_agent.py)
+2025-09-14 23:10:51,667 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-14 23:10:51,667 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-14 23:10:51,668 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-14 23:10:51,668 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-14 23:10:51,668 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-14 23:10:51,668 [INFO] backend.main - Application startup completed.

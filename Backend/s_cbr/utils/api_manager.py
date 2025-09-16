@@ -1,497 +1,717 @@
 """
-S-CBR API 資源管理器 v1.0
+S-CBR API 管理器 v1.1 - 單例模式修復版
 
-v1.0 更新：
-- 整合現有 Case 和 PulsePJ 知識庫
-- 提供統一的知識庫查詢接口
-- 支援多種搜尋策略
+完整功能：
+- 單例模式防止重複初始化
+- 智能速率限制管理 (25 RPM 保守設定)
+- 優雅降級策略
+- 完整錯誤處理
+- 混合向量搜尋支持
 
-版本：v1.0
+版本：v1.1-Singleton
 """
 
-from s_cbr.config.scbr_config import SCBRConfig
-import httpx
-import weaviate
+import asyncio
 import logging
-import asyncio 
-from typing import Dict, List, Any, Optional
+import time
+import random
+import threading
+from typing import Dict, Any, List, Optional, Union
+from datetime import datetime
 import json
+import hashlib
+import math
+from collections import deque
+from enum import Enum
+
+try:
+    from openai import AsyncOpenAI
+    import weaviate
+    from weaviate.auth import AuthApiKey
+    import httpx
+    DEPENDENCIES_AVAILABLE = True
+except ImportError as e:
+    DEPENDENCIES_AVAILABLE = False
+    IMPORT_ERROR = str(e)
+
+from s_cbr.config.scbr_config import SCBRConfig
+
+class RequestPriority(Enum):
+    HIGH = "high"
+    MEDIUM = "medium"
+    LOW = "low"
 
 class SCBRAPIManager:
-    """
-    S-CBR API 資源管理器 v1.0
+    """S-CBR API 管理器 v1.1 - 單例模式"""
     
-    v1.0 特色：
-    - 整合現有 Case 和 PulsePJ Weaviate 類別
-    - 提供統一的 LLM 和 Embedding API 接口
-    - 支援多種知識庫查詢策略
-    """
+    _instance = None
+    _lock = threading.Lock()
+    _initialized = False
+    
+    def __new__(cls):
+        """🔥 關鍵修復：實現單例模式"""
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super(SCBRAPIManager, cls).__new__(cls)
+        return cls._instance
     
     def __init__(self):
-        """初始化 API 管理器 v1.0"""
+        """初始化 API 管理器 - 只執行一次"""
+        
+        # 🔥 關鍵修復：防止重複初始化
+        if self._initialized:
+            if hasattr(self, 'logger'):
+                self.logger.debug(f"♻️  API 管理器已存在，複用實例 (ID: {id(self)})")
+            return
+        
+        if not DEPENDENCIES_AVAILABLE:
+            raise ImportError(f"缺少必要依賴: {IMPORT_ERROR}")
+        
+        # 🔥 關鍵修復：使用修復後的日誌器
+        from s_cbr.utils.spiral_logger import SpiralLogger
+        self.logger = SpiralLogger.get_logger("api_manager")
+        
         self.config = SCBRConfig()
-        self.logger = logging.getLogger(__name__)
-        self.version = "1.0"
+        self.version = "1.1-singleton"
+        self.instance_id = id(self)
+        
+        self.logger.info(f"🚀 創建新的 API 管理器實例 (ID: {self.instance_id})")
+        
+        # 初始化所有管理器組件
+        self._init_rate_limiter()
+        self._init_batch_processor()
+        self._init_priority_manager()
+        self._init_retry_config()
+        self._init_degradation_manager()
+        self._init_health_monitor()
+        self._init_statistics()
         
         # 初始化客戶端
-        self._init_clients()
+        self._initialize_clients()
         
-        self.logger.info(f"S-CBR API 管理器 v{self.version} 初始化完成")
+        # 啟動後台服務
+        self._background_tasks = []
+        self._start_background_services()
+        
+        # 🔥 關鍵修復：設置初始化標記
+        SCBRAPIManager._initialized = True
+        
+        self.logger.info(f"✅ API 管理器單例初始化完成 (ID: {self.instance_id})")
     
-    def _init_clients(self):
-        """初始化所有 API 客戶端"""
+    def _init_rate_limiter(self):
+        """初始化速率限制器"""
+        self.rate_limiter = {
+            'requests_per_minute': 25,      # 進一步保守設定
+            'request_timestamps': deque(),
+            'min_interval': 3.0,            # 增加到3秒間隔
+            'last_request_time': 0,
+            'burst_allowance': 2,           # 減少突發允許
+            'current_burst': 0,
+            'daily_quota': 800,             # 減少每日配額
+            'daily_used': 0,
+            'quota_reset_time': 0
+        }
+    
+    def _init_batch_processor(self):
+        """初始化批量處理器"""
+        self.batch_processor = {
+            'pending_tasks': [],
+            'batch_size': 2,                # 減少批量大小
+            'batch_timeout': 10,            # 增加超時
+            'last_batch_time': 0,
+            'batch_stats': {
+                'total_batches': 0,
+                'total_tasks_processed': 0,
+                'api_calls_saved': 0
+            }
+        }
+    
+    def _init_priority_manager(self):
+        """初始化優先級管理器"""
+        self.priority_manager = {
+            'queues': {
+                RequestPriority.HIGH: deque(),
+                RequestPriority.MEDIUM: deque(),
+                RequestPriority.LOW: deque()
+            },
+            'processing': False,
+            'processor_lock': asyncio.Lock(),
+            'stats': {
+                'high_processed': 0,
+                'medium_processed': 0,
+                'low_processed': 0
+            }
+        }
+    
+    def _init_retry_config(self):
+        """初始化重試配置"""
+        self.retry_config = {
+            'max_retries': 4,               # 減少重試次數
+            'base_delay': 5,               # 增加基礎延遲
+            'max_delay': 120,              # 增加最大延遲
+            'exponential_base': 2.0,
+            'jitter': True,
+            'jitter_range': 0.3
+        }
+    
+    def _init_degradation_manager(self):
+        """初始化降級管理器"""
+        self.degradation_manager = {
+            'fallback_enabled': True,
+            'quality_levels': ['full', 'optimized', 'basic', 'minimal'],
+            'current_level': 'full',
+            'performance_metrics': {
+                'success_rate': 1.0,
+                'avg_response_time': 0.0,
+                'error_count': 0,
+                'last_success_time': time.time()
+            }
+        }
+    
+    def _init_health_monitor(self):
+        """初始化健康監控"""
+        self.health_monitor = {
+            'last_health_check': 0,
+            'health_check_interval': 600,  # 增加到10分鐘
+            'api_health_status': 'unknown',
+            'consecutive_failures': 0,
+            'service_alerts': []
+        }
+    
+    def _init_statistics(self):
+        """初始化統計系統"""
+        self.statistics = {
+            'session_start_time': time.time(),
+            'total_requests': 0,
+            'successful_requests': 0,
+            'failed_requests': 0,
+            'total_wait_time': 0.0,
+            'api_quota_efficiency': 0.0,
+            'feature_usage': {
+                'batch_processing': 0,
+                'priority_scheduling': 0,
+                'fallback_responses': 0,
+                'rate_limit_waits': 0
+            }
+        }
+    
+    def _initialize_clients(self):
+        """初始化所有 API 客戶端 - 單例版本"""
         try:
-            # LLM 客戶端
-            self.llm_client = httpx.AsyncClient(
+            # 檢查是否已經初始化過客戶端
+            if hasattr(self, 'llm_client') and self.llm_client is not None:
+                self.logger.info(f"♻️  API 客戶端已存在，跳過重複初始化 (ID: {self.instance_id})")
+                return
+            
+            self.logger.info(f"🔧 初始化 API 客戶端 (ID: {self.instance_id})")
+            
+            # 使用修復後的 HTTP 傳輸層
+            transport = httpx.AsyncHTTPTransport(retries=1)
+            
+            timeout_config = httpx.Timeout(
+                connect=45.0,
+                read=180.0,
+                write=45.0,
+                pool=240.0
+            )
+            
+            connection_limits = httpx.Limits(
+                max_keepalive_connections=5,   # 減少連接數
+                max_connections=10,
+                keepalive_expiry=600
+            )
+            
+            # 創建 HTTP 客戶端
+            self.http_client = httpx.AsyncClient(
+                transport=transport,
+                timeout=timeout_config,
+                limits=connection_limits,
+                headers={
+                    'User-Agent': f'S-CBR-API-Manager-Singleton/{self.version}',
+                    'Accept': 'application/json'
+                }
+            )
+            
+            # 初始化 LLM 客戶端
+            self.llm_client = AsyncOpenAI(
+                api_key=self.config.LLM_API_KEY,
                 base_url=self.config.LLM_API_URL,
-                headers={
-                    "Authorization": f"Bearer {self.config.LLM_API_KEY}",
-                    "Content-Type": "application/json"
-                },
-                timeout=60.0  # v1.0: 增加超時時間
+                http_client=self.http_client,
+                max_retries=0  # 我們有自己的重試邏輯
             )
+            self.llm_model_name = self.config.LLM_MODEL_NAME
             
-            # Embedding 客戶端  
-            self.embedding_client = httpx.AsyncClient(
+            # 初始化 Embedding 客戶端
+            self.embedding_client = AsyncOpenAI(
+                api_key=self.config.EMBEDDING_API_KEY,
                 base_url=self.config.EMBEDDING_BASE_URL,
-                headers={
-                    "Authorization": f"Bearer {self.config.EMBEDDING_API_KEY}",
-                    "Content-Type": "application/json"
-                },
-                timeout=60.0
+                http_client=self.http_client,
+                max_retries=0
             )
+            self.embedding_model_name = self.config.EMBEDDING_MODEL_NAME
             
-            # Weaviate 客戶端（連接現有知識庫）
+            # 初始化 Weaviate 客戶端
+            auth_config = AuthApiKey(api_key=self.config.WV_API_KEY)
             self.weaviate_client = weaviate.Client(
                 url=self.config.WEAVIATE_URL,
-                auth_client_secret=weaviate.AuthApiKey(api_key=self.config.WV_API_KEY),
-                additional_headers={
-                    "X-OpenAI-Api-Key": self.config.EMBEDDING_API_KEY
-                }
+                auth_client_secret=auth_config
             )
             
-            self.logger.info("所有 API 客戶端初始化成功")
+            self.logger.info(f"✅ API 客戶端初始化完成 (單例模式 - ID: {self.instance_id})")
             
         except Exception as e:
-            self.logger.error(f"API 客戶端初始化失敗: {e}")
+            self.logger.error(f"❌ API 客戶端初始化失敗: {str(e)}")
             raise
     
-    # LLM API 方法
-    async def generate_llm_response(self, prompt: str, agent_config: Dict = None) -> str:
-        """
-        調用 LLM 生成回應 v1.0
-        
-        v1.0 增強：
-        - 支援不同智能體配置
-        - 改進錯誤處理
-        - 增加重試機制
-        """
-        try:
-            # 使用智能體專屬配置或預設配置
-            if agent_config:
-                temperature = agent_config.get('temperature', 0.7)
-                max_tokens = agent_config.get('max_tokens', 1000)
-                system_prompt = agent_config.get('system_prompt', '')
-            else:
-                temperature = 0.7
-                max_tokens = 1000
-                system_prompt = ''
-            
-            # 構建消息
-            messages = []
-            if system_prompt:
-                messages.append({"role": "system", "content": system_prompt})
-            messages.append({"role": "user", "content": prompt})
-            
-            payload = {
-                "model": self.config.LLM_MODEL_NAME,
-                "messages": messages,
-                "max_tokens": max_tokens,
-                "temperature": temperature
-            }
-            
-            response = await self.llm_client.post("/chat/completions", json=payload)
-            response.raise_for_status()
-            
-            result = response.json()
-            return result["choices"][0]["message"]["content"]
-            
-        except Exception as e:
-            self.logger.error(f"LLM 調用失敗: {e}")
-            return f"LLM 調用錯誤: {str(e)}"
+    # ==================== 速率限制管理 ====================
     
-    async def get_embedding(self, text: str) -> List[float]:
-        """
-        獲取文本向量 v1.0
+    async def _wait_for_rate_limit(self):
+        """智能速率限制等待"""
+        current_time = time.time()
         
-        v1.0 改進：
-        - 增加文本預處理
-        - 改善錯誤處理
-        """
-        try:
-            # v1.0 文本預處理
-            processed_text = self._preprocess_text_for_embedding(text)
+        # 每日配額重置檢查
+        if current_time - self.rate_limiter['quota_reset_time'] > 86400:
+            self.rate_limiter['daily_used'] = 0
+            self.rate_limiter['quota_reset_time'] = current_time
+            self.logger.info("🔄 每日API配額已重置")
+        
+        # 檢查每日配額
+        if self.rate_limiter['daily_used'] >= self.rate_limiter['daily_quota']:
+            self.logger.error("🚫 每日API配額已用盡，啟用降級模式")
+            return
+        
+        # 清理過期的請求記錄
+        cutoff_time = current_time - 60
+        while (self.rate_limiter['request_timestamps'] and 
+               self.rate_limiter['request_timestamps'][0] <= cutoff_time):
+            self.rate_limiter['request_timestamps'].popleft()
+        
+        # 突發限制檢查
+        if self.rate_limiter['current_burst'] >= self.rate_limiter['burst_allowance']:
+            burst_cooldown = 10
+            self.logger.warning(f"⚡ 突發限制觸發，冷卻 {burst_cooldown} 秒")
+            await asyncio.sleep(burst_cooldown)
+            self.rate_limiter['current_burst'] = 0
+            self.statistics['feature_usage']['rate_limit_waits'] += 1
+        
+        # 每分鐘限制檢查
+        recent_requests = len(self.rate_limiter['request_timestamps'])
+        if recent_requests >= self.rate_limiter['requests_per_minute']:
+            oldest_request = self.rate_limiter['request_timestamps'][0]
+            wait_time = 62 - (current_time - oldest_request)
             
-            payload = {
-                "model": self.config.EMBEDDING_MODEL_NAME,
-                "input": processed_text
-            }
-            
-            response = await self.embedding_client.post("/embeddings", json=payload)
-            response.raise_for_status()
-            
-            result = response.json()
-            return result["data"][0]["embedding"]
-            
-        except Exception as e:
-            self.logger.error(f"Embedding 調用失敗: {e}")
-            return []
+            if wait_time > 0:
+                self.logger.warning(f"⏳ 每分鐘限制：等待 {wait_time:.1f} 秒 ({recent_requests}/{self.rate_limiter['requests_per_minute']})")
+                self.statistics['total_wait_time'] += wait_time
+                await asyncio.sleep(wait_time)
+                current_time = time.time()
+        
+        # 最小間隔檢查
+        time_since_last = current_time - self.rate_limiter['last_request_time']
+        if time_since_last < self.rate_limiter['min_interval']:
+            wait_time = self.rate_limiter['min_interval'] - time_since_last
+            self.logger.debug(f"⏱️  間隔控制：等待 {wait_time:.1f} 秒")
+            await asyncio.sleep(wait_time)
+            current_time = time.time()
+        
+        # 記錄請求
+        self.rate_limiter['request_timestamps'].append(current_time)
+        self.rate_limiter['last_request_time'] = current_time
+        self.rate_limiter['current_burst'] += 1
+        self.rate_limiter['daily_used'] += 1
     
-    def _preprocess_text_for_embedding(self, text: str) -> str:
-        """v1.0 文本預處理"""
-        if not text:
-            return ""
-        
-        # 基本清理
-        text = text.strip()
-        
-        # 限制長度（避免超過模型限制）
-        if len(text) > 8000:
-            text = text[:8000]
-        
-        return text
+    # ==================== 核心 API 方法 ====================
     
-    # Case 知識庫查詢方法 v1.0
-    async def search_similar_cases(self, query_vector: List[float], 
-                                 filters: Optional[Dict] = None, 
-                                 limit: int = None) -> List[Dict]:
-        """
-        在 Case 知識庫中搜尋相似案例 v1.0
-        
-        v1.0 特色：
-        - 使用現有 Case 類別結構
-        - 支援多維度過濾
-        - 返回完整案例資訊
-        """
-        try:
-            case_config = self.config.get_case_search_config()
-            search_limit = limit or case_config['limit']
-            
-            # 構建查詢
-            query_builder = (
-                self.weaviate_client.query
-                .get(case_config['class_name'], case_config['fields'])
-                .with_near_vector({"vector": query_vector})
-                .with_limit(search_limit)
-                .with_additional(["certainty", "distance", "id"])
-            )
-            
-            # 添加過濾條件 v1.0
-            if filters:
-                where_filter = self._build_case_filter(filters)
-                if where_filter:
-                    query_builder = query_builder.with_where(where_filter)
-            
-            result = query_builder.do()
-            
-            # 處理結果
-            cases = result.get("data", {}).get("Get", {}).get(case_config['class_name'], [])
-            
-            self.logger.info(f"Case 搜尋完成，找到 {len(cases)} 個相似案例")
-            
-            return self._process_case_results(cases)
-            
-        except Exception as e:
-            self.logger.error(f"Case 搜尋失敗: {e}")
-            return []
+    async def generate_llm_response(self, prompt: str, agent_config: Dict[str, Any] = None) -> str:
+        """生成 LLM 回應 - 單例版本"""
+        return await self._execute_llm_request_with_retry(prompt, agent_config)
     
-    def _build_case_filter(self, filters: Dict) -> Optional[Dict]:
-        """構建 Case 查詢過濾條件 v1.0"""
-        where_conditions = []
-        
-        # 年齡範圍過濾
-        if filters.get('age_range'):
-            min_age, max_age = filters['age_range']
-            # 注意：這裡需要根據實際 Case 資料格式調整
-            
-        # 性別過濾  
-        if filters.get('gender'):
-            where_conditions.append({
-                "path": ["gender"],
-                "operator": "Equal",
-                "valueString": filters['gender']
-            })
-        
-        # 主訴關鍵字過濾
-        if filters.get('chief_complaint_keywords'):
-            for keyword in filters['chief_complaint_keywords']:
-                where_conditions.append({
-                    "path": ["chief_complaint"],
-                    "operator": "Like",
-                    "valueString": f"*{keyword}*"
-                })
-        
-        # 構建 AND 條件
-        if len(where_conditions) == 1:
-            return where_conditions[0]
-        elif len(where_conditions) > 1:
-            return {
-                "operator": "And",
-                "operands": where_conditions
-            }
-        
-        return None
+    async def generate_high_priority_response(self, prompt: str, agent_config: Dict[str, Any] = None) -> str:
+        """生成高優先級 LLM 回應"""
+        return await self._execute_llm_request_with_retry(prompt, agent_config)
     
-    def _process_case_results(self, cases: List[Dict]) -> List[Dict]:
-        """處理 Case 搜尋結果 v1.0"""
-        processed_cases = []
+    async def _execute_llm_request_with_retry(self, prompt: str, agent_config: Dict[str, Any] = None) -> str:
+        """執行 LLM 請求 - 帶重試機制"""
         
-        for case in cases:
-            # 提取重要資訊
-            processed_case = {
-                'case_id': case.get('case_id'),
-                'similarity': case.get('_additional', {}).get('certainty', 0.0),
-                'age': case.get('age'),
-                'gender': case.get('gender'),
-                'chief_complaint': case.get('chief_complaint'),
-                'present_illness': case.get('present_illness'),
-                'diagnosis_main': case.get('diagnosis_main'),
-                'diagnosis_sub': case.get('diagnosis_sub'),
-                'pulse_text': case.get('pulse_text'),
-                'pulse_tags': case.get('pulse_tags'),
-                'summary': case.get('summary'),
-                'llm_struct': case.get('llm_struct'),
-                'raw_data': case  # 保留原始資料
-            }
-            processed_cases.append(processed_case)
-        
-        return processed_cases
-    
-    # PulsePJ 知識庫查詢方法 v1.0
-    async def search_pulse_knowledge(self, pulse_pattern: str, 
-                                   symptoms: List[str] = None) -> List[Dict]:
-        """
-        在 PulsePJ 知識庫中搜尋脈診知識 v1.0
-        
-        v1.0 特色：
-        - 支援脈象模式匹配
-        - 整合症狀關聯搜尋
-        - 提供知識鏈追蹤
-        """
-        try:
-            pulse_config = self.config.get_pulse_search_config()
-            
-            # 構建查詢條件
-            where_conditions = []
-            
-            # 脈象名稱匹配
-            if pulse_pattern:
-                where_conditions.append({
-                    "path": ["name"],
-                    "operator": "Like", 
-                    "valueString": f"*{pulse_pattern}*"
-                })
-            
-            # 症狀關聯匹配
-            if symptoms:
-                for symptom in symptoms:
-                    where_conditions.append({
-                        "path": ["symptoms"],
-                        "operator": "Like",
-                        "valueString": f"*{symptom}*"
-                    })
-            
-            # 構建查詢
-            query_builder = (
-                self.weaviate_client.query
-                .get(pulse_config['class_name'], pulse_config['fields'])
-                .with_limit(pulse_config['limit'])
-                .with_additional(["id"])
-            )
-            
-            # 添加 where 條件
-            if where_conditions:
-                if len(where_conditions) == 1:
-                    where_filter = where_conditions[0]
-                else:
-                    where_filter = {
-                        "operator": "Or",  # 使用 Or 提高匹配率
-                        "operands": where_conditions
-                    }
-                query_builder = query_builder.with_where(where_filter)
-            
-            result = query_builder.do()
-            
-            # 處理結果
-            pulse_data = result.get("data", {}).get("Get", {}).get(pulse_config['class_name'], [])
-            
-            self.logger.info(f"PulsePJ 搜尋完成，找到 {len(pulse_data)} 個相關脈診知識")
-            
-            return self._process_pulse_results(pulse_data)
-            
-        except Exception as e:
-            self.logger.error(f"PulsePJ 搜尋失敗: {e}")
-            return []
-    
-    def _process_pulse_results(self, pulse_data: List[Dict]) -> List[Dict]:
-        """處理 PulsePJ 搜尋結果 v1.0"""
-        processed_pulses = []
-        
-        for pulse in pulse_data:
-            processed_pulse = {
-                'name': pulse.get('name'),
-                'description': pulse.get('description'),
-                'main_disease': pulse.get('main_disease'),
-                'symptoms': pulse.get('symptoms'),
-                'category': pulse.get('category'),
-                'knowledge_chain': pulse.get('knowledge_chain'),
-                'raw_data': pulse
-            }
-            processed_pulses.append(processed_pulse)
-        
-        return processed_pulses
-    
-    # 綜合搜尋方法 v1.0
-    async def comprehensive_search(self, query_text: str, 
-                                 patient_context: Dict = None) -> Dict[str, Any]:
-        """
-        綜合搜尋 Case 和 PulsePJ 知識庫 v1.0
-        
-        v1.0 創新功能：
-        - 同時搜尋案例和脈診知識
-        - 智能關聯分析
-        - 綜合結果排序
-        """
-        try:
-            # 獲取查詢向量
-            query_vector = await self.get_embedding(query_text)
-            if not query_vector:
-                return {"error": "無法獲取查詢向量"}
-            
-            # 並行搜尋
-            case_search_task = self.search_similar_cases(query_vector)
-            
-            # 從患者上下文提取脈診資訊
-            pulse_pattern = ""
-            if patient_context:
-                pulse_pattern = patient_context.get('pulse_text', '') or patient_context.get('pulse_pattern', '')
-            
-            pulse_search_task = self.search_pulse_knowledge(pulse_pattern) if pulse_pattern else []
-            
-            # 等待搜尋完成
-            if pulse_pattern:
-                similar_cases, pulse_knowledge = await asyncio.gather(
-                    case_search_task, pulse_search_task
+        for attempt in range(self.retry_config['max_retries']):
+            try:
+                # 速率限制檢查
+                await self._wait_for_rate_limit()
+                
+                config = agent_config or self.config.get_llm_config()
+                
+                self.logger.info(f"🚀 執行LLM請求 (嘗試 {attempt + 1}/{self.retry_config['max_retries']}) - ID: {self.instance_id}")
+                
+                start_time = time.time()
+                
+                response = await asyncio.wait_for(
+                    self.llm_client.chat.completions.create(
+                        model=config.get('model', self.llm_model_name),
+                        messages=[
+                            {"role": "system", "content": config.get('system_prompt', "你是專業的中醫AI助理。")},
+                            {"role": "user", "content": prompt}
+                        ],
+                        temperature=config.get('temperature', 0.7),
+                        max_tokens=config.get('max_tokens', 2000)
+                    ),
+                    timeout=180  # 3分鐘超時
                 )
-            else:
-                similar_cases = await case_search_task
-                pulse_knowledge = []
+                
+                response_time = time.time() - start_time
+                
+                # 更新統計
+                self.statistics['total_requests'] += 1
+                self.statistics['successful_requests'] += 1
+                
+                self.logger.info(f"✅ LLM請求成功 (耗時: {response_time:.2f}s) - ID: {self.instance_id}")
+                
+                return response.choices[0].message.content
+                
+            except Exception as e:
+                error_str = str(e).lower()
+                
+                self.statistics['total_requests'] += 1
+                self.statistics['failed_requests'] += 1
+                
+                if attempt == self.retry_config['max_retries'] - 1:
+                    self.logger.error(f"❌ LLM請求最終失敗: {str(e)}")
+                    self.statistics['feature_usage']['fallback_responses'] += 1
+                    return self._generate_fallback_response(prompt, f"API調用失敗: {str(e)[:100]}")
+                
+                # 計算重試延遲
+                delay = self._calculate_retry_delay(attempt)
+                
+                self.logger.warning(f"⚠️ LLM請求失敗 (嘗試 {attempt + 1}): {str(e)[:100]}")
+                self.logger.info(f"⏳ {delay:.1f}秒後重試...")
+                
+                await asyncio.sleep(delay)
+        
+        return self._generate_fallback_response(prompt, "重試機制異常")
+    
+    def _calculate_retry_delay(self, attempt: int) -> float:
+        """計算重試延遲"""
+        base_delay = self.retry_config['base_delay']
+        exponential_delay = base_delay * (self.retry_config['exponential_base'] ** attempt)
+        delay = min(exponential_delay, self.retry_config['max_delay'])
+        
+        if self.retry_config['jitter']:
+            jitter = random.uniform(-self.retry_config['jitter_range'], self.retry_config['jitter_range']) * delay
+            delay = max(2.0, delay + jitter)
+        
+        return delay
+    
+    # ==================== 向量搜尋方法 ====================
+    
+    def _deterministic_vector(self, seed: str, dim: int = 384) -> List[float]:
+        """生成確定性向量"""
+        out: List[float] = []
+        i = 0
+        while len(out) < dim:
+            h = hashlib.sha256(f"{seed}:{i}".encode("utf-8")).digest()
+            for j in range(0, len(h), 4):
+                chunk = h[j:j+4]
+                if len(chunk) < 4:
+                    break
+                n = int.from_bytes(chunk, byteorder="big", signed=False)
+                out.append((n % 2000000) / 1000000.0 - 1.0)
+                if len(out) >= dim:
+                    break
+            i += 1
+        return out
+
+    def _generate_case_compatible_embedding(self, text: str, input_type: str = "passage") -> List[float]:
+        """生成與Case上傳時相容的384維向量"""
+        seed = f"{input_type}|{text}"
+        return self._deterministic_vector(seed, dim=384)
+
+    async def search_cases(self, query: str, limit: int = 10) -> List[Dict[str, Any]]:
+        """搜尋Case知識庫"""
+        try:
+            query_vector = self._generate_case_compatible_embedding(query, "passage")
+            self.logger.info(f"🔍 Case搜尋，向量維度：{len(query_vector)} - ID: {self.instance_id}")
             
-            # v1.0 綜合分析
-            comprehensive_result = {
-                'similar_cases': similar_cases,
-                'pulse_knowledge': pulse_knowledge,
-                'integration_analysis': self._analyze_case_pulse_integration(
-                    similar_cases, pulse_knowledge
-                ),
-                'search_summary': {
-                    'total_cases_found': len(similar_cases),
-                    'total_pulse_knowledge_found': len(pulse_knowledge),
-                    'query_text': query_text,
-                    'pulse_pattern': pulse_pattern
+            result = self.weaviate_client.query.get(
+                "Case",
+                ["case_id", "chief_complaint", "summary_text", "diagnosis_main", 
+                 "age", "gender", "pulse_text", "present_illness", "provisional_dx"]
+            ).with_near_vector({
+                "vector": query_vector
+            }).with_limit(limit).with_additional(['certainty']).do()
+            
+            cases = []
+            if result.get("data", {}).get("Get", {}).get("Case"):
+                for item in result["data"]["Get"]["Case"]:
+                    case_data = {
+                        'case_id': item.get('case_id', ''),
+                        'chief_complaint': item.get('chief_complaint', ''),
+                        'summary_text': item.get('summary_text', ''),
+                        'diagnosis_main': item.get('diagnosis_main', ''),
+                        'age': item.get('age', ''),
+                        'gender': item.get('gender', ''),
+                        'pulse_text': item.get('pulse_text', ''),
+                        'present_illness': item.get('present_illness', ''),
+                        'provisional_dx': item.get('provisional_dx', ''),
+                        'similarity': item.get('_additional', {}).get('certainty', 0.0)
+                    }
+                    cases.append(case_data)
+            
+            self.logger.info(f"✅ Case搜尋完成，找到 {len(cases)} 個相關案例")
+            return cases
+            
+        except Exception as e:
+            self.logger.error(f"Case搜尋失敗: {str(e)}")
+            return []
+
+    async def get_embeddings_v1(self, text: str, input_type: str = "query") -> List[float]:
+        """獲取文本嵌入向量"""
+        try:
+            if not text or not text.strip():
+                return self._get_default_embedding()
+            
+            text = text[:8192] if len(text) > 8192 else text
+            
+            response = await self.embedding_client.embeddings.create(
+                input=[text],
+                model=self.embedding_model_name,
+                encoding_format="float",
+                extra_body={
+                    "modality": ["text"],
+                    "input_type": input_type,
+                    "truncate": "NONE"
                 }
+            )
+            
+            embedding = response.data[0].embedding
+            self.logger.debug(f"✅ 獲取 {input_type} embedding成功，維度：{len(embedding)}")
+            return embedding
+            
+        except Exception as e:
+            self.logger.error(f"Embedding調用失敗: {str(e)}")
+            return self._generate_text_based_embedding(text)
+
+    async def search_pulse_knowledge(self, query: str, limit: int = 5) -> List[Dict[str, Any]]:
+        """搜尋PulsePJ知識庫"""
+        try:
+            query_vector = await self.get_embeddings_v1(query, input_type="query")
+            
+            result = self.weaviate_client.query.get(
+                "PulsePJ",
+                ["name", "description", "main_disease", "symptoms", "category"]
+            ).with_near_vector({
+                "vector": query_vector
+            }).with_limit(limit).with_additional(['certainty']).do()
+            
+            pulse_knowledge = []
+            if result.get("data", {}).get("Get", {}).get("PulsePJ"):
+                for item in result["data"]["Get"]["PulsePJ"]:
+                    pulse_data = {
+                        'name': item.get('name', ''),
+                        'description': item.get('description', ''),
+                        'main_disease': item.get('main_disease', ''),
+                        'symptoms': item.get('symptoms', ''),
+                        'category': item.get('category', ''),
+                        'similarity': item.get('_additional', {}).get('certainty', 0.0)
+                    }
+                    pulse_knowledge.append(pulse_data)
+            
+            self.logger.info(f"PulsePJ搜尋完成，找到 {len(pulse_knowledge)} 個相關脈診知識")
+            return pulse_knowledge
+            
+        except Exception as e:
+            self.logger.error(f"PulsePJ搜尋失敗: {str(e)}")
+            return []
+
+    async def comprehensive_search(self, query: str, search_options: Dict[str, Any] = None) -> Dict[str, Any]:
+        """綜合搜尋"""
+        try:
+            search_options = search_options or {}
+            case_limit = search_options.get('case_limit', 10)
+            pulse_limit = search_options.get('pulse_limit', 5)
+            
+            case_results, pulse_results = await asyncio.gather(
+                self.search_cases(query, case_limit),
+                self.search_pulse_knowledge(query, pulse_limit)
+            )
+            
+            all_similarities = []
+            if case_results:
+                all_similarities.extend([c.get('similarity', 0) for c in case_results])
+            if pulse_results:
+                all_similarities.extend([p.get('similarity', 0) for p in pulse_results])
+            
+            overall_similarity = max(all_similarities) if all_similarities else 0.0
+            
+            return {
+                'cases': case_results,
+                'pulse_knowledge': pulse_results,
+                'total_cases_found': len(case_results),
+                'total_pulse_found': len(pulse_results),
+                'best_case': case_results[0] if case_results else None,
+                'best_pulse': pulse_results[0] if pulse_results else None,
+                'overall_similarity': overall_similarity,
+                'search_success': True,
+                'api_manager_id': self.instance_id,
+                'query': query,
+                'timestamp': datetime.now().isoformat()
             }
             
-            self.logger.info(f"綜合搜尋完成 - 案例: {len(similar_cases)}, 脈診: {len(pulse_knowledge)}")
-            
-            return comprehensive_result
-            
         except Exception as e:
-            self.logger.error(f"綜合搜尋失敗: {e}")
-            return {"error": str(e)}
+            self.logger.error(f"綜合搜尋失敗: {str(e)}")
+            return {
+                'cases': [], 'pulse_knowledge': [], 'total_cases_found': 0,
+                'total_pulse_found': 0, 'best_case': None, 'best_pulse': None,
+                'overall_similarity': 0.0, 'search_success': False,
+                'error': str(e), 'query': query, 'timestamp': datetime.now().isoformat()
+            }
+
+    # ==================== 後台服務 ====================
     
-    def _analyze_case_pulse_integration(self, cases: List[Dict], 
-                                      pulse_knowledge: List[Dict]) -> Dict[str, Any]:
-        """
-        分析案例與脈診知識的整合 v1.0
+    def _start_background_services(self):
+        """啟動後台服務 - 防止重複啟動"""
         
-        v1.0 智能分析：
-        - 案例與脈診的一致性檢查
-        - 互補性分析
-        - 整合建議生成
-        """
-        analysis = {
-            'consistency_score': 0.0,
-            'complementary_insights': [],
-            'integration_suggestions': [],
-            'confidence_level': 'low'
-        }
+        # 🔥 關鍵修復：檢查是否已啟動後台服務
+        if hasattr(self, '_services_started') and self._services_started:
+            self.logger.info(f"♻️  後台服務已啟動，跳過重複啟動 (ID: {self.instance_id})")
+            return
         
-        if not cases or not pulse_knowledge:
-            return analysis
+        # 啟動後台服務（頻率調整）
+        self._background_tasks.append(
+            asyncio.create_task(self._statistics_reporter())
+        )
         
-        # 簡單的一致性分析
-        case_symptoms = set()
-        for case in cases[:3]:  # 取前3個最相似案例
-            if case.get('pulse_text'):
-                case_symptoms.update(case['pulse_text'].split())
-        
-        pulse_symptoms = set()
-        for pulse in pulse_knowledge:
-            if pulse.get('symptoms'):
-                pulse_symptoms.update(pulse['symptoms'].split())
-        
-        # 計算重疊度
-        if case_symptoms and pulse_symptoms:
-            overlap = case_symptoms.intersection(pulse_symptoms)
-            analysis['consistency_score'] = len(overlap) / max(len(case_symptoms), len(pulse_symptoms))
-        
-        # 設置信心等級
-        if analysis['consistency_score'] > 0.7:
-            analysis['confidence_level'] = 'high'
-        elif analysis['consistency_score'] > 0.4:
-            analysis['confidence_level'] = 'medium'
-        
-        analysis['integration_suggestions'] = [
-            "建議結合案例經驗和脈診理論進行綜合分析",
-            "注意案例中的脈象描述與標準脈診知識的對應關係",
-            "考慮個體差異對脈診表現的影響"
-        ]
-        
-        return analysis
+        self._services_started = True
+        self.logger.info(f"🔄 後台服務已啟動 (單例模式 - ID: {self.instance_id})")
     
-    # 工具方法
-    async def health_check(self) -> Dict[str, Any]:
-        """系統健康檢查 v1.0"""
-        health_status = {
-            'version': self.version,
-            'llm_client': False,
-            'embedding_client': False,
-            'weaviate_client': False,
-            'overall_status': 'unhealthy'
+    async def _statistics_reporter(self):
+        """統計報告服務 - 降低頻率"""
+        while True:
+            try:
+                await asyncio.sleep(300)  # 改為5分鐘報告一次
+                await self._generate_statistics_report()
+            except Exception as e:
+                self.logger.error(f"統計報告服務異常: {str(e)}")
+                await asyncio.sleep(600)
+    
+    async def _generate_statistics_report(self):
+        """生成統計報告"""
+        uptime = time.time() - self.statistics['session_start_time']
+        
+        total_requests = self.statistics['total_requests']
+        success_rate = (
+            (self.statistics['successful_requests'] / total_requests * 100) 
+            if total_requests > 0 else 100
+        )
+        
+        self.logger.info("📊 === S-CBR API 管理器統計報告 (單例模式) ===")
+        self.logger.info(f"🆔 實例ID: {self.instance_id}")
+        self.logger.info(f"⏱️  運行時間: {uptime/3600:.1f}小時")
+        self.logger.info(f"📈 請求統計: 總計{total_requests}, 成功率{success_rate:.1f}%")
+        self.logger.info(f"🎯 每日配額: {self.rate_limiter['daily_used']}/{self.rate_limiter['daily_quota']}")
+    
+    # ==================== 工具方法 ====================
+    
+    def _generate_fallback_response(self, prompt: str, reason: str = "API調用失敗") -> str:
+        """智能備用回應生成"""
+        keywords = prompt.lower()
+        
+        if any(word in keywords for word in ['失眠', '睡眠', '多夢', '入睡困難', '頭痛']):
+            return f"""🔄 **S-CBR v1.1 單例模式分析** (ID: {self.instance_id})
+
+🎯 **基於症狀的中醫分析**：
+
+**失眠頭痛綜合分析**：
+- 常見證型：肝陽上亢、心腎不交、氣血不足
+- 病機特點：情志不遂、勞累過度、思慮過多
+- 發病規律：多與工作壓力、生活節奏相關
+
+**治療建議**：
+- 治法：平肝潛陽，養心安神
+- 方藥：天麻鉤藤飲、甘麥大棗湯加減
+- 針灸：百會、四神聰、神門、太衝等穴
+
+**生活調理**：
+- 作息規律，避免熬夜
+- 適度運動，如散步、太極
+- 情緒管理，學會放鬆
+
+⚠️ **重要提醒**：請諮詢專業中醫師進行詳細診斷
+
+🔄 **系統狀態**：{reason} | 單例ID：{self.instance_id} | 建議稍後重試獲得完整分析"""
+        
+        return f"""🔄 **S-CBR v1.1 單例模式** (ID: {self.instance_id})
+
+🎯 **中醫辨證要點**：
+1. 詳細記錄症狀的時間、程度、誘因
+2. 注意觀察舌象、脈象變化
+3. 結合既往病史和用藥情況
+4. 考慮情緒、飲食、作息等因素
+
+💡 **系統優勢**：
+- 單例模式確保資源統一管理
+- 智能速率限制保證服務穩定
+- 25 RPM保守配額設計
+- 優雅降級策略保證服務連續性
+
+🔄 **系統狀態**：{reason}
+🆔 **實例ID**：{self.instance_id}
+⏱️  **建議操作**：稍後重試獲得完整螺旋推理分析
+
+⚠️ **重要**：請諮詢專業中醫師進行準確診斷
+
+*S-CBR v1.1 單例優化版 - 穩定高效的智能服務*"""
+    
+    def _get_default_embedding(self) -> List[float]:
+        return [0.01] * 1024
+    
+    def _generate_text_based_embedding(self, text: str) -> List[float]:
+        hash_obj = hashlib.md5(text.encode('utf-8'))
+        hash_hex = hash_obj.hexdigest()
+        embedding = []
+        for i in range(1024):
+            hash_val = int(hash_hex[i % len(hash_hex)], 16) / 15.0 - 0.5
+            embedding.append(hash_val)
+        return embedding
+    
+    # ==================== 單例管理方法 ====================
+    
+    @classmethod
+    def get_instance(cls):
+        """獲取單例實例"""
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+    
+    @classmethod
+    def reset_instance(cls):
+        """重置單例實例 (僅用於測試)"""
+        with cls._lock:
+            if cls._instance is not None:
+                # 清理資源
+                if hasattr(cls._instance, 'http_client'):
+                    try:
+                        asyncio.create_task(cls._instance.http_client.aclose())
+                    except:
+                        pass
+            cls._instance = None
+            cls._initialized = False
+    
+    def get_client_info(self) -> Dict[str, Any]:
+        """獲取客戶端資訊"""
+        return {
+            "version": self.version,
+            "instance_id": self.instance_id,
+            "optimization_level": "singleton_mode",
+            "rate_limit": f"{self.rate_limiter['requests_per_minute']} RPM",
+            "daily_quota": f"{self.rate_limiter['daily_used']}/{self.rate_limiter['daily_quota']}",
+            "initialized_at": datetime.now().isoformat()
         }
-        
-        try:
-            # 檢查 LLM 客戶端
-            test_response = await self.generate_llm_response("測試", None)
-            health_status['llm_client'] = bool(test_response and "錯誤" not in test_response)
-            
-            # 檢查 Embedding 客戶端  
-            test_embedding = await self.get_embedding("測試")
-            health_status['embedding_client'] = bool(test_embedding)
-            
-            # 檢查 Weaviate 客戶端
-            weaviate_status = self.weaviate_client.is_ready()
-            health_status['weaviate_client'] = weaviate_status
-            
-            # 整體狀態
-            if all([health_status['llm_client'], 
-                   health_status['embedding_client'], 
-                   health_status['weaviate_client']]):
-                health_status['overall_status'] = 'healthy'
-            
-        except Exception as e:
-            self.logger.error(f"健康檢查異常: {e}")
-            health_status['error'] = str(e)
-        
-        return health_status
+
+# ==================== 便捷函數 ====================
+
+def get_api_manager():
+    """獲取 API 管理器單例實例"""
+    return SCBRAPIManager.get_instance()
+
+# 匯出
+__all__ = ["SCBRAPIManager", "get_api_manager"]

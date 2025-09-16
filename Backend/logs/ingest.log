@@ -1,36 +1,680 @@
-2025-09-14 02:04:36,711 [INFO] backend.main - Application startup.
-2025-09-14 02:07:05,855 [INFO] backend.main - Application shutdown.
-2025-09-14 02:07:07,655 [INFO] backend.main - Application startup.
-2025-09-14 02:08:01,349 [INFO] backend.main - Application shutdown.
-2025-09-14 02:08:02,982 [INFO] backend.main - Application startup.
-2025-09-14 02:08:48,560 [INFO] backend.main - Application shutdown.
-2025-09-14 02:08:50,075 [INFO] backend.main - Application startup.
-2025-09-14 02:10:21,185 [INFO] backend.main - Application shutdown.
-2025-09-14 02:10:23,189 [INFO] backend.main - Application startup.
-2025-09-14 03:08:16,467 [INFO] backend.main - Application shutdown.
-2025-09-14 03:08:18,049 [INFO] backend.main - Application startup.
-2025-09-14 03:15:01,361 [INFO] backend.main - Application shutdown.
-2025-09-14 03:15:02,889 [INFO] backend.main - Application startup.
-2025-09-14 03:16:30,440 [INFO] backend.main - Application shutdown.
-2025-09-14 03:16:31,944 [INFO] backend.main - Application startup.
-2025-09-14 03:23:28,129 [INFO] backend.main - Application shutdown.
-2025-09-14 03:23:29,883 [INFO] backend.main - Application startup.
-2025-09-14 03:24:06,437 [INFO] backend.main - Application shutdown.
-2025-09-14 03:24:08,060 [INFO] backend.main - Application startup.
-2025-09-14 04:13:25,925 [INFO] backend.main - Application shutdown.
-2025-09-14 04:13:27,538 [INFO] backend.main - Application startup.
-2025-09-14 04:14:00,237 [INFO] backend.main - Application shutdown.
-2025-09-14 04:14:01,816 [INFO] backend.main - Application startup.
-2025-09-14 04:14:26,798 [INFO] backend.main - Application shutdown.
-2025-09-14 04:14:28,289 [INFO] backend.main - Application startup.
-2025-09-14 04:14:53,719 [INFO] backend.main - Application shutdown.
-2025-09-14 04:14:55,176 [INFO] backend.main - Application startup.
-2025-09-14 04:15:15,967 [INFO] backend.main - Application shutdown.
-2025-09-14 04:15:17,529 [INFO] backend.main - Application startup.
-2025-09-14 04:15:37,111 [INFO] backend.main - Application shutdown.
-2025-09-14 04:15:38,684 [INFO] backend.main - Application startup.
-2025-09-14 04:20:08,899 [INFO] backend.main - Application shutdown.
-2025-09-14 04:20:10,377 [INFO] backend.main - Application startup.
-2025-09-14 04:20:28,308 [INFO] backend.main - Application shutdown.
-2025-09-14 04:20:29,811 [INFO] backend.main - Application startup.
-2025-09-14 04:34:13,811 [INFO] backend.main - Application shutdown.
+2025-09-16 00:11:46,187 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 00:11:46,189 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 00:11:46,190 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 00:11:49,112 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 00:11:49,119 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 00:11:49,120 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 00:11:49,120 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 00:11:49,120 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 00:11:49,120 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 00:11:49,121 [INFO] backend.main - Application startup completed.
+2025-09-16 00:12:01,778 [INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250916-e7661f57]
+2025-09-16 00:12:01,779 [INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:12:01,779 [INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-16 00:12:01,780 [INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250916-e7661f57]
+2025-09-16 00:12:01,780 [INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250916-e7661f57]
+2025-09-16 00:12:01,781 [INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:12:02,345 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:02,345 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:02,345 [INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-16 00:12:03,023 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:03,023 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:03,024 [INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-16 00:12:03,690 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:03,690 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:03,691 [INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-16 00:12:04,300 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:04,301 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:04,865 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:04,866 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:04,866 [INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-16 00:12:04,866 [INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-16 00:12:05,551 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:05,551 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:05,553 [INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-16 00:12:06,127 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:06,127 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:06,128 [INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-16 00:12:06,694 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:06,695 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:06,695 [INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-16 00:12:06,696 [INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-16 00:12:07,295 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:07,295 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:07,881 [INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:07,882 [INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:07,882 [INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-16 00:12:07,883 [INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-16 00:12:07,883 [INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-16 00:12:07,885 [INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250916_001207
+2025-09-16 00:12:07,885 [INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250916_001207
+2025-09-16 00:12:07,886 [DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-16 00:12:07,886 [DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-16 00:17:10,765 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-16 00:17:10,766 [INFO] openai._base_client - Retrying request to /chat/completions in 0.480910 seconds
+2025-09-16 00:17:18,053 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 00:17:18,058 [DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-16 00:17:18,059 [INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 00:17:18,059 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 00:17:18,060 [DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 00:17:18,060 [DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 00:22:20,252 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-16 00:22:20,252 [INFO] openai._base_client - Retrying request to /chat/completions in 0.414170 seconds
+2025-09-16 00:27:22,878 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-16 00:27:22,879 [INFO] openai._base_client - Retrying request to /chat/completions in 0.949204 seconds
+2025-09-16 00:32:26,038 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-16 00:32:26,039 [ERROR] s_cbr.api_manager - LLM 調用失敗: Error code: 504
+2025-09-16 00:32:26,039 [INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-16 00:32:26,040 [DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 0
+2025-09-16 00:32:26,040 [ERROR] s_cbr.Step1CaseFinder - STEP 1 執行異常: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 00:32:26,041 [DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-16 00:32:26,041 [DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-16 00:32:26,042 [WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-16 00:32:26,042 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-16 00:32:26,042 [INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-16 00:32:26,043 [ERROR] s_cbr.Step1CaseFinder - 放寬搜尋失敗: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 00:32:26,043 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-16 00:32:26,045 [DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-16 00:32:26,045 [INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-16 00:32:26,045 [ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-16 00:32:26,046 [ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-16 00:32:26,046 [INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 00:32:26,047 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 00:32:26,047 [DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 00:32:26,048 [DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 00:33:21,730 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 00:33:21,730 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 00:33:21,730 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 00:33:29,911 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 00:33:29,916 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 00:33:29,916 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 00:33:29,917 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 00:33:29,917 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 00:33:29,917 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 00:33:29,917 [INFO] backend.main - Application startup completed.
+2025-09-16 00:55:35,995 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 00:55:35,995 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 00:55:35,995 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 00:55:38,496 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 00:55:38,501 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 00:55:38,502 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 00:55:38,502 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 00:55:38,502 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 00:55:38,502 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 00:55:38,502 [INFO] backend.main - Application startup completed.
+2025-09-16 00:58:23,631 [INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23,632 [INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:58:23,632 [INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-16 00:58:23,632 [INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23,633 [INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23,634 [INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:58:23,634 [ERROR] s_cbr.api_manager - 客戶端初始化失敗: AsyncClient.__init__() got an unexpected keyword argument 'retries'
+2025-09-16 00:58:23,635 [ERROR] s_cbr.run_spiral_cbr_v1 - ❌ S-CBR v1.0 推理失敗 [REQ-20250916-a6bd9e0c]: AsyncClient.__init__() got an unexpected keyword argument 'retries'
+2025-09-16 00:58:23,635 [INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23,636 [INFO] s_cbr.S-CBR-API -    處理時間: 5ms
+2025-09-16 00:58:23,636 [INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-16 00:58:23,637 [INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-16 01:02:02,588 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 01:02:02,588 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 01:02:02,588 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 01:02:05,241 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 01:02:05,246 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 01:02:05,247 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 01:02:05,247 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 01:02:05,247 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 01:02:05,247 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 01:02:05,247 [INFO] backend.main - Application startup completed.
+2025-09-16 01:44:53,087 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 01:44:53,088 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 01:44:53,088 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 01:44:54,943 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: expected 'except' or 'finally' block (api_manager.py, line 1109)
+2025-09-16 01:44:54,948 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 01:44:54,948 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-16 01:44:54,948 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-16 01:44:54,948 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 01:44:54,948 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 01:44:54,949 [INFO] backend.main - Application startup completed.
+2025-09-16 01:53:30,039 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 01:53:30,039 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 01:53:32,469 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 01:53:32,482 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 01:53:32,482 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 01:53:32,482 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 01:53:32,482 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 01:53:32,483 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 01:53:32,483 [INFO] backend.main - Application startup completed.
+2025-09-16 01:53:51,809 [INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250916-5cfdb3bd]
+2025-09-16 01:53:51,809 [INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 01:53:51,810 [INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-16 01:53:51,810 [INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250916-5cfdb3bd]
+2025-09-16 01:53:51,811 [INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250916-5cfdb3bd]
+2025-09-16 01:53:51,811 [INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 01:53:52,095 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:52,095 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:52,095 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:52,097 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:52,097 [INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-16 01:53:52,426 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:52,427 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:52,428 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:52,428 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:52,429 [INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-16 01:53:52,736 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:52,737 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:52,737 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:52,737 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:52,738 [INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-16 01:53:53,027 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:53,028 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:53,028 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:53,029 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:53,402 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:53,403 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:53,403 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:53,404 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:53,404 [INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-16 01:53:53,405 [INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-16 01:53:53,796 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:53,796 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:53,797 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:53,797 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:53,798 [INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-16 01:53:54,101 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:54,101 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:54,102 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:54,103 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:54,103 [INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-16 01:53:54,439 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:54,440 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:54,441 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:54,442 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:54,442 [INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-16 01:53:54,443 [INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-16 01:53:54,810 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:54,812 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:54,812 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:54,812 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:55,104 [INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:55,105 [INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:55,105 [INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:55,106 [INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:55,106 [INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-16 01:53:55,106 [INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-16 01:53:55,107 [INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-16 01:53:55,107 [INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250916_015355
+2025-09-16 01:53:55,109 [INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250916_015355
+2025-09-16 01:53:55,109 [DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-16 01:53:55,109 [DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-16 01:53:55,110 [INFO] s_cbr.api_manager - 🔄 每日API配額已重置
+2025-09-16 01:54:05,456 [WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 01:54:05,456 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 1): unknown
+2025-09-16 01:54:05,457 [INFO] s_cbr.api_manager - ⏳ 3.4秒後重試...
+2025-09-16 01:54:09,244 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 01:54:09,249 [INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757958835110_542 (嘗試 2/6)
+2025-09-16 01:55:55,121 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,121 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,123 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,124 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,125 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,125 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,126 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,127 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,127 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,127 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,128 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,128 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,129 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,129 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,130 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,130 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,130 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,131 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,131 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,132 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,132 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,133 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,134 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,134 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,135 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,135 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,136 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,136 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,137 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,138 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,138 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,139 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,139 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,140 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,140 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,140 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,141 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,142 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,142 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,143 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,143 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,144 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,145 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,145 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,145 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,146 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,146 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,148 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,148 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,149 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,149 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,150 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,150 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,151 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,151 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,152 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55,153 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,154 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,154 [INFO] s_cbr.api_manager - 📈 請求統計: 總計1, 成功率0.0%
+2025-09-16 01:55:55,154 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,155 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級1
+2025-09-16 01:55:55,156 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,156 [INFO] s_cbr.api_manager - 🏥 系統健康: healthy, 級別:full
+2025-09-16 01:55:55,156 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55,157 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55,157 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55,158 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55,159 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55,159 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55,159 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:56:29,260 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 2): unknown
+2025-09-16 01:56:29,260 [INFO] s_cbr.api_manager - ⏳ 5.9秒後重試...
+2025-09-16 01:56:45,186 [WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 01:56:45,187 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 3): unknown
+2025-09-16 01:56:45,188 [INFO] s_cbr.api_manager - ⏳ 5.7秒後重試...
+2025-09-16 01:56:50,873 [WARNING] s_cbr.api_manager - ⚡ 突發限制觸發，冷卻 8 秒
+2025-09-16 01:56:55,119 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,120 [WARNING] s_cbr.api_manager - 🚨 健康檢查發現問題: 成功率過低: 0.00, 連續失敗: 3次
+2025-09-16 01:56:55,120 [WARNING] s_cbr.api_manager - ⬇️ 系統降級：full → optimized，原因：健康檢查異常
+2025-09-16 01:56:55,121 [INFO] s_cbr.api_manager - 🔧 系統參數已調整為 optimized 模式
+2025-09-16 01:56:55,122 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,122 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,123 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,123 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,123 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,124 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,124 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55,125 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:57:08,893 [WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 01:57:08,894 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 4): unknown
+2025-09-16 01:57:08,895 [INFO] s_cbr.api_manager - ⏳ 15.0秒後重試...
+2025-09-16 01:57:24,083 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 01:57:24,084 [INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757958835110_542 (嘗試 5/6)
+2025-09-16 01:57:55,139 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,140 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,141 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,142 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,142 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,142 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,143 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,144 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,145 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,145 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,146 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,146 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,147 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,147 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,147 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,148 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,148 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,149 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,149 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,150 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,150 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,150 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,151 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,152 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,152 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,153 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,153 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,153 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,154 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,154 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,155 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,155 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,156 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,156 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,157 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,158 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,159 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,159 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,159 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,161 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,161 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,162 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,162 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,163 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,163 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,164 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,164 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,165 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,165 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,166 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,166 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,166 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,167 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,167 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,168 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,168 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,169 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,169 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,170 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55,170 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,170 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55,170 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,172 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55,172 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55,173 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55,173 [INFO] s_cbr.api_manager - 📈 請求統計: 總計4, 成功率0.0%
+2025-09-16 01:57:55,174 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55,174 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級1
+2025-09-16 01:57:55,175 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55,175 [INFO] s_cbr.api_manager - 🏥 系統健康: healthy, 級別:optimized
+2025-09-16 01:59:44,091 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 5): unknown
+2025-09-16 01:59:44,091 [INFO] s_cbr.api_manager - ⏳ 22.0秒後重試...
+2025-09-16 01:59:55,144 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,144 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,144 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,145 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,145 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,146 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,147 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,147 [WARNING] s_cbr.api_manager - 🚨 健康檢查發現問題: 成功率過低: 0.00, 連續失敗: 5次
+2025-09-16 01:59:55,147 [WARNING] s_cbr.api_manager - ⬇️ 系統降級：optimized → basic，原因：健康檢查異常
+2025-09-16 01:59:55,149 [INFO] s_cbr.api_manager - 🔧 系統參數已調整為 basic 模式
+2025-09-16 01:59:55,149 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,150 [DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55,150 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,150 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,151 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,152 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,152 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,153 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,153 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,154 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,155 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,156 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,156 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,157 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,158 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,158 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,158 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,159 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,160 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,161 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,162 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,162 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,163 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,163 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,164 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,164 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,165 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,165 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,166 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,166 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,167 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,168 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,168 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,169 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,169 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,169 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,170 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,171 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,173 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,173 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,174 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,174 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,175 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,176 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,176 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,177 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,177 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,178 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,178 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,179 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,179 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,181 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,181 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,182 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,182 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,183 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,183 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,184 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55,184 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,185 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,186 [INFO] s_cbr.api_manager - 📈 請求統計: 總計5, 成功率0.0%
+2025-09-16 01:59:55,186 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,187 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級1
+2025-09-16 01:59:55,187 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,188 [INFO] s_cbr.api_manager - 🏥 系統健康: healthy, 級別:basic
+2025-09-16 01:59:55,189 [INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55,189 [INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55,191 [INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55,191 [INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55,192 [INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55,193 [INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55,193 [INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 02:00:16,107 [WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 02:00:16,108 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 6): unknown
+2025-09-16 02:00:16,108 [INFO] s_cbr.api_manager - ⏳ 33.7秒後重試...
+2025-09-16 02:00:49,788 [DEBUG] s_cbr.api_manager - ✅ medium 優先級請求 req_1757958835110_542 處理完成
+2025-09-16 02:00:49,789 [DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-16 02:00:49,790 [INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 02:00:49,790 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 02:00:49,790 [DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 02:00:49,790 [DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 02:00:49,791 [WARNING] s_cbr.api_manager - ⚡ 突發限制觸發，冷卻 8 秒
+2025-09-16 02:01:07,823 [WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 02:01:07,823 [WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757959249791_507 (嘗試 1): unknown
+2025-09-16 02:01:07,824 [INFO] s_cbr.api_manager - ⏳ 2.6秒後重試...
+2025-09-16 02:01:10,615 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 02:01:10,617 [INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757959249791_507 (嘗試 2/3)
+2025-09-16 02:01:54,657 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 02:01:54,657 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 02:01:54,658 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 02:01:55,818 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 02:01:56,294 [DEBUG] s_cbr.api_manager - ✅ 獲取 query embedding成功，維度：2048
+2025-09-16 02:01:56,334 [INFO] s_cbr.api_manager - PulsePJ搜尋完成，找到 5 個相關脈診知識
+2025-09-16 02:01:56,334 [INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-16 02:01:56,335 [DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 13
+2025-09-16 02:01:56,335 [ERROR] s_cbr.Step1CaseFinder - STEP 1 執行異常: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 02:01:56,336 [DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-16 02:01:56,338 [DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-16 02:01:56,339 [WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-16 02:01:56,340 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-16 02:01:56,340 [INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-16 02:01:56,340 [ERROR] s_cbr.Step1CaseFinder - 放寬搜尋失敗: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 02:01:56,341 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-16 02:01:56,341 [DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-16 02:01:56,342 [INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-16 02:01:56,342 [ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-16 02:01:56,343 [ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-16 02:01:56,343 [INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 02:01:56,344 [DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 02:01:56,344 [DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 02:01:56,344 [DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 02:01:56,345 [INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757959316345_413 (嘗試 1/3)
+2025-09-16 02:03:11,227 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 02:03:11,231 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 02:03:11,232 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 02:03:11,232 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 02:03:11,232 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 02:03:11,232 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 02:03:11,232 [INFO] backend.main - Application startup completed.
+2025-09-16 02:09:32,982 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 02:09:32,982 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 02:09:32,982 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 02:09:35,378 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 02:09:35,383 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 02:09:35,383 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 02:09:35,384 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 02:09:35,384 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 02:09:35,384 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 02:09:35,384 [INFO] backend.main - Application startup completed.
+2025-09-16 02:17:04,889 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 02:17:12,001 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 02:17:13,072 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 02:23:57,591 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 02:23:58,615 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 02:35:47,665 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 02:35:47,665 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 02:35:47,665 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 02:35:50,170 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 02:35:50,184 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 02:35:50,185 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 02:35:50,185 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 02:35:50,186 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 02:35:50,186 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 02:35:50,186 [INFO] backend.main - Application startup completed.
+2025-09-16 02:57:46,320 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 02:57:46,320 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 02:57:46,320 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 02:57:48,709 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 02:57:48,716 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 02:57:48,716 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 02:57:48,716 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 02:57:48,717 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 02:57:48,717 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 02:57:48,717 [INFO] backend.main - Application startup completed.
+2025-09-16 03:01:25,805 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 03:01:25,805 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 03:01:25,805 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 03:01:28,482 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 03:01:28,486 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 03:01:28,486 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 03:01:28,486 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 03:01:28,487 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 03:01:28,487 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 03:01:28,487 [INFO] backend.main - Application startup completed.
+2025-09-16 03:01:58,429 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:02:05,231 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:02:06,282 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:05:55,355 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 03:05:55,355 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 03:05:55,355 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 03:05:57,762 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 03:05:57,766 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 03:05:57,766 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 03:05:57,766 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 03:05:57,766 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 03:05:57,767 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 03:05:57,767 [INFO] backend.main - Application startup completed.
+2025-09-16 03:10:48,738 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 03:10:48,739 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 03:10:48,739 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 03:10:54,145 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 03:10:54,149 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 03:10:54,149 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 03:10:54,149 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 03:10:54,149 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 03:10:54,149 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 03:10:54,149 [INFO] backend.main - Application startup completed.
+2025-09-16 03:14:05,895 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:14:24,162 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:14:25,201 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:14:26,095 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:17:47,861 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:17:56,904 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:18:14,964 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:21:35,436 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:21:42,093 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:21:43,176 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:21:44,043 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:21:59,471 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:22:06,693 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:28:50,986 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:28:56,983 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:29:13,472 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:29:14,523 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:29:15,401 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:32:34,621 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:32:42,907 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:39:27,820 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:42:47,724 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:42:55,053 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:42:56,152 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:42:57,014 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 03:49:38,448 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:49:45,647 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:50:03,577 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 03:54:32,990 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 03:54:32,990 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 03:54:32,990 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 03:54:37,714 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 03:54:37,720 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 03:54:37,720 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 03:54:37,720 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 03:54:37,720 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 03:54:37,720 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 03:54:37,720 [INFO] backend.main - Application startup completed.
+2025-09-16 13:09:22,197 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:09:42,463 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:09:43,547 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:09:44,456 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:09:59,272 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:10:06,152 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:10:23,266 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:10:29,429 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:10:46,638 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:10:46,970 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:10:47,854 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:10:52,228 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:11:08,142 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:11:15,027 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:11:31,108 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:11:37,642 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:11:37,947 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:11:38,805 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:11:53,413 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:12:01,589 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:12:19,724 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:12:26,638 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:12:43,230 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:12:43,554 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:12:44,441 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:12:48,386 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:13:08,402 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:13:16,413 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:13:33,573 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:13:41,702 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:13:42,043 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:13:42,902 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-16 13:13:57,373 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:14:04,820 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:14:21,674 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 13:14:27,846 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-16 14:28:34,715 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 14:28:34,715 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 14:28:34,716 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 14:55:56,536 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: cannot import name 'run_spiral_cbr_v2' from 's_cbr.main' (C:\work\系統-中醫\Pulse-project\Backend\s_cbr\main.py)
+2025-09-16 14:55:56,550 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 14:55:56,550 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-16 14:55:56,550 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-16 14:55:56,550 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 14:55:56,550 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 14:55:56,550 [INFO] backend.main - Application startup completed.
+2025-09-16 14:56:05,190 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 14:56:05,190 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 14:56:07,347 [INFO] backend.main - ✅ S-CBR v1.0 螺旋推理模組載入成功
+2025-09-16 14:56:07,351 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 14:56:07,351 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-16 14:56:07,352 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-16 14:56:07,352 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 14:56:07,352 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 14:56:07,352 [INFO] backend.main - Application startup completed.
+2025-09-16 15:06:14,507 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 15:06:14,507 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-16 15:06:14,507 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-16 15:06:16,790 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: cannot import name 'run_spiral_cbr_v2' from 's_cbr.main' (C:\work\系統-中醫\Pulse-project\Backend\s_cbr\main.py)
+2025-09-16 15:06:16,794 [INFO] backend.main - 🚀 TCM S-CBR Backend v1.0 啟動
+2025-09-16 15:06:16,794 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-16 15:06:16,795 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-16 15:06:16,795 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-16 15:06:16,795 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-16 15:06:16,795 [INFO] backend.main - Application startup completed.
+2025-09-16 15:06:36,501 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-16 15:06:36,501 [INFO] backend.main - 🔻 Application shutdown completed.

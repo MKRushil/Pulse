@@ -1,0 +1,1 @@
+2025-09-16 00:56:19 [   ERROR] s_cbr.api_manager:_initialize_clients:163 - 客戶端初始化失敗: AsyncClient.__init__() got an unexpected keyword argument 'retries'

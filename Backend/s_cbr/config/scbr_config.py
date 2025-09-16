@@ -51,11 +51,11 @@ class SCBRConfig:
         """載入外部 config.py 配置"""
         # LLM 配置繼承
         self.LLM_API_URL = getattr(config, 'LLM_API_URL', 'https://integrate.api.nvidia.com/v1')
-        self.LLM_API_KEY = getattr(config, 'LLM_API_KEY', '')
+        self.LLM_API_KEY = getattr(config, 'LLM_API_KEY', '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')
         self.LLM_MODEL_NAME = getattr(config, 'LLM_MODEL_NAME', 'meta/llama-3.3-70b-instruct')
         
         # Embedding 配置繼承
-        self.EMBEDDING_API_KEY = getattr(config, 'EMBEDDING_API_KEY', '')
+        self.EMBEDDING_API_KEY = getattr(config, 'EMBEDDING_API_KEY', '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')
         self.EMBEDDING_BASE_URL = getattr(config, 'EMBEDDING_BASE_URL', 'https://integrate.api.nvidia.com/v1')
         self.EMBEDDING_MODEL_NAME = getattr(config, 'EMBEDDING_MODEL_NAME', 'nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1')
         
@@ -231,4 +231,73 @@ class SCBRConfig:
             'additional_headers': {
                 'X-OpenAI-Api-Key': instance.EMBEDDING_API_KEY
             }
+        }
+    
+    
+    def get_agent_config(self, agent_name: str) -> Dict[str, Any]:
+        """獲取智能體配置 v1.0 - 修復缺失方法"""
+        valid_agents = ['diagnostic_agent', 'adaptation_agent', 'monitoring_agent', 'feedback_agent']
+        
+        if agent_name not in valid_agents:
+            raise ValueError(f"無效的智能體名稱: {agent_name}. 有效選項: {valid_agents}")
+        
+        agent_config = self.AGENTIVE_CONFIG.get(agent_name)
+        
+        if not agent_config:
+            # 預設配置備用
+            return {
+                'model': self.LLM_MODEL_NAME,
+                'temperature': 0.7,
+                'max_tokens': 1200,
+                'system_prompt': f"你是專業的中醫{agent_name.replace('_agent', '')}智能體。"
+            }
+        
+        return agent_config.copy()  # 返回副本，避免意外修改
+    
+    def get_llm_config(self) -> Dict[str, Any]:
+        """獲取通用 LLM 配置 v1.0"""
+        return {
+            'model': self.LLM_MODEL_NAME,
+            'temperature': 0.7,  
+            'max_tokens': 2000,
+            'api_url': self.LLM_API_URL,
+            'api_key': self.LLM_API_KEY
+        }
+    
+    def get_embedding_config(self) -> Dict[str, Any]:
+        """獲取嵌入模型配置 v1.0"""
+        return {
+            'model': self.EMBEDDING_MODEL_NAME,
+            'api_key': self.EMBEDDING_API_KEY,
+            'base_url': self.EMBEDDING_BASE_URL,
+            'max_length': 512
+        }
+    
+    def get_spiral_config(self) -> Dict[str, Any]:
+        """獲取螺旋推理配置 v1.0"""
+        return self.SPIRAL_SETTINGS.copy()
+    
+    def get_adaptation_weights(self) -> Dict[str, float]:
+        """獲取適配權重配置 v1.0"""
+        return self.ADAPTATION_WEIGHTS.copy()
+    
+    def get_knowledge_base_config(self, kb_type: str) -> Dict[str, Any]:
+        """獲取知識庫配置 v1.0"""
+        if kb_type == 'case':
+            return self.get_case_search_config()
+        elif kb_type == 'pulse':
+            return self.get_pulse_search_config()
+        else:
+            raise ValueError(f"無效的知識庫類型: {kb_type}. 有效選項: ['case', 'pulse']")
+    
+    def get_all_config_summary(self) -> Dict[str, Any]:
+        """獲取配置摘要 v1.0 - 用於調試"""
+        return {
+            'version': self.version,
+            'loaded_from_external_config': CONFIG_LOADED,
+            'available_classes': {**self.EXISTING_CLASSES, **self.SCBR_CLASSES},
+            'spiral_settings': self.SPIRAL_SETTINGS,
+            'adaptation_weights': self.ADAPTATION_WEIGHTS,
+            'agentive_agents': list(self.AGENTIVE_CONFIG.keys()),
+            'knowledge_bases': list(self.EXISTING_CLASSES.keys())
         }

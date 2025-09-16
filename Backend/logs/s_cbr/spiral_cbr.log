@@ -1,0 +1,1011 @@
+2025-09-15 02:54:14 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 02:54:37 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 02:59:59 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-3be1ec38]
+2025-09-15 02:59:59 [    INFO] s_cbr.S-CBR-API -    問題: 患者基本資訊： - 年齡：35歲 - 性別：女 - 主訴：頭痛失眠，持續2週 - 現病史：工作壓力大，睡眠品質差 - 脈象：脈細數，略弦 - 舌診：舌紅苔薄黃
+2025-09-15 02:59:59 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 02:59:59 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-3be1ec38]
+2025-09-15 02:59:59 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-3be1ec38]
+2025-09-15 02:59:59 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 患者基本資訊： - 年齡：35歲 - 性別：女 - 主訴：頭痛失眠，持續2週 - 現病史：工作壓力大，睡眠品質差 - 脈象：脈細數，略弦 - 舌診：舌紅苔薄黃
+2025-09-15 03:00:00 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:00 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:00 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 03:00:00 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:00 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:00 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 03:00:01 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:01 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:01 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 03:00:01 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:01 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:02 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:02 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:02 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 03:00:02 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 03:00:03 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:03 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:03 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 03:00:03 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:03 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:03 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 03:00:04 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:04 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:04 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 03:00:04 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 03:00:04 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:04 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:05 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:00:05 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:00:05 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 03:00:05 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 03:00:05 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 03:00:05 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_030005
+2025-09-15 03:00:05 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_030005
+2025-09-15 03:00:05 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 03:00:05 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 03:00:09 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 03:00:09 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:00:09 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:00:09 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:00:09 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:00:09 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'SCBRConfig' object has no attribute 'get_agent_config'
+2025-09-15 03:00:09 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:00:09 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:00:09 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:00:09 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:00:09 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'SCBRConfig' object has no attribute 'get_agent_config'
+2025-09-15 03:00:09 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_030005
+2025-09-15 03:00:09 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_030005
+2025-09-15 03:00:09 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-3be1ec38]
+2025-09-15 03:00:09 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-3be1ec38]
+2025-09-15 03:00:09 [    INFO] s_cbr.S-CBR-API -    處理時間: 9425ms
+2025-09-15 03:00:09 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 03:00:09 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 03:01:14 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-cbfeab5d]
+2025-09-15 03:01:14 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 03:01:14 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 03:01:14 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-cbfeab5d]
+2025-09-15 03:01:14 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-cbfeab5d]
+2025-09-15 03:01:14 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 03:01:14 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:14 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:14 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 03:01:15 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:15 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:15 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 03:01:15 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:15 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:15 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 03:01:16 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:16 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:16 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:16 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:16 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 03:01:16 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 03:01:17 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:17 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:17 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 03:01:17 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:17 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:17 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 03:01:18 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:18 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:18 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 03:01:18 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 03:01:18 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:18 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:19 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:01:19 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:01:19 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 03:01:19 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 03:01:19 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 03:01:19 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_030119
+2025-09-15 03:01:19 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_030119
+2025-09-15 03:01:19 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 03:01:19 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 03:01:22 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 03:01:22 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:01:22 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:01:22 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:01:22 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:01:22 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'SCBRConfig' object has no attribute 'get_agent_config'
+2025-09-15 03:01:22 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:01:22 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:01:22 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:01:22 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:01:22 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'SCBRConfig' object has no attribute 'get_agent_config'
+2025-09-15 03:01:22 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_030119
+2025-09-15 03:01:22 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_030119
+2025-09-15 03:01:22 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-cbfeab5d]
+2025-09-15 03:01:22 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-cbfeab5d]
+2025-09-15 03:01:22 [    INFO] s_cbr.S-CBR-API -    處理時間: 8860ms
+2025-09-15 03:01:22 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 03:01:22 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 03:43:10 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 03:43:32 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-7c277773]
+2025-09-15 03:43:32 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 03:43:32 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 03:43:32 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-7c277773]
+2025-09-15 03:43:32 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-7c277773]
+2025-09-15 03:43:32 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 03:43:32 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:32 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:32 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 03:43:33 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:33 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:33 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 03:43:33 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:33 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:33 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 03:43:34 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:34 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:35 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:35 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:35 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 03:43:35 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 03:43:35 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:35 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:35 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 03:43:36 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:36 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:36 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 03:43:36 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:36 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:36 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 03:43:36 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 03:43:37 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:37 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:37 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:43:37 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:43:37 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 03:43:37 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 03:43:37 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 03:43:37 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_034337
+2025-09-15 03:43:37 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_034337
+2025-09-15 03:43:37 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 03:43:37 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 03:43:42 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 03:43:42 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:43:42 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:43:42 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:43:42 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:43:50 [    INFO] s_cbr.utils.api_manager - PulsePJ 搜尋完成，找到 0 個相關脈診知識
+2025-09-15 03:43:50 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 03:43:50 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 03:43:51 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:43:51 [   ERROR] s_cbr.Step1CaseFinder - 搜尋執行失敗: 無法獲取查詢向量
+2025-09-15 03:43:51 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 03:43:51 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 03:43:51 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 03:43:51 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 03:43:51 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 03:43:52 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:43:52 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 03:43:52 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 03:43:52 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 03:43:52 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 03:43:52 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 03:43:52 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:43:52 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:43:52 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:43:52 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:43:59 [    INFO] s_cbr.utils.api_manager - PulsePJ 搜尋完成，找到 0 個相關脈診知識
+2025-09-15 03:43:59 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 03:43:59 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 03:44:00 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:44:00 [   ERROR] s_cbr.Step1CaseFinder - 搜尋執行失敗: 無法獲取查詢向量
+2025-09-15 03:44:00 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 03:44:00 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 03:44:00 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 03:44:00 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 03:44:00 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 03:44:01 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:44:01 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 03:44:01 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 03:44:01 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 03:44:01 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 03:44:01 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 03:44:01 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_034337
+2025-09-15 03:44:01 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_034337
+2025-09-15 03:44:01 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-7c277773]
+2025-09-15 03:44:01 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-7c277773]
+2025-09-15 03:44:01 [    INFO] s_cbr.S-CBR-API -    處理時間: 28835ms
+2025-09-15 03:44:01 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 03:44:01 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 03:53:40 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 03:53:55 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 03:54:59 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-11579a2b]
+2025-09-15 03:54:59 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 03:54:59 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 03:54:59 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-11579a2b]
+2025-09-15 03:54:59 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-11579a2b]
+2025-09-15 03:54:59 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 03:55:00 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:00 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:00 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 03:55:01 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:01 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:01 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 03:55:01 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:01 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:01 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 03:55:02 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:02 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:02 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:02 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:02 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 03:55:02 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 03:55:03 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:03 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:03 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 03:55:03 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:03 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:03 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 03:55:04 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:04 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:04 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 03:55:04 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 03:55:05 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:05 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:05 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 03:55:05 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 03:55:05 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 03:55:05 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 03:55:05 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 03:55:05 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_035505
+2025-09-15 03:55:05 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_035505
+2025-09-15 03:55:05 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 03:55:05 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 03:55:09 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 03:55:09 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:55:09 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:55:09 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:55:09 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:55:17 [    INFO] s_cbr.utils.api_manager - PulsePJ 搜尋完成，找到 0 個相關脈診知識
+2025-09-15 03:55:17 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 03:55:17 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 03:55:18 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:55:18 [   ERROR] s_cbr.Step1CaseFinder - 搜尋執行失敗: 無法獲取查詢向量
+2025-09-15 03:55:18 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 03:55:18 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 03:55:18 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 03:55:18 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 03:55:18 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 03:55:18 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:55:18 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 03:55:18 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 03:55:18 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 03:55:18 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 03:55:18 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 03:55:18 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 03:55:18 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 03:55:18 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 03:55:18 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 03:55:26 [    INFO] s_cbr.utils.api_manager - PulsePJ 搜尋完成，找到 0 個相關脈診知識
+2025-09-15 03:55:26 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 03:55:26 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 03:55:27 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:55:27 [   ERROR] s_cbr.Step1CaseFinder - 搜尋執行失敗: 無法獲取查詢向量
+2025-09-15 03:55:27 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 03:55:27 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 03:55:27 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 03:55:27 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 03:55:27 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 03:55:27 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 03:55:27 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 03:55:27 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 03:55:27 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 03:55:27 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 03:55:27 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 03:55:27 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_035505
+2025-09-15 03:55:27 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_035505
+2025-09-15 03:55:27 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-11579a2b]
+2025-09-15 03:55:27 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-11579a2b]
+2025-09-15 03:55:27 [    INFO] s_cbr.S-CBR-API -    處理時間: 28072ms
+2025-09-15 03:55:27 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 03:55:27 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 04:01:43 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 04:02:37 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-bf220c5f]
+2025-09-15 04:02:37 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 04:02:37 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 04:02:37 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-bf220c5f]
+2025-09-15 04:02:37 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-bf220c5f]
+2025-09-15 04:02:37 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 04:02:38 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:38 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:38 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 04:02:38 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:38 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:38 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 04:02:39 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:39 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:39 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 04:02:39 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:39 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:40 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:40 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:40 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 04:02:40 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 04:02:41 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:41 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:41 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 04:02:41 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:41 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:41 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 04:02:42 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:42 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:42 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 04:02:42 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 04:02:42 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:42 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:43 [    INFO] s_cbr.utils.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 04:02:43 [    INFO] s_cbr.utils.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 04:02:43 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 04:02:43 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 04:02:43 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 04:02:43 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_040243
+2025-09-15 04:02:43 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_040243
+2025-09-15 04:02:43 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 04:02:43 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 04:02:46 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 04:02:46 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 04:02:46 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 04:02:46 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 04:02:46 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 04:02:53 [    INFO] s_cbr.utils.api_manager - PulsePJ 搜尋完成，找到 0 個相關脈診知識
+2025-09-15 04:02:53 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 04:02:53 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 04:02:54 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 04:02:54 [   ERROR] s_cbr.Step1CaseFinder - 搜尋執行失敗: 無法獲取查詢向量
+2025-09-15 04:02:54 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 04:02:54 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 04:02:54 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 04:02:54 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 04:02:54 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 04:02:55 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 04:02:55 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 04:02:55 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 04:02:55 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 04:02:55 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 04:02:55 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 04:02:55 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 04:02:55 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 04:02:55 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 04:02:55 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 04:03:02 [    INFO] s_cbr.utils.api_manager - PulsePJ 搜尋完成，找到 0 個相關脈診知識
+2025-09-15 04:03:02 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 04:03:02 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 04:03:02 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 04:03:02 [   ERROR] s_cbr.Step1CaseFinder - 搜尋執行失敗: 無法獲取查詢向量
+2025-09-15 04:03:02 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 04:03:02 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 04:03:02 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 04:03:02 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 04:03:02 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 04:03:03 [   ERROR] s_cbr.utils.api_manager - Embedding 調用失敗: Client error '400 Bad Request' for url 'https://integrate.api.nvidia.com/v1/embeddings'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-09-15 04:03:03 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 04:03:03 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 04:03:03 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 04:03:03 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 04:03:03 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 04:03:03 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_040243
+2025-09-15 04:03:03 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_040243
+2025-09-15 04:03:03 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-bf220c5f]
+2025-09-15 04:03:03 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-bf220c5f]
+2025-09-15 04:03:03 [    INFO] s_cbr.S-CBR-API -    處理時間: 25480ms
+2025-09-15 04:03:03 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 04:03:03 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 10:20:02 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 10:30:04 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-b9de568d]
+2025-09-15 10:30:04 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 10:30:04 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 10:30:04 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-b9de568d]
+2025-09-15 10:30:04 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-b9de568d]
+2025-09-15 10:30:04 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 10:30:05 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:05 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:05 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 10:30:06 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:06 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:06 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 10:30:06 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:06 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:06 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 10:30:07 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:07 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:07 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:07 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:07 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 10:30:07 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 10:30:08 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:08 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:08 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 10:30:08 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:08 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:08 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 10:30:09 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:09 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:09 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 10:30:09 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 10:30:09 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:09 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:10 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:30:10 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:30:10 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 10:30:10 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 10:30:10 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 10:30:10 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_103010
+2025-09-15 10:30:10 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_103010
+2025-09-15 10:30:10 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 10:30:10 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 10:30:17 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 10:30:17 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 10:30:17 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 10:30:17 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 10:30:17 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 10:30:25 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'SCBRAPIManager' object has no attribute 'search_pulse_knowledge'
+2025-09-15 10:30:25 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 10:30:25 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 10:30:25 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 10:30:25 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 10:30:32 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'SCBRAPIManager' object has no attribute 'search_pulse_knowledge'
+2025-09-15 10:30:32 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_103010
+2025-09-15 10:30:32 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_103010
+2025-09-15 10:30:32 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-b9de568d]
+2025-09-15 10:30:32 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-b9de568d]
+2025-09-15 10:30:32 [    INFO] s_cbr.S-CBR-API -    處理時間: 27434ms
+2025-09-15 10:30:32 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 10:30:32 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 10:54:33 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 10:54:51 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250915-93876e3f]
+2025-09-15 10:54:51 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 10:54:51 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-15 10:54:51 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250915-93876e3f]
+2025-09-15 10:54:51 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250915-93876e3f]
+2025-09-15 10:54:51 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-15 10:54:52 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:52 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:52 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-15 10:54:53 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:53 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:53 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-15 10:54:53 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:53 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:53 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-15 10:54:54 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:54 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:54 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:54 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:54 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-15 10:54:54 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-15 10:54:55 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:55 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:55 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-15 10:54:55 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:55 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:55 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-15 10:54:56 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:56 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:56 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-15 10:54:56 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-15 10:54:56 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:56 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:57 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 10:54:57 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 10:54:57 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-15 10:54:57 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-15 10:54:57 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-15 10:54:57 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250915_105457
+2025-09-15 10:54:57 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250915_105457
+2025-09-15 10:54:57 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-15 10:54:57 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-15 10:55:04 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-15 10:55:04 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 10:55:04 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 10:55:04 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 10:55:04 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 10:55:12 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 10:55:12 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 5 個相關脈診知識
+2025-09-15 10:55:12 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 10:55:12 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 10:55:12 [   ERROR] s_cbr.Step1CaseFinder - STEP 1 執行異常: 'SCBRAPIManager' object has no attribute 'comprehensive_search'
+2025-09-15 10:55:12 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 10:55:12 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 10:55:12 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 10:55:12 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 10:55:12 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 10:55:12 [   ERROR] s_cbr.Step1CaseFinder - 放寬搜尋失敗: 'SCBRAPIManager' object has no attribute 'comprehensive_search'
+2025-09-15 10:55:12 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 10:55:12 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 10:55:12 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 10:55:12 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 10:55:12 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 10:55:12 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-15 10:55:12 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-15 10:55:12 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-15 10:55:12 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-15 10:55:20 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 10:55:20 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 5 個相關脈診知識
+2025-09-15 10:55:20 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-15 10:55:20 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 20
+2025-09-15 10:55:20 [   ERROR] s_cbr.Step1CaseFinder - STEP 1 執行異常: 'SCBRAPIManager' object has no attribute 'comprehensive_search'
+2025-09-15 10:55:20 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-15 10:55:20 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-15 10:55:20 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-15 10:55:20 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-15 10:55:20 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-15 10:55:20 [   ERROR] s_cbr.Step1CaseFinder - 放寬搜尋失敗: 'SCBRAPIManager' object has no attribute 'comprehensive_search'
+2025-09-15 10:55:20 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-15 10:55:20 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-15 10:55:20 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-15 10:55:20 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-15 10:55:20 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-15 10:55:20 [    INFO] s_cbr.SpiralCBREngine - 螺旋推理 v1.0 完成 - 會話ID: spiral_v1_20250915_105457
+2025-09-15 10:55:20 [    INFO] s_cbr.SCBREngine - 螺旋推理 v1.0 完成 - Session: scbr_v1_20250915_105457
+2025-09-15 10:55:20 [    INFO] s_cbr.run_spiral_cbr_v1 - ✅ S-CBR v1.0 推理完成 [REQ-20250915-93876e3f]
+2025-09-15 10:55:20 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250915-93876e3f]
+2025-09-15 10:55:20 [    INFO] s_cbr.S-CBR-API -    處理時間: 28459ms
+2025-09-15 10:55:20 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-15 10:55:20 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-15 20:57:23 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 20:59:58 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 20:59:59 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-15 20:59:59 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-15 21:00:01 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 21:00:01 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 21:00:01 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 21:00:01 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 5 個相關脈診知識
+2025-09-15 21:00:01 [    INFO] s_cbr.api_manager - 綜合搜尋完成 - Cases: 0, Pulse: 5, 最佳相似度: 0.643
+2025-09-15 21:00:02 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 21:00:02 [    INFO] s_cbr.api_manager - PulsePJ 搜尋完成，找到 2 個相關脈診知識
+2025-09-15 21:00:02 [   DEBUG] s_cbr.api_manager - ✅ 成功獲取 query embedding，維度：2048
+2025-09-15 21:00:02 [    INFO] s_cbr.api_manager - ✅ Case 搜尋完成，找到 0 個相關案例
+2025-09-15 21:00:02 [    INFO] s_cbr.api_manager - 綜合搜尋完成 - Cases: 0, Pulse: 2, 最佳相似度: 0.643
+2025-09-15 22:15:13 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 22:17:56 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:30:44 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:31:37 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:35:46 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-15 23:46:46 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 00:11:49 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 00:12:01 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250916-e7661f57]
+2025-09-16 00:12:01 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:12:01 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-16 00:12:01 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250916-e7661f57]
+2025-09-16 00:12:01 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250916-e7661f57]
+2025-09-16 00:12:01 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:12:02 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:02 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:02 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-16 00:12:03 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:03 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:03 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-16 00:12:03 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:03 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:03 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-16 00:12:04 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:04 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:04 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:04 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:04 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-16 00:12:04 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-16 00:12:05 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:05 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:05 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-16 00:12:06 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:06 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:06 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-16 00:12:06 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:06 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:06 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-16 00:12:06 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-16 00:12:07 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:07 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:07 [    INFO] s_cbr.api_manager - 所有 API 客戶端初始化成功
+2025-09-16 00:12:07 [    INFO] s_cbr.api_manager - S-CBR API 管理器 v1.0 初始化完成
+2025-09-16 00:12:07 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-16 00:12:07 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-16 00:12:07 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-16 00:12:07 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250916_001207
+2025-09-16 00:12:07 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250916_001207
+2025-09-16 00:12:07 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-16 00:12:07 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-16 00:17:18 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-16 00:17:18 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 00:17:18 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 00:17:18 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 00:17:18 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 00:32:26 [   ERROR] s_cbr.api_manager - LLM 調用失敗: Error code: 504
+2025-09-16 00:32:26 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-16 00:32:26 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 0
+2025-09-16 00:32:26 [   ERROR] s_cbr.Step1CaseFinder - STEP 1 執行異常: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 00:32:26 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-16 00:32:26 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-16 00:32:26 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-16 00:32:26 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-16 00:32:26 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-16 00:32:26 [   ERROR] s_cbr.Step1CaseFinder - 放寬搜尋失敗: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 00:32:26 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-16 00:32:26 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-16 00:32:26 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-16 00:32:26 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-16 00:32:26 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-16 00:32:26 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 00:32:26 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 00:32:26 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 00:32:26 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 00:33:29 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 00:55:38 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 00:58:23 [   ERROR] s_cbr.api_manager - 客戶端初始化失敗: AsyncClient.__init__() got an unexpected keyword argument 'retries'
+2025-09-16 00:58:23 [   ERROR] s_cbr.run_spiral_cbr_v1 - ❌ S-CBR v1.0 推理失敗 [REQ-20250916-a6bd9e0c]: AsyncClient.__init__() got an unexpected keyword argument 'retries'
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API - ✅ S-CBR 查詢完成 [REQ-20250916-a6bd9e0c]
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API -    處理時間: 5ms
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API -    推理輪數: 0
+2025-09-16 00:58:23 [    INFO] s_cbr.S-CBR-API -    收斂狀態: False
+2025-09-16 01:02:05 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 01:53:32 [    INFO] s_cbr - S-CBR v1.0 模組載入完成
+2025-09-16 01:53:51 [    INFO] s_cbr.S-CBR-API - 🔄 S-CBR 查詢請求 [REQ-20250916-5cfdb3bd]
+2025-09-16 01:53:51 [    INFO] s_cbr.S-CBR-API -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 01:53:51 [    INFO] s_cbr.S-CBR-API -    患者上下文: 0 個欄位
+2025-09-16 01:53:51 [    INFO] s_cbr.S-CBR-API - 🧠 啟動螺旋推理引擎 [REQ-20250916-5cfdb3bd]
+2025-09-16 01:53:51 [    INFO] s_cbr.run_spiral_cbr_v1 - 🚀 啟動 S-CBR v1.0 推理 [REQ-20250916-5cfdb3bd]
+2025-09-16 01:53:51 [    INFO] s_cbr.run_spiral_cbr_v1 -    問題: 我35歲，女性，最近2週頭痛失眠，工作壓力大
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:52 [    INFO] s_cbr.Step1CaseFinder - STEP 1 案例搜尋器 v1.0 初始化完成
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:52 [    INFO] s_cbr.Step2CaseAdapter - STEP 2 案例適配器 v1.0 初始化完成
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:52 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:52 [    INFO] s_cbr.Step3Monitor - STEP 3 方案監控器 v1.0 初始化完成
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:53 [    INFO] s_cbr.FeedbackRepository - 反饋知識庫 v1.0 初始化完成
+2025-09-16 01:53:53 [    INFO] s_cbr.Step4Feedback - STEP 4 回饋處理器 v1.0 初始化完成
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:53 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:53 [    INFO] s_cbr.DiagnosticAgent - 診斷智能體 v1.0 初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:54 [    INFO] s_cbr.AdaptationAgent - 適配智能體 v1.0 初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:54 [    INFO] s_cbr.FeedbackAgent - 回饋智能體 v1.0 初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.AgentiveCoordinator - Agentive AI 協調器 v1.0 初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:54 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:55 [    INFO] s_cbr.api_manager - ✅ 所有 API 客戶端初始化成功 (高性能配置)
+2025-09-16 01:53:55 [    INFO] s_cbr.api_manager - 🔄 後台服務已啟動：統計報告、健康監控、自愈機制
+2025-09-16 01:53:55 [    INFO] s_cbr.api_manager - 🚀 S-CBR API 管理器 v1.1 全功能版初始化完成
+2025-09-16 01:53:55 [    INFO] s_cbr.api_manager - ✅ 防護層級：5層 | 功能模組：8個 | 監控指標：15+ 項
+2025-09-16 01:53:55 [    INFO] s_cbr.DialogManager - 對話管理器 v1.0 初始化完成
+2025-09-16 01:53:55 [    INFO] s_cbr.SpiralCBREngine - 螺旋CBR推理引擎 v1.0 初始化完成
+2025-09-16 01:53:55 [    INFO] s_cbr.SCBREngine - S-CBR 引擎 v1.0 初始化完成
+2025-09-16 01:53:55 [    INFO] s_cbr.SCBREngine - 啟動螺旋對話推理 v1.0 - Session: scbr_v1_20250916_015355
+2025-09-16 01:53:55 [    INFO] s_cbr.SpiralCBREngine - 啟動螺旋對話推理 v1.0 - 會話ID: spiral_v1_20250916_015355
+2025-09-16 01:53:55 [   DEBUG] s_cbr.SpiralCBREngine - 螺旋狀態 v1.0 初始化完成
+2025-09-16 01:53:55 [   DEBUG] s_cbr.DiagnosticAgent - 建立患者檔案 v1.0
+2025-09-16 01:53:55 [    INFO] s_cbr.api_manager - 🔄 每日API配額已重置
+2025-09-16 01:54:05 [ WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 01:54:05 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 1): unknown
+2025-09-16 01:54:05 [    INFO] s_cbr.api_manager - ⏳ 3.4秒後重試...
+2025-09-16 01:54:09 [    INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757958835110_542 (嘗試 2/6)
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計1, 成功率0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級1
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: healthy, 級別:full
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.0小時
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:55:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:56:29 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 2): unknown
+2025-09-16 01:56:29 [    INFO] s_cbr.api_manager - ⏳ 5.9秒後重試...
+2025-09-16 01:56:45 [ WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 01:56:45 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 3): unknown
+2025-09-16 01:56:45 [    INFO] s_cbr.api_manager - ⏳ 5.7秒後重試...
+2025-09-16 01:56:50 [ WARNING] s_cbr.api_manager - ⚡ 突發限制觸發，冷卻 8 秒
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [ WARNING] s_cbr.api_manager - 🚨 健康檢查發現問題: 成功率過低: 0.00, 連續失敗: 3次
+2025-09-16 01:56:55 [ WARNING] s_cbr.api_manager - ⬇️ 系統降級：full → optimized，原因：健康檢查異常
+2025-09-16 01:56:55 [    INFO] s_cbr.api_manager - 🔧 系統參數已調整為 optimized 模式
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:56:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:57:08 [ WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 01:57:08 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 4): unknown
+2025-09-16 01:57:08 [    INFO] s_cbr.api_manager - ⏳ 15.0秒後重試...
+2025-09-16 01:57:24 [    INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757958835110_542 (嘗試 5/6)
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計4, 成功率0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級1
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:57:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: healthy, 級別:optimized
+2025-09-16 01:59:44 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 5): unknown
+2025-09-16 01:59:44 [    INFO] s_cbr.api_manager - ⏳ 22.0秒後重試...
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [ WARNING] s_cbr.api_manager - 🚨 健康檢查發現問題: 成功率過低: 0.00, 連續失敗: 5次
+2025-09-16 01:59:55 [ WARNING] s_cbr.api_manager - ⬇️ 系統降級：optimized → basic，原因：健康檢查異常
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔧 系統參數已調整為 basic 模式
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [   DEBUG] s_cbr.api_manager - ✅ 系統健康狀態良好
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計5, 成功率0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級1
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: healthy, 級別:basic
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📊 === S-CBR API 管理器統計報告 ===
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⏱️  運行時間: 0.1小時
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 📈 請求統計: 總計0, 成功率100.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🎯 API效率: 0.0%
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - ⚡ 功能使用: 批處理0, 優先級0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🔄 隊列狀態: H:0, M:0, L:0
+2025-09-16 01:59:55 [    INFO] s_cbr.api_manager - 🏥 系統健康: unknown, 級別:full
+2025-09-16 02:00:16 [ WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 02:00:16 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757958835110_542 (嘗試 6): unknown
+2025-09-16 02:00:16 [    INFO] s_cbr.api_manager - ⏳ 33.7秒後重試...
+2025-09-16 02:00:49 [   DEBUG] s_cbr.api_manager - ✅ medium 優先級請求 req_1757958835110_542 處理完成
+2025-09-16 02:00:49 [   DEBUG] s_cbr.AgentiveCoordinator - Agentive 上下文 v1.0 初始化完成
+2025-09-16 02:00:49 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 02:00:49 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 02:00:49 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 02:00:49 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 02:00:49 [ WARNING] s_cbr.api_manager - ⚡ 突發限制觸發，冷卻 8 秒
+2025-09-16 02:01:07 [ WARNING] s_cbr.api_manager - ⚠️ API健康檢查失敗: 
+2025-09-16 02:01:07 [ WARNING] s_cbr.api_manager - ⚠️ LLM請求失敗 req_1757959249791_507 (嘗試 1): unknown
+2025-09-16 02:01:07 [    INFO] s_cbr.api_manager - ⏳ 2.6秒後重試...
+2025-09-16 02:01:10 [    INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757959249791_507 (嘗試 2/3)
+2025-09-16 02:01:56 [   DEBUG] s_cbr.api_manager - ✅ 獲取 query embedding成功，維度：2048
+2025-09-16 02:01:56 [    INFO] s_cbr.api_manager - PulsePJ搜尋完成，找到 5 個相關脈診知識
+2025-09-16 02:01:56 [    INFO] s_cbr.Step1CaseFinder - 開始執行 STEP 1: 尋找高相關案例
+2025-09-16 02:01:56 [   DEBUG] s_cbr.Step1CaseFinder - 搜尋查詢準備完成 - 文本長度: 13
+2025-09-16 02:01:56 [   ERROR] s_cbr.Step1CaseFinder - STEP 1 執行異常: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 02:01:56 [   DEBUG] s_cbr.DialogManager - 生成 STEP 1 案例搜尋對話
+2025-09-16 02:01:56 [   DEBUG] s_cbr.SpiralCBREngine - STEP 1 v1.0 完成 - 相似度: 0.000
+2025-09-16 02:01:56 [ WARNING] s_cbr.SpiralCBREngine - 第 1 輪未找到合適案例
+2025-09-16 02:01:56 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0 備選策略
+2025-09-16 02:01:56 [    INFO] s_cbr.Step1CaseFinder - 執行放寬條件搜尋
+2025-09-16 02:01:56 [   ERROR] s_cbr.Step1CaseFinder - 放寬搜尋失敗: SCBRAPIManager.comprehensive_search() got an unexpected keyword argument 'query_text'
+2025-09-16 02:01:56 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 2 v1.0: 案例適配與協商
+2025-09-16 02:01:56 [   DEBUG] s_cbr.AgentiveCoordinator - 適配智能體規劃適配策略 v1.0
+2025-09-16 02:01:56 [    INFO] s_cbr.AdaptationAgent - 創建適配策略 v1.0
+2025-09-16 02:01:56 [   ERROR] s_cbr.AdaptationAgent - 適配策略創建失敗: 'NoneType' object has no attribute 'get'
+2025-09-16 02:01:56 [   ERROR] s_cbr.SpiralCBREngine - 第 1 輪推理異常: 'AdaptationAgent' object has no attribute '_create_fallback_strategy_v1'
+2025-09-16 02:01:56 [    INFO] s_cbr.SpiralCBREngine - === 螺旋推理 v1.0 第 1 輪開始 ===
+2025-09-16 02:01:56 [   DEBUG] s_cbr.SpiralCBREngine - 執行 STEP 1 v1.0: 尋找高相關案例
+2025-09-16 02:01:56 [   DEBUG] s_cbr.AgentiveCoordinator - 診斷智能體分析患者特徵
+2025-09-16 02:01:56 [   DEBUG] s_cbr.DiagnosticAgent - 執行綜合特徵分析 v1.0
+2025-09-16 02:01:56 [    INFO] s_cbr.api_manager - 🚀 執行LLM請求 req_1757959316345_413 (嘗試 1/3)
