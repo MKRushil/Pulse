@@ -54,18 +54,18 @@ logger = logging.getLogger("backend.main")
 # -----------------------------------------------------------------------------
 # FastAPI App
 # -----------------------------------------------------------------------------
-app = FastAPI(title="TCM Spiral CBR Backend", version="1.0.0")
+app = FastAPI(title="TCM Spiral CBR Backend", version="2.0.0")
 
 # 整合 S-CBR 路由器
 if _scbr_available and scbr_router:
     app.include_router(scbr_router, prefix="/api", tags=["S-CBR"])
-    logger.info("✅ S-CBR v1.0 螺旋推理模組載入成功")
+    logger.info("✅ S-CBR v2.0 螺旋推理模組載入成功")
 else:
     logger.error(f"❌ S-CBR 螺旋推理模組載入失敗: {_scbr_import_error}")
 
 @app.on_event("startup")
 async def _on_startup():
-    logger.info("🚀 TCM S-CBR Backend v1.0 啟動")
+    logger.info("🚀 TCM S-CBR Backend v2.0 啟動")
     if _scbr_available:
         logger.info("   - S-CBR 螺旋推理引擎: ✅ 已載入")
         logger.info("   - API 端點 /api/query: ✅ 可用")
