@@ -168,3 +168,5 @@
 2025-09-21 20:31:31,190 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
 2025-09-21 20:31:31,190 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
 2025-09-21 20:31:31,190 [INFO] backend.main - Application startup completed.
+2025-09-21 21:35:39,785 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-21 21:35:39,785 [INFO] backend.main - 🔻 Application shutdown completed.
