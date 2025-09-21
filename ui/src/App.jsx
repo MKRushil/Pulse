@@ -1,61 +1,64 @@
 import { useState } from "react";
 import DiagnosisChat from "./DiagnosisChat";
-import CaseChat from "./CaseChat";
 import TCMExamForm from "./TCMForm";
-import BrowseCases from "./BrowseCases";
-import ReasoningView from "./ReasoningView";
 import {
   MessageCircle,
-  User,
-  PlusCircle,
-  FileText,
-  BrainCog
+  PlusCircle
 } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-
-
 
 const menuItems = [
-  { name: "診斷對話", icon: <MessageCircle size={22} />, key: "diagnosis" },
-  // { name: "個案對話", icon: <User size={22} />, key: "case" },
-  { name: "新增病歷", icon: <PlusCircle size={22} />, key: "add" },
-  // { name: "瀏覽病歷", icon: <FileText size={22} />, key: "view" },
-  // { name: "推理檢視", icon: <BrainCog size={22} />, key: "reasoning" },
+  { name: "診斷對話", icon: <MessageCircle />, key: "diagnosis" },
+  { name: "新增病歷", icon: <PlusCircle />, key: "add" }
 ];
 
 export default function App() {
   const [selected, setSelected] = useState("diagnosis");
+  
   return (
-    <div className="flex h-screen bg-gradient-custom text-blue-900">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex">
       {/* 側邊功能列 */}
-      <aside className="w-64 bg-white/90 flex flex-col border-r border-blue-100 shadow-xl">
-        <div className="text-2xl font-extrabold text-blue-900 text-center py-6 border-b border-blue-100 tracking-wider">
-          中醫輔助系統
+      <aside className="w-80 bg-white border-r border-gray-200 shadow-lg flex flex-col">
+        {/* Logo 區域 */}
+        <div className="p-6 border-b border-gray-200">
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            中醫智慧輔助系統
+          </h1>
+          <p className="text-sm text-gray-500">v2.0 - 螺旋推理版</p>
         </div>
-        <nav className="flex-1">
-          <ul>
+        
+        {/* 導航選單 */}
+        <nav className="flex-1 p-4">
+          <div className="space-y-2">
             {menuItems.map((item) => (
-              <li
+              <button
                 key={item.key}
                 onClick={() => setSelected(item.key)}
-                className={`flex items-center px-8 py-4 cursor-pointer rounded-r-2xl font-bold text-lg transition-all duration-200 select-none
-                  ${selected === item.key ? "bg-blue-100 text-blue-700 shadow-inner" : "text-gray-700 hover:bg-blue-50"}`}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                  selected === item.key
+                    ? "bg-blue-100 text-blue-700 border border-blue-200"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
+                }`}
               >
-                <span className="mr-3">{item.icon}</span>
-                {item.name}
-              </li>
+                {item.icon}
+                <span className="font-medium">{item.name}</span>
+              </button>
             ))}
-          </ul>
+          </div>
         </nav>
-        <div className="px-8 py-4 text-xs text-blue-300 border-t border-blue-100">v1.0</div>
+        
+        {/* 底部說明 */}
+        <div className="p-4 border-t border-gray-200">
+          <div className="text-xs text-gray-500">
+            <p>螺旋推理 S-CBR 系統</p>
+            <p>支援持續推理與案例過濾</p>
+          </div>
+        </div>
       </aside>
+
       {/* 右側內容區 */}
-      <main className="flex-1 flex flex-col bg-transparent min-h-0">
+      <main className="flex-1 overflow-auto">
         {selected === "diagnosis" && <DiagnosisChat />}
-        {selected === "case" && <CaseChat />}
-        {selected === "add" && <div className="p-4 w-full flex flex-col items-center overflow-y-auto"><TCMExamForm /></div>}
-        {selected === "view" && <BrowseCases />}
-        {selected === "reasoning" && <ReasoningView />}
+        {selected === "add" && <TCMExamForm />}
       </main>
     </div>
   );

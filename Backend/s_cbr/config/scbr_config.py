@@ -41,7 +41,7 @@ class SessionConfig:
     enable_session_persistence: bool = True
     session_storage_path: str = "data/sessions"
 
-@dataclass  
+@dataclass 
 class AgentConfig:
     """智能體配置"""
     diagnostic_weight: float = 0.4
@@ -75,7 +75,7 @@ class SCBRConfig:
     
     v2.0 特色：
     - 會話配置管理
-    - 螺旋推理參數配置  
+    - 螺旋推理參數配置 
     - 智能體協調配置
     - 動態配置更新
     """
@@ -119,7 +119,7 @@ class SCBRConfig:
             else:
                 self.logger.info("使用默認配置")
                 self._create_default_config_file()
-                
+        
         except Exception as e:
             self.logger.warning(f"載入配置失敗，使用默認配置: {str(e)}")
     
@@ -160,7 +160,7 @@ class SCBRConfig:
                 for key, value in log_data.items():
                     if hasattr(self.logging_config, key):
                         setattr(self.logging_config, key, value)
-                        
+        
         except Exception as e:
             self.logger.error(f"更新配置失敗: {str(e)}")
     
@@ -185,7 +185,7 @@ class SCBRConfig:
                     json.dump(default_config, f, indent=2, ensure_ascii=False)
             
             self.logger.info(f"創建默認配置文件: {self.config_path}")
-            
+        
         except Exception as e:
             self.logger.error(f"創建默認配置文件失敗: {str(e)}")
     
@@ -251,7 +251,7 @@ class SCBRConfig:
                     json.dump(config_data, f, indent=2, ensure_ascii=False)
             
             self.logger.info(f"配置已保存到: {self.config_path}")
-            
+        
         except Exception as e:
             self.logger.error(f"保存配置失敗: {str(e)}")
     
@@ -273,6 +273,88 @@ class SCBRConfig:
             'logging': asdict(self.logging_config),
             'version': self.version
         }
+    
+    def get_config(self, key_path: str, default=None):
+        """
+        通用配置獲取方法 v2.0
+        
+        支援點分路徑訪問配置，如：'session_config.max_sessions'
+        
+        Args:
+            key_path (str): 配置鍵路徑，支援點分層級
+                           例如: 'session.max_concurrent_sessions'
+                                'spiral.max_rounds'
+                                'agent.diagnostic_weight'
+                                'session_config.max_concurrent_sessions' (向後兼容)
+            default: 默認值，當配置項不存在時返回
+            
+        Returns:
+            配置值或默認值
+            
+        Examples:
+            >>> config.get_config('session.max_concurrent_sessions')
+            100
+            >>> config.get_config('spiral.max_rounds', 5)
+            10
+            >>> config.get_config('nonexistent.key', 'fallback')
+            'fallback'
+        """
+        try:
+            keys = key_path.split('.')
+            
+            # 第一級：配置對象映射
+            config_mapping = {
+                'spiral': self.spiral_config,
+                'session': self.session_config,
+                'agent': self.agent_config,
+                'database': self.database_config,
+                'logging': self.logging_config,
+                # 向後兼容的映射
+                'spiral_config': self.spiral_config,
+                'session_config': self.session_config,
+                'agent_config': self.agent_config,
+                'database_config': self.database_config,
+                'logging_config': self.logging_config
+            }
+            
+            # 處理第一級配置對象
+            if len(keys) >= 1 and keys[0] in config_mapping:
+                current_obj = config_mapping[keys[0]]
+                
+                # 如果只有一級路徑，返回整個配置對象的字典表示
+                if len(keys) == 1:
+                    if hasattr(current_obj, '__dict__'):
+                        return current_obj.__dict__
+                    return asdict(current_obj) if hasattr(current_obj, '__dataclass_fields__') else current_obj
+                
+                # 處理多級路徑
+                for key in keys[1:]:
+                    if hasattr(current_obj, key):
+                        current_obj = getattr(current_obj, key)
+                    elif isinstance(current_obj, dict) and key in current_obj:
+                        current_obj = current_obj[key]
+                    else:
+                        self.logger.debug(f"配置路徑 '{key_path}' 中的 '{key}' 不存在，返回默認值: {default}")
+                        return default
+                
+                return current_obj
+            
+            # 嘗試直接在當前配置實例中查找（向後兼容）
+            current_obj = self
+            for key in keys:
+                if hasattr(current_obj, key):
+                    current_obj = getattr(current_obj, key)
+                elif isinstance(current_obj, dict) and key in current_obj:
+                    current_obj = current_obj[key]
+                else:
+                    self.logger.debug(f"配置路徑 '{key_path}' 中的 '{key}' 不存在，返回默認值: {default}")
+                    return default
+            
+            return current_obj
+            
+        except Exception as e:
+            self.logger.warning(f"獲取配置 '{key_path}' 時發生錯誤: {str(e)}，返回默認值: {default}")
+            return default
     
     def validate_config(self) -> Dict[str, Any]:
         """驗證配置有效性"""
@@ -303,9 +385,9 @@ class SCBRConfig:
             
             # 驗證智能體配置
             total_weight = (self.agent_config.diagnostic_weight + 
-                          self.agent_config.adaptation_weight + 
-                          self.agent_config.monitoring_weight + 
-                          self.agent_config.feedback_weight)
+                           self.agent_config.adaptation_weight + 
+                           self.agent_config.monitoring_weight + 
+                           self.agent_config.feedback_weight)
             
             if abs(total_weight - 1.0) > 0.01:
                 validation_result['warnings'].append(f"智能體權重總和為{total_weight:.2f}，建議調整為1.0")
@@ -316,7 +398,7 @@ class SCBRConfig:
                 validation_result['valid'] = False
             
             self.logger.info(f"配置驗證完成: {'有效' if validation_result['valid'] else '無效'}")
-            
+        
         except Exception as e:
             validation_result['valid'] = False
             validation_result['errors'].append(f"配置驗證過程出錯: {str(e)}")

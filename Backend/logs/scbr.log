@@ -1,0 +1,24 @@
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-589c3f4e]
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    問題: 35歲，女，壓力大
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    會話ID: None
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-589c3f4e]
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-589c3f4e]
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 35歲，女，壓力大
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: None
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 00:42:39 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250922_004239_e0e55cd3
+2025-09-22 00:42:39 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 00:42:39 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 00:42:39 - SCBR.SCBREngine - ERROR - 第 1 輪螺旋推理失敗: sequence item 14: expected str instance, list found
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-589c3f4e]
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_004239_e0e55cd3
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 00:42:39 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-589c3f4e]
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    處理時間: 22ms
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_004239_e0e55cd3
+2025-09-22 00:42:39 - SCBR.S-CBR-API - INFO -    可繼續: True
