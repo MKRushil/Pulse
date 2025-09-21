@@ -9,7 +9,7 @@ S-CBR 核心模組 v1.0
 版本：v1.0
 """
 
-from .spiral_cbr_engine import SpiralCBREngine
+from ..engines.spiral_cbr_engine import SpiralCBREngine
 from .agentive_coordinator import AgentiveCoordinator
 from .dialog_orchestrator import DialogOrchestrator
 

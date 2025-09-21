@@ -170,3 +170,48 @@
 2025-09-21 20:31:31,190 [INFO] backend.main - Application startup completed.
 2025-09-21 21:35:39,785 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-21 21:35:39,785 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-21 21:35:41,402 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 's_cbr.core.spiral_cbr_engine'
+2025-09-21 21:35:41,408 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-21 21:35:41,408 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-21 21:35:41,408 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-21 21:35:41,409 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-21 21:35:41,409 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-21 21:35:41,409 [INFO] backend.main - Application startup completed.
+2025-09-21 21:57:00,728 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-21 21:57:00,728 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-21 21:57:02,485 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 's_cbr.core.spiral_cbr_engine'
+2025-09-21 21:57:02,489 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-21 21:57:02,489 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-21 21:57:02,489 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-21 21:57:02,489 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-21 21:57:02,489 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-21 21:57:02,490 [INFO] backend.main - Application startup completed.
+2025-09-21 21:57:42,092 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-21 21:57:42,093 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-21 21:57:43,814 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 's_cbr.core.spiral_cbr_engine'
+2025-09-21 21:57:43,820 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-21 21:57:43,820 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-21 21:57:43,820 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-21 21:57:43,820 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-21 21:57:43,821 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-21 21:57:43,821 [INFO] backend.main - Application startup completed.
+2025-09-21 22:02:04,029 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-21 22:02:04,030 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-21 22:02:06,557 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 'Backend'
+2025-09-21 22:02:06,563 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-21 22:02:06,564 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-21 22:02:06,564 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-21 22:02:06,564 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-21 22:02:06,564 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-21 22:02:06,564 [INFO] backend.main - Application startup completed.
+2025-09-21 22:02:52,493 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-21 22:02:52,493 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-21 22:02:54,543 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 'Backend'
+2025-09-21 22:02:54,547 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-21 22:02:54,547 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-21 22:02:54,547 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-21 22:02:54,547 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-21 22:02:54,548 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-21 22:02:54,548 [INFO] backend.main - Application startup completed.
+2025-09-21 22:03:49,339 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-21 22:03:49,339 [INFO] backend.main - 🔻 Application shutdown completed.
