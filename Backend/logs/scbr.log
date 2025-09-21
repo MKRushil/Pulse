@@ -46,3 +46,79 @@
 2025-09-22 00:54:35 - SCBR.S-CBR-API - INFO -    推理輪數: 1
 2025-09-22 00:54:35 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_005435_e0e55cd3
 2025-09-22 00:54:35 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-cf305653]
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO -    問題: 35歲，女，壓力大
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO -    會話ID: None
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 02:38:46 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-cf305653]
+2025-09-22 02:38:46 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-cf305653]
+2025-09-22 02:38:46 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 35歲，女，壓力大
+2025-09-22 02:38:46 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: None
+2025-09-22 02:38:46 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 02:38:46 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.1-405b-instruct
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - WARNING - RPCase 管理器不可用
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.0 初始化完成
+2025-09-22 02:38:46 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 02:38:46 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.0 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.0 (Round 1)
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - WARNING - Weaviate 客戶端不可用，使用模擬案例
+2025-09-22 02:38:46 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.0 (Round 1)
+2025-09-22 02:38:48 - SCBR.SpiralCBREngine - ERROR - Step 2 案例適配失敗: Connection error.
+2025-09-22 02:38:48 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.0 (Round 1)
+2025-09-22 02:38:50 - SCBR.SpiralCBREngine - ERROR - Step 3 方案監控失敗: Connection error.
+2025-09-22 02:38:50 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.0 (Round 1)
+2025-09-22 02:38:51 - SCBR.SpiralCBREngine - ERROR - Step 4 反饋學習失敗: Connection error.
+2025-09-22 02:38:51 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.0 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 02:38:51 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 02:38:51 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-cf305653]
+2025-09-22 02:38:51 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:38:51 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 02:38:51 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 02:38:51 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-cf305653]
+2025-09-22 02:38:51 - SCBR.S-CBR-API - INFO -    處理時間: 5779ms
+2025-09-22 02:38:51 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 02:38:51 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:38:51 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 02:38:59 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-3af2a354]
+2025-09-22 02:38:59 - SCBR.S-CBR-API - INFO -    問題: 繼續推理上一個問題
+2025-09-22 02:38:59 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:38:59 - SCBR.S-CBR-API - INFO -    繼續推理: True
+2025-09-22 02:38:59 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 02:38:59 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-3af2a354]
+2025-09-22 02:38:59 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-3af2a354]
+2025-09-22 02:38:59 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 繼續推理上一個問題
+2025-09-22 02:38:59 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:38:59 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: True
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.1-405b-instruct
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - WARNING - RPCase 管理器不可用
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.0 初始化完成
+2025-09-22 02:38:59 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 02:38:59 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.0 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.0 (Round 1)
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - WARNING - Weaviate 客戶端不可用，使用模擬案例
+2025-09-22 02:38:59 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.0 (Round 1)
+2025-09-22 02:39:00 - SCBR.SpiralCBREngine - ERROR - Step 2 案例適配失敗: Connection error.
+2025-09-22 02:39:00 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.0 (Round 1)
+2025-09-22 02:39:02 - SCBR.SpiralCBREngine - ERROR - Step 3 方案監控失敗: Connection error.
+2025-09-22 02:39:02 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.0 (Round 1)
+2025-09-22 02:39:04 - SCBR.SpiralCBREngine - ERROR - Step 4 反饋學習失敗: Connection error.
+2025-09-22 02:39:04 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.0 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 02:39:04 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 02:39:04 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-3af2a354]
+2025-09-22 02:39:04 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:39:04 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 02:39:04 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 02:39:04 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-3af2a354]
+2025-09-22 02:39:04 - SCBR.S-CBR-API - INFO -    處理時間: 5249ms
+2025-09-22 02:39:04 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 02:39:04 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 02:39:04 - SCBR.S-CBR-API - INFO -    可繼續: True
