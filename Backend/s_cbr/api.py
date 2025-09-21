@@ -6,6 +6,7 @@ S-CBR API 路由器 v2.0 - 螺旋互動版
 - 用戶決定是否繼續推理
 - 案例使用記錄管理
 - 修正循環導入問題，使用懶載入模式
+- 支援回饋案例儲存到 RPCase 知識庫
 """
 
 from fastapi import APIRouter, Request, HTTPException
@@ -14,6 +15,7 @@ import logging
 from typing import Dict, Any, Optional
 from datetime import datetime
 import uuid
+import json
 
 # 創建路由器
 router = APIRouter()
@@ -51,6 +53,15 @@ def _get_memory_components():
         return SpiralMemory
     except ImportError as e:
         logging.error(f"無法載入記憶組件: {e}")
+        return None
+
+def _get_rpcase_components():
+    """懶載入 RPCase 組件"""
+    try:
+        from .knowledge.rpcase_manager import RPCaseManager
+        return RPCaseManager
+    except ImportError as e:
+        logging.error(f"無法載入 RPCase 組件: {e}")
         return None
 
 # 初始化日誌（優先使用螺旋日誌器）
@@ -255,6 +266,168 @@ async def api_query(request: Request):
             detail=error_response
         )
 
+@router.post("/case/save-feedback")
+async def save_feedback_case(request: Request):
+    """
+    儲存螺旋推理回饋案例到 RPCase 知識庫 v2.0
+    
+    入參 JSON:
+    {
+        "session_id": "session_uuid",
+        "diagnosis": {
+            "main_dx": "主要診斷",
+            "confidence": 0.86,
+            "safety_score": 0.82,
+            "efficacy_score": 0.76
+        },
+        "conversation_history": [...],
+        "user_feedback": "案例品質評估",
+        "save_as_rpcase": true
+    }
+    
+    出參 JSON:
+    {
+        "status": "success",
+        "message": "回饋案例儲存成功",
+        "case_id": "RP_20250922_010235_abc123",
+        "rpcase_info": {...},
+        "timestamp": "2025-09-22T01:02:35.123456"
+    }
+    """
+    start_time = datetime.now()
+    trace_id = f"SAVE-{start_time.strftime('%Y%m%d')}-{str(uuid.uuid4())[:8]}"
+    
+    try:
+        body = await request.json()
+        session_id = body.get("session_id")
+        diagnosis = body.get("diagnosis", {})
+        conversation_history = body.get("conversation_history", [])
+        user_feedback = body.get("user_feedback", "用戶儲存為有效案例")
+        save_as_rpcase = body.get("save_as_rpcase", True)
+        
+        if not session_id:
+            raise HTTPException(
+                status_code=400,
+                detail={
+                    "error": "缺少必要參數",
+                    "message": "請提供 session_id",
+                    "trace_id": trace_id
+                }
+            )
+        
+        # 記錄請求
+        logger.info(f"💾 S-CBR 案例儲存請求 [{trace_id}]")
+        logger.info(f"   會話ID: {session_id}")
+        logger.info(f"   診斷數據: {len(str(diagnosis))} 個字符")
+        logger.info(f"   對話記錄: {len(conversation_history)} 條")
+        
+        # 從會話管理器獲取會話信息
+        session_manager = _get_session_manager()
+        if not session_manager or session_id not in session_manager.sessions:
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "error": "會話不存在或已過期",
+                    "message": f"無法找到會話 {session_id}",
+                    "trace_id": trace_id
+                }
+            )
+        
+        session = session_manager.sessions[session_id]
+        
+        # 生成 RPCase ID
+        rpcase_id = f"RP_{start_time.strftime('%Y%m%d_%H%M%S')}_{session_id.split('_')[-1]}"
+        
+        # 構建回饋案例數據
+        rpcase_data = {
+            "rpcase_id": rpcase_id,
+            "original_question": session.original_query,
+            "patient_context": json.dumps({
+                "conversation_messages": len(conversation_history),
+                "spiral_rounds": session.round_count,
+                "used_cases": session.used_cases
+            }, ensure_ascii=False),
+            "spiral_rounds": session.round_count,
+            "used_cases": session.used_cases,
+            "final_diagnosis": diagnosis.get("main_dx", "") or str(diagnosis.get("diagnosis", "")),
+            "treatment_plan": str(diagnosis.get("treatment_plan", "")),
+            "reasoning_process": json.dumps(diagnosis, ensure_ascii=False),
+            "user_feedback": user_feedback,
+            "effectiveness_score": float(diagnosis.get("efficacy_score", 0.8)),
+            "confidence_score": float(diagnosis.get("confidence", 0.8)),
+            "safety_score": float(diagnosis.get("safety_score", 0.8)),
+            "session_id": session_id,
+            "conversation_history": json.dumps(conversation_history, ensure_ascii=False),
+            "created_timestamp": start_time.isoformat(),
+            "updated_timestamp": start_time.isoformat(),
+            "tags": ["user_approved", "spiral_reasoning", f"round_{session.round_count}"],
+            "complexity_level": min(session.round_count, 5),
+            "success_rate": 1.0,  # 用戶主動儲存，視為成功
+            "reuse_count": 0,
+            "source_type": "spiral_feedback"
+        }
+        
+        # 儲存到 RPCase 向量庫
+        if save_as_rpcase:
+            RPCaseManager = _get_rpcase_components()
+            if RPCaseManager:
+                try:
+                    rpcase_manager = RPCaseManager()
+                    save_result = await rpcase_manager.save_rpcase(rpcase_data)
+                    logger.info(f"✅ RPCase 儲存成功: {rpcase_id}")
+                except Exception as e:
+                    logger.error(f"RPCase 儲存失敗: {str(e)}")
+                    # 不拋出異常，讓其他流程繼續
+                    rpcase_data["rpcase_save_error"] = str(e)
+            else:
+                logger.warning("RPCase 管理器不可用，僅記錄數據")
+        
+        # 構建回應
+        response = {
+            "status": "success",
+            "message": "回饋案例儲存成功",
+            "case_id": rpcase_id,
+            "rpcase_info": {
+                "spiral_rounds": rpcase_data["spiral_rounds"],
+                "used_cases_count": len(rpcase_data["used_cases"]),
+                "confidence_score": rpcase_data["confidence_score"],
+                "complexity_level": rpcase_data["complexity_level"],
+                "created_timestamp": rpcase_data["created_timestamp"]
+            },
+            "trace_id": trace_id,
+            "timestamp": start_time.isoformat(),
+            "version": "2.0"
+        }
+        
+        # 記錄成功
+        processing_time = (datetime.now() - start_time).total_seconds() * 1000
+        logger.info(f"✅ S-CBR v2.0 案例儲存完成 [{trace_id}]")
+        logger.info(f"   案例ID: {rpcase_id}")
+        logger.info(f"   處理時間: {processing_time:.0f}ms")
+        logger.info(f"   螺旋輪數: {rpcase_data['spiral_rounds']}")
+        logger.info(f"   信心度: {rpcase_data['confidence_score']:.2f}")
+        
+        return JSONResponse(response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        processing_time = (datetime.now() - start_time).total_seconds() * 1000
+        logger.error(f"❌ S-CBR v2.0 案例儲存失敗 [{trace_id}]: {str(e)}")
+        logger.exception("詳細錯誤資訊")
+        
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "error": "案例儲存失敗",
+                "detail": str(e),
+                "trace_id": trace_id,
+                "processing_time_ms": int(processing_time),
+                "timestamp": start_time.isoformat(),
+                "version": "2.0"
+            }
+        )
+
 @router.post("/spiral-reset")
 async def reset_spiral_session(request: Request):
     """
@@ -359,12 +532,14 @@ async def scbr_health_check():
         
         # 基本組件檢查
         run_spiral_cbr_v2, SpiralSessionManager, _ = _get_spiral_components()
+        RPCaseManager = _get_rpcase_components()
         
         components = {
             "spiral_engine": "loaded" if run_spiral_cbr_v2 else "failed",
             "session_manager": "loaded" if SpiralSessionManager else "failed",
             "config": "loaded" if SCBRConfig else "failed",
-            "api_manager": "loaded" if SCBRAPIManager else "failed"
+            "api_manager": "loaded" if SCBRAPIManager else "failed",
+            "rpcase_manager": "loaded" if RPCaseManager else "failed"
         }
         
         # 如果配置組件可用，執行詳細檢查

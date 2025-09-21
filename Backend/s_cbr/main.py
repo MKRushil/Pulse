@@ -32,12 +32,12 @@ class SpiralSession:
     def __init__(self, session_id: str):
         self.session_id = session_id
         self.original_query = ""  # 原始問題
-        self.used_cases = []      # 已使用案例ID列表
-        self.round_count = 0      # 推理輪數
+        self.used_cases = []  # 已使用案例ID列表
+        self.round_count = 0  # 推理輪數
         self.current_result = {}  # 當前推理結果
         self.created_at = datetime.datetime.now()
         self.last_updated = datetime.datetime.now()
-        
+    
     def is_query_updated(self, new_query: str) -> bool:
         """
         判斷問題是否有實質更新
@@ -45,7 +45,7 @@ class SpiralSession:
         """
         if not self.original_query:
             return True
-            
+        
         # 計算文本相似度（簡單實現）
         similarity = self._calculate_text_similarity(self.original_query, new_query)
         return similarity < 0.8
@@ -58,7 +58,7 @@ class SpiralSession:
         
         if not set1 or not set2:
             return 0.0
-            
+        
         intersection = len(set1 & set2)
         union = len(set1 | set2)
         
@@ -70,18 +70,18 @@ class SpiralSession:
             self.original_query = new_query
             self.used_cases = []  # 重置已使用案例
             self.round_count = 0  # 重置輪次
-            
+    
     def add_used_case(self, case_id: str):
         """添加已使用的案例ID"""
         if case_id not in self.used_cases:
             self.used_cases.append(case_id)
-        self.last_updated = datetime.datetime.now()
-        
+            self.last_updated = datetime.datetime.now()
+    
     def increment_round(self):
         """增加推理輪次"""
         self.round_count += 1
         self.last_updated = datetime.datetime.now()
-        
+    
     def to_dict(self) -> Dict[str, Any]:
         """轉換為字典格式"""
         return {
@@ -103,13 +103,13 @@ class SpiralSessionManager:
     def __init__(self):
         self.sessions = {}  # session_id -> SpiralSession
         self.logger = SpiralLogger.get_logger("SpiralSessionManager")
-        
+    
     def get_or_create_session(self, session_id: Optional[str], query: str) -> SpiralSession:
         """獲取或創建會話"""
         if not session_id:
             # 基於查詢生成新的session_id
             session_id = self._generate_session_id(query)
-            
+        
         if session_id not in self.sessions:
             session = SpiralSession(session_id)
             session.update_query(query)
@@ -118,7 +118,7 @@ class SpiralSessionManager:
         else:
             session = self.sessions[session_id]
             session.update_query(query)  # 檢查查詢是否更新
-            
+        
         return self.sessions[session_id]
     
     def _generate_session_id(self, query: str) -> str:
@@ -132,13 +132,13 @@ class SpiralSessionManager:
         if session_id in self.sessions:
             del self.sessions[session_id]
             self.logger.info(f"重置螺旋會話: {session_id}")
-            
+    
     def reset_all_sessions(self):
         """重置所有會話"""
         count = len(self.sessions)
         self.sessions.clear()
         self.logger.info(f"重置所有螺旋會話: {count} 個會話")
-        
+    
     def cleanup_old_sessions(self, max_age_hours: int = 24):
         """清理超過指定時間的會話"""
         cutoff_time = datetime.datetime.now() - datetime.timedelta(hours=max_age_hours)
@@ -149,10 +149,10 @@ class SpiralSessionManager:
         
         for sid in old_sessions:
             del self.sessions[sid]
-            
+        
         if old_sessions:
             self.logger.info(f"清理過期螺旋會話: {len(old_sessions)} 個")
-            
+    
     def get_sessions_info(self) -> List[Dict[str, Any]]:
         """獲取所有會話資訊"""
         return [session.to_dict() for session in self.sessions.values()]
@@ -239,29 +239,66 @@ class SCBREngine:
             }
     
     def _format_round_dialog(self, result: Dict[str, Any], session: SpiralSession) -> str:
-        """格式化當前輪對話回覆"""
-        dialog_parts = [
-            f"🌀 第{session.round_count}輪螺旋推理結果",
-            "",
-            f"📋 **診斷結果**",
-            result.get('diagnosis', ''),
-            "",
-            f"💊 **治療方案**",
-            result.get('treatment_plan', ''),
-            "",
-            f"📊 **評估指標**",
-            f"- 安全評分: {result.get('safety_score', 0.0):.2f}/1.0",
-            f"- 有效評分: {result.get('efficacy_score', 0.0):.2f}/1.0",
-            f"- 信心度: {result.get('confidence', 0.0):.2f}/1.0",
-            "",
-            f"📝 **建議**",
-            result.get('recommendations', ''),
-            "",
-            f"---",
-            f"已使用案例數: {len(session.used_cases)}"
-        ]
+        """格式化當前輪對話回覆 - 修正版"""
         
-        return "\n".join(dialog_parts)
+        def safe_str(value, default="暫無相關信息") -> str:
+            """安全轉換為字符串，處理各種數據類型"""
+            if value is None:
+                return default
+            elif isinstance(value, list):
+                if not value:
+                    return default
+                # 如果是列表，用換行符連接，並確保每個元素都是字符串
+                return "\n".join(str(item) for item in value if item is not None)
+            elif isinstance(value, dict):
+                # 如果是字典，格式化為鍵值對
+                if not value:
+                    return default
+                return "\n".join(f"- {k}: {v}" for k, v in value.items() if v is not None)
+            else:
+                # 其他類型直接轉字符串
+                try:
+                    str_value = str(value).strip()
+                    return str_value if str_value else default
+                except Exception:
+                    return default
+        
+        try:
+            dialog_parts = [
+                f"🌀 第{session.round_count}輪螺旋推理結果",
+                "",
+                f"📋 **診斷結果**",
+                safe_str(result.get('diagnosis')),
+                "",
+                f"💊 **治療方案**",
+                safe_str(result.get('treatment_plan')),
+                "",
+                f"📊 **評估指標**",
+                f"- 安全評分: {float(result.get('safety_score', 0.0)):.2f}/1.0",
+                f"- 有效評分: {float(result.get('efficacy_score', 0.0)):.2f}/1.0",
+                f"- 信心度: {float(result.get('confidence', 0.0)):.2f}/1.0",
+                "",
+                f"📝 **建議**",
+                safe_str(result.get('recommendations')),
+                "",
+                f"---",
+                f"已使用案例數: {len(session.used_cases)}"
+            ]
+            
+            # 確保所有部分都是字符串並過濾空值
+            safe_parts = []
+            for part in dialog_parts:
+                try:
+                    str_part = str(part) if part is not None else ""
+                    safe_parts.append(str_part)
+                except Exception:
+                    safe_parts.append("")
+            
+            return "\n".join(safe_parts)
+            
+        except Exception as e:
+            self.logger.error(f"格式化對話回覆失敗: {str(e)}")
+            return f"🌀 第{session.round_count}輪螺旋推理結果\n\n推理已完成，但格式化結果時發生錯誤：{str(e)}"
 
 # 全域函數：執行螺旋推理 v2.0
 async def run_spiral_cbr_v2(question: str, 
