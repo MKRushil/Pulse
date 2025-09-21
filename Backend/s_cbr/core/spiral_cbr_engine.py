@@ -16,7 +16,7 @@ from datetime import datetime
 # 動態導入避免循環依賴
 try:
     from ..agents.adaptation_agent import AdaptationAgent
-    from ..agents.monitoring_agent import MonitoringAgent
+    from ..agents.monitor_agent import MonitoringAgent
     from ..agents.feedback_agent import FeedbackAgent
     from ..agents.diagnostic_agent import DiagnosticAgent
     from ..knowledge.case_repository import CaseRepository
