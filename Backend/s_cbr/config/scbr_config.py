@@ -1,11 +1,12 @@
 """
-S-CBR 系統配置管理 v2.0
+S-CBR 系統配置管理 v2.1 - Backend 整合版
 
 管理 S-CBR 螺旋推理系統的全局配置
 支援會話配置與螺旋推理參數管理
+整合 Backend/config.py 的 LLM、Embedding、Weaviate 配置
 
-版本：v2.0 - 螺旋互動版
-更新：會話管理配置與螺旋推理優化
+版本：v2.1 - Backend 整合版  
+更新：整合 Backend/config.py，支援統一配置管理
 """
 
 from typing import Dict, Any, List, Optional, Union
@@ -56,7 +57,7 @@ class DatabaseConfig:
     """數據庫配置"""
     weaviate_url: str = "http://localhost:8080"
     weaviate_timeout: int = 30
-    vector_dimension: int = 128
+    vector_dimension: int = 1536
     enable_vector_cache: bool = True
     cache_size: int = 1000
 
@@ -71,9 +72,11 @@ class LoggingConfig:
 
 class SCBRConfig:
     """
-    S-CBR 系統配置管理器 v2.0
+    S-CBR 系統配置管理器 v2.1 - Backend 整合版
     
-    v2.0 特色：
+    v2.1 特色：
+    - 整合 Backend/config.py 配置
+    - 統一的配置管理介面
     - 會話配置管理
     - 螺旋推理參數配置 
     - 智能體協調配置
@@ -83,7 +86,7 @@ class SCBRConfig:
     def __init__(self, config_path: str = None):
         """初始化配置管理器"""
         self.logger = SpiralLogger.get_logger("SCBRConfig") if hasattr(SpiralLogger, 'get_logger') else logging.getLogger("SCBRConfig")
-        self.version = "2.0"
+        self.version = "2.1"
         
         # 配置文件路徑
         self.config_path = config_path or self._get_default_config_path()
@@ -94,6 +97,9 @@ class SCBRConfig:
         self.agent_config = AgentConfig()
         self.database_config = DatabaseConfig()
         self.logging_config = LoggingConfig()
+        
+        # Backend 配置緩存
+        self._backend_config_cache = None
         
         # 載入配置
         self._load_config()
@@ -209,6 +215,125 @@ class SCBRConfig:
         """獲取日誌配置"""
         return self.logging_config
     
+    def get_backend_config(self) -> Dict[str, Any]:
+        """
+        獲取 Backend/config.py 的配置 v2.1
+        
+        提供與 Backend/config.py 的整合，優先使用主配置檔案的設定
+        支援配置緩存以提升性能
+        """
+        # 如果已有緩存且未過期，直接返回
+        if self._backend_config_cache is not None:
+            return self._backend_config_cache
+        
+        backend_config = {}
+        
+        try:
+            import sys
+            import os
+            
+            # 添加 Backend 路徑
+            backend_path = os.path.join(os.path.dirname(__file__), '..', '..', '..')
+            if backend_path not in sys.path:
+                sys.path.append(backend_path)
+            
+            # 導入 Backend 配置
+            from Backend.config import (
+                LLM_API_URL, LLM_API_KEY, LLM_MODEL_NAME,
+                EMBEDDING_API_KEY, EMBEDDING_BASE_URL, EMBEDDING_MODEL_NAME,
+                WV_API_KEY, WEAVIATE_URL, WV_HTTP_SECURE, WV_HTTP_HOST, WV_HTTP_PORT
+            )
+            
+            backend_config = {
+                "llm": {
+                    "api_url": LLM_API_URL,
+                    "api_key": LLM_API_KEY,
+                    "model": LLM_MODEL_NAME,
+                    "timeout": 60
+                },
+                "embedding": {
+                    "api_key": EMBEDDING_API_KEY,
+                    "base_url": EMBEDDING_BASE_URL,
+                    "model": EMBEDDING_MODEL_NAME,
+                    "timeout": 30
+                },
+                "weaviate": {
+                    "url": WEAVIATE_URL,
+                    "api_key": WV_API_KEY,
+                    "secure": WV_HTTP_SECURE,
+                    "host": WV_HTTP_HOST,
+                    "port": WV_HTTP_PORT,
+                    "timeout": 30
+                }
+            }
+            
+            # 緩存配置
+            self._backend_config_cache = backend_config
+            self.logger.info("✅ 成功載入 Backend 配置")
+            
+        except ImportError as e:
+            self.logger.warning(f"無法載入 Backend 配置: {e}")
+            # 使用預設值
+            backend_config = {
+                "llm": {
+                    "api_url": "https://integrate.api.nvidia.com/v1",
+                    "api_key": "",
+                    "model": "meta/llama-3.1-405b-instruct",
+                    "timeout": 60
+                },
+                "embedding": {
+                    "api_key": "",
+                    "base_url": "https://integrate.api.nvidia.com/v1",
+                    "model": "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1",
+                    "timeout": 30
+                },
+                "weaviate": {
+                    "url": "http://localhost:8080",
+                    "api_key": None,
+                    "secure": False,
+                    "host": "localhost",
+                    "port": 8080,
+                    "timeout": 30
+                }
+            }
+            # 緩存預設配置
+            self._backend_config_cache = backend_config
+        except Exception as e:
+            self.logger.error(f"Backend 配置載入異常: {e}")
+            # 返回空配置避免程序崩潰
+            backend_config = {
+                "llm": {},
+                "embedding": {},
+                "weaviate": {}
+            }
+        
+        return backend_config
+
+    def get_llm_config(self) -> Dict[str, Any]:
+        """獲取 LLM 配置"""
+        backend_config = self.get_backend_config()
+        return backend_config.get("llm", {})
+
+    def get_embedding_config(self) -> Dict[str, Any]:
+        """獲取 Embedding 配置"""
+        backend_config = self.get_backend_config()
+        return backend_config.get("embedding", {})
+
+    def get_weaviate_config(self) -> Dict[str, Any]:
+        """獲取 Weaviate 配置"""
+        backend_config = self.get_backend_config()
+        return backend_config.get("weaviate", {})
+
+    def clear_backend_cache(self):
+        """清除 Backend 配置緩存"""
+        self._backend_config_cache = None
+        self.logger.debug("Backend 配置緩存已清除")
+
+    def reload_backend_config(self):
+        """重新載入 Backend 配置"""
+        self.clear_backend_cache()
+        return self.get_backend_config()
+    
     def update_spiral_config(self, **kwargs):
         """更新螺旋推理配置"""
         try:
@@ -258,6 +383,7 @@ class SCBRConfig:
     def reload_config(self):
         """重新載入配置"""
         try:
+            self.clear_backend_cache()  # 清除 Backend 緩存
             self._load_config()
             self.logger.info("配置已重新載入")
         except Exception as e:
@@ -271,39 +397,40 @@ class SCBRConfig:
             'agent': asdict(self.agent_config),
             'database': asdict(self.database_config),
             'logging': asdict(self.logging_config),
+            'backend': self.get_backend_config(),
             'version': self.version
         }
     
     def get_config(self, key_path: str, default=None):
         """
-        通用配置獲取方法 v2.0
+        通用配置獲取方法 v2.1 - 支援 Backend 配置
         
-        支援點分路徑訪問配置，如：'session_config.max_sessions'
+        支援點分路徑訪問配置，包括 Backend/config.py 的配置
         
         Args:
             key_path (str): 配置鍵路徑，支援點分層級
-                           例如: 'session.max_concurrent_sessions'
-                                'spiral.max_rounds'
-                                'agent.diagnostic_weight'
-                                'session_config.max_concurrent_sessions' (向後兼容)
+            例如: 'llm.api_key'  # 從 Backend/config.py
+                  'backend.llm.model'  # 從 Backend/config.py
+                  'session.max_concurrent_sessions'  # 從 scbr_config.yaml
             default: 默認值，當配置項不存在時返回
-            
+        
         Returns:
             配置值或默認值
-            
+        
         Examples:
+            >>> config.get_config('llm.api_key')
+            'nvapi-xxxxx'
             >>> config.get_config('session.max_concurrent_sessions')
             100
-            >>> config.get_config('spiral.max_rounds', 5)
-            10
-            >>> config.get_config('nonexistent.key', 'fallback')
-            'fallback'
+            >>> config.get_config('weaviate.url')
+            'http://localhost:8080'
         """
         try:
             keys = key_path.split('.')
             
-            # 第一級：配置對象映射
+            # 第一級：配置對象映射（包含 Backend 配置）
             config_mapping = {
+                # S-CBR 配置
                 'spiral': self.spiral_config,
                 'session': self.session_config,
                 'agent': self.agent_config,
@@ -314,18 +441,23 @@ class SCBRConfig:
                 'session_config': self.session_config,
                 'agent_config': self.agent_config,
                 'database_config': self.database_config,
-                'logging_config': self.logging_config
+                'logging_config': self.logging_config,
+                # Backend 配置映射
+                'backend': self.get_backend_config(),
+                'llm': self.get_llm_config(),
+                'embedding': self.get_embedding_config(),
+                'weaviate': self.get_weaviate_config()
             }
             
             # 處理第一級配置對象
             if len(keys) >= 1 and keys[0] in config_mapping:
                 current_obj = config_mapping[keys[0]]
                 
-                # 如果只有一級路徑，返回整個配置對象的字典表示
+                # 如果只有一級路徑，返回整個配置對象
                 if len(keys) == 1:
                     if hasattr(current_obj, '__dict__'):
                         return current_obj.__dict__
-                    return asdict(current_obj) if hasattr(current_obj, '__dataclass_fields__') else current_obj
+                    return current_obj if isinstance(current_obj, dict) else asdict(current_obj) if hasattr(current_obj, '__dataclass_fields__') else current_obj
                 
                 # 處理多級路徑
                 for key in keys[1:]:
@@ -385,9 +517,9 @@ class SCBRConfig:
             
             # 驗證智能體配置
             total_weight = (self.agent_config.diagnostic_weight + 
-                           self.agent_config.adaptation_weight + 
-                           self.agent_config.monitoring_weight + 
-                           self.agent_config.feedback_weight)
+                          self.agent_config.adaptation_weight + 
+                          self.agent_config.monitoring_weight + 
+                          self.agent_config.feedback_weight)
             
             if abs(total_weight - 1.0) > 0.01:
                 validation_result['warnings'].append(f"智能體權重總和為{total_weight:.2f}，建議調整為1.0")
@@ -406,6 +538,90 @@ class SCBRConfig:
         
         return validation_result
 
+    def validate_backend_config(self) -> Dict[str, Any]:
+        """驗證 Backend 配置的完整性 v2.1"""
+        validation_result = {
+            'valid': True,
+            'errors': [],
+            'warnings': []
+        }
+        
+        try:
+            backend_config = self.get_backend_config()
+            
+            # 驗證 LLM 配置
+            llm_config = backend_config.get("llm", {})
+            if not llm_config.get("api_key"):
+                validation_result['warnings'].append("LLM API Key 未設置，將無法使用真實 LLM 服務")
+            
+            if not llm_config.get("api_url"):
+                validation_result['errors'].append("LLM API URL 未設置")
+                validation_result['valid'] = False
+            
+            if not llm_config.get("model"):
+                validation_result['warnings'].append("LLM 模型未指定")
+            
+            # 驗證 Embedding 配置
+            embedding_config = backend_config.get("embedding", {})
+            if not embedding_config.get("api_key"):
+                validation_result['warnings'].append("Embedding API Key 未設置，將使用降級向量化方法")
+            
+            if not embedding_config.get("base_url"):
+                validation_result['warnings'].append("Embedding API URL 未設置")
+            
+            # 驗證 Weaviate 配置
+            weaviate_config = backend_config.get("weaviate", {})
+            if not weaviate_config.get("url"):
+                validation_result['errors'].append("Weaviate URL 未設置")
+                validation_result['valid'] = False
+            
+            # 檢查 Weaviate 連接性（可選）
+            try:
+                import weaviate
+                url = weaviate_config.get("url", "http://localhost:8080")
+                api_key = weaviate_config.get("api_key")
+                
+                if api_key:
+                    client = weaviate.Client(
+                        url=url,
+                        auth_client_secret=weaviate.AuthApiKey(api_key=api_key),
+                        timeout_config=(5, 5)
+                    )
+                else:
+                    client = weaviate.Client(
+                        url=url,
+                        timeout_config=(5, 5)
+                    )
+                
+                # 測試連接
+                client.is_ready()
+                validation_result['warnings'].append(f"Weaviate 連接測試成功: {url}")
+                
+            except Exception as e:
+                validation_result['warnings'].append(f"Weaviate 連接測試失敗: {str(e)}")
+            
+            self.logger.info(f"Backend 配置驗證完成: {'有效' if validation_result['valid'] else '無效'}")
+            
+        except Exception as e:
+            validation_result['valid'] = False
+            validation_result['errors'].append(f"Backend 配置驗證過程出錯: {str(e)}")
+            self.logger.error(f"Backend 配置驗證失敗: {str(e)}")
+        
+        return validation_result
+
+    def get_full_validation(self) -> Dict[str, Any]:
+        """獲取完整的配置驗證報告"""
+        scbr_validation = self.validate_config()
+        backend_validation = self.validate_backend_config()
+        
+        return {
+            "scbr_config": scbr_validation,
+            "backend_config": backend_validation,
+            "overall_valid": scbr_validation['valid'] and backend_validation['valid'],
+            "total_errors": len(scbr_validation['errors']) + len(backend_validation['errors']),
+            "total_warnings": len(scbr_validation['warnings']) + len(backend_validation['warnings'])
+        }
+
 # 全局配置實例
 _global_config = None
 
@@ -422,7 +638,7 @@ def reload_global_config():
     if _global_config is not None:
         _global_config.reload_config()
 
-# 便捷函數
+# 便捷函數 - S-CBR 配置
 def get_spiral_config() -> SpiralConfig:
     """獲取螺旋推理配置"""
     return get_config().get_spiral_config()
@@ -443,13 +659,44 @@ def get_logging_config() -> LoggingConfig:
     """獲取日誌配置"""
     return get_config().get_logging_config()
 
+# 便捷函數 - Backend 配置 (v2.1 新增)
+def get_llm_config() -> Dict[str, Any]:
+    """獲取 LLM 配置"""
+    return get_config().get_llm_config()
+
+def get_embedding_config() -> Dict[str, Any]:
+    """獲取 Embedding 配置"""
+    return get_config().get_embedding_config()
+
+def get_weaviate_config() -> Dict[str, Any]:
+    """獲取 Weaviate 配置"""
+    return get_config().get_weaviate_config()
+
+def get_backend_config() -> Dict[str, Any]:
+    """獲取完整的 Backend 配置"""
+    return get_config().get_backend_config()
+
+# 便捷函數 - 配置驗證 (v2.1 新增)
+def validate_all_configs() -> Dict[str, Any]:
+    """驗證所有配置"""
+    return get_config().get_full_validation()
+
+def clear_config_cache():
+    """清除配置緩存"""
+    get_config().clear_backend_cache()
+
 # 向後兼容的類別名稱
 SCBRConfigV2 = SCBRConfig
+SCBRConfigV21 = SCBRConfig
 
 __all__ = [
-    "SCBRConfig", "SCBRConfigV2", 
+    "SCBRConfig", "SCBRConfigV2", "SCBRConfigV21",
     "SpiralConfig", "SessionConfig", "AgentConfig", "DatabaseConfig", "LoggingConfig",
     "get_config", "reload_global_config",
     "get_spiral_config", "get_session_config", "get_agent_config", 
-    "get_database_config", "get_logging_config"
+    "get_database_config", "get_logging_config",
+    # v2.1 新增的 Backend 配置函數
+    "get_llm_config", "get_embedding_config", "get_weaviate_config", "get_backend_config",
+    # v2.1 新增的驗證和工具函數
+    "validate_all_configs", "clear_config_cache"
 ]
