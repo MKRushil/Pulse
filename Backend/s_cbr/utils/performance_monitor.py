@@ -684,7 +684,7 @@ class SystemPerformanceMonitor:
         await self.stop_monitoring()
 
 # 便捷函數
-def create_performance_monitor(config: Optional[SCBRConfig] = None) -> SystemPerformanceMonitor:
+def create_performance_monitor(config: Optional[Any] = None) -> SystemPerformanceMonitor:
     """創建性能監控器實例"""
     return SystemPerformanceMonitor(config)
 

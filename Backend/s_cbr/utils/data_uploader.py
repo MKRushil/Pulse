@@ -664,7 +664,7 @@ class DataUploader:
         }
 
 # 便捷函數
-def create_data_uploader(config: Optional[SCBRConfig] = None) -> DataUploader:
+def create_data_uploader(config: Optional[Any] = None) -> DataUploader:
     """創建數據上傳器實例"""
     return DataUploader(config)
 

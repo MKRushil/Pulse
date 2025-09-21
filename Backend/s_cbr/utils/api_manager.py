@@ -317,7 +317,7 @@ class SCBRAPIManager:
                 "success_rate": 0.0
             }
     
-    async def _get_session_manager(self) -> Optional['SpiralSessionManager']:
+    async def _get_session_manager(self) -> Optional['Any']:
         """獲取會話管理器實例（懶載入）"""
         if self._session_manager is None and SpiralSessionManager:
             try:
