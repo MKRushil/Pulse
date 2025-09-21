@@ -10,9 +10,9 @@ S-CBR 主引擎入口模組 v2.0 - 螺旋互動版
 版本：v2.0 - 螺旋互動版
 """
 
-from Backend.s_cbr.engines.spiral_cbr_engine import SpiralCBREngine
-from s_cbr.config.scbr_config import SCBRConfig
-from s_cbr.utils.spiral_logger import SpiralLogger
+from .engines.spiral_cbr_engine import SpiralCBREngine
+from .config.scbr_config import SCBRConfig
+from .utils.spiral_logger import SpiralLogger
 from typing import Dict, Any, Optional, List
 import asyncio
 import datetime

@@ -1,0 +1,32 @@
+agent:
+  adaptation_weight: 0.3
+  agent_timeout: 30
+  diagnostic_weight: 0.4
+  enable_parallel_processing: true
+  feedback_weight: 0.1
+  monitoring_weight: 0.2
+database:
+  cache_size: 1000
+  enable_vector_cache: true
+  vector_dimension: 128
+  weaviate_timeout: 30
+  weaviate_url: http://localhost:8080
+logging:
+  backup_count: 5
+  file_path: logs/scbr.log
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
+  max_file_size: 10485760
+session:
+  enable_session_persistence: true
+  max_concurrent_sessions: 100
+  session_cleanup_interval: 300
+  session_memory_limit: 1000
+  session_storage_path: data/sessions
+spiral:
+  case_diversity_weight: 0.3
+  effectiveness_threshold: 0.8
+  max_rounds: 10
+  min_rounds: 1
+  session_timeout: 3600
+  similarity_threshold: 0.7
