@@ -46,7 +46,7 @@ class DataUploader:
     - 安全檢查
     """
     
-    def __init__(self, config: SCBRConfig = None):
+    def __init__(self, config = None):
         """初始化數據上傳器 v2.0"""
         self.logger = SpiralLogger.get_logger("DataUploader") if hasattr(SpiralLogger, 'get_logger') else logging.getLogger("DataUploader")
         self.version = "2.0"

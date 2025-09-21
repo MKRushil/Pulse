@@ -41,7 +41,7 @@ class SpiralLogger:
     _instances = {}
     _config = None
     
-    def __init__(self, name: str, config: SCBRConfig = None):
+    def __init__(self, name: str, config = None):
         """初始化螺旋日誌工具 v2.0"""
         self.name = name
         self.version = "2.0"
@@ -70,7 +70,7 @@ class SpiralLogger:
         self.session_events = []
         
     @classmethod
-    def get_logger(cls, name: str, config: SCBRConfig = None) -> 'SpiralLogger':
+    def get_logger(cls, name: str, config = None) -> 'SpiralLogger':
         """
         獲取日誌實例（單例模式）
         

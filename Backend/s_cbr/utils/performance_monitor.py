@@ -163,7 +163,7 @@ class SystemPerformanceMonitor:
     - 多通道通知
     """
     
-    def __init__(self, config: SCBRConfig = None):
+    def __init__(self, config = None):
         """初始化系統性能監控器 v2.0"""
         self.logger = SpiralLogger.get_logger("PerformanceMonitor") if hasattr(SpiralLogger, 'get_logger') else logging.getLogger("PerformanceMonitor")
         self.version = "2.0"

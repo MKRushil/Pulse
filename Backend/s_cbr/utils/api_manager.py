@@ -37,7 +37,7 @@ class SCBRAPIManager:
     - 自動故障恢復
     """
     
-    def __init__(self, config: SCBRConfig = None):
+    def __init__(self, config = None):
         """初始化API管理器 v2.0"""
         self.logger = SpiralLogger.get_logger("SCBRAPIManager") if hasattr(SpiralLogger, 'get_logger') else logging.getLogger("SCBRAPIManager")
         self.version = "2.0"
