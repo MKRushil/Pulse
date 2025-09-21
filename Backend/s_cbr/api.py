@@ -5,6 +5,7 @@ S-CBR API 路由器 v2.0 - 螺旋互動版
 - 每輪推理結果即時回傳
 - 用戶決定是否繼續推理
 - 案例使用記錄管理
+- 修正循環導入問題，使用懶載入模式
 """
 
 from fastapi import APIRouter, Request, HTTPException
@@ -14,15 +15,75 @@ from typing import Dict, Any, Optional
 from datetime import datetime
 import uuid
 
-from .main import run_spiral_cbr_v2, SpiralSessionManager
-from .utils.spiral_logger import SpiralLogger
-
 # 創建路由器
 router = APIRouter()
-logger = SpiralLogger.get_logger("S-CBR-API")
 
-# 全局會話管理器
-session_manager = SpiralSessionManager()
+# 懶載入模組 - 避免循環導入
+def _get_spiral_components():
+    """
+    懶載入螺旋推理組件
+    
+    Returns:
+        tuple: (run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger)
+    """
+    try:
+        from .main import run_spiral_cbr_v2, SpiralSessionManager
+        from .utils.spiral_logger import SpiralLogger
+        return run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger
+    except ImportError as e:
+        logging.error(f"無法載入 S-CBR 組件: {e}")
+        return None, None, None
+
+def _get_config_components():
+    """懶載入配置組件"""
+    try:
+        from .config.scbr_config import SCBRConfig
+        from .utils.api_manager import SCBRAPIManager
+        return SCBRConfig, SCBRAPIManager
+    except ImportError as e:
+        logging.error(f"無法載入配置組件: {e}")
+        return None, None
+
+def _get_memory_components():
+    """懶載入記憶組件"""
+    try:
+        from .knowledge.spiral_memory import SpiralMemory
+        return SpiralMemory
+    except ImportError as e:
+        logging.error(f"無法載入記憶組件: {e}")
+        return None
+
+# 初始化日誌（優先使用螺旋日誌器）
+try:
+    _, _, SpiralLogger = _get_spiral_components()
+    if SpiralLogger:
+        logger = SpiralLogger.get_logger("S-CBR-API")
+    else:
+        logger = logging.getLogger("S-CBR-API")
+except Exception:
+    logger = logging.getLogger("S-CBR-API")
+
+# 全局會話管理器（懶載入）
+_session_manager = None
+
+def _get_session_manager():
+    """
+    獲取會話管理器實例（懶載入）
+    
+    Returns:
+        SpiralSessionManager: 會話管理器實例
+    """
+    global _session_manager
+    if _session_manager is None:
+        _, SpiralSessionManager, _ = _get_spiral_components()
+        if SpiralSessionManager:
+            try:
+                _session_manager = SpiralSessionManager()
+                logger.info("✅ 螺旋會話管理器初始化成功")
+            except Exception as e:
+                logger.error(f"❌ 螺旋會話管理器初始化失敗: {e}")
+                _session_manager = None
+    return _session_manager
 
 @router.post("/query")
 async def api_query(request: Request):
@@ -45,7 +106,7 @@ async def api_query(request: Request):
     
     出參 JSON:
     {
-        "dialog": "🌀 第X輪螺旋推理結果\n診斷: ...",
+        "dialog": "🌀 第X輪螺旋推理結果\\n診斷: ...",
         "session_id": "session_uuid",
         "continue_available": true,
         "round": 2,
@@ -69,6 +130,35 @@ async def api_query(request: Request):
     trace_id = f"REQ-{start_time.strftime('%Y%m%d')}-{str(uuid.uuid4())[:8]}"
     
     try:
+        # 懶載入組件
+        run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger = _get_spiral_components()
+        
+        if not run_spiral_cbr_v2 or not SpiralSessionManager:
+            logger.error(f"S-CBR 組件載入失敗 [{trace_id}]")
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "error": "S-CBR 螺旋推理引擎不可用",
+                    "message": "無法載入螺旋推理組件，請檢查模組依賴",
+                    "trace_id": trace_id,
+                    "version": "2.0"
+                }
+            )
+        
+        # 獲取會話管理器
+        session_manager = _get_session_manager()
+        if not session_manager:
+            logger.error(f"會話管理器初始化失敗 [{trace_id}]")
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "error": "會話管理器不可用",
+                    "message": "無法初始化會話管理器",
+                    "trace_id": trace_id,
+                    "version": "2.0"
+                }
+            )
+        
         # 解析請求
         body = await request.json()
         question = body.get("question") or body.get("query")
@@ -87,7 +177,8 @@ async def api_query(request: Request):
                 detail={
                     "error": "缺少必要參數",
                     "message": "請提供 'question' 欄位",
-                    "trace_id": trace_id
+                    "trace_id": trace_id,
+                    "version": "2.0"
                 }
             )
         
@@ -143,7 +234,6 @@ async def api_query(request: Request):
     except HTTPException:
         # FastAPI HTTPException 直接拋出
         raise
-        
     except Exception as e:
         # 記錄錯誤
         processing_time = (datetime.now() - start_time).total_seconds() * 1000
@@ -179,6 +269,16 @@ async def reset_spiral_session(request: Request):
         body = await request.json()
         session_id = body.get("session_id")
         
+        session_manager = _get_session_manager()
+        if not session_manager:
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "error": "會話管理器不可用",
+                    "version": "2.0"
+                }
+            )
+        
         if session_id:
             session_manager.reset_session(session_id)
             message = f"會話 {session_id} 已重置"
@@ -212,6 +312,16 @@ async def get_spiral_sessions():
     獲取當前活躍的螺旋推理會話
     """
     try:
+        session_manager = _get_session_manager()
+        if not session_manager:
+            return JSONResponse({
+                "active_sessions": 0,
+                "sessions": [],
+                "error": "會話管理器不可用",
+                "version": "2.0",
+                "timestamp": datetime.now().isoformat()
+            })
+        
         sessions_info = session_manager.get_sessions_info()
         
         return JSONResponse({
@@ -238,30 +348,66 @@ async def scbr_health_check():
     S-CBR 系統詳細健康檢查 v2.0
     """
     try:
-        from .config.scbr_config import SCBRConfig
-        from .utils.api_manager import SCBRAPIManager
+        SCBRConfig, SCBRAPIManager = _get_config_components()
         
-        config = SCBRConfig()
-        api_manager = SCBRAPIManager()
-        
-        # 執行健康檢查
-        health_result = await api_manager.health_check()
-        
-        return JSONResponse({
-            "status": "healthy" if health_result.get("overall_status") == "healthy" else "unhealthy",
+        health_data = {
+            "status": "healthy",
             "version": "2.0",
             "module": "S-CBR-Spiral",
-            "components": {
-                "config": "loaded",
-                "api_manager": "initialized",
-                "session_manager": "active",
-                "llm_client": health_result.get("llm_client", False),
-                "embedding_client": health_result.get("embedding_client", False),
-                "weaviate_client": health_result.get("weaviate_client", False)
-            },
-            "active_sessions": len(session_manager.get_sessions_info()),
             "timestamp": datetime.now().isoformat()
-        })
+        }
+        
+        # 基本組件檢查
+        run_spiral_cbr_v2, SpiralSessionManager, _ = _get_spiral_components()
+        
+        components = {
+            "spiral_engine": "loaded" if run_spiral_cbr_v2 else "failed",
+            "session_manager": "loaded" if SpiralSessionManager else "failed",
+            "config": "loaded" if SCBRConfig else "failed",
+            "api_manager": "loaded" if SCBRAPIManager else "failed"
+        }
+        
+        # 如果配置組件可用，執行詳細檢查
+        if SCBRConfig and SCBRAPIManager:
+            try:
+                config = SCBRConfig()
+                api_manager = SCBRAPIManager()
+                
+                # 執行健康檢查
+                health_result = await api_manager.health_check_v2()
+                components.update({
+                    "llm_client": health_result.get("checks", {}).get("external_apis", {}).get("status") == "healthy",
+                    "embedding_client": health_result.get("checks", {}).get("memory_system", {}).get("status") == "healthy",
+                    "weaviate_client": health_result.get("checks", {}).get("database", {}).get("status") == "healthy"
+                })
+                
+            except Exception as e:
+                logger.warning(f"詳細健康檢查失敗: {e}")
+                components.update({
+                    "llm_client": False,
+                    "embedding_client": False,
+                    "weaviate_client": False
+                })
+        
+        health_data["components"] = components
+        
+        # 會話統計
+        session_manager = _get_session_manager()
+        if session_manager:
+            try:
+                sessions_info = session_manager.get_sessions_info()
+                health_data["active_sessions"] = len(sessions_info)
+            except Exception:
+                health_data["active_sessions"] = 0
+        else:
+            health_data["active_sessions"] = 0
+        
+        # 判斷總體健康狀態
+        critical_components = ["spiral_engine", "session_manager"]
+        if any(components.get(comp) == "failed" for comp in critical_components):
+            health_data["status"] = "unhealthy"
+        
+        return JSONResponse(health_data)
         
     except Exception as e:
         logger.error(f"S-CBR v2.0 健康檢查失敗: {str(e)}")
@@ -281,27 +427,56 @@ async def scbr_statistics():
     S-CBR 系統統計資訊 v2.0
     """
     try:
-        from .knowledge.spiral_memory import SpiralMemory
+        SpiralMemory = _get_memory_components()
         
-        # 獲取記憶庫統計
-        spiral_memory = SpiralMemory()
-        memory_stats = spiral_memory.get_memory_stats()
-        
-        # 獲取會話統計
-        sessions_info = session_manager.get_sessions_info()
-        
-        return JSONResponse({
+        stats_data = {
             "version": "2.0",
             "module": "S-CBR-Spiral",
-            "statistics": {
-                "memory_stats": memory_stats,
-                "system_uptime": "運行中",
-                "active_sessions": len(sessions_info),
-                "total_rounds_processed": sum([s.get('round_count', 0) for s in sessions_info]),
-                "total_cases_used": sum([len(s.get('used_cases', [])) for s in sessions_info])
-            },
             "timestamp": datetime.now().isoformat()
-        })
+        }
+        
+        # 記憶庫統計
+        if SpiralMemory:
+            try:
+                spiral_memory = SpiralMemory()
+                memory_stats = await spiral_memory.get_memory_stats_v2()
+                stats_data["memory_stats"] = memory_stats
+            except Exception as e:
+                logger.warning(f"記憶統計獲取失敗: {e}")
+                stats_data["memory_stats"] = {"error": str(e)}
+        else:
+            stats_data["memory_stats"] = {"error": "記憶組件不可用"}
+        
+        # 會話統計
+        session_manager = _get_session_manager()
+        if session_manager:
+            try:
+                sessions_info = session_manager.get_sessions_info()
+                stats_data["statistics"] = {
+                    "system_uptime": "運行中",
+                    "active_sessions": len(sessions_info),
+                    "total_rounds_processed": sum([s.get('round_count', 0) for s in sessions_info]),
+                    "total_cases_used": sum([len(s.get('used_cases', [])) for s in sessions_info])
+                }
+            except Exception as e:
+                logger.warning(f"會話統計獲取失敗: {e}")
+                stats_data["statistics"] = {
+                    "system_uptime": "運行中",
+                    "active_sessions": 0,
+                    "total_rounds_processed": 0,
+                    "total_cases_used": 0,
+                    "error": str(e)
+                }
+        else:
+            stats_data["statistics"] = {
+                "system_uptime": "運行中",
+                "active_sessions": 0,
+                "total_rounds_processed": 0,
+                "total_cases_used": 0,
+                "error": "會話管理器不可用"
+            }
+        
+        return JSONResponse(stats_data)
         
     except Exception as e:
         logger.error(f"獲取 S-CBR v2.0 統計資訊失敗: {str(e)}")
@@ -320,21 +495,38 @@ async def scbr_reset_memory():
     重置 S-CBR 記憶庫（開發和調試用）v2.0
     """
     try:
-        from .knowledge.spiral_memory import SpiralMemory
+        SpiralMemory = _get_memory_components()
         
-        spiral_memory = SpiralMemory()
+        reset_results = []
         
-        # 清理過期記憶
-        spiral_memory.cleanup_expired_memories()
+        # 重置記憶庫
+        if SpiralMemory:
+            try:
+                spiral_memory = SpiralMemory()
+                cleanup_stats = await spiral_memory.cleanup_expired_memories_v2()
+                reset_results.append(f"記憶庫清理: {cleanup_stats.get('total_cleaned', 0)} 個記錄")
+            except Exception as e:
+                reset_results.append(f"記憶庫重置失敗: {str(e)}")
+        else:
+            reset_results.append("記憶庫組件不可用")
         
         # 重置會話管理器
-        session_manager.reset_all_sessions()
+        session_manager = _get_session_manager()
+        if session_manager:
+            try:
+                session_manager.reset_all_sessions()
+                reset_results.append("所有螺旋會話已重置")
+            except Exception as e:
+                reset_results.append(f"會話重置失敗: {str(e)}")
+        else:
+            reset_results.append("會話管理器不可用")
         
-        logger.info("🔄 S-CBR v2.0 記憶庫與會話已重置")
+        logger.info(f"🔄 S-CBR v2.0 重置完成: {'; '.join(reset_results)}")
         
         return JSONResponse({
             "status": "success",
-            "message": "S-CBR v2.0 記憶庫與螺旋會話已重置",
+            "message": "S-CBR v2.0 記憶庫與螺旋會話重置完成",
+            "details": reset_results,
             "version": "2.0",
             "timestamp": datetime.now().isoformat()
         })
@@ -349,6 +541,12 @@ async def scbr_reset_memory():
                 "timestamp": datetime.now().isoformat()
             }
         )
+
+# 向後兼容端點
+@router.get("/health")
+async def health_check_compatibility():
+    """向後兼容的健康檢查端點"""
+    return await scbr_health_check()
 
 # 導出路由器
 __all__ = ["router"]
