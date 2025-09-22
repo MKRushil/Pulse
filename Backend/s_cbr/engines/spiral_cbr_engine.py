@@ -271,7 +271,7 @@ class SpiralCBREngine:
                 # 嘗試使用現有的檢索系統
                 try:
                     # 導入現有的案例檢索器
-                    from ...agents.step1_case_finder import Step1CaseFinder
+                    from ..steps.step1_case_finder import Step1CaseFinder
                     case_finder = Step1CaseFinder()
                     existing_cases = await case_finder.find_similar_cases(question, limit=3)
                     

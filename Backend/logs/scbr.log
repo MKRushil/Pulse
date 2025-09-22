@@ -177,3 +177,461 @@
 2025-09-22 03:25:21 - SCBR.S-CBR-API - INFO -    推理輪數: 1
 2025-09-22 03:25:21 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
 2025-09-22 03:25:21 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-d2269c4f]
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO -    問題: 35歲，女，壓力大
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 04:47:08 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-d2269c4f]
+2025-09-22 04:47:08 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-d2269c4f]
+2025-09-22 04:47:08 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 35歲，女，壓力大
+2025-09-22 04:47:08 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:47:08 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 04:47:08 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['Pulse', 'PatientCase', 'PulsePJ', 'Case', 'RPCase', 'SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord']
+2025-09-22 04:47:08 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 04:47:08 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 04:47:08 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 04:47:08 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 1)
+2025-09-22 04:47:08 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 04:47:10 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 04:47:10 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 04:47:10 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 04:47:41 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 04:47:41 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 1)
+2025-09-22 04:47:46 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 04:47:46 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 1)
+2025-09-22 04:47:51 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 04:47:51 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 1)
+2025-09-22 04:48:00 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 04:48:00 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 04:48:00 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 04:48:00 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-d2269c4f]
+2025-09-22 04:48:00 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:48:00 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 04:48:00 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 04:48:00 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-d2269c4f]
+2025-09-22 04:48:00 - SCBR.S-CBR-API - INFO -    處理時間: 51922ms
+2025-09-22 04:48:00 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 04:48:00 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:48:00 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 04:51:35 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-0e6dc4de]
+2025-09-22 04:51:35 - SCBR.S-CBR-API - INFO -    問題: 繼續推理上一個問題
+2025-09-22 04:51:35 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:51:35 - SCBR.S-CBR-API - INFO -    繼續推理: True
+2025-09-22 04:51:35 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 04:51:35 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-0e6dc4de]
+2025-09-22 04:51:35 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-0e6dc4de]
+2025-09-22 04:51:35 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 繼續推理上一個問題
+2025-09-22 04:51:35 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:51:35 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: True
+2025-09-22 04:51:35 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['Pulse', 'PatientCase', 'PulsePJ', 'Case', 'RPCase', 'SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord']
+2025-09-22 04:51:36 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 04:51:36 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 04:51:36 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 04:51:36 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 1)
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 04:51:36 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 04:51:37 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 04:51:39 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 04:51:39 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 1)
+2025-09-22 04:51:53 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 04:51:53 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 1)
+2025-09-22 04:51:59 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 04:51:59 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 1)
+2025-09-22 04:52:05 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 04:52:05 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 04:52:05 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 04:52:05 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-0e6dc4de]
+2025-09-22 04:52:05 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:52:05 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 04:52:05 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 04:52:05 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-0e6dc4de]
+2025-09-22 04:52:05 - SCBR.S-CBR-API - INFO -    處理時間: 29417ms
+2025-09-22 04:52:05 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 04:52:05 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:52:05 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 04:52:16 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-5cf28ce3]
+2025-09-22 04:52:16 - SCBR.S-CBR-API - INFO -    問題: 繼續推理上一個問題
+2025-09-22 04:52:16 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:52:16 - SCBR.S-CBR-API - INFO -    繼續推理: True
+2025-09-22 04:52:16 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 04:52:16 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-5cf28ce3]
+2025-09-22 04:52:16 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-5cf28ce3]
+2025-09-22 04:52:16 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 繼續推理上一個問題
+2025-09-22 04:52:16 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:52:16 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: True
+2025-09-22 04:52:16 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PulsePJ', 'Case', 'RPCase', 'SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord', 'Pulse', 'PatientCase']
+2025-09-22 04:52:17 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 04:52:17 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 04:52:17 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 04:52:17 - SCBR.SCBREngine - INFO - 開始執行第 2 輪螺旋推理
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_023846_e0e55cd3, Round: 2
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 2)
+2025-09-22 04:52:17 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 04:52:18 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 04:52:18 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 04:52:19 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 04:52:21 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 04:52:21 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 2)
+2025-09-22 04:52:36 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 04:52:36 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 2)
+2025-09-22 04:52:43 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 04:52:43 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 2)
+2025-09-22 04:52:49 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 04:52:49 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 2
+2025-09-22 04:52:49 - SCBR.SCBREngine - INFO - 第 2 輪螺旋推理完成
+2025-09-22 04:52:49 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-5cf28ce3]
+2025-09-22 04:52:49 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:52:49 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 2
+2025-09-22 04:52:49 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 04:52:49 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-5cf28ce3]
+2025-09-22 04:52:49 - SCBR.S-CBR-API - INFO -    處理時間: 32303ms
+2025-09-22 04:52:49 - SCBR.S-CBR-API - INFO -    推理輪數: 2
+2025-09-22 04:52:49 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:52:49 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 04:53:09 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-2edad172]
+2025-09-22 04:53:09 - SCBR.S-CBR-API - INFO -    問題: 繼續推理上一個問題
+2025-09-22 04:53:09 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:53:09 - SCBR.S-CBR-API - INFO -    繼續推理: True
+2025-09-22 04:53:09 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 04:53:09 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-2edad172]
+2025-09-22 04:53:09 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-2edad172]
+2025-09-22 04:53:09 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 繼續推理上一個問題
+2025-09-22 04:53:09 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:53:09 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: True
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PulsePJ', 'Case', 'RPCase', 'SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord', 'Pulse', 'PatientCase']
+2025-09-22 04:53:09 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 04:53:09 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 04:53:09 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 04:53:09 - SCBR.SCBREngine - INFO - 開始執行第 3 輪螺旋推理
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_023846_e0e55cd3, Round: 3
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 3)
+2025-09-22 04:53:09 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 04:53:10 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 04:53:10 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 04:53:11 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 04:53:13 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 04:53:14 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 04:53:14 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 3)
+2025-09-22 04:53:20 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 04:53:20 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 3)
+2025-09-22 04:53:26 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 04:53:26 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 3)
+2025-09-22 04:54:16 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 04:54:16 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 3
+2025-09-22 04:54:16 - SCBR.SCBREngine - INFO - 第 3 輪螺旋推理完成
+2025-09-22 04:54:16 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-2edad172]
+2025-09-22 04:54:16 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:54:16 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 3
+2025-09-22 04:54:16 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 04:54:16 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-2edad172]
+2025-09-22 04:54:16 - SCBR.S-CBR-API - INFO -    處理時間: 66945ms
+2025-09-22 04:54:16 - SCBR.S-CBR-API - INFO -    推理輪數: 3
+2025-09-22 04:54:16 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 04:54:16 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 13:09:58 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-dc7c0bb8]
+2025-09-22 13:09:58 - SCBR.S-CBR-API - INFO -    問題: 18歲，女，月經過後瘋狂出血5天
+2025-09-22 13:09:58 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:09:58 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 13:09:58 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 13:09:58 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-dc7c0bb8]
+2025-09-22 13:09:58 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-dc7c0bb8]
+2025-09-22 13:09:58 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 18歲，女，月經過後瘋狂出血5天
+2025-09-22 13:09:58 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:09:58 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 13:09:58 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PatientCase', 'Pulse', 'Case', 'PulsePJ', 'RPCase', 'SCBRSpiralSessions', 'SCBRFeedbackCases', 'CMS', 'SymptomRelation', 'Tmc2', 'Tmc', 'PulseRecord']
+2025-09-22 13:09:59 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 13:09:59 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 13:09:59 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 13:09:59 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 1)
+2025-09-22 13:09:59 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 13:10:01 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 13:10:01 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 13:10:02 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 13:10:05 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 13:10:05 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 1)
+2025-09-22 13:10:13 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 13:10:13 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 1)
+2025-09-22 13:10:20 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 13:10:20 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 1)
+2025-09-22 13:10:42 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 13:10:42 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 13:10:42 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 13:10:42 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-dc7c0bb8]
+2025-09-22 13:10:42 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:10:42 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 13:10:42 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 13:10:42 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-dc7c0bb8]
+2025-09-22 13:10:42 - SCBR.S-CBR-API - INFO -    處理時間: 43739ms
+2025-09-22 13:10:42 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 13:10:42 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:10:42 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 13:11:22 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-c20e3611]
+2025-09-22 13:11:22 - SCBR.S-CBR-API - INFO -    問題: 還有他時常睡不著
+2025-09-22 13:11:22 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:11:22 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 13:11:22 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 13:11:22 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-c20e3611]
+2025-09-22 13:11:22 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-c20e3611]
+2025-09-22 13:11:22 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 還有他時常睡不著
+2025-09-22 13:11:22 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:11:22 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 13:11:22 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord', 'Pulse', 'PatientCase', 'PulsePJ', 'Case', 'RPCase']
+2025-09-22 13:11:23 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 13:11:23 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 13:11:23 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 13:11:23 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 1)
+2025-09-22 13:11:23 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 13:11:24 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 13:11:24 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 13:11:24 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 13:11:26 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 13:11:27 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 13:11:27 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 1)
+2025-09-22 13:11:33 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 13:11:33 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 1)
+2025-09-22 13:11:39 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 13:11:39 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 1)
+2025-09-22 13:11:48 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 13:11:48 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_023846_e0e55cd3, Round: 1
+2025-09-22 13:11:48 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 13:11:48 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-c20e3611]
+2025-09-22 13:11:48 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:11:48 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 13:11:48 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 13:11:48 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-c20e3611]
+2025-09-22 13:11:48 - SCBR.S-CBR-API - INFO -    處理時間: 26090ms
+2025-09-22 13:11:48 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 13:11:48 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 13:11:48 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO - 💾 S-CBR 案例儲存請求 [SAVE-20250922-9b4297c2]
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_023846_e0e55cd3
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    診斷數據: 482 個字符
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    對話記錄: 19 條
+2025-09-22 14:43:35 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-22 14:43:35 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-22 14:43:35 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 14:43:35 - SCBR.S-CBR-API - ERROR - RPCase 儲存失敗: Weaviate 客戶端不可用
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 案例儲存完成 [SAVE-20250922-9b4297c2]
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    案例ID: RP_20250922_144335_e0e55cd3
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    處理時間: 58ms
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    螺旋輪數: 1
+2025-09-22 14:43:35 - SCBR.S-CBR-API - INFO -    信心度: 0.88
+2025-09-22 14:43:37 - SCBR.SpiralSessionManager - INFO - 重置螺旋會話: spiral_20250922_023846_e0e55cd3
+2025-09-22 14:43:37 - SCBR.S-CBR-API - INFO - 🔄 會話 spiral_20250922_023846_e0e55cd3 已重置
+2025-09-22 15:09:49 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-f0272ad3]
+2025-09-22 15:09:49 - SCBR.S-CBR-API - INFO -    問題: 19歲，男，身體發臭與肥胖
+2025-09-22 15:09:49 - SCBR.S-CBR-API - INFO -    會話ID: None
+2025-09-22 15:09:49 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 15:09:49 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 15:09:49 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-f0272ad3]
+2025-09-22 15:09:49 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-f0272ad3]
+2025-09-22 15:09:49 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 19歲，男，身體發臭與肥胖
+2025-09-22 15:09:49 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: None
+2025-09-22 15:09:49 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 15:09:49 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250922_150949_e004c2c6
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PulsePJ', 'Case', 'RPCase', 'SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord', 'Pulse', 'PatientCase']
+2025-09-22 15:09:49 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 15:09:49 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 15:09:49 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 15:09:49 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_150949_e004c2c6, Round: 1
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 1)
+2025-09-22 15:09:49 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 15:09:51 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 15:09:51 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 15:09:51 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 15:09:54 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 15:09:54 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 1)
+2025-09-22 15:10:00 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 15:10:00 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 1)
+2025-09-22 15:10:06 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 15:10:06 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 1)
+2025-09-22 15:10:12 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 15:10:12 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_150949_e004c2c6, Round: 1
+2025-09-22 15:10:12 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 15:10:12 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-f0272ad3]
+2025-09-22 15:10:12 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_150949_e004c2c6
+2025-09-22 15:10:12 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 15:10:12 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 15:10:12 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-f0272ad3]
+2025-09-22 15:10:12 - SCBR.S-CBR-API - INFO -    處理時間: 23563ms
+2025-09-22 15:10:12 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 15:10:12 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_150949_e004c2c6
+2025-09-22 15:10:12 - SCBR.S-CBR-API - INFO -    可繼續: True
+2025-09-22 15:11:23 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250922-62701af3]
+2025-09-22 15:11:23 - SCBR.S-CBR-API - INFO -    問題: 且他時常睡不著覺
+2025-09-22 15:11:23 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_150949_e004c2c6
+2025-09-22 15:11:23 - SCBR.S-CBR-API - INFO -    繼續推理: False
+2025-09-22 15:11:23 - SCBR.S-CBR-API - INFO -    患者上下文: 0 個欄位
+2025-09-22 15:11:23 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250922-62701af3]
+2025-09-22 15:11:23 - SCBR.run_spiral_cbr_v2 - INFO - 🚀 啟動 S-CBR v2.0 螺旋推理 [REQ-20250922-62701af3]
+2025-09-22 15:11:23 - SCBR.run_spiral_cbr_v2 - INFO -    問題: 且他時常睡不著覺
+2025-09-22 15:11:23 - SCBR.run_spiral_cbr_v2 - INFO -    會話ID: spiral_20250922_150949_e004c2c6
+2025-09-22 15:11:23 - SCBR.run_spiral_cbr_v2 - INFO -    繼續推理: False
+2025-09-22 15:11:23 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord', 'Pulse', 'PatientCase', 'PulsePJ', 'Case', 'RPCase']
+2025-09-22 15:11:24 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-22 15:11:24 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-22 15:11:24 - SCBR.SCBREngine - INFO - S-CBR 引擎 v2.0 初始化完成
+2025-09-22 15:11:24 - SCBR.SCBREngine - INFO - 開始執行第 1 輪螺旋推理
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - 開始螺旋推理 v2.1 - Session: spiral_20250922_150949_e004c2c6, Round: 1
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - 已使用案例數: 0
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - Step 1 - 案例檢索 v2.1 (Round 1)
+2025-09-22 15:11:24 - SCBR.SpiralCBREngine - INFO - Embedding 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1, Key=有
+2025-09-22 15:11:25 - SCBR.SpiralCBREngine - ERROR - ❌ NVIDIA Embedding API 錯誤: 400 - {"error":"'input_type' parameter is required for asymmetric models"}
+2025-09-22 15:11:25 - SCBR.SpiralCBREngine - INFO - 嘗試使用 LLM 客戶端生成向量
+2025-09-22 15:11:25 - SCBR.SpiralCBREngine - WARNING - 通過 LLM 客戶端生成向量失敗: 404 page not found
+2025-09-22 15:11:27 - SCBR.SpiralCBREngine - INFO - ✅ 生成 384 維向量 (SentenceTransformers)
+2025-09-22 15:11:27 - SCBR.SpiralCBREngine - INFO - 從 Case 知識庫檢索到 0 個案例
+2025-09-22 15:11:27 - SCBR.SpiralCBREngine - INFO - Case 知識庫檢索: 0 個案例
+2025-09-22 15:11:27 - SCBR.SpiralCBREngine - INFO - 從 PulsePJ 知識庫檢索到 0 個脈象知識
+2025-09-22 15:11:27 - SCBR.SpiralCBREngine - INFO - PulsePJ 知識庫檢索: 0 個脈象知識
+2025-09-22 15:11:28 - SCBR.RPCaseManager - INFO - 檢索到 0 個相似的回饋案例
+2025-09-22 15:11:28 - SCBR.SpiralCBREngine - INFO - RPCase 知識庫檢索: 0 個回饋案例
+2025-09-22 15:11:28 - SCBR.SpiralCBREngine - INFO - Step 1 完成 - 總檢索案例數: 0
+2025-09-22 15:11:28 - SCBR.SpiralCBREngine - WARNING - 未檢索到任何案例，使用模擬案例
+2025-09-22 15:11:28 - SCBR.SpiralCBREngine - INFO - Step 2 - 案例適配 v2.1 (Round 1)
+2025-09-22 15:11:33 - SCBR.SpiralCBREngine - INFO - Step 2 案例適配完成
+2025-09-22 15:11:33 - SCBR.SpiralCBREngine - INFO - Step 3 - 方案監控 v2.1 (Round 1)
+2025-09-22 15:11:39 - SCBR.SpiralCBREngine - INFO - Step 3 方案監控完成
+2025-09-22 15:11:39 - SCBR.SpiralCBREngine - INFO - Step 4 - 反饋學習 v2.1 (Round 1)
+2025-09-22 15:11:45 - SCBR.SpiralCBREngine - INFO - Step 4 反饋學習完成
+2025-09-22 15:11:45 - SCBR.SpiralCBREngine - INFO - 螺旋推理 v2.1 完成 - Session: spiral_20250922_150949_e004c2c6, Round: 1
+2025-09-22 15:11:45 - SCBR.SCBREngine - INFO - 第 1 輪螺旋推理完成
+2025-09-22 15:11:45 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.0 螺旋推理完成 [REQ-20250922-62701af3]
+2025-09-22 15:11:45 - SCBR.run_spiral_cbr_v2 - INFO -    會話: spiral_20250922_150949_e004c2c6
+2025-09-22 15:11:45 - SCBR.run_spiral_cbr_v2 - INFO -    輪次: 1
+2025-09-22 15:11:45 - SCBR.run_spiral_cbr_v2 - INFO -    可繼續: True
+2025-09-22 15:11:45 - SCBR.S-CBR-API - INFO - ✅ S-CBR v2.0 查詢完成 [REQ-20250922-62701af3]
+2025-09-22 15:11:45 - SCBR.S-CBR-API - INFO -    處理時間: 22016ms
+2025-09-22 15:11:45 - SCBR.S-CBR-API - INFO -    推理輪數: 1
+2025-09-22 15:11:45 - SCBR.S-CBR-API - INFO -    會話ID: spiral_20250922_150949_e004c2c6
+2025-09-22 15:11:45 - SCBR.S-CBR-API - INFO -    可繼續: True
