@@ -221,3 +221,63 @@
 2025-09-23 01:28:41,026 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-23 01:28:41,026 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
 2025-09-23 01:28:41,026 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 01:28:44,289 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 01:28:44,295 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 01:28:44,295 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 01:28:44,295 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 01:28:44,295 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 01:28:44,296 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 01:28:44,296 [INFO] backend.main - Application startup completed.
+2025-09-23 01:33:26,863 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:33:26,864 [INFO] cases.case_storage - [20250923_013326_8636] [1/4 save] saved original file=20250923_013326_8636.json
+2025-09-23 01:33:26,864 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-23 01:33:26,864 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=67
+2025-09-23 01:33:26,864 [INFO] cases.case_storage - [20250923_013326_8636] [2/4 normalize] gender=男 age=67
+2025-09-23 01:33:26,878 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook_v1.1.json version=1.1 rules=520
+2025-09-23 01:33:28,349 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:33:28,350 [INFO] cases.case_storage - [20250923_013326_8636] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-23 01:33:28,397 [INFO] vector.uploader - [20250923_013326_8636] [4/4 upload] age before send: value=67 type=int → send as str='67'
+2025-09-23 01:33:28,397 [INFO] vector.uploader - [20250923_013326_8636] [4/4 upload] prepare record
+2025-09-23 01:33:28,449 [ERROR] cases.case_storage - [20250923_013326_8636] [4/4 upload] failed: Creating object! Unexpected status code: 500, with response body: {'error': [{'message': 'put object: import into index case: put local object: shard="ZmJ2sPr9qHQx": store object in LSM store: Validate vector index for d327d41d-bf4f-441e-a262-0f880826316f: new node has a vector with length 1024. Existing nodes have vectors with length 384'}]}.
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\cases\case_storage.py", line 71, in save_case_data
+    case_id = upload_case_vector(view=view, diag=diag, file_path=data_path, req_id=req_id)
+  File "C:\work\系統-中醫\Pulse-project\Backend\vector\uploader.py", line 119, in upload_case_vector
+    client.data_object.create(data_object=obj, class_name=CLASS_NAME, vector=emb)
+  File "C:\Users\a0970\anaconda3\envs\Rag\lib\site-packages\weaviate\data\crud_data.py", line 159, in create
+    raise UnexpectedStatusCodeException("Creating object", response)
+weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected status code: 500, with response body: {'error': [{'message': 'put object: import into index case: put local object: shard="ZmJ2sPr9qHQx": store object in LSM store: Validate vector index for d327d41d-bf4f-441e-a262-0f880826316f: new node has a vector with length 1024. Existing nodes have vectors with length 384'}]}.
+2025-09-23 01:33:28,451 [ERROR] backend.main - ❌ 病例存儲失敗: None
+2025-09-23 01:37:52,233 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 01:37:52,233 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 01:37:52,233 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 01:37:55,656 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 01:37:55,663 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 01:37:55,664 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 01:37:55,664 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 01:37:55,664 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 01:37:55,664 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 01:37:55,664 [INFO] backend.main - Application startup completed.
+2025-09-23 01:38:11,175 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 01:38:11,175 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 01:38:11,175 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 01:38:14,718 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 01:38:14,723 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 01:38:14,723 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 01:38:14,723 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 01:38:14,723 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 01:38:14,724 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 01:38:14,724 [INFO] backend.main - Application startup completed.
+2025-09-23 01:38:27,029 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 01:38:27,029 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 01:38:27,029 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 01:38:30,193 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 01:38:30,198 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 01:38:30,198 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 01:38:30,198 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 01:38:30,198 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 01:38:30,198 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 01:38:30,198 [INFO] backend.main - Application startup completed.
+2025-09-23 01:38:39,694 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 01:38:39,694 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 01:38:39,694 [INFO] backend.main - 🔻 Application shutdown completed.

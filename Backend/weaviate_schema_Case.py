@@ -37,7 +37,6 @@ def ensure_case_class():
             {"name": "pulse_tags", "dataType": ["text[]"]},
             {"name": "summary_text", "dataType": ["text"]},
             {"name": "summary", "dataType": ["text"]},
-            # 如需多值，建議改 text[]；目前 uploader 以字串存單欄避免 422
             {"name": "diagnosis_main", "dataType": ["text"]},
             {"name": "diagnosis_sub", "dataType": ["text"]},
             {"name": "llm_struct", "dataType": ["text"]},
