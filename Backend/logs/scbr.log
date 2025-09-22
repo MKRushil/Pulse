@@ -831,3 +831,29 @@
 2025-09-23 04:39:37 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-5b471352]
 2025-09-23 05:06:06 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
 2025-09-23 05:06:06 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-23 05:10:29 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 05:10:29 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-23 05:23:56 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 05:23:56 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-23 05:23:56 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250923-e3026d1c]
+2025-09-23 05:23:56 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 失眠多夢
+2025-09-23 05:23:56 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-23 05:23:56 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-23 05:23:56 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-23 05:23:56 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250923_052356_1a6bd7fa_146 (總會話數: 1)
+2025-09-23 05:23:56 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250923_052356_1a6bd7fa_146
+2025-09-23 05:23:56 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PatientCase', 'Pulse', 'Case', 'PulsePJ', 'RPCase', 'SCBRSpiralSessions', 'SCBRFeedbackCases', 'CMS', 'SymptomRelation', 'Tmc2', 'Tmc', 'PulseRecord']
+2025-09-23 05:23:57 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在
+2025-09-23 05:23:57 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-23 05:23:57 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-23 05:23:57 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-23 05:23:57 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-23 05:23:57 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-23 05:23:57 - SCBR.run_spiral_cbr_v2 - ERROR - ❌ S-CBR v2.1 螺旋推理失敗 [REQ-20250923-e3026d1c]: 'SpiralCBREngine' object has no attribute 'execute_spiral_reasoning'
+2025-09-23 05:23:57 - SCBR.S-CBR-API - ERROR - ❌ S-CBR v2.1 處理失敗 [REQ-20250923-e3026d1c]: 'SpiralLogger' object has no attribute 'exception'

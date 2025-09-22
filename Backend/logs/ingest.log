@@ -986,3 +986,23 @@ weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected s
 2025-09-23 05:05:57,781 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-23 05:05:57,781 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
 2025-09-23 05:05:57,781 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 05:06:01,020 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 05:06:01,025 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 05:06:01,025 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 05:06:01,025 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 05:06:01,025 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 05:06:01,025 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 05:06:01,025 [INFO] backend.main - Application startup completed.
+2025-09-23 05:09:30,969 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 05:09:30,969 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 05:09:30,970 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 05:10:16,612 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 05:10:16,616 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 05:10:16,617 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 05:10:16,617 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 05:10:16,617 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 05:10:16,617 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 05:10:16,617 [INFO] backend.main - Application startup completed.
+2025-09-23 05:23:42,906 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 05:23:42,906 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 05:23:42,906 [INFO] backend.main - 🔻 Application shutdown completed.

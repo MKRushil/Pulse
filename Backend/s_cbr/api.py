@@ -149,7 +149,7 @@ async def api_query(request: Request):
         run_spiral_cbr_v2, _, _ = _get_spiral_components()
         session_manager = _get_session_manager()
 
-        if not run_spiral_cbr_v2 or not session_manager:
+        if run_spiral_cbr_v2 is None or session_manager is None:
             raise HTTPException(
                 status_code=503,
                 detail={
