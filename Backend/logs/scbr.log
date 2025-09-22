@@ -797,3 +797,37 @@
 2025-09-23 03:15:59 - SCBR.S-CBR-API - INFO -    可繼續: True
 2025-09-23 03:28:44 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
 2025-09-23 03:28:44 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-84c88144]
+2025-09-23 03:56:25 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 03:56:25 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-81a6fff6]
+2025-09-23 04:07:27 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:07:27 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-d12a0b97]
+2025-09-23 04:08:59 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:08:59 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-151abd11]
+2025-09-23 04:09:07 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-05db6a6b]
+2025-09-23 04:18:13 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:18:13 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:18:13 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-64ef7825]
+2025-09-23 04:22:21 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO - 🔄 S-CBR 螺旋查詢請求 [REQ-20250923-55aedb30]
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO -  問題: 失眠多夢
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO -  會話ID: None
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO -  繼續推理: False
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO -  患者上下文: 0 個欄位
+2025-09-23 04:22:21 - SCBR.S-CBR-API - INFO - 🧠 啟動螺旋推理引擎 v2.0 [REQ-20250923-55aedb30]
+2025-09-23 04:22:21 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.0 螺旋推理啟動 [REQ-20250923-55aedb30]
+2025-09-23 04:22:21 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 失眠多夢
+2025-09-23 04:22:21 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-23 04:22:21 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-23 04:22:21 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-23 04:22:21 - SCBR.run_spiral_cbr_v2 - ERROR - ❌ S-CBR v2.0 螺旋推理失敗 [REQ-20250923-55aedb30]: SpiralSessionManager.create_session() takes 2 positional arguments but 3 were given
+2025-09-23 04:22:21 - SCBR.S-CBR-API - ERROR - ❌ S-CBR v2.0 處理失敗 [REQ-20250923-55aedb30]: 'SpiralLogger' object has no attribute 'exception'
+2025-09-23 04:23:38 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:23:38 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-c2f080f6]
+2025-09-23 04:34:32 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:34:32 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-2f278288]
+2025-09-23 04:39:37 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:39:37 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器初始化成功
+2025-09-23 04:39:37 - SCBR.S-CBR-API - ERROR - 會話管理器初始化失敗 [REQ-20250923-5b471352]
+2025-09-23 05:06:06 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 05:06:06 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)

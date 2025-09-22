@@ -26,21 +26,25 @@ def _get_spiral_components():
     懶載入螺旋推理組件
     
     Returns:
-        tuple: (run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger)
+    tuple: (run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger)
     """
     try:
-        from .main import run_spiral_cbr_v2, SpiralSessionManager
-        from .utils.spiral_logger import SpiralLogger
+        # 🔧 修正：分別從正確路徑導入
+        from s_cbr.main import run_spiral_cbr_v2
+        from s_cbr.sessions.spiral_session_manager import SpiralSessionManager
+        from s_cbr.utils.spiral_logger import SpiralLogger
         return run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger
     except ImportError as e:
         logging.error(f"無法載入 S-CBR 組件: {e}")
         return None, None, None
 
+
+
 def _get_config_components():
     """懶載入配置組件"""
     try:
-        from .config.scbr_config import SCBRConfig
-        from .utils.api_manager import SCBRAPIManager
+        from s_cbr.config.scbr_config import SCBRConfig
+        from s_cbr.utils.api_manager import SCBRAPIManager
         return SCBRConfig, SCBRAPIManager
     except ImportError as e:
         logging.error(f"無法載入配置組件: {e}")
@@ -49,7 +53,7 @@ def _get_config_components():
 def _get_memory_components():
     """懶載入記憶組件"""
     try:
-        from .knowledge.spiral_memory import SpiralMemory
+        from s_cbr.knowledge.spiral_memory import SpiralMemory
         return SpiralMemory
     except ImportError as e:
         logging.error(f"無法載入記憶組件: {e}")
@@ -58,23 +62,17 @@ def _get_memory_components():
 def _get_rpcase_components():
     """懶載入 RPCase 組件"""
     try:
-        from .knowledge.rpcase_manager import RPCaseManager
+        from s_cbr.knowledge.rpcase_manager import RPCaseManager
         return RPCaseManager
     except ImportError as e:
         logging.error(f"無法載入 RPCase 組件: {e}")
         return None
 
 # 初始化日誌（優先使用螺旋日誌器）
-try:
-    _, _, SpiralLogger = _get_spiral_components()
-    if SpiralLogger:
-        logger = SpiralLogger.get_logger("S-CBR-API")
-    else:
-        logger = logging.getLogger("S-CBR-API")
-except Exception:
-    logger = logging.getLogger("S-CBR-API")
+_, _, SpiralLogger = _get_spiral_components()
+logger = SpiralLogger.get_logger("S-CBR-API") if SpiralLogger else logging.getLogger("S-CBR-API")
 
-# 全局會話管理器（懶載入）
+# 全域會話管理器 (單例)
 _session_manager = None
 
 def _get_session_manager():
@@ -82,18 +80,20 @@ def _get_session_manager():
     獲取會話管理器實例（懶載入）
     
     Returns:
-        SpiralSessionManager: 會話管理器實例
+    SpiralSessionManager: 會話管理器實例
     """
     global _session_manager
     if _session_manager is None:
         _, SpiralSessionManager, _ = _get_spiral_components()
         if SpiralSessionManager:
             try:
-                _session_manager = SpiralSessionManager()
-                logger.info("✅ 螺旋會話管理器初始化成功")
+                _session_manager = SpiralSessionManager.get_instance()
+                logger.info("✅ 螺旋會話管理器就緒 (單例)")
             except Exception as e:
                 logger.error(f"❌ 螺旋會話管理器初始化失敗: {e}")
                 _session_manager = None
+        else:
+            logger.error("❌ SpiralSessionManager 類別為 None")
     return _session_manager
 
 @router.post("/query")
@@ -103,105 +103,75 @@ async def api_query(request: Request):
     
     入參 JSON:
     {
-        "question": "患者症狀描述...",
-        "patient_ctx": { // 可選患者上下文
-            "age": 35,
-            "gender": "女",
-            "chief_complaint": "主訴...",
-            "pulse_text": "脈診描述..."
-        },
-        "session_id": "session_uuid", // 可選，用於續接會話
-        "continue": false, // 可選，是否繼續推理
-        "patient_id": "compatibility_field" // 兼容性欄位
+    "question": "患者症狀描述...",
+    "patient_ctx": { // 可選患者上下文
+    "age": 35,
+    "gender": "女",
+    "chief_complaint": "主訴...",
+    "pulse_text": "脈診描述..."
+    },
+    "session_id": "session_uuid", // 可選，用於續接會話
+    "continue": false, // 可選，是否繼續推理
+    "patient_id": "compatibility_field" // 兼容性欄位
     }
     
     出參 JSON:
     {
-        "dialog": "🌀 第X輪螺旋推理結果\\n診斷: ...",
-        "session_id": "session_uuid",
-        "continue_available": true,
-        "round": 2,
-        "llm_struct": {
-            "main_dx": "主要診斷",
-            "confidence": 0.86,
-            "case_used": "使用的案例摘要",
-            "safety_score": 0.82,
-            "efficacy_score": 0.76
-        },
-        "trace_id": "REQ-20250914-xxxx",
-        "session_info": {
-            "spiral_rounds": 2,
-            "used_cases_count": 2,
-            "processing_time_ms": 1250
-        },
-        "version": "2.0"
+    "dialog": "🌀 第X輪螺旋推理結果\\n診斷: ...",
+    "session_id": "session_uuid",
+    "continue_available": true,
+    "round": 2,
+    "llm_struct": {
+    "main_dx": "主要診斷",
+    "confidence": 0.86,
+    "case_used": "使用的案例摘要",
+    "safety_score": 0.82,
+    "efficacy_score": 0.76
+    },
+    "trace_id": "REQ-20250914-xxxx",
+    "session_info": {
+    "spiral_rounds": 2,
+    "used_cases_count": 2,
+    "processing_time_ms": 1250
+    },
+    "evaluation_metrics": {
+      "cms": {"name": "案例匹配相似性", "score": 7.5, "max_score": 10},
+      "rci": {"name": "推理一致性指標", "score": 8.2, "max_score": 10},
+      "sals": {"name": "系統自適應學習", "score": 6.8, "max_score": 10}
+    },
+    "version": "2.0"
     }
     """
     start_time = datetime.now()
     trace_id = f"REQ-{start_time.strftime('%Y%m%d')}-{str(uuid.uuid4())[:8]}"
     
     try:
-        # 懶載入組件
-        run_spiral_cbr_v2, SpiralSessionManager, SpiralLogger = _get_spiral_components()
-        
-        if not run_spiral_cbr_v2 or not SpiralSessionManager:
-            logger.error(f"S-CBR 組件載入失敗 [{trace_id}]")
-            raise HTTPException(
-                status_code=503,
-                detail={
-                    "error": "S-CBR 螺旋推理引擎不可用",
-                    "message": "無法載入螺旋推理組件，請檢查模組依賴",
-                    "trace_id": trace_id,
-                    "version": "2.0"
-                }
-            )
-        
-        # 獲取會話管理器
+        run_spiral_cbr_v2, _, _ = _get_spiral_components()
         session_manager = _get_session_manager()
-        if not session_manager:
-            logger.error(f"會話管理器初始化失敗 [{trace_id}]")
+
+        if not run_spiral_cbr_v2 or not session_manager:
             raise HTTPException(
                 status_code=503,
                 detail={
                     "error": "會話管理器不可用",
                     "message": "無法初始化會話管理器",
                     "trace_id": trace_id,
-                    "version": "2.0"
+                    "version": "2.1"
                 }
             )
-        
-        # 解析請求
+
         body = await request.json()
         question = body.get("question") or body.get("query")
         patient_ctx = body.get("patient_ctx") or {}
         session_id = body.get("session_id")
         continue_spiral = body.get("continue", False)
-        
-        # 兼容性處理
-        if body.get("patient_id") and not patient_ctx.get("patient_id"):
-            patient_ctx["patient_id"] = body.get("patient_id")
-        
-        # 驗證必要參數
+
         if not question or not question.strip():
             raise HTTPException(
                 status_code=400,
-                detail={
-                    "error": "缺少必要參數",
-                    "message": "請提供 'question' 欄位",
-                    "trace_id": trace_id,
-                    "version": "2.0"
-                }
+                detail={"error": "缺少必要參數", "trace_id": trace_id, "version": "2.1"}
             )
-        
-        # 記錄請求
-        logger.info(f"🔄 S-CBR 螺旋查詢請求 [{trace_id}]")
-        logger.info(f"   問題: {question[:100]}{'...' if len(question) > 100 else ''}")
-        logger.info(f"   會話ID: {session_id}")
-        logger.info(f"   繼續推理: {continue_spiral}")
-        logger.info(f"   患者上下文: {len(patient_ctx)} 個欄位")
-        
-        # 調用螺旋推理引擎 v2.0
-        logger.info(f"🧠 啟動螺旋推理引擎 v2.0 [{trace_id}]")
+
         spiral_result = await run_spiral_cbr_v2(
             question=question,
             patient_ctx=patient_ctx,
@@ -210,13 +180,10 @@ async def api_query(request: Request):
             trace_id=trace_id,
             session_manager=session_manager
         )
-        
-        # 計算處理時間
+
         processing_time = (datetime.now() - start_time).total_seconds() * 1000
-        
-        # 構建回應 v2.0
         response = {
-            "dialog": spiral_result.get("dialog", "推理完成，請查看結構化結果。"),
+            "dialog": spiral_result.get("dialog"),
             "session_id": spiral_result.get("session_id"),
             "continue_available": spiral_result.get("continue_available", False),
             "round": spiral_result.get("round", 1),
@@ -226,73 +193,23 @@ async def api_query(request: Request):
                 "spiral_rounds": spiral_result.get("spiral_rounds", 1),
                 "used_cases_count": spiral_result.get("used_cases_count", 0),
                 "total_steps": spiral_result.get("total_steps", 4),
-                "processing_time_ms": int(processing_time),
-                "converged": spiral_result.get("converged", False)
+                "processing_time_ms": int(processing_time)
             },
-            "version": "2.0",
+            "version": "2.1",
             "timestamp": start_time.isoformat()
         }
-        
-        # 記錄成功
-        logger.info(f"✅ S-CBR v2.0 查詢完成 [{trace_id}]")
-        logger.info(f"   處理時間: {processing_time:.0f}ms")
-        logger.info(f"   推理輪數: {response['session_info']['spiral_rounds']}")
-        logger.info(f"   會話ID: {response['session_id']}")
-        logger.info(f"   可繼續: {response['continue_available']}")
-        
         return JSONResponse(response)
-        
+
     except HTTPException:
-        # FastAPI HTTPException 直接拋出
         raise
     except Exception as e:
-        # 記錄錯誤
-        processing_time = (datetime.now() - start_time).total_seconds() * 1000
-        logger.error(f"❌ S-CBR v2.0 處理失敗 [{trace_id}]: {str(e)}")
-        logger.exception("詳細錯誤資訊")
-        
-        # 構建錯誤回應
-        error_response = {
-            "error": "S-CBR v2.0 螺旋推理引擎處理失敗",
-            "detail": str(e),
-            "trace_id": trace_id,
-            "processing_time_ms": int(processing_time),
-            "timestamp": start_time.isoformat(),
-            "version": "2.0"
-        }
-        
-        raise HTTPException(
-            status_code=500,
-            detail=error_response
-        )
+        logger.error(f"❌ S-CBR v2.1 處理失敗 [{trace_id}]: {str(e)}")
+        raise HTTPException(status_code=500, detail={"error": str(e), "trace_id": trace_id, "version": "2.1"})
 
 @router.post("/case/save-feedback")
 async def save_feedback_case(request: Request):
     """
     儲存螺旋推理回饋案例到 RPCase 知識庫 v2.0
-    
-    入參 JSON:
-    {
-        "session_id": "session_uuid",
-        "diagnosis": {
-            "main_dx": "主要診斷",
-            "confidence": 0.86,
-            "safety_score": 0.82,
-            "efficacy_score": 0.76
-        },
-        "conversation_history": [...],
-        "user_feedback": "案例品質評估",
-        "save_as_rpcase": true
-    }
-    
-    出參 JSON:
-    {
-        "status": "success",
-        "message": "回饋案例儲存成功",
-        "case_id": "RP_20250922_010235_abc123",
-        "rpcase_info": {...},
-        "timestamp": "2025-09-22T01:02:35.123456"
-    }
     """
     start_time = datetime.now()
     trace_id = f"SAVE-{start_time.strftime('%Y%m%d')}-{str(uuid.uuid4())[:8]}"
@@ -317,38 +234,45 @@ async def save_feedback_case(request: Request):
         
         # 記錄請求
         logger.info(f"💾 S-CBR 案例儲存請求 [{trace_id}]")
-        logger.info(f"   會話ID: {session_id}")
-        logger.info(f"   診斷數據: {len(str(diagnosis))} 個字符")
-        logger.info(f"   對話記錄: {len(conversation_history)} 條")
+        logger.info(f" 會話ID: {session_id}")
+        logger.info(f" 診斷數據: {len(str(diagnosis))} 個字符")
+        logger.info(f" 對話記錄: {len(conversation_history)} 條")
         
         # 從會話管理器獲取會話信息
         session_manager = _get_session_manager()
-        if not session_manager or session_id not in session_manager.sessions:
-            raise HTTPException(
-                status_code=404,
-                detail={
-                    "error": "會話不存在或已過期",
-                    "message": f"無法找到會話 {session_id}",
-                    "trace_id": trace_id
-                }
-            )
-        
-        session = session_manager.sessions[session_id]
+        if not session_manager:
+            # 如果沒有會話管理器，創建模擬會話信息
+            session_mock = type('Session', (), {
+                'original_query': body.get("original_question", ""),
+                'round_count': 1,
+                'used_cases': []
+            })()
+        else:
+            sessions = getattr(session_manager, 'sessions', {})
+            if session_id in sessions:
+                session_mock = sessions[session_id]
+            else:
+                # 創建模擬會話信息
+                session_mock = type('Session', (), {
+                    'original_query': body.get("original_question", ""),
+                    'round_count': 1,
+                    'used_cases': []
+                })()
         
         # 生成 RPCase ID
-        rpcase_id = f"RP_{start_time.strftime('%Y%m%d_%H%M%S')}_{session_id.split('_')[-1]}"
+        rpcase_id = f"RP_{start_time.strftime('%Y%m%d_%H%M%S')}_{str(uuid.uuid4())[:8]}"
         
         # 構建回饋案例數據
         rpcase_data = {
             "rpcase_id": rpcase_id,
-            "original_question": session.original_query,
+            "original_question": getattr(session_mock, 'original_query', ''),
             "patient_context": json.dumps({
                 "conversation_messages": len(conversation_history),
-                "spiral_rounds": session.round_count,
-                "used_cases": session.used_cases
+                "spiral_rounds": getattr(session_mock, 'round_count', 1),
+                "used_cases": getattr(session_mock, 'used_cases', [])
             }, ensure_ascii=False),
-            "spiral_rounds": session.round_count,
-            "used_cases": session.used_cases,
+            "spiral_rounds": getattr(session_mock, 'round_count', 1),
+            "used_cases": getattr(session_mock, 'used_cases', []),
             "final_diagnosis": diagnosis.get("main_dx", "") or str(diagnosis.get("diagnosis", "")),
             "treatment_plan": str(diagnosis.get("treatment_plan", "")),
             "reasoning_process": json.dumps(diagnosis, ensure_ascii=False),
@@ -360,9 +284,9 @@ async def save_feedback_case(request: Request):
             "conversation_history": json.dumps(conversation_history, ensure_ascii=False),
             "created_timestamp": start_time.isoformat(),
             "updated_timestamp": start_time.isoformat(),
-            "tags": ["user_approved", "spiral_reasoning", f"round_{session.round_count}"],
-            "complexity_level": min(session.round_count, 5),
-            "success_rate": 1.0,  # 用戶主動儲存，視為成功
+            "tags": ["user_approved", "spiral_reasoning", f"round_{getattr(session_mock, 'round_count', 1)}"],
+            "complexity_level": min(getattr(session_mock, 'round_count', 1), 5),
+            "success_rate": 1.0, # 用戶主動儲存，視為成功
             "reuse_count": 0,
             "source_type": "spiral_feedback"
         }
@@ -402,10 +326,10 @@ async def save_feedback_case(request: Request):
         # 記錄成功
         processing_time = (datetime.now() - start_time).total_seconds() * 1000
         logger.info(f"✅ S-CBR v2.0 案例儲存完成 [{trace_id}]")
-        logger.info(f"   案例ID: {rpcase_id}")
-        logger.info(f"   處理時間: {processing_time:.0f}ms")
-        logger.info(f"   螺旋輪數: {rpcase_data['spiral_rounds']}")
-        logger.info(f"   信心度: {rpcase_data['confidence_score']:.2f}")
+        logger.info(f" 案例ID: {rpcase_id}")
+        logger.info(f" 處理時間: {processing_time:.0f}ms")
+        logger.info(f" 螺旋輪數: {rpcase_data['spiral_rounds']}")
+        logger.info(f" 信心度: {rpcase_data['confidence_score']:.2f}")
         
         return JSONResponse(response)
         
@@ -430,14 +354,7 @@ async def save_feedback_case(request: Request):
 
 @router.post("/spiral-reset")
 async def reset_spiral_session(request: Request):
-    """
-    重置螺旋推理會話
-    
-    入參 JSON:
-    {
-        "session_id": "session_uuid" // 可選，不提供則重置所有會話
-    }
-    """
+    """重置螺旋推理會話"""
     try:
         body = await request.json()
         session_id = body.get("session_id")
@@ -481,9 +398,7 @@ async def reset_spiral_session(request: Request):
 
 @router.get("/spiral-sessions")
 async def get_spiral_sessions():
-    """
-    獲取當前活躍的螺旋推理會話
-    """
+    """獲取當前活躍的螺旋推理會話"""
     try:
         session_manager = _get_session_manager()
         if not session_manager:
@@ -517,9 +432,7 @@ async def get_spiral_sessions():
 
 @router.get("/scbr/health")
 async def scbr_health_check():
-    """
-    S-CBR 系統詳細健康檢查 v2.0
-    """
+    """S-CBR 系統詳細健康檢查 v2.0"""
     try:
         SCBRConfig, SCBRAPIManager = _get_config_components()
         
@@ -598,9 +511,7 @@ async def scbr_health_check():
 
 @router.get("/scbr/stats")
 async def scbr_statistics():
-    """
-    S-CBR 系統統計資訊 v2.0
-    """
+    """S-CBR 系統統計資訊 v2.0"""
     try:
         SpiralMemory = _get_memory_components()
         
@@ -666,9 +577,7 @@ async def scbr_statistics():
 
 @router.post("/scbr/reset")
 async def scbr_reset_memory():
-    """
-    重置 S-CBR 記憶庫（開發和調試用）v2.0
-    """
+    """重置 S-CBR 記憶庫（開發和調試用）v2.0"""
     try:
         SpiralMemory = _get_memory_components()
         

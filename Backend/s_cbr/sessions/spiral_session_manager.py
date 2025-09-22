@@ -11,19 +11,9 @@
 import datetime
 import hashlib
 import threading
+import logging
 from typing import Dict, List, Optional, Any
 from .spiral_session import SpiralSession
-
-# 動態導入logger，避免循環導入
-try:
-    from ..utils.spiral_logger import SpiralLogger
-except ImportError:
-    # 降級處理，使用標準logging
-    import logging
-    class SpiralLogger:
-        @staticmethod
-        def get_logger(name):
-            return logging.getLogger(name)
 
 class SpiralSessionManager:
     """
@@ -36,7 +26,9 @@ class SpiralSessionManager:
     - 會話統計與監控
     - 線程安全的會話操作
     """
-    
+    _instance: Optional["SpiralSessionManager"] = None
+    _lock = threading.Lock()
+
     def __init__(self, max_sessions: int = 1000):
         """
         初始化會話管理器
@@ -44,14 +36,71 @@ class SpiralSessionManager:
         Args:
             max_sessions: 最大同時活躍會話數
         """
+        if getattr(self, "_initialized", False):
+            return
+
         self.sessions: Dict[str, SpiralSession] = {}
         self.max_sessions = max_sessions
-        self.logger = SpiralLogger.get_logger("SpiralSessionManager")
-        self._lock = threading.Lock()  # 線程安全鎖
+        self.logger = self._init_safe_logger()
+        self._lock = threading.Lock()
         self._last_cleanup = datetime.datetime.now()
-        
+        self._initialized = True
+
         self.logger.info(f"螺旋會話管理器初始化 - 最大會話數: {max_sessions}")
+    
+    @classmethod
+    def get_instance(cls, max_sessions: int = 1000) -> "SpiralSessionManager":
+        """取得全域唯一實例"""
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = cls(max_sessions=max_sessions)
+        return cls._instance
+    
+
+    def _init_safe_logger(self):
+        """安全的日誌器初始化，避免循環依賴"""
+        try:
+            # 🔧 修正：使用延遲導入避免循環依賴
+            from ..utils.spiral_logger import SpiralLogger
+            return SpiralLogger.get_logger("SpiralSessionManager")
+        except ImportError:
+            # 降級處理，使用標準logging
+            return logging.getLogger("SpiralSessionManager")
+        except Exception:
+            # 最後的安全網
+            logger = logging.getLogger("SpiralSessionManager")
+            logger.warning("SpiralLogger 初始化失敗，使用標準 logger")
+            return logger
+    
+    def create_session(self, query: str, patient_ctx: Optional[Dict] = None) -> str:
+        """
+        🔧 新增：創建新會話的方法
         
+        Args:
+            query: 查詢字符串
+            patient_ctx: 患者上下文（可選）
+        
+        Returns:
+            str: 會話ID
+        """
+        with self._lock:
+            # 自動清理過期會話
+            self._auto_cleanup_if_needed()
+            
+            session_id = self._generate_session_id(query)
+            
+            # 檢查會話數量限制
+            if len(self.sessions) >= self.max_sessions:
+                self._cleanup_oldest_sessions(int(self.max_sessions * 0.1))
+            
+            session = SpiralSession(session_id)
+            session.update_query(query)
+            self.sessions[session_id] = session
+            
+            self.logger.info(f"創建新螺旋會話: {session_id} (總會話數: {len(self.sessions)})")
+            return session_id
+    
     def get_or_create_session(self, session_id: Optional[str], query: str) -> SpiralSession:
         """
         獲取或創建會話
@@ -59,7 +108,7 @@ class SpiralSessionManager:
         Args:
             session_id: 會話ID，如果為None則自動生成
             query: 查詢字符串
-            
+        
         Returns:
             SpiralSession: 會話實例
         """
@@ -69,7 +118,7 @@ class SpiralSessionManager:
             
             if not session_id:
                 session_id = self._generate_session_id(query)
-                
+            
             if session_id not in self.sessions:
                 # 檢查會話數量限制
                 if len(self.sessions) >= self.max_sessions:
@@ -82,7 +131,7 @@ class SpiralSessionManager:
             else:
                 session = self.sessions[session_id]
                 session.update_query(query)  # 檢查查詢是否更新
-                
+            
             return self.sessions[session_id]
     
     def _generate_session_id(self, query: str) -> str:
@@ -91,7 +140,7 @@ class SpiralSessionManager:
         
         Args:
             query: 查詢字符串
-            
+        
         Returns:
             str: 生成的會話ID
         """
@@ -114,12 +163,25 @@ class SpiralSessionManager:
         
         Args:
             session_id: 會話ID
-            
+        
         Returns:
             Optional[SpiralSession]: 會話實例，如果不存在則返回None
         """
         with self._lock:
             return self.sessions.get(session_id)
+    
+    def update_session(self, session_id: str, session: SpiralSession):
+        """
+        🔧 新增：更新會話的方法
+        
+        Args:
+            session_id: 會話ID
+            session: 會話實例
+        """
+        with self._lock:
+            if session_id in self.sessions:
+                self.sessions[session_id] = session
+                self.logger.debug(f"更新會話: {session_id}")
     
     def session_exists(self, session_id: str) -> bool:
         """
@@ -127,7 +189,7 @@ class SpiralSessionManager:
         
         Args:
             session_id: 會話ID
-            
+        
         Returns:
             bool: True 表示存在，False 表示不存在
         """
@@ -140,7 +202,7 @@ class SpiralSessionManager:
         
         Args:
             session_id: 要重置的會話ID
-            
+        
         Returns:
             bool: True 表示重置成功，False 表示會話不存在
         """
@@ -150,21 +212,21 @@ class SpiralSessionManager:
                 self.logger.info(f"重置螺旋會話: {session_id}")
                 return True
             return False
-            
+    
     def reset_all_sessions(self):
         """重置所有會話"""
         with self._lock:
             count = len(self.sessions)
             self.sessions.clear()
             self.logger.info(f"重置所有螺旋會話: {count} 個會話")
-            
+    
     def cleanup_old_sessions(self, max_age_hours: int = 24) -> int:
         """
         清理超過指定時間的會話
         
         Args:
             max_age_hours: 會話最大存活時間（小時）
-            
+        
         Returns:
             int: 清理的會話數量
         """
@@ -177,10 +239,10 @@ class SpiralSessionManager:
             
             for sid in old_sessions:
                 del self.sessions[sid]
-                
+            
             if old_sessions:
                 self.logger.info(f"清理過期螺旋會話: {len(old_sessions)} 個")
-                
+            
             self._last_cleanup = datetime.datetime.now()
             return len(old_sessions)
     
@@ -193,7 +255,7 @@ class SpiralSessionManager:
         """
         if not self.sessions or count <= 0:
             return
-            
+        
         # 按最後更新時間排序，清理最舊的會話
         sorted_sessions = sorted(
             self.sessions.items(),
@@ -203,7 +265,7 @@ class SpiralSessionManager:
         for i in range(min(count, len(sorted_sessions))):
             session_id = sorted_sessions[i][0]
             del self.sessions[session_id]
-            
+        
         self.logger.info(f"清理最老的 {count} 個會話")
     
     def _auto_cleanup_if_needed(self):
@@ -278,7 +340,7 @@ class SpiralSessionManager:
         Args:
             query: 查詢字符串
             similarity_threshold: 相似度閾值
-            
+        
         Returns:
             Optional[SpiralSession]: 最相似的會話，如果沒有找到則返回None
         """
@@ -289,17 +351,17 @@ class SpiralSessionManager:
             for session in self.sessions.values():
                 if not session.original_query:
                     continue
-                    
+                
                 # 使用SpiralSession的相似度計算方法
                 similarity = session._calculate_text_similarity(session.original_query, query)
                 
                 if similarity >= similarity_threshold and similarity > best_similarity:
                     best_similarity = similarity
                     best_session = session
-                    
+            
             if best_session:
                 self.logger.info(f"找到相似會話: {best_session.session_id} (相似度: {best_similarity:.3f})")
-                
+            
             return best_session
     
     def __len__(self) -> int:

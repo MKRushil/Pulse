@@ -711,3 +711,278 @@ weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected s
 2025-09-23 03:31:04,393 [INFO] backend.main - Application startup completed.
 2025-09-23 03:31:11,632 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-23 03:31:11,633 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 03:31:14,917 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 03:31:14,921 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 03:31:14,921 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 03:31:14,921 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 03:31:14,921 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 03:31:14,921 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 03:31:14,921 [INFO] backend.main - Application startup completed.
+2025-09-23 03:55:57,988 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 03:55:57,988 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 03:55:57,988 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 03:56:01,827 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 03:56:01,831 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 03:56:01,831 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 03:56:01,831 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 03:56:01,831 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 03:56:01,831 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 03:56:01,831 [INFO] backend.main - Application startup completed.
+2025-09-23 03:56:25,959 [INFO] SpiralSessionManager - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:07:19,036 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:07:19,036 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:07:19,036 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:07:22,745 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:07:22,752 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:07:22,752 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:07:22,752 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:07:22,752 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:07:22,752 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:07:22,753 [INFO] backend.main - Application startup completed.
+2025-09-23 04:07:27,972 [INFO] SpiralSessionManager - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:08:53,557 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:08:53,558 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:08:53,558 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:08:58,290 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:08:58,299 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:08:58,300 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:08:58,300 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:08:58,300 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:08:58,301 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:08:58,302 [INFO] backend.main - Application startup completed.
+2025-09-23 04:08:59,663 [INFO] SpiralSessionManager - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:16:35,425 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:16:35,425 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:16:35,426 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:16:38,855 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:16:38,859 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:16:38,859 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:16:38,859 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:16:38,860 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:16:38,860 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:16:38,860 [INFO] backend.main - Application startup completed.
+2025-09-23 04:16:50,728 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:16:50,728 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:16:50,728 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:16:53,989 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:16:53,994 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:16:53,994 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:16:53,995 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:16:53,995 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:16:53,995 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:16:53,995 [INFO] backend.main - Application startup completed.
+2025-09-23 04:17:18,284 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:17:18,285 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:17:18,285 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:17:21,865 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:17:21,870 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:17:21,870 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:17:21,870 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:17:21,870 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:17:21,871 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:17:21,871 [INFO] backend.main - Application startup completed.
+2025-09-23 04:17:41,269 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:17:41,269 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:17:41,269 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:17:44,633 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:17:44,637 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:17:44,637 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:17:44,637 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:17:44,638 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:17:44,638 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:17:44,638 [INFO] backend.main - Application startup completed.
+2025-09-23 04:17:58,779 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:17:58,779 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:17:58,779 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:18:02,165 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:18:02,169 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:18:02,169 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:18:02,169 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:18:02,170 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:18:02,170 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:18:02,170 [INFO] backend.main - Application startup completed.
+2025-09-23 04:20:02,812 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:20:02,812 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:20:02,812 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:20:06,444 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:20:06,448 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:20:06,448 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:20:06,448 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:20:06,448 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:20:06,448 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:20:06,448 [INFO] backend.main - Application startup completed.
+2025-09-23 04:21:32,094 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:21:32,094 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:21:32,095 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:21:35,413 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:21:35,417 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:21:35,417 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:21:35,417 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:21:35,417 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:21:35,417 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:21:35,417 [INFO] backend.main - Application startup completed.
+2025-09-23 04:22:00,690 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:22:00,691 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:22:00,691 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:22:04,043 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:22:04,047 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:22:04,047 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:22:04,047 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:22:04,048 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:22:04,048 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:22:04,048 [INFO] backend.main - Application startup completed.
+2025-09-23 04:22:05,129 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:22:05,130 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:22:05,130 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:22:08,897 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:22:08,901 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:22:08,901 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:22:08,901 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:22:08,902 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:22:08,902 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:22:08,902 [INFO] backend.main - Application startup completed.
+2025-09-23 04:22:32,533 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:22:32,533 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:22:32,533 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:22:36,131 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:22:36,136 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:22:36,136 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:22:36,136 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:22:36,136 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:22:36,137 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:22:36,137 [INFO] backend.main - Application startup completed.
+2025-09-23 04:22:46,611 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:22:46,611 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:22:46,612 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:22:49,954 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:22:49,958 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:22:49,958 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:22:49,958 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:22:49,958 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:22:49,958 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:22:49,959 [INFO] backend.main - Application startup completed.
+2025-09-23 04:22:51,366 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:22:51,366 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:22:51,366 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:22:54,854 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:22:54,858 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:22:54,858 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:22:54,858 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:22:54,858 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:22:54,859 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:22:54,859 [INFO] backend.main - Application startup completed.
+2025-09-23 04:23:19,201 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:23:19,201 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:23:19,201 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:23:22,543 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:23:22,547 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:23:22,547 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:23:22,547 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:23:22,548 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:23:22,548 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:23:22,548 [INFO] backend.main - Application startup completed.
+2025-09-23 04:23:38,085 [INFO] SpiralSessionManager - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:34:15,112 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:34:15,112 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:34:15,113 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:34:20,634 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:34:20,639 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:34:20,639 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:34:20,639 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:34:20,639 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:34:20,639 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:34:20,640 [INFO] backend.main - Application startup completed.
+2025-09-23 04:34:32,761 [INFO] SpiralSessionManager - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 04:35:20,609 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:35:20,609 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:35:20,609 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:35:24,290 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:35:24,294 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:35:24,294 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:35:24,294 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:35:24,294 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:35:24,294 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:35:24,294 [INFO] backend.main - Application startup completed.
+2025-09-23 04:39:09,658 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:39:09,658 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:39:09,659 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:39:13,441 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:39:13,446 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:39:13,447 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:39:13,447 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:39:13,447 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:39:13,447 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:39:13,447 [INFO] backend.main - Application startup completed.
+2025-09-23 04:52:36,089 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:52:36,089 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:52:36,089 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:52:39,454 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:52:39,458 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:52:39,458 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:52:39,459 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:52:39,459 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:52:39,459 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:52:39,459 [INFO] backend.main - Application startup completed.
+2025-09-23 04:54:35,017 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:54:35,017 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:54:35,018 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:54:38,653 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:54:38,658 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:54:38,658 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:54:38,658 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:54:38,658 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:54:38,658 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:54:38,658 [INFO] backend.main - Application startup completed.
+2025-09-23 04:55:05,419 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:55:05,419 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:55:05,419 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:55:08,768 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:55:08,772 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:55:08,772 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:55:08,772 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:55:08,773 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:55:08,773 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:55:08,773 [INFO] backend.main - Application startup completed.
+2025-09-23 04:58:46,067 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:58:46,067 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:58:46,068 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:58:49,261 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:58:49,266 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:58:49,266 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:58:49,266 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:58:49,266 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:58:49,267 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:58:49,267 [INFO] backend.main - Application startup completed.
+2025-09-23 04:59:42,629 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 04:59:42,629 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 04:59:42,629 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 04:59:46,002 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 04:59:46,014 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 04:59:46,014 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 04:59:46,015 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 04:59:46,015 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 04:59:46,015 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 04:59:46,015 [INFO] backend.main - Application startup completed.
+2025-09-23 05:03:59,476 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 05:03:59,476 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 05:03:59,476 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 05:04:02,735 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 05:04:02,740 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 05:04:02,740 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 05:04:02,740 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 05:04:02,741 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 05:04:02,741 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 05:04:02,741 [INFO] backend.main - Application startup completed.
+2025-09-23 05:05:54,232 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 05:05:54,232 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 05:05:54,233 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 05:05:57,775 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 05:05:57,779 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 05:05:57,780 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 05:05:57,780 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 05:05:57,780 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 05:05:57,780 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 05:05:57,781 [INFO] backend.main - Application startup completed.
+2025-09-23 05:05:57,781 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 05:05:57,781 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 05:05:57,781 [INFO] backend.main - 🔻 Application shutdown completed.

@@ -1,5 +1,5 @@
 """
-S-CBR 主引擎 v2.0 - 螺旋推理互動版
+S-CBR 主引擎 v2.1 - 螺旋推理互動版
 
 v2.0 修改：
 - 移除治療方案生成
@@ -20,31 +20,22 @@ from s_cbr.dialog.response_generator import ResponseGenerator
 from s_cbr.dialog.conversation_state import ConversationState
 
 class SpiralCBRMainEngine:
-    """S-CBR 主引擎 v2.0"""
-    
     def __init__(self):
         self.config = SCBRConfig()
         self.logger = SpiralLogger.get_logger("SpiralCBRMain")
         self.spiral_engine = SpiralCBREngine()
         self.response_generator = ResponseGenerator()
-        self.version = "2.0"
-        
+        self.version = "2.1"
         self.logger.info(f"S-CBR 主引擎 v{self.version} 初始化完成")
 
-async def run_spiral_cbr_v2(question: str, 
+async def run_spiral_cbr_v2(question: str,
                            patient_ctx: Optional[Dict[str, Any]] = None,
                            session_id: Optional[str] = None,
                            continue_spiral: bool = False,
                            trace_id: Optional[str] = None,
                            session_manager: Optional[SpiralSessionManager] = None) -> Dict[str, Any]:
     """
-    S-CBR 螺旋推理引擎 v2.0 - 互動版
-    
-    v2.0 特色：
-    - 移除治療方案生成
-    - 集成 3 項自動化評估指標
-    - 支持多輪對話
-    - 案例使用記錄和過濾
+    S-CBR 螺旋推理引擎 v2.1 - 互動版
     
     Args:
         question: 患者問題描述
@@ -58,24 +49,33 @@ async def run_spiral_cbr_v2(question: str,
         Dict: 包含 dialog、評估指標、會話資訊等
     """
     
+    # main.py 內，整段替換 run_spiral_cbr_v2 即可
+async def run_spiral_cbr_v2(question: str, 
+                           patient_ctx: Optional[Dict[str, Any]] = None,
+                           session_id: Optional[str] = None,
+                           continue_spiral: bool = False,
+                           trace_id: Optional[str] = None,
+                           session_manager: Optional[SpiralSessionManager] = None) -> Dict[str, Any]:
+    """
+    S-CBR 螺旋推理引擎 v2.1 - 互動版
+    """
     logger = SpiralLogger.get_logger("run_spiral_cbr_v2")
-    
+
     try:
-        # 生成追蹤ID
         if trace_id is None:
             trace_id = f"SCBR-{datetime.now().strftime('%Y%m%d-%H%M%S')}-{str(uuid.uuid4())[:8]}"
-        
-        logger.info(f"🌀 S-CBR v2.0 螺旋推理啟動 [{trace_id}]")
+
+        logger.info(f"🌀 S-CBR v2.1 螺旋推理啟動 [{trace_id}]")
         logger.info(f"  問題: {question[:100]}{'...' if len(question) > 100 else ''}")
         logger.info(f"  會話ID: {session_id}")
         logger.info(f"  繼續推理: {continue_spiral}")
         logger.info(f"  患者上下文: {len(patient_ctx or {})} 個欄位")
-        
-        # 初始化會話管理器
+
+        # ✅ 使用單例：不要 new
         if session_manager is None:
-            session_manager = SpiralSessionManager()
-        
-        # 獲取或創建會話
+            session_manager = SpiralSessionManager.get_instance()
+
+        # 取得/建立會話
         if continue_spiral and session_id:
             session = session_manager.get_session(session_id)
             if not session:
@@ -83,7 +83,7 @@ async def run_spiral_cbr_v2(question: str,
                 session_id = None
         else:
             session_id = None
-            
+
         if not session_id:
             session_id = session_manager.create_session(question, patient_ctx or {})
             session = session_manager.get_session(session_id)
@@ -91,14 +91,12 @@ async def run_spiral_cbr_v2(question: str,
         else:
             session = session_manager.get_session(session_id)
             logger.info(f"✅ 繼續現有會話: {session_id}")
-        
-        # 初始化引擎和回應生成器
+
+        # 初始化主引擎
         main_engine = SpiralCBRMainEngine()
-        
-        # 執行螺旋推理
+
         logger.info(f"🧠 執行螺旋推理 - 第 {session.round_count + 1} 輪")
-        
-        # 構建查詢上下文
+
         query_context = {
             "question": question,
             "patient_ctx": patient_ctx or {},
@@ -107,66 +105,66 @@ async def run_spiral_cbr_v2(question: str,
             "used_cases": session.used_cases,
             "trace_id": trace_id
         }
-        
-        # 調用螺旋推理引擎
+
         spiral_result = await main_engine.spiral_engine.execute_spiral_reasoning(query_context)
-        
-        # 🔧 移除治療方案，保留診斷結果、問題判斷、建議
+
+        # 移除治療內容
         filtered_result = _filter_treatment_content(spiral_result)
-        
-        # 🔧 計算 3 項評估指標
+
+        # 評估指標
         evaluation_metrics = await _calculate_comprehensive_metrics(
             filtered_result, session, query_context
         )
-        
-        # 生成對話回應
+
+        # 產生對話
         conversation_state = ConversationState(session_id, session)
         step_results = filtered_result.get("step_results", [])
-        
         dialog_response = await main_engine.response_generator.generate_comprehensive_response_v2(
             conversation_state, step_results
         )
-        
-        # 更新會話狀態
-        session.add_round(question, filtered_result)
+
+        # ✅ 更新會話狀態：用已存在的方法
+        session.increment_round()
+        # 如果 filtered_result 有用到的案例，可選擇性加入：
+        for step in step_results:
+            case_id = step.get("case_id")
+            if case_id:
+                session.add_used_case(case_id)
+
         session_manager.update_session(session_id, session)
-        
-        # 檢查是否可以繼續推理
+
         continue_available = (
             session.round_count < main_engine.config.MAX_SPIRAL_ROUNDS and
             len(session.used_cases) < main_engine.config.MAX_CASES_PER_SESSION and
             spiral_result.get("converged", False) != True
         )
-        
-        # 構建最終回應
+
         final_response = {
             "dialog": dialog_response.get("dialog", "推理完成，請查看結構化結果。"),
             "session_id": session_id,
             "continue_available": continue_available,
             "round": session.round_count,
             "llm_struct": filtered_result.get("llm_struct", {}),
-            "evaluation_metrics": evaluation_metrics,  # 🔧 添加評估指標
+            "evaluation_metrics": evaluation_metrics,
             "spiral_rounds": session.round_count,
             "used_cases_count": len(session.used_cases),
             "total_steps": 4,
             "converged": spiral_result.get("converged", False),
             "trace_id": trace_id,
-            "version": "2.0"
+            "version": "2.1"
         }
-        
-        logger.info(f"✅ S-CBR v2.0 螺旋推理完成 [{trace_id}]")
+
+        logger.info(f"✅ S-CBR v2.1 螺旋推理完成 [{trace_id}]")
         logger.info(f"  推理輪數: {session.round_count}")
         logger.info(f"  使用案例: {len(session.used_cases)}")
         logger.info(f"  可繼續: {continue_available}")
         logger.info(f"  評估指標: CMS={evaluation_metrics.get('cms', {}).get('score', 0)}/10")
-        
+
         return final_response
-        
+
     except Exception as e:
-        logger.error(f"❌ S-CBR v2.0 螺旋推理失敗 [{trace_id}]: {str(e)}")
+        logger.error(f"❌ S-CBR v2.1 螺旋推理失敗 [{trace_id}]: {str(e)}")
         logger.exception("詳細錯誤資訊")
-        
-        # 錯誤回應
         return {
             "dialog": f"❌ **系統錯誤**\n\n螺旋推理過程中發生錯誤：{str(e)}",
             "error": True,
@@ -175,13 +173,13 @@ async def run_spiral_cbr_v2(question: str,
             "continue_available": False,
             "round": 0,
             "llm_struct": {"error": str(e), "confidence": 0.0},
-            "evaluation_metrics": _get_default_metrics(),  # 默認評估指標
+            "evaluation_metrics": _get_default_metrics(),
             "spiral_rounds": 0,
             "used_cases_count": 0,
             "total_steps": 0,
             "converged": False,
             "trace_id": trace_id,
-            "version": "2.0"
+            "version": "2.1"
         }
 
 def _filter_treatment_content(spiral_result: Dict[str, Any]) -> Dict[str, Any]:
