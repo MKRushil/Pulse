@@ -18,31 +18,45 @@ export default function DiagnosisChat() {
   const [usedCasesCount, setUsedCasesCount] = useState(0);
   const [savingCase, setSavingCase] = useState(false);
   const [currentDiagnosis, setCurrentDiagnosis] = useState(null);
+  const [conversationContext, setConversationContext] = useState(null);
+  const [isFollowUp, setIsFollowUp] = useState(false);
   const chatEndRef = useRef(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  const send = async (continueSpiral = false) => {
+  const send = async (continueSpiral = false, isFollowUpQuestion = false) => {
     if ((!input.trim() && !continueSpiral) || loading) return;
 
     console.log("觸發 send", { input, continueSpiral, sessionId, currentRound });
 
-    // 如果不是繼續推理，添加用戶訊息
-    if (!continueSpiral && input.trim()) {
-      setMessages((m) => [...m, { from: "user", text: input }]);
-    } else if (continueSpiral) {
+    let question;
+    if (continueSpiral) {
       setMessages((m) => [...m, { 
         from: "user", 
         text: `🔄 繼續第 ${currentRound + 1} 輪螺旋推理`, 
         type: "continue" 
       }]);
+      question = `繼續推理上一個問題`;
+    } else if (isFollowUpQuestion && conversationContext) {
+      // 🔧 將新輸入作為補充條件
+      question = `${conversationContext.originalQuery}。補充條件：${input}`;
+      setMessages((m) => [...m, { from: "user", text: `📝 補充條件：${input}` }]);
+      setIsFollowUp(true);
+    } else {
+      // 全新問題
+      setMessages((m) => [...m, { from: "user", text: input }]);
+      question = input;
+      setConversationContext({
+        originalQuery: input,
+        timestamp: new Date().toISOString()
+      });
+      setIsFollowUp(false);
     }
 
     setLoading(true);
-    const question = continueSpiral ? `繼續推理上一個問題` : input;
-    if (!continueSpiral) setInput("");
+    if (!continueSpiral && !isFollowUpQuestion) setInput("");
 
     try {
       const requestBody = {
@@ -87,7 +101,8 @@ export default function DiagnosisChat() {
           round: data.round,
           continueAvailable: data.continue_available,
           sessionInfo: data.session_info,
-          llmStruct: data.llm_struct
+          llmStruct: data.llm_struct,
+          evaluationMetrics: data.evaluation_metrics  // 🔧 新增評估指標
         }
       ]);
 
@@ -104,6 +119,12 @@ export default function DiagnosisChat() {
     }
 
     setLoading(false);
+  };
+
+  const addCondition = () => {
+    if (conversationContext && input.trim()) {
+      send(false, true); // 作為補充條件發送
+    }
   };
 
   const saveCase = async () => {
@@ -139,7 +160,7 @@ export default function DiagnosisChat() {
       ]);
 
       // 儲存後重置會話
-      setTimeout(resetSession, 2000);
+      setTimeout(endReasoning, 2000);
 
     } catch (err) {
       console.error("儲存案例錯誤", err);
@@ -155,7 +176,8 @@ export default function DiagnosisChat() {
     setSavingCase(false);
   };
 
-  const resetSession = async () => {
+  // 🔧 一鍵結束推理
+  const endReasoning = async () => {
     try {
       if (sessionId) {
         await fetch("/api/spiral-reset", {
@@ -171,6 +193,8 @@ export default function DiagnosisChat() {
       setContinueAvailable(false);
       setUsedCasesCount(0);
       setCurrentDiagnosis(null);
+      setConversationContext(null);
+      setIsFollowUp(false);
       setMessages([
         { 
           from: "bot", 
@@ -193,75 +217,81 @@ export default function DiagnosisChat() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-b from-blue-50 to-green-50">
-      {/* 標題列與狀態 */}
-      <header className="bg-white border-b border-gray-200 p-4 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold text-gray-800">🌀 螺旋推理診斷</h2>
-            <p className="text-sm text-gray-600">智慧中醫輔助診斷系統 v2.0</p>
-          </div>
-          
-          {/* 狀態指示器 */}
-          {sessionId && (
-            <div className="flex items-center space-x-4 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-gray-600">第 {currentRound} 輪</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-gray-600">已用案例：{usedCasesCount}</span>
-              </div>
-              <button
-                onClick={resetSession}
-                className="flex items-center space-x-1 px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                title="重置會話"
-              >
-                <X size={14} />
-                <span>重置</span>
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
+    <div className="flex flex-col flex-1 h-full max-h-full">
+      {/* 🔧 添加頂部操作欄 */}
+      <div className="flex justify-between items-center px-8 py-4 border-b border-gray-200">
+        <h1 className="text-2xl font-bold tracking-wider">螺旋推理診斷</h1>
+        
+        {sessionId && (
+          <button
+            onClick={endReasoning}
+            className="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 
+                       text-white rounded-lg transition-colors"
+          >
+            <X size={18} />
+            結束推理
+          </button>
+        )}
+      </div>
 
       {/* 對話區域 */}
-      <div className="flex-1 overflow-auto p-4 space-y-4">
-        {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-4xl px-4 py-3 rounded-lg shadow-sm ${
-              msg.from === "user" 
-                ? "bg-blue-500 text-white" 
-                : msg.type === "error"
-                ? "bg-red-50 border border-red-200 text-gray-800"
-                : msg.type === "success"
-                ? "bg-green-50 border border-green-200 text-gray-800"
-                : msg.type === "system" 
-                ? "bg-yellow-50 border border-yellow-200 text-gray-800"
-                : "bg-white border border-gray-200 text-gray-800"
-            }`}>
-              <div className="prose max-w-none text-sm">
-                <ReactMarkdown>{msg.text}</ReactMarkdown>
-              </div>
+      <div className="flex-1 overflow-y-auto px-8 pb-4">
+        <div className="space-y-4">
+          {messages.map((msg, i) => (
+            <div key={i}>
+              <ChatBubble key={i} msg={msg} />
               
               {/* 診斷結果的操作按鈕區 */}
               {msg.type === "diagnosis" && (
-                <div className="mt-4 pt-3 border-t border-gray-200 flex items-center justify-between">
-                  <div className="text-xs text-gray-500 space-y-1">
-                    <div>推理輪次：{msg.round} | 處理時間：{msg.sessionInfo?.processing_time_ms}ms</div>
-                    <div>案例使用：{usedCasesCount}/10 | 會話：{sessionId?.split('_').pop()}</div>
+                <div className="mt-4 space-y-2">
+                  <div className="text-xs text-blue-600 font-medium">
+                    推理輪次：{msg.round} | 處理時間：{msg.sessionInfo?.processing_time_ms}ms
+                    <br />
+                    案例使用：{usedCasesCount}/10 | 會話：{sessionId?.split('_').pop()}
                   </div>
                   
-                  <div className="flex items-center space-x-2">
+                  {/* 🔧 顯示評估指標 */}
+                  {msg.evaluationMetrics && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+                      <h4 className="font-semibold text-blue-800 mb-3">📊 評估指標</h4>
+                      <div className="space-y-3">
+                        {Object.entries(msg.evaluationMetrics).map(([key, metric]) => (
+                          <div key={key} className="flex items-center justify-between">
+                            <div className="flex-1">
+                              <div className="font-medium text-blue-700">
+                                {metric.abbreviation} ({metric.name})
+                              </div>
+                              <div className="text-sm text-blue-600">
+                                {metric.description}
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="font-bold text-lg text-blue-800">
+                                {metric.score}/{metric.max_score}
+                              </div>
+                              <div className="w-20 bg-gray-200 rounded-full h-2 mt-1">
+                                <div 
+                                  className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                                  style={{ width: `${(metric.score / metric.max_score) * 100}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="flex gap-2 mt-3">
                     {/* 儲存案例按鈕 */}
                     <button
                       onClick={saveCase}
-                      disabled={savingCase || loading}
-                      className="flex items-center space-x-1 px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg transition-colors text-sm disabled:opacity-50"
-                      title="儲存此診斷結果為新案例"
+                      disabled={savingCase}
+                      className="flex items-center gap-1 px-3 py-1 bg-green-500 hover:bg-green-600 
+                                text-white text-sm rounded transition-colors disabled:opacity-50"
                     >
                       {savingCase ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
-                      <span>儲存案例</span>
+                      儲存案例
                     </button>
                     
                     {/* 繼續推理按鈕 */}
@@ -269,11 +299,11 @@ export default function DiagnosisChat() {
                       <button
                         onClick={() => send(true)}
                         disabled={loading}
-                        className="flex items-center space-x-1 px-3 py-1 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg transition-colors text-sm"
-                        title="繼續螺旋推理"
+                        className="flex items-center gap-1 px-3 py-1 bg-blue-500 hover:bg-blue-600 
+                                  text-white text-sm rounded transition-colors disabled:opacity-50"
                       >
                         <RotateCcw size={14} />
-                        <span>繼續推理</span>
+                        繼續推理
                       </button>
                     )}
                   </div>
@@ -282,93 +312,92 @@ export default function DiagnosisChat() {
               
               {/* 推理結束指示 */}
               {msg.type === "diagnosis" && !msg.continueAvailable && (
-                <div className="mt-3 pt-3 border-t border-gray-200">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-xs text-green-600">
-                      <CheckCircle2 size={14} />
-                      <span>螺旋推理完成</span>
-                    </div>
-                    <button
-                      onClick={saveCase}
-                      disabled={savingCase}
-                      className="flex items-center space-x-1 px-3 py-1 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg transition-colors text-sm"
-                    >
-                      {savingCase ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
-                      <span>儲存案例</span>
-                    </button>
+                <div className="flex items-center justify-center mt-4 p-3 bg-green-50 
+                              border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-2 text-green-700">
+                    <CheckCircle2 size={18} />
+                    <span className="font-medium">螺旋推理完成</span>
                   </div>
                 </div>
               )}
             </div>
-          </div>
-        ))}
+          ))}
 
-        {/* 載入指示器 */}
-        {loading && (
-          <div className="flex justify-start">
-            <div className="bg-white border border-gray-200 px-4 py-3 rounded-lg shadow-sm">
-              <div className="flex items-center space-x-2">
-                <Loader2 size={16} className="animate-spin text-blue-500" />
-                <span className="text-sm text-gray-600">
+          {/* 載入指示器 */}
+          {loading && (
+            <div className="flex justify-start">
+              <div className="flex items-center gap-2 px-6 py-4 rounded-1.5rem shadow border 
+                            bg-blue-100 text-blue-500 animate-pulse">
+                <Loader2 className="animate-spin" size={22} />
+                <span>
                   {continueAvailable ? `正在進行第 ${currentRound + 1} 輪推理...` : "正在分析症狀..."}
                 </span>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div ref={chatEndRef} />
+          <div ref={chatEndRef} />
+        </div>
       </div>
 
-      {/* 輸入區域 */}
-      <footer className="bg-white border-t border-gray-200 p-4">
-        <div className="flex space-x-2">
-          <div className="flex-1 relative">
-            <textarea
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={
-                sessionId 
-                  ? "描述新的症狀或條件..." 
-                  : "請詳細描述您的症狀（如：主訴、現病史、望聞問切等）..."
-              }
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              rows={2}
-              disabled={loading}
-            />
-          </div>
-          
-          <div className="flex flex-col space-y-2">
-            <button
-              onClick={() => send(false)}
-              disabled={!input.trim() || loading}
-              className="px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center"
-              title="發送新問題"
-            >
-              <SendHorizontal size={20} />
-            </button>
-            
-            {continueAvailable && !loading && (
-              <button
-                onClick={() => send(true)}
-                disabled={loading}
-                className="px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center"
-                title="繼續螺旋推理"
-              >
-                <RotateCcw size={20} />
-              </button>
-            )}
-          </div>
-        </div>
+      {/* 🔧 修改輸入區域，添加補充條件按鈕 */}
+      <div className="flex items-center gap-2 p-6 border-t border-blue-100">
+        <input 
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyPress}
+          className="flex-1 rounded-xl bg-blue-50 px-4 py-3 outline-none text-lg"
+          placeholder={
+            conversationContext 
+              ? "添加補充條件..." 
+              : "請描述您的症狀..."
+          }
+        />
         
-        <div className="mt-2 text-xs text-gray-500 flex items-center justify-between">
-          <span>按 Enter 發送，Shift+Enter 換行</span>
-          {sessionId && (
-            <span>會話ID: {sessionId.split('_').pop()} | 輪次: {currentRound}/{usedCasesCount < 10 ? '10' : '已滿'}</span>
-          )}
-        </div>
-      </footer>
+        {/* 補充條件按鈕 */}
+        {conversationContext && (
+          <button
+            onClick={addCondition}
+            className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-xl 
+                       transition-colors flex items-center gap-2"
+            disabled={loading || !input.trim()}
+          >
+            <span>補充</span>
+          </button>
+        )}
+        
+        {/* 原有發送按鈕 */}
+        <button
+          onClick={() => send(false)}
+          className="bg-blue-600 hover:bg-blue-700 transition p-3 rounded-xl"
+          disabled={loading}
+          type="button"
+        >
+          <SendHorizontal size={20} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ChatBubble({ msg }) {
+  return (
+    <div className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
+      <div className={`relative max-w-75% px-6 py-4 rounded-1.5rem shadow-md border text-base leading-relaxed ${
+        msg.from === "user" 
+          ? "bg-gradient-to-br from-blue-400 to-blue-600 border-blue-400 text-white" 
+          : "bg-gradient-to-br from-blue-100 to-blue-200 border-blue-200 text-blue-900"
+      } after:absolute after:bottom-0 after:w-0 after:h-0 after:border-solid ${
+        msg.from === "user"
+          ? "after:right--10px after:border-l-14px after:border-l-blue-600 after:border-t-14px after:border-t-transparent"
+          : "after:left--10px after:border-r-14px after:border-r-blue-100 after:border-t-14px after:border-t-transparent"
+      }`}>
+        {msg.from === "bot" ? (
+          <ReactMarkdown>{msg.text}</ReactMarkdown>
+        ) : (
+          msg.text
+        )}
+      </div>
     </div>
   );
 }

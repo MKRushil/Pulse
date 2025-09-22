@@ -281,3 +281,433 @@ weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected s
 2025-09-23 01:38:39,694 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-23 01:38:39,694 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
 2025-09-23 01:38:39,694 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 01:38:42,931 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 01:38:42,936 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 01:38:42,936 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 01:38:42,936 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 01:38:42,936 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 01:38:42,937 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 01:38:42,937 [INFO] backend.main - Application startup completed.
+2025-09-23 01:40:38,057 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:40:38,059 [INFO] cases.case_storage - [20250923_014038_0585] [1/4 save] saved original file=20250923_014038_0585.json
+2025-09-23 01:40:38,059 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=67
+2025-09-23 01:40:38,060 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=67
+2025-09-23 01:40:38,060 [INFO] cases.case_storage - [20250923_014038_0585] [2/4 normalize] gender=男 age=67
+2025-09-23 01:40:38,062 [INFO] cases.case_diagnosis - [rulebook] loaded path=C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_rulebook_v1.1.json version=1.1 rules=520
+2025-09-23 01:40:39,587 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:40:39,587 [INFO] cases.case_storage - [20250923_014038_0585] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-23 01:40:39,617 [INFO] vector.uploader - [20250923_014038_0585] [4/4 upload] age before send: value=67 type=int → send as str='67'
+2025-09-23 01:40:39,618 [INFO] vector.uploader - [20250923_014038_0585] [4/4 upload] prepare record
+2025-09-23 01:40:39,676 [INFO] vector.uploader - [20250923_014038_0585] [4/4 upload] Case created de-identified id=3b6c36dead5d
+2025-09-23 01:40:39,677 [INFO] backend.main - ✅ 病例存儲成功: 3b6c36dead5d
+2025-09-23 01:43:31,089 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:43:31,090 [INFO] cases.case_storage - [20250923_014331_0901] [1/4 save] saved original file=20250923_014331_0901.json
+2025-09-23 01:43:31,091 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=44
+2025-09-23 01:43:31,091 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=44
+2025-09-23 01:43:31,091 [INFO] cases.case_storage - [20250923_014331_0901] [2/4 normalize] gender=女 age=44
+2025-09-23 01:43:32,511 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:43:32,512 [INFO] cases.case_storage - [20250923_014331_0901] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-23 01:43:32,555 [INFO] vector.uploader - [20250923_014331_0901] [4/4 upload] age before send: value=44 type=int → send as str='44'
+2025-09-23 01:43:32,556 [INFO] vector.uploader - [20250923_014331_0901] [4/4 upload] prepare record
+2025-09-23 01:43:32,619 [INFO] vector.uploader - [20250923_014331_0901] [4/4 upload] Case created de-identified id=4b6059cd142c
+2025-09-23 01:43:32,619 [INFO] backend.main - ✅ 病例存儲成功: 4b6059cd142c
+2025-09-23 01:47:58,639 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:47:58,641 [INFO] cases.case_storage - [20250923_014758_6402] [1/4 save] saved original file=20250923_014758_6402.json
+2025-09-23 01:47:58,641 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=62
+2025-09-23 01:47:58,641 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=62
+2025-09-23 01:47:58,641 [INFO] cases.case_storage - [20250923_014758_6402] [2/4 normalize] gender=男 age=62
+2025-09-23 01:47:59,484 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:47:59,485 [INFO] cases.case_storage - [20250923_014758_6402] [3/4 triage] main=['痰濕困脾'] sub=[]
+2025-09-23 01:47:59,521 [INFO] vector.uploader - [20250923_014758_6402] [4/4 upload] age before send: value=62 type=int → send as str='62'
+2025-09-23 01:47:59,521 [INFO] vector.uploader - [20250923_014758_6402] [4/4 upload] prepare record
+2025-09-23 01:47:59,579 [INFO] vector.uploader - [20250923_014758_6402] [4/4 upload] Case created de-identified id=a2ac0b91b344
+2025-09-23 01:47:59,580 [INFO] backend.main - ✅ 病例存儲成功: a2ac0b91b344
+2025-09-23 01:49:38,289 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:49:38,290 [INFO] cases.case_storage - [20250923_014938_2891] [1/4 save] saved original file=20250923_014938_2891.json
+2025-09-23 01:49:38,291 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=67
+2025-09-23 01:49:38,291 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=67
+2025-09-23 01:49:38,291 [INFO] cases.case_storage - [20250923_014938_2891] [2/4 normalize] gender=女 age=67
+2025-09-23 01:49:39,608 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:49:39,608 [INFO] cases.case_storage - [20250923_014938_2891] [3/4 triage] main=['腎陰虛'] sub=[]
+2025-09-23 01:49:39,625 [INFO] vector.uploader - [20250923_014938_2891] [4/4 upload] age before send: value=67 type=int → send as str='67'
+2025-09-23 01:49:39,625 [INFO] vector.uploader - [20250923_014938_2891] [4/4 upload] prepare record
+2025-09-23 01:49:39,674 [INFO] vector.uploader - [20250923_014938_2891] [4/4 upload] Case created de-identified id=3c7349894a2b
+2025-09-23 01:49:39,674 [INFO] backend.main - ✅ 病例存儲成功: 3c7349894a2b
+2025-09-23 01:52:11,642 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:52:11,643 [INFO] cases.case_storage - [20250923_015211_6428] [1/4 save] saved original file=20250923_015211_6428.json
+2025-09-23 01:52:11,643 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=66
+2025-09-23 01:52:11,643 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=66
+2025-09-23 01:52:11,643 [INFO] cases.case_storage - [20250923_015211_6428] [2/4 normalize] gender=男 age=66
+2025-09-23 01:52:12,278 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:52:12,278 [INFO] cases.case_storage - [20250923_015211_6428] [3/4 triage] main=['陽氣虛弱'] sub=[]
+2025-09-23 01:52:12,326 [INFO] vector.uploader - [20250923_015211_6428] [4/4 upload] age before send: value=66 type=int → send as str='66'
+2025-09-23 01:52:12,326 [INFO] vector.uploader - [20250923_015211_6428] [4/4 upload] prepare record
+2025-09-23 01:52:12,381 [INFO] vector.uploader - [20250923_015211_6428] [4/4 upload] Case created de-identified id=9da822b8be33
+2025-09-23 01:52:12,381 [INFO] backend.main - ✅ 病例存儲成功: 9da822b8be33
+2025-09-23 01:53:42,039 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:53:42,040 [INFO] cases.case_storage - [20250923_015342_0399] [1/4 save] saved original file=20250923_015342_0399.json
+2025-09-23 01:53:42,040 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=55
+2025-09-23 01:53:42,040 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=55
+2025-09-23 01:53:42,041 [INFO] cases.case_storage - [20250923_015342_0399] [2/4 normalize] gender=女 age=55
+2025-09-23 01:53:42,793 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:53:42,793 [INFO] cases.case_storage - [20250923_015342_0399] [3/4 triage] main=['腎氣不足'] sub=[]
+2025-09-23 01:53:42,830 [INFO] vector.uploader - [20250923_015342_0399] [4/4 upload] age before send: value=55 type=int → send as str='55'
+2025-09-23 01:53:42,830 [INFO] vector.uploader - [20250923_015342_0399] [4/4 upload] prepare record
+2025-09-23 01:53:42,884 [INFO] vector.uploader - [20250923_015342_0399] [4/4 upload] Case created de-identified id=8c7fee3fb906
+2025-09-23 01:53:42,885 [INFO] backend.main - ✅ 病例存儲成功: 8c7fee3fb906
+2025-09-23 01:55:44,537 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:55:44,539 [INFO] cases.case_storage - [20250923_015544_5386] [1/4 save] saved original file=20250923_015544_5386.json
+2025-09-23 01:55:44,539 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=48
+2025-09-23 01:55:44,539 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=48
+2025-09-23 01:55:44,539 [INFO] cases.case_storage - [20250923_015544_5386] [2/4 normalize] gender=男 age=48
+2025-09-23 01:55:45,968 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:55:45,969 [INFO] cases.case_storage - [20250923_015544_5386] [3/4 triage] main=['肝胃不和'] sub=[]
+2025-09-23 01:55:46,018 [INFO] vector.uploader - [20250923_015544_5386] [4/4 upload] age before send: value=48 type=int → send as str='48'
+2025-09-23 01:55:46,018 [INFO] vector.uploader - [20250923_015544_5386] [4/4 upload] prepare record
+2025-09-23 01:55:46,070 [INFO] vector.uploader - [20250923_015544_5386] [4/4 upload] Case created de-identified id=04d85173b77b
+2025-09-23 01:55:46,070 [INFO] backend.main - ✅ 病例存儲成功: 04d85173b77b
+2025-09-23 01:57:31,500 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 01:57:31,501 [INFO] cases.case_storage - [20250923_015731_5000] [1/4 save] saved original file=20250923_015731_5000.json
+2025-09-23 01:57:31,501 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=23
+2025-09-23 01:57:31,502 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=23
+2025-09-23 01:57:31,502 [INFO] cases.case_storage - [20250923_015731_5000] [2/4 normalize] gender=男 age=23
+2025-09-23 01:57:32,822 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 01:57:32,823 [INFO] cases.case_storage - [20250923_015731_5000] [3/4 triage] main=['風寒咳嗽'] sub=[]
+2025-09-23 01:57:32,859 [INFO] vector.uploader - [20250923_015731_5000] [4/4 upload] age before send: value=23 type=int → send as str='23'
+2025-09-23 01:57:32,859 [INFO] vector.uploader - [20250923_015731_5000] [4/4 upload] prepare record
+2025-09-23 01:57:32,914 [INFO] vector.uploader - [20250923_015731_5000] [4/4 upload] Case created de-identified id=28ae6b74bcf6
+2025-09-23 01:57:32,915 [INFO] backend.main - ✅ 病例存儲成功: 28ae6b74bcf6
+2025-09-23 02:00:03,575 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:00:03,576 [INFO] cases.case_storage - [20250923_020003_5757] [1/4 save] saved original file=20250923_020003_5757.json
+2025-09-23 02:00:03,576 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=20
+2025-09-23 02:00:03,576 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=20
+2025-09-23 02:00:03,576 [INFO] cases.case_storage - [20250923_020003_5757] [2/4 normalize] gender=男 age=20
+2025-09-23 02:00:04,966 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:00:04,966 [INFO] cases.case_storage - [20250923_020003_5757] [3/4 triage] main=['風寒咳嗽'] sub=[]
+2025-09-23 02:00:05,011 [INFO] vector.uploader - [20250923_020003_5757] [4/4 upload] age before send: value=20 type=int → send as str='20'
+2025-09-23 02:00:05,011 [INFO] vector.uploader - [20250923_020003_5757] [4/4 upload] prepare record
+2025-09-23 02:00:05,065 [INFO] vector.uploader - [20250923_020003_5757] [4/4 upload] Case created de-identified id=f07cff0e1c2d
+2025-09-23 02:00:05,065 [INFO] backend.main - ✅ 病例存儲成功: f07cff0e1c2d
+2025-09-23 02:01:40,181 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:01:40,183 [INFO] cases.case_storage - [20250923_020140_1829] [1/4 save] saved original file=20250923_020140_1829.json
+2025-09-23 02:01:40,183 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=33
+2025-09-23 02:01:40,183 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=33
+2025-09-23 02:01:40,185 [INFO] cases.case_storage - [20250923_020140_1829] [2/4 normalize] gender=女 age=33
+2025-09-23 02:01:40,825 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:01:40,825 [INFO] cases.case_storage - [20250923_020140_1829] [3/4 triage] main=['肝腎不足'] sub=[]
+2025-09-23 02:01:40,848 [INFO] vector.uploader - [20250923_020140_1829] [4/4 upload] age before send: value=33 type=int → send as str='33'
+2025-09-23 02:01:40,848 [INFO] vector.uploader - [20250923_020140_1829] [4/4 upload] prepare record
+2025-09-23 02:01:40,901 [INFO] vector.uploader - [20250923_020140_1829] [4/4 upload] Case created de-identified id=d9978b24664f
+2025-09-23 02:01:40,902 [INFO] backend.main - ✅ 病例存儲成功: d9978b24664f
+2025-09-23 02:03:21,889 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:03:21,890 [INFO] cases.case_storage - [20250923_020321_8895] [1/4 save] saved original file=20250923_020321_8895.json
+2025-09-23 02:03:21,891 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=33
+2025-09-23 02:03:21,891 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=33
+2025-09-23 02:03:21,891 [INFO] cases.case_storage - [20250923_020321_8895] [2/4 normalize] gender=女 age=33
+2025-09-23 02:03:22,511 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:03:22,513 [INFO] cases.case_storage - [20250923_020321_8895] [3/4 triage] main=['肝鬱化火'] sub=[]
+2025-09-23 02:03:22,554 [INFO] vector.uploader - [20250923_020321_8895] [4/4 upload] age before send: value=33 type=int → send as str='33'
+2025-09-23 02:03:22,554 [INFO] vector.uploader - [20250923_020321_8895] [4/4 upload] prepare record
+2025-09-23 02:03:22,606 [INFO] vector.uploader - [20250923_020321_8895] [4/4 upload] Case created de-identified id=903e9a5f4219
+2025-09-23 02:03:22,607 [INFO] backend.main - ✅ 病例存儲成功: 903e9a5f4219
+2025-09-23 02:04:56,008 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:04:56,009 [INFO] cases.case_storage - [20250923_020456_0083] [1/4 save] saved original file=20250923_020456_0083.json
+2025-09-23 02:04:56,009 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=45
+2025-09-23 02:04:56,009 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=45
+2025-09-23 02:04:56,009 [INFO] cases.case_storage - [20250923_020456_0083] [2/4 normalize] gender=男 age=45
+2025-09-23 02:04:57,383 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:04:57,384 [INFO] cases.case_storage - [20250923_020456_0083] [3/4 triage] main=['肝鬱化火'] sub=[]
+2025-09-23 02:04:57,419 [INFO] vector.uploader - [20250923_020456_0083] [4/4 upload] age before send: value=45 type=int → send as str='45'
+2025-09-23 02:04:57,420 [INFO] vector.uploader - [20250923_020456_0083] [4/4 upload] prepare record
+2025-09-23 02:04:57,470 [INFO] vector.uploader - [20250923_020456_0083] [4/4 upload] Case created de-identified id=9b23687f6185
+2025-09-23 02:04:57,470 [INFO] backend.main - ✅ 病例存儲成功: 9b23687f6185
+2025-09-23 02:07:16,586 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:07:16,587 [INFO] cases.case_storage - [20250923_020716_5863] [1/4 save] saved original file=20250923_020716_5863.json
+2025-09-23 02:07:16,587 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=24
+2025-09-23 02:07:16,587 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=24
+2025-09-23 02:07:16,588 [INFO] cases.case_storage - [20250923_020716_5863] [2/4 normalize] gender=女 age=24
+2025-09-23 02:07:18,241 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:07:18,241 [INFO] cases.case_storage - [20250923_020716_5863] [3/4 triage] main=['風寒咳嗽'] sub=[]
+2025-09-23 02:07:18,275 [INFO] vector.uploader - [20250923_020716_5863] [4/4 upload] age before send: value=24 type=int → send as str='24'
+2025-09-23 02:07:18,276 [INFO] vector.uploader - [20250923_020716_5863] [4/4 upload] prepare record
+2025-09-23 02:07:18,327 [INFO] vector.uploader - [20250923_020716_5863] [4/4 upload] Case created de-identified id=8518d20d5e98
+2025-09-23 02:07:18,328 [INFO] backend.main - ✅ 病例存儲成功: 8518d20d5e98
+2025-09-23 02:08:50,716 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:08:50,718 [INFO] cases.case_storage - [20250923_020850_7172] [1/4 save] saved original file=20250923_020850_7172.json
+2025-09-23 02:08:50,719 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=38
+2025-09-23 02:08:50,719 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=38
+2025-09-23 02:08:50,719 [INFO] cases.case_storage - [20250923_020850_7172] [2/4 normalize] gender=男 age=38
+2025-09-23 02:08:51,618 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:08:51,618 [INFO] cases.case_storage - [20250923_020850_7172] [3/4 triage] main=['腎氣不足'] sub=[]
+2025-09-23 02:08:51,653 [INFO] vector.uploader - [20250923_020850_7172] [4/4 upload] age before send: value=38 type=int → send as str='38'
+2025-09-23 02:08:51,654 [INFO] vector.uploader - [20250923_020850_7172] [4/4 upload] prepare record
+2025-09-23 02:08:51,708 [INFO] vector.uploader - [20250923_020850_7172] [4/4 upload] Case created de-identified id=d9134e70b740
+2025-09-23 02:08:51,708 [INFO] backend.main - ✅ 病例存儲成功: d9134e70b740
+2025-09-23 02:10:44,738 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:10:44,739 [INFO] cases.case_storage - [20250923_021044_7389] [1/4 save] saved original file=20250923_021044_7389.json
+2025-09-23 02:10:44,739 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=49
+2025-09-23 02:10:44,739 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=49
+2025-09-23 02:10:44,739 [INFO] cases.case_storage - [20250923_021044_7389] [2/4 normalize] gender=男 age=49
+2025-09-23 02:10:45,628 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:10:45,629 [INFO] cases.case_storage - [20250923_021044_7389] [3/4 triage] main=['腎陰虛'] sub=[]
+2025-09-23 02:10:45,678 [INFO] vector.uploader - [20250923_021044_7389] [4/4 upload] age before send: value=49 type=int → send as str='49'
+2025-09-23 02:10:45,679 [INFO] vector.uploader - [20250923_021044_7389] [4/4 upload] prepare record
+2025-09-23 02:10:45,729 [INFO] vector.uploader - [20250923_021044_7389] [4/4 upload] Case created de-identified id=030594692aac
+2025-09-23 02:10:45,729 [INFO] backend.main - ✅ 病例存儲成功: 030594692aac
+2025-09-23 02:12:29,233 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:12:29,233 [INFO] cases.case_storage - [20250923_021229_2339] [1/4 save] saved original file=20250923_021229_2339.json
+2025-09-23 02:12:29,233 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=64
+2025-09-23 02:12:29,235 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=64
+2025-09-23 02:12:29,235 [INFO] cases.case_storage - [20250923_021229_2339] [2/4 normalize] gender=女 age=64
+2025-09-23 02:12:30,808 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:12:30,809 [INFO] cases.case_storage - [20250923_021229_2339] [3/4 triage] main=['肝腎不足'] sub=[]
+2025-09-23 02:12:30,846 [INFO] vector.uploader - [20250923_021229_2339] [4/4 upload] age before send: value=64 type=int → send as str='64'
+2025-09-23 02:12:30,847 [INFO] vector.uploader - [20250923_021229_2339] [4/4 upload] prepare record
+2025-09-23 02:12:30,901 [INFO] vector.uploader - [20250923_021229_2339] [4/4 upload] Case created de-identified id=5ee85c7be763
+2025-09-23 02:12:30,902 [INFO] backend.main - ✅ 病例存儲成功: 5ee85c7be763
+2025-09-23 02:13:50,394 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:13:50,396 [INFO] cases.case_storage - [20250923_021350_3947] [1/4 save] saved original file=20250923_021350_3947.json
+2025-09-23 02:13:50,396 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=41
+2025-09-23 02:13:50,396 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=41
+2025-09-23 02:13:50,396 [INFO] cases.case_storage - [20250923_021350_3947] [2/4 normalize] gender=女 age=41
+2025-09-23 02:13:51,262 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:13:51,262 [INFO] cases.case_storage - [20250923_021350_3947] [3/4 triage] main=['肝鬱化火'] sub=[]
+2025-09-23 02:13:51,290 [INFO] vector.uploader - [20250923_021350_3947] [4/4 upload] age before send: value=41 type=int → send as str='41'
+2025-09-23 02:13:51,290 [INFO] vector.uploader - [20250923_021350_3947] [4/4 upload] prepare record
+2025-09-23 02:13:51,339 [INFO] vector.uploader - [20250923_021350_3947] [4/4 upload] Case created de-identified id=7c546bfe461a
+2025-09-23 02:13:51,339 [INFO] backend.main - ✅ 病例存儲成功: 7c546bfe461a
+2025-09-23 02:15:16,629 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:15:16,630 [INFO] cases.case_storage - [20250923_021516_6290] [1/4 save] saved original file=20250923_021516_6290.json
+2025-09-23 02:15:16,631 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=34
+2025-09-23 02:15:16,631 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=34
+2025-09-23 02:15:16,631 [INFO] cases.case_storage - [20250923_021516_6290] [2/4 normalize] gender=女 age=34
+2025-09-23 02:15:17,504 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:15:17,505 [INFO] cases.case_storage - [20250923_021516_6290] [3/4 triage] main=['肝鬱化火'] sub=[]
+2025-09-23 02:15:17,548 [INFO] vector.uploader - [20250923_021516_6290] [4/4 upload] age before send: value=34 type=int → send as str='34'
+2025-09-23 02:15:17,548 [INFO] vector.uploader - [20250923_021516_6290] [4/4 upload] prepare record
+2025-09-23 02:15:17,602 [INFO] vector.uploader - [20250923_021516_6290] [4/4 upload] Case created de-identified id=2b831caa3169
+2025-09-23 02:15:17,602 [INFO] backend.main - ✅ 病例存儲成功: 2b831caa3169
+2025-09-23 02:17:10,593 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:17:10,595 [INFO] cases.case_storage - [20250923_021710_5939] [1/4 save] saved original file=20250923_021710_5939.json
+2025-09-23 02:17:10,595 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=74
+2025-09-23 02:17:10,595 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=74
+2025-09-23 02:17:10,595 [INFO] cases.case_storage - [20250923_021710_5939] [2/4 normalize] gender=男 age=74
+2025-09-23 02:17:11,451 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:17:11,451 [INFO] cases.case_storage - [20250923_021710_5939] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-23 02:17:11,489 [INFO] vector.uploader - [20250923_021710_5939] [4/4 upload] age before send: value=74 type=int → send as str='74'
+2025-09-23 02:17:11,489 [INFO] vector.uploader - [20250923_021710_5939] [4/4 upload] prepare record
+2025-09-23 02:17:11,541 [INFO] vector.uploader - [20250923_021710_5939] [4/4 upload] Case created de-identified id=66c869727bb8
+2025-09-23 02:17:11,542 [INFO] backend.main - ✅ 病例存儲成功: 66c869727bb8
+2025-09-23 02:18:39,048 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:18:39,049 [INFO] cases.case_storage - [20250923_021839_0489] [1/4 save] saved original file=20250923_021839_0489.json
+2025-09-23 02:18:39,049 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=37
+2025-09-23 02:18:39,049 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=37
+2025-09-23 02:18:39,050 [INFO] cases.case_storage - [20250923_021839_0489] [2/4 normalize] gender=女 age=37
+2025-09-23 02:18:41,603 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:18:41,603 [INFO] cases.case_storage - [20250923_021839_0489] [3/4 triage] main=['腎陰虛'] sub=[]
+2025-09-23 02:18:41,647 [INFO] vector.uploader - [20250923_021839_0489] [4/4 upload] age before send: value=37 type=int → send as str='37'
+2025-09-23 02:18:41,647 [INFO] vector.uploader - [20250923_021839_0489] [4/4 upload] prepare record
+2025-09-23 02:18:41,699 [INFO] vector.uploader - [20250923_021839_0489] [4/4 upload] Case created de-identified id=27aa9c1a2277
+2025-09-23 02:18:41,699 [INFO] backend.main - ✅ 病例存儲成功: 27aa9c1a2277
+2025-09-23 02:20:12,676 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:20:12,679 [INFO] cases.case_storage - [20250923_022012_6767] [1/4 save] saved original file=20250923_022012_6767.json
+2025-09-23 02:20:12,679 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=34
+2025-09-23 02:20:12,679 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=34
+2025-09-23 02:20:12,679 [INFO] cases.case_storage - [20250923_022012_6767] [2/4 normalize] gender=女 age=34
+2025-09-23 02:20:14,032 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:20:14,033 [INFO] cases.case_storage - [20250923_022012_6767] [3/4 triage] main=['心肝血虛'] sub=[]
+2025-09-23 02:20:14,066 [INFO] vector.uploader - [20250923_022012_6767] [4/4 upload] age before send: value=34 type=int → send as str='34'
+2025-09-23 02:20:14,066 [INFO] vector.uploader - [20250923_022012_6767] [4/4 upload] prepare record
+2025-09-23 02:20:14,125 [INFO] vector.uploader - [20250923_022012_6767] [4/4 upload] Case created de-identified id=d4cd33eac2b6
+2025-09-23 02:20:14,125 [INFO] backend.main - ✅ 病例存儲成功: d4cd33eac2b6
+2025-09-23 02:21:34,946 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:21:34,947 [INFO] cases.case_storage - [20250923_022134_9466] [1/4 save] saved original file=20250923_022134_9466.json
+2025-09-23 02:21:34,948 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=38
+2025-09-23 02:21:34,948 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=38
+2025-09-23 02:21:34,948 [INFO] cases.case_storage - [20250923_022134_9466] [2/4 normalize] gender=男 age=38
+2025-09-23 02:21:35,581 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:21:35,583 [INFO] cases.case_storage - [20250923_022134_9466] [3/4 triage] main=['心脾兩虛'] sub=[]
+2025-09-23 02:21:35,604 [INFO] vector.uploader - [20250923_022134_9466] [4/4 upload] age before send: value=38 type=int → send as str='38'
+2025-09-23 02:21:35,604 [INFO] vector.uploader - [20250923_022134_9466] [4/4 upload] prepare record
+2025-09-23 02:21:35,655 [INFO] vector.uploader - [20250923_022134_9466] [4/4 upload] Case created de-identified id=9e813f595ce2
+2025-09-23 02:21:35,655 [INFO] backend.main - ✅ 病例存儲成功: 9e813f595ce2
+2025-09-23 02:23:03,569 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:23:03,570 [INFO] cases.case_storage - [20250923_022303_5695] [1/4 save] saved original file=20250923_022303_5695.json
+2025-09-23 02:23:03,571 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=71
+2025-09-23 02:23:03,571 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=71
+2025-09-23 02:23:03,571 [INFO] cases.case_storage - [20250923_022303_5695] [2/4 normalize] gender=女 age=71
+2025-09-23 02:23:04,217 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:23:04,218 [INFO] cases.case_storage - [20250923_022303_5695] [3/4 triage] main=['腎陽不足'] sub=[]
+2025-09-23 02:23:04,263 [INFO] vector.uploader - [20250923_022303_5695] [4/4 upload] age before send: value=71 type=int → send as str='71'
+2025-09-23 02:23:04,263 [INFO] vector.uploader - [20250923_022303_5695] [4/4 upload] prepare record
+2025-09-23 02:23:04,320 [INFO] vector.uploader - [20250923_022303_5695] [4/4 upload] Case created de-identified id=2d6a307a8adf
+2025-09-23 02:23:04,321 [INFO] backend.main - ✅ 病例存儲成功: 2d6a307a8adf
+2025-09-23 02:24:18,373 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:24:18,374 [INFO] cases.case_storage - [20250923_022418_3737] [1/4 save] saved original file=20250923_022418_3737.json
+2025-09-23 02:24:18,374 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=22
+2025-09-23 02:24:18,374 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=22
+2025-09-23 02:24:18,374 [INFO] cases.case_storage - [20250923_022418_3737] [2/4 normalize] gender=女 age=22
+2025-09-23 02:24:19,804 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:24:19,804 [INFO] cases.case_storage - [20250923_022418_3737] [3/4 triage] main=['脾腎陽虛'] sub=[]
+2025-09-23 02:24:19,845 [INFO] vector.uploader - [20250923_022418_3737] [4/4 upload] age before send: value=22 type=int → send as str='22'
+2025-09-23 02:24:19,846 [INFO] vector.uploader - [20250923_022418_3737] [4/4 upload] prepare record
+2025-09-23 02:24:19,895 [INFO] vector.uploader - [20250923_022418_3737] [4/4 upload] Case created de-identified id=92988ef4743e
+2025-09-23 02:24:19,895 [INFO] backend.main - ✅ 病例存儲成功: 92988ef4743e
+2025-09-23 02:25:33,841 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:25:33,843 [INFO] cases.case_storage - [20250923_022533_8417] [1/4 save] saved original file=20250923_022533_8417.json
+2025-09-23 02:25:33,843 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=58
+2025-09-23 02:25:33,843 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=58
+2025-09-23 02:25:33,843 [INFO] cases.case_storage - [20250923_022533_8417] [2/4 normalize] gender=女 age=58
+2025-09-23 02:25:35,217 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:25:35,217 [INFO] cases.case_storage - [20250923_022533_8417] [3/4 triage] main=['脾腎陽虛'] sub=[]
+2025-09-23 02:25:35,251 [INFO] vector.uploader - [20250923_022533_8417] [4/4 upload] age before send: value=58 type=int → send as str='58'
+2025-09-23 02:25:35,251 [INFO] vector.uploader - [20250923_022533_8417] [4/4 upload] prepare record
+2025-09-23 02:25:35,303 [INFO] vector.uploader - [20250923_022533_8417] [4/4 upload] Case created de-identified id=f1ee0d4a45cf
+2025-09-23 02:25:35,303 [INFO] backend.main - ✅ 病例存儲成功: f1ee0d4a45cf
+2025-09-23 02:26:49,157 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:26:49,158 [INFO] cases.case_storage - [20250923_022649_1575] [1/4 save] saved original file=20250923_022649_1575.json
+2025-09-23 02:26:49,158 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=25
+2025-09-23 02:26:49,159 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=25
+2025-09-23 02:26:49,159 [INFO] cases.case_storage - [20250923_022649_1575] [2/4 normalize] gender=男 age=25
+2025-09-23 02:26:50,521 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:26:50,522 [INFO] cases.case_storage - [20250923_022649_1575] [3/4 triage] main=['肝鬱化火'] sub=[]
+2025-09-23 02:26:50,567 [INFO] vector.uploader - [20250923_022649_1575] [4/4 upload] age before send: value=25 type=int → send as str='25'
+2025-09-23 02:26:50,567 [INFO] vector.uploader - [20250923_022649_1575] [4/4 upload] prepare record
+2025-09-23 02:26:50,618 [INFO] vector.uploader - [20250923_022649_1575] [4/4 upload] Case created de-identified id=210eb592ae79
+2025-09-23 02:26:50,618 [INFO] backend.main - ✅ 病例存儲成功: 210eb592ae79
+2025-09-23 02:28:14,062 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:28:14,063 [INFO] cases.case_storage - [20250923_022814_0627] [1/4 save] saved original file=20250923_022814_0627.json
+2025-09-23 02:28:14,064 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=73
+2025-09-23 02:28:14,064 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=73
+2025-09-23 02:28:14,064 [INFO] cases.case_storage - [20250923_022814_0627] [2/4 normalize] gender=女 age=73
+2025-09-23 02:28:15,414 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:28:15,414 [INFO] cases.case_storage - [20250923_022814_0627] [3/4 triage] main=['心脾兩虛'] sub=[]
+2025-09-23 02:28:15,450 [INFO] vector.uploader - [20250923_022814_0627] [4/4 upload] age before send: value=73 type=int → send as str='73'
+2025-09-23 02:28:15,450 [INFO] vector.uploader - [20250923_022814_0627] [4/4 upload] prepare record
+2025-09-23 02:28:15,507 [INFO] vector.uploader - [20250923_022814_0627] [4/4 upload] Case created de-identified id=a40f9194d71c
+2025-09-23 02:28:15,508 [INFO] backend.main - ✅ 病例存儲成功: a40f9194d71c
+2025-09-23 02:30:24,273 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:30:24,275 [INFO] cases.case_storage - [20250923_023024_2739] [1/4 save] saved original file=20250923_023024_2739.json
+2025-09-23 02:30:24,275 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=42
+2025-09-23 02:30:24,275 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=42
+2025-09-23 02:30:24,276 [INFO] cases.case_storage - [20250923_023024_2739] [2/4 normalize] gender=女 age=42
+2025-09-23 02:30:25,249 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:30:25,249 [INFO] cases.case_storage - [20250923_023024_2739] [3/4 triage] main=['陽氣虛弱'] sub=[]
+2025-09-23 02:30:25,280 [INFO] vector.uploader - [20250923_023024_2739] [4/4 upload] age before send: value=42 type=int → send as str='42'
+2025-09-23 02:30:25,280 [INFO] vector.uploader - [20250923_023024_2739] [4/4 upload] prepare record
+2025-09-23 02:30:25,343 [INFO] vector.uploader - [20250923_023024_2739] [4/4 upload] Case created de-identified id=f12a5635bb6f
+2025-09-23 02:30:25,343 [INFO] backend.main - ✅ 病例存儲成功: f12a5635bb6f
+2025-09-23 02:32:00,458 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:32:00,459 [INFO] cases.case_storage - [20250923_023200_4582] [1/4 save] saved original file=20250923_023200_4582.json
+2025-09-23 02:32:00,459 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=70
+2025-09-23 02:32:00,459 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=70
+2025-09-23 02:32:00,460 [INFO] cases.case_storage - [20250923_023200_4582] [2/4 normalize] gender=女 age=70
+2025-09-23 02:32:01,329 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:32:01,329 [INFO] cases.case_storage - [20250923_023200_4582] [3/4 triage] main=['心火上炎'] sub=[]
+2025-09-23 02:32:01,363 [INFO] vector.uploader - [20250923_023200_4582] [4/4 upload] age before send: value=70 type=int → send as str='70'
+2025-09-23 02:32:01,363 [INFO] vector.uploader - [20250923_023200_4582] [4/4 upload] prepare record
+2025-09-23 02:32:01,422 [INFO] vector.uploader - [20250923_023200_4582] [4/4 upload] Case created de-identified id=4da75c876886
+2025-09-23 02:32:01,423 [INFO] backend.main - ✅ 病例存儲成功: 4da75c876886
+2025-09-23 02:33:20,217 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:33:20,218 [INFO] cases.case_storage - [20250923_023320_2175] [1/4 save] saved original file=20250923_023320_2175.json
+2025-09-23 02:33:20,219 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=70
+2025-09-23 02:33:20,219 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=70
+2025-09-23 02:33:20,219 [INFO] cases.case_storage - [20250923_023320_2175] [2/4 normalize] gender=男 age=70
+2025-09-23 02:33:21,110 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:33:21,110 [INFO] cases.case_storage - [20250923_023320_2175] [3/4 triage] main=['痰濕困脾'] sub=[]
+2025-09-23 02:33:21,139 [INFO] vector.uploader - [20250923_023320_2175] [4/4 upload] age before send: value=70 type=int → send as str='70'
+2025-09-23 02:33:21,141 [INFO] vector.uploader - [20250923_023320_2175] [4/4 upload] prepare record
+2025-09-23 02:33:21,193 [INFO] vector.uploader - [20250923_023320_2175] [4/4 upload] Case created de-identified id=68843666fd5d
+2025-09-23 02:33:21,193 [INFO] backend.main - ✅ 病例存儲成功: 68843666fd5d
+2025-09-23 02:34:36,663 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:34:36,664 [INFO] cases.case_storage - [20250923_023436_6638] [1/4 save] saved original file=20250923_023436_6638.json
+2025-09-23 02:34:36,664 [INFO] cases.normalizer - [normalize] de-identified view ready gender=女 age=24
+2025-09-23 02:34:36,664 [INFO] cases.case_storage - [normalize] de-identified view ready gender=女 age=24
+2025-09-23 02:34:36,664 [INFO] cases.case_storage - [20250923_023436_6638] [2/4 normalize] gender=女 age=24
+2025-09-23 02:34:37,528 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:34:37,529 [INFO] cases.case_storage - [20250923_023436_6638] [3/4 triage] main=['風寒咳嗽'] sub=[]
+2025-09-23 02:34:37,544 [INFO] vector.uploader - [20250923_023436_6638] [4/4 upload] age before send: value=24 type=int → send as str='24'
+2025-09-23 02:34:37,545 [INFO] vector.uploader - [20250923_023436_6638] [4/4 upload] prepare record
+2025-09-23 02:34:37,595 [INFO] vector.uploader - [20250923_023436_6638] [4/4 upload] Case created de-identified id=7932b4810b48
+2025-09-23 02:34:37,596 [INFO] backend.main - ✅ 病例存儲成功: 7932b4810b48
+2025-09-23 02:36:02,280 [INFO] backend.main - 📝 收到新增病例請求: unknown
+2025-09-23 02:36:02,282 [INFO] cases.case_storage - [20250923_023602_2810] [1/4 save] saved original file=20250923_023602_2810.json
+2025-09-23 02:36:02,282 [INFO] cases.normalizer - [normalize] de-identified view ready gender=男 age=23
+2025-09-23 02:36:02,282 [INFO] cases.case_storage - [normalize] de-identified view ready gender=男 age=23
+2025-09-23 02:36:02,283 [INFO] cases.case_storage - [20250923_023602_2810] [2/4 normalize] gender=男 age=23
+2025-09-23 02:36:03,266 [INFO] vector.embedding - ✅ NVIDIA Embedding 成功生成 1024 維向量
+2025-09-23 02:36:03,266 [INFO] cases.case_storage - [20250923_023602_2810] [3/4 triage] main=['痰濕困脾'] sub=[]
+2025-09-23 02:36:03,282 [INFO] vector.uploader - [20250923_023602_2810] [4/4 upload] age before send: value=23 type=int → send as str='23'
+2025-09-23 02:36:03,282 [INFO] vector.uploader - [20250923_023602_2810] [4/4 upload] prepare record
+2025-09-23 02:36:03,339 [INFO] vector.uploader - [20250923_023602_2810] [4/4 upload] Case created de-identified id=07a9b3c5855a
+2025-09-23 02:36:03,339 [INFO] backend.main - ✅ 病例存儲成功: 07a9b3c5855a
+2025-09-23 02:38:39,104 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 02:38:39,104 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 02:38:39,109 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 02:38:39,109 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 02:38:39,110 [INFO] SCBRConfig - ✅ 成功載入 Backend 配置
+2025-09-23 02:38:39,415 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 02:38:39,415 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 02:38:40,901 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-23 02:38:48,459 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 02:39:04,348 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 02:40:40,385 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 02:55:45,430 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 02:55:45,431 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 02:55:45,437 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 02:55:45,437 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 02:55:45,437 [INFO] SCBRConfig - ✅ 成功載入 Backend 配置
+2025-09-23 02:55:45,766 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 02:55:45,767 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 02:55:47,289 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-23 03:00:50,043 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-23 03:00:50,044 [INFO] openai._base_client - Retrying request to /chat/completions in 0.440524 seconds
+2025-09-23 03:01:01,598 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 03:06:03,736 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-23 03:06:03,736 [INFO] openai._base_client - Retrying request to /chat/completions in 0.452896 seconds
+2025-09-23 03:06:11,423 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 03:11:13,510 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 504 Gateway Timeout"
+2025-09-23 03:11:13,511 [INFO] openai._base_client - Retrying request to /chat/completions in 0.441123 seconds
+2025-09-23 03:15:59,528 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 03:25:02,959 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 03:25:02,959 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 03:25:02,960 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 03:25:07,229 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 03:25:07,234 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 03:25:07,234 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 03:25:07,234 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 03:25:07,234 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 03:25:07,234 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 03:25:07,235 [INFO] backend.main - Application startup completed.
+2025-09-23 03:26:41,809 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 03:26:41,809 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 03:26:41,809 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 03:26:45,377 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 's_cbr.core.spiral_cbr_engine'
+2025-09-23 03:26:45,383 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 03:26:45,383 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-23 03:26:45,383 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-23 03:26:45,383 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 03:26:45,383 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 03:26:45,384 [INFO] backend.main - Application startup completed.
+2025-09-23 03:27:30,046 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 03:27:30,046 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 03:27:33,348 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 03:27:33,352 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 03:27:33,352 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 03:27:33,352 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 03:27:33,352 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 03:27:33,352 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 03:27:33,354 [INFO] backend.main - Application startup completed.
+2025-09-23 03:28:44,442 [INFO] SpiralSessionManager - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-23 03:31:02,288 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 03:31:02,288 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 03:31:02,288 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 03:31:04,386 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: No module named 'engines'
+2025-09-23 03:31:04,392 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 03:31:04,392 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-23 03:31:04,392 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-23 03:31:04,392 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 03:31:04,393 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 03:31:04,393 [INFO] backend.main - Application startup completed.
+2025-09-23 03:31:11,632 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 03:31:11,633 [INFO] backend.main - 🔻 Application shutdown completed.
