@@ -414,7 +414,7 @@ class SpiralCBREngine:
         try:
             if not self.config:
                 self.logger.error("SCBRConfig 不可用，無法生成向量")
-                return [0.0] * 1536
+                return [0.0] * 384
             
             # 通過 SCBRConfig 獲取 Embedding 配置
             embedding_config = self.config.get_embedding_config()
@@ -433,6 +433,7 @@ class SpiralCBREngine:
                     payload = {
                         "input": [text],  # 確保是陣列格式
                         "model": embedding_model,
+                        "input_type": "query",
                         "encoding_format": "float"
                     }
                     

@@ -240,7 +240,7 @@ class SCBRConfig:
             # 導入 Backend 配置
             from Backend.config import (
                 LLM_API_URL, LLM_API_KEY, LLM_MODEL_NAME,
-                EMBEDDING_API_KEY, EMBEDDING_BASE_URL, EMBEDDING_MODEL_NAME,
+                EMBEDDING_API_KEY, EMBEDDING_BASE_URL, EMBEDDING_MODEL_NAME, NVIDIA_API_KEY, EMBEDDING_NV_MODEL_NAME,
                 WV_API_KEY, WEAVIATE_URL, WV_HTTP_SECURE, WV_HTTP_HOST, WV_HTTP_PORT
             )
             
@@ -252,9 +252,9 @@ class SCBRConfig:
                     "timeout": 60
                 },
                 "embedding": {
-                    "api_key": EMBEDDING_API_KEY,
+                    "api_key": NVIDIA_API_KEY,
                     "base_url": EMBEDDING_BASE_URL,
-                    "model": EMBEDDING_MODEL_NAME,
+                    "model": EMBEDDING_NV_MODEL_NAME,
                     "timeout": 30
                 },
                 "weaviate": {
