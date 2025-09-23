@@ -106,7 +106,7 @@ async def run_spiral_cbr_v2(question: str,
             "trace_id": trace_id
         }
 
-        spiral_result = await main_engine.spiral_engine.execute_spiral_reasoning(query_context)
+        spiral_result = await main_engine.spiral_engine.start_spiral_dialog(query_context)
 
         # 移除治療內容
         filtered_result = _filter_treatment_content(spiral_result)
@@ -133,9 +133,14 @@ async def run_spiral_cbr_v2(question: str,
 
         session_manager.update_session(session_id, session)
 
+        # 設定每次輪數
+        MAX_SPIRAL_ROUNDS = 5
+        MAX_CASES_PER_SESSION = 10
+
+
         continue_available = (
-            session.round_count < main_engine.config.MAX_SPIRAL_ROUNDS and
-            len(session.used_cases) < main_engine.config.MAX_CASES_PER_SESSION and
+            session.round_count < MAX_SPIRAL_ROUNDS and
+            len(session.used_cases) < MAX_CASES_PER_SESSION and
             spiral_result.get("converged", False) != True
         )
 

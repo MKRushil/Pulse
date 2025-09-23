@@ -546,6 +546,10 @@ class SpiralLogger:
         """Error級別日誌"""
         self.logger.error(message, extra=kwargs)
     
+    def exception(self, message: str, **kwargs):
+        """Exception級別日誌（帶堆疊）"""
+        self.logger.exception(message, extra=kwargs)
+    
     def critical(self, message: str, **kwargs):
         """Critical級別日誌"""
         self.logger.critical(message, extra=kwargs)
