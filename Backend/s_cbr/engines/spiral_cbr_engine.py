@@ -13,6 +13,22 @@ S-CBR 螺旋推理引擎 v2.1 - Backend 配置整合版
 
 import asyncio
 import json
+
+def _safe_json_array(text: str) -> list[str]:
+    import json as _json
+    try:
+        arr = _json.loads(text.strip())
+        if isinstance(arr, list):
+            return [x for x in arr if isinstance(x, str)]
+    except Exception:
+        pass
+    # 模型若不是純 JSON，就做最粗略的提取（逗號/換行切）
+    parts = [p.strip(" []，,、") for p in text.splitlines() if p.strip()]
+    if len(parts) == 1:
+        parts = [p.strip() for p in parts[0].replace("，", ",").split(",")]
+    return [p for p in parts if p]
+
+
 import uuid
 from typing import Dict, Any, List, Optional, Tuple
 from datetime import datetime
@@ -184,6 +200,45 @@ class SpiralCBREngine:
             self.logger.error(f"RPCase 管理器初始化失敗: {e}")
             self.rpcase_manager = None
 
+    async def _llm_expand_terms(self, query_text: str) -> list[str]:
+        """
+        命中過低時，向 LLM 請求 5-12 個中文同義/近義/關聯詞，僅做保底重試。
+        """
+        prompt = (
+            "請將以下中醫主訴/症狀語句做同義與近義展開，產出 5-12 個中文短詞，"
+            "避免過度泛化（與原意保持接近），僅輸出 JSON 陣列。\n\n"
+            f"原始語句：{query_text}\n"
+            "輸出範例：[\"腹痛\",\"胃腹痛\",\"脹痛\"]"
+        )
+
+        # 與你現有 LLM 呼叫方式一致（本檔案使用 self.llm_client.chat.completions.create）
+        try:
+            rsp = await self.llm_client.chat.completions.create(
+                model=self.llm_model,
+                messages=[
+                    {"role": "system", "content": "你是中醫檢索助手，僅輸出 JSON 陣列。"},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0.2,
+                max_tokens=256,
+            )
+            content = rsp.choices[0].message.content if rsp and rsp.choices else ""
+        except Exception as e:
+            self.logger.warning(f"同義展開 LLM 調用失敗：{e}")
+            content = ""
+
+        terms = _safe_json_array(content)
+        # 去重與限長
+        out, seen = [], set()
+        for t in terms:
+            if not t or len(t) > 16:
+                continue
+            if t not in seen:
+                out.append(t)
+                seen.add(t)
+        return out[:12]
+
+
     async def start_spiral_dialog(self, query: Dict[str, Any]) -> Dict[str, Any]:
         """
         啟動螺旋推理對話 v2.1
@@ -322,6 +377,48 @@ class SpiralCBREngine:
             
             self.logger.info(f"Step 1 完成 - 總檢索案例數: {retrieved_cases['total_retrieved']}")
             
+            # === 低命中保底：若三類加總命中 < 3，呼叫 LLM 做一次展開並用 OR 條件重試（BM25 路徑） ===
+            try:
+                total_hits = retrieved_cases["total_retrieved"]
+            except Exception:
+                total_hits = 0
+
+            if total_hits < 3 and self.weaviate_client:
+                self.logger.info("命中過低（<3），啟用 LLM 同義展開保底重試")
+                expanded_terms = await self._llm_expand_terms(question)
+
+                # 逐庫重試（不覆蓋原命中，採「補齊」）
+                try:
+                    add_cases = self._retry_case_with_where_or(expanded_terms, limit=max(3 - len(retrieved_cases.get("cases", [])), 0) or 1)
+                    if add_cases:
+                        retrieved_cases["cases"] = (retrieved_cases.get("cases") or []) + add_cases
+                except Exception as e:
+                    self.logger.warning(f"Case 重試異常：{e}")
+
+                try:
+                    add_pulses = self._retry_pulse_with_where_or(expanded_terms, limit=max(2 - len(retrieved_cases.get("pulse_knowledge", [])), 0) or 1)
+                    if add_pulses:
+                        retrieved_cases["pulse_knowledge"] = (retrieved_cases.get("pulse_knowledge") or []) + add_pulses
+                except Exception as e:
+                    self.logger.warning(f"Pulse 重試異常：{e}")
+
+                try:
+                    add_rpcases = self._retry_rpcase_with_where_or(expanded_terms, limit=max(2 - len(retrieved_cases.get("feedback_cases", [])), 0) or 1)
+                    if add_rpcases:
+                        retrieved_cases["feedback_cases"] = (retrieved_cases.get("feedback_cases") or []) + add_rpcases
+                except Exception as e:
+                    self.logger.warning(f"RPCase 重試異常：{e}")
+
+                # 重算總數並紀錄
+                retrieved_cases["total_retrieved"] = (
+                    len(retrieved_cases.get("cases") or []) +
+                    len(retrieved_cases.get("pulse_knowledge") or []) +
+                    len(retrieved_cases.get("feedback_cases") or [])
+                )
+                self.logger.info(f"保底重試後 - 總檢索案例數: {retrieved_cases['total_retrieved']}")
+
+
+
             # 如果沒有檢索到任何案例，使用模擬案例
             if retrieved_cases["total_retrieved"] == 0:
                 self.logger.warning("未檢索到任何案例，使用模擬案例")
@@ -408,6 +505,80 @@ class SpiralCBREngine:
         except Exception as e:
             self.logger.error(f"PulsePJ 知識庫檢索失敗: {e}")
             return []
+
+    def _retry_case_with_where_or(self, expanded_terms: list[str], limit: int = 3) -> list[dict]:
+        try:
+            if not expanded_terms:
+                return []
+            # 針對你的 Case schema 欄位（見你檔案中 _retrieve_from_case_kb 欄位清單）
+            case_or = {
+                "operator": "Or",
+                "operands": [
+                    {"path": ["chief_complaint"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                    {"path": ["summary"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                    {"path": ["present_illness"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                ]
+            }
+            result = (
+                self.weaviate_client.query
+                .get("Case", ["case_id","age","gender","chief_complaint","present_illness","diagnosis_main","treatment_plan","summary"])
+                .with_where(case_or)
+                .with_limit(limit)
+                .do()
+            )
+            return result.get("data", {}).get("Get", {}).get("Case", []) or []
+        except Exception as e:
+            self.logger.warning(f"Case OR 重試失敗：{e}")
+            return []
+
+    def _retry_pulse_with_where_or(self, expanded_terms: list[str], limit: int = 2) -> list[dict]:
+        try:
+            if not expanded_terms:
+                return []
+            pulse_or = {
+                "operator": "Or",
+                "operands": [
+                    {"path": ["pulse_name"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                    {"path": ["associated_conditions"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                    {"path": ["diagnostic_significance"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                ]
+            }
+            result = (
+                self.weaviate_client.query
+                .get("PulsePJ", ["pulse_id","pulse_name","pulse_description","associated_conditions","diagnostic_significance","treatment_approach"])
+                .with_where(pulse_or)
+                .with_limit(limit)
+                .do()
+            )
+            return result.get("data", {}).get("Get", {}).get("PulsePJ", []) or []
+        except Exception as e:
+            self.logger.warning(f"PulsePJ OR 重試失敗：{e}")
+            return []
+
+    def _retry_rpcase_with_where_or(self, expanded_terms: list[str], limit: int = 2) -> list[dict]:
+        try:
+            if not expanded_terms:
+                return []
+            rpcase_or = {
+                "operator": "Or",
+                "operands": [
+                    {"path": ["original_question"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                    {"path": ["patient_symptoms"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                    {"path": ["tags"], "operator": "ContainsAny", "valueTextArray": expanded_terms},
+                ]
+            }
+            result = (
+                self.weaviate_client.query
+                .get("RPCase", ["rpcase_id","original_question","final_diagnosis","treatment_plan","confidence_score","patient_context","tags"])
+                .with_where(rpcase_or)
+                .with_limit(limit)
+                .do()
+            )
+            return result.get("data", {}).get("Get", {}).get("RPCase", []) or []
+        except Exception as e:
+            self.logger.warning(f"RPCase OR 重試失敗：{e}")
+            return []
+
 
     async def _generate_query_vector(self, text: str) -> List[float]:
         """生成查詢文本的向量表示 - v2.1 使用 SCBRConfig"""

@@ -23,96 +23,113 @@ class ResponseGenerator:
         self.logger = SpiralLogger.get_logger("ResponseGenerator")
         self.version = "2.0"
         
-    async def generate_comprehensive_response_v2(self, conversation, step_results) -> dict:
+    async def generate_comprehensive_response_v2(
+        self,
+        conversation_state,
+        step_results: list[dict]
+    ) -> dict:
         """
-        綜合回應（v2）：
-        - 優先輸出【診斷結果】與（若有）人性化【回覆】（spiral_dialog）
-        - 嚴禁輸出治療/處方細節
-        - 其餘分析/評估交由外層 evaluation_metrics 顯示（前端已有）
+        統一輸出版（v2）：
+        - 優先讀取 llm_struct / llm_struct.output_v2 產生可讀對話
+        - 若缺少，回退至 final_step 其他欄位
+        - 最後仍缺則給出「最小可用」安全提示與精準追問
         """
         try:
-            # --- 1) 取出最後一步（通常是 Step4）的結構化結果 ---
             final_step = step_results[-1] if step_results else {}
+            sections: list[str] = []
 
-            # 常見鍵位相容（不同模組命名可能不同）
-            diagnosis = (
-                final_step.get("final_diagnosis") or
-                final_step.get("diagnosis") or
-                final_step.get("result_diagnosis") or
-                ""
-            )
+            # -------- 1) 優先：從 llm_struct / output_v2 取資料 --------
+            llm_struct = None
+            if isinstance(final_step, dict):
+                # 有些流程直接把 llm_struct 放在 final_step["llm_struct"]
+                llm_struct = final_step.get("llm_struct")
+                # 也兼容整個 final_step 就是 llm_struct 的情況
+                if llm_struct is None and ("diagnosis" in final_step or "final_diagnosis" in final_step):
+                    llm_struct = final_step
 
-            # 嚴禁治療/處方：不讀取 treatment_plan / prescription / herbs
-            # plan = final_step.get("treatment_plan")  # <-- 刻意不用
-            # herbs = final_step.get("herbs")          # <-- 刻意不用
+            dx_text = None
+            evidence = None
+            advice = None
+            next_actions = None
+            reasoning_summary = None
 
-            # 對話友好文案（若引擎有給）
-            dialog_note = (
-                final_step.get("spiral_dialog") or
-                final_step.get("dialog") or
-                ""
-            )
+            if isinstance(llm_struct, dict):
+                # output_v2 為優先輸出
+                output_v2 = llm_struct.get("output_v2") if isinstance(llm_struct.get("output_v2"), dict) else {}
 
-            # 若引擎在中間步驟已有小結，可補充（不包含治療）
-            reasoning_brief = (
-                final_step.get("reasoning_summary") or
-                final_step.get("reasoning") or
-                ""
-            )
+                # 診斷
+                if output_v2:
+                    diag_obj = output_v2.get("diagnosis")
+                    if isinstance(diag_obj, dict):
+                        dx_text = diag_obj.get("syndrome") or diag_obj.get("name")
+                    evidence = output_v2.get("evidence") if isinstance(output_v2.get("evidence"), list) else None
+                    advice = output_v2.get("advice") if isinstance(output_v2.get("advice"), list) else None
+                    next_actions = output_v2.get("next_actions") if isinstance(output_v2.get("next_actions"), list) else None
 
-            # --- 2) 組裝輸出（不包含任何治療/處方） ---
-            blocks = []
+                # 若 output_v2 不足，再讀 llm_struct 既有欄位
+                if not dx_text:
+                    dx_text = llm_struct.get("main_dx") or llm_struct.get("final_diagnosis") or llm_struct.get("diagnosis")
+                if evidence is None:
+                    # 兼容你在 Step2/3 可能塞的摘要欄位
+                    ev = llm_struct.get("evidence") or llm_struct.get("key_points")
+                    evidence = ev if isinstance(ev, list) else None
+                if advice is None:
+                    recs = llm_struct.get("recommendations") or llm_struct.get("advice")
+                    advice = recs if isinstance(recs, list) else None
 
-            # (a) 診斷結果
-            if diagnosis.strip():
-                blocks.append(f"## 📋 **診斷結果**\n- {diagnosis.strip()}\n")
-            else:
-                # 若沒有任何診斷字樣，提供清楚的缺資訊說明（避免前端空白）
-                blocks.append(
-                    "## 📋 **診斷結果**\n"
-                    "- 目前資訊不足，暫無法確定診斷。\n"
-                    "\n"
-                    "### 🔎 建議補充\n"
-                    "- 年齡、性別\n"
-                    "- 起病時間與持續時長、發作規律（入睡困難／易醒／早醒）\n"
-                    "- 伴隨症狀（心悸、口乾、胸悶、頭脹等）\n"
-                    "- 情緒與壓力、作息與飲食、咖啡因／酒精使用\n"
-                    "- 既往病史與用藥\n"
-                    "- 脈象（弦／細／滑／數／遲等）\n"
-                    "\n"
-                    "_說明：舌象不納入本次判斷流程。_\n"
+                # 推理摘要（可選）
+                reasoning_summary = llm_struct.get("reasoning_summary") or llm_struct.get("learning_insights")
+
+            # -------- 2) 若 llm_struct 不足，退回 final_step 其他欄位 --------
+            if not dx_text and isinstance(final_step, dict):
+                dx_text = final_step.get("final_diagnosis") or final_step.get("diagnosis")
+            if evidence is None and isinstance(final_step, dict):
+                ev = final_step.get("evidence") or final_step.get("key_points")
+                evidence = ev if isinstance(ev, list) else None
+            if advice is None and isinstance(final_step, dict):
+                recs = final_step.get("recommendations") or final_step.get("advice")
+                advice = recs if isinstance(recs, list) else None
+
+            # -------- 3) 組裝對話區塊（診斷 / 依據 / 建議 / 追問）--------
+            if dx_text:
+                sections.append(f"**診斷結果**：{dx_text}")
+
+            if evidence and len(evidence) > 0:
+                sections.append("**依據要點**：\n" + "\n".join([f"- {x}" for x in evidence]))
+            elif reasoning_summary:
+                sections.append(f"**依據要點**：{reasoning_summary}")
+
+            if advice and len(advice) > 0:
+                sections.append("**建議**：\n" + "\n".join([f"- {x}" for x in advice]))
+
+            # 可選的下一步精準追問（若上游有產出）
+            if next_actions and len(next_actions) > 0:
+                sections.append("**下一步建議補充**：\n" + "\n".join([f"- {q}" for q in next_actions[:3]]))
+
+            # -------- 4) 最小可用回覆（避免只有「請補充」）--------
+            if not sections:
+                # 即使資訊不足，也給出基本結論框架，避免空白體驗
+                sections.append("目前已完成初步分析，但關鍵條件仍不足，無法確認最終辨證。")
+                sections.append(
+                    "建議至少補充：年齡、症狀起始與時程、發作規律（入睡困難／易醒／早醒）、"
+                    "是否伴隨心悸／胸悶／口乾／頭脹、作息壓力與飲食、咖啡因／酒精使用、脈象（弦/細/滑/數/遲）等。"
                 )
 
-            # (b) 友好回覆（若有）
-            if dialog_note and dialog_note.strip():
-                blocks.append(f"### 🗣️ **回覆**\n{dialog_note.strip()}\n")
+            # 安全提示（固定）
+            sections.append("> ⚠️ 本回覆為系統輔助判讀，僅供參考，請依專業醫師診治。")
 
-            # (c) 推理依據（精簡；不包含治療）
-            if reasoning_brief and reasoning_brief.strip():
-                # 做一點簡單過濾，若內容含「處方、方劑、藥材、劑量」等字眼就不顯示
-                if not any(k in reasoning_brief for k in ["處方", "方劑", "藥材", "劑量"]):
-                    blocks.append(f"### 📑 **推理依據（精簡）**\n{reasoning_brief.strip()}\n")
-
-            # --- 3) 收斂輸出 ---
-            final_text = "\n".join(blocks).strip()
-            if not final_text:
-                # 理論上到不了這裡；再保一層兜底
-                final_text = (
-                    "目前資訊不足，暫無法給出確切辨證結論。\n\n"
-                    "建議補充：年齡、性別、症狀起始時間與持續時長、發作規律、"
-                    "伴隨症（心悸／口乾／胸悶／頭脹）、情緒與壓力、作息與飲食、既往病史與用藥、脈象。"
-                )
-
-            return {"dialog": final_text}
+            dialog = "\n\n".join(sections)
+            return {"dialog": dialog}
 
         except Exception as e:
-            # 任何例外時的兜底（不輸出治療）
+            # 落網之魚：保證仍有可讀輸出
             fallback = (
-                "系統在整合推理結果時發生錯誤，但不影響評估指標的顯示。\n\n"
-                "目前資訊仍不足以確認證型，請補充：年齡、起病時間與規律、伴隨症、"
-                "作息與壓力、飲食與咖啡因／酒精使用、既往病史與用藥、脈象。"
+                "目前系統無法完整整理診斷結果，但已完成初步分析。"
+                "請補充關鍵條件（如症狀時程、規律、伴隨症與脈象）後再試一次。"
             )
-            return {"dialog": fallback}
+            dialog = f"{fallback}\n\n> 錯誤訊息：{e}\n\n> ⚠️ 本回覆為系統輔助判讀，請依專業醫師診治。"
+            return {"dialog": dialog}
+
 
     async def generate_minimal_diagnosis_v2(self,
                                         gender: str,
