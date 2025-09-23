@@ -11,6 +11,7 @@ from typing import Dict, Any, Optional, List
 from datetime import datetime
 import uuid
 import asyncio
+import re
 
 from s_cbr.engines.spiral_cbr_engine import SpiralCBREngine
 from s_cbr.config.scbr_config import SCBRConfig
@@ -27,6 +28,7 @@ class SpiralCBRMainEngine:
         self.response_generator = ResponseGenerator()
         self.version = "2.1"
         self.logger.info(f"S-CBR 主引擎 v{self.version} 初始化完成")
+        
 
 async def run_spiral_cbr_v2(question: str,
                            patient_ctx: Optional[Dict[str, Any]] = None,
@@ -48,7 +50,7 @@ async def run_spiral_cbr_v2(question: str,
     Returns:
         Dict: 包含 dialog、評估指標、會話資訊等
     """
-    
+
     # main.py 內，整段替換 run_spiral_cbr_v2 即可
 async def run_spiral_cbr_v2(question: str, 
                            patient_ctx: Optional[Dict[str, Any]] = None,
@@ -122,6 +124,19 @@ async def run_spiral_cbr_v2(question: str,
         dialog_response = await main_engine.response_generator.generate_comprehensive_response_v2(
             conversation_state, step_results
         )
+
+        # === 新增：若未命中任何案例 → 走 LLM 兜底產生「初步辨證＋需補充條件」 ===
+        if not step_results:
+            why_no_cases = filtered_result.get("why_no_cases", "檢索未命中案例")
+            dialog_response = await main_engine.response_generator.generate_fallback_response_v2(
+                question=question,
+                patient_ctx=patient_ctx or {},
+                why_no_cases=why_no_cases
+            )
+        else:
+            dialog_response = await main_engine.response_generator.generate_comprehensive_response_v2(
+                conversation_state, step_results
+            )
 
         # ✅ 更新會話狀態：用已存在的方法
         session.increment_round()

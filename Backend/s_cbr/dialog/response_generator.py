@@ -87,6 +87,68 @@ class ResponseGenerator:
         
         return '\n'.join(filtered_lines)
     
+    async def generate_fallback_response_v2(self, question: str, patient_ctx: dict | None = None, why_no_cases: str = "") -> dict:
+         """
+         當檢索不到案例時的兜底回應：
+         - 以「輸入症狀」先產生「初步辨證方向」與「需補充的關鍵條件」
+         - 嚴禁提供任何治療/處方內容（上游另有過濾再雙保險）
+         回傳格式與 generate_comprehensive_response_v2 對齊：{"dialog": "..."}
+         """
+         patient_ctx = patient_ctx or {}
+ 
+         # ====== 嘗試使用你既有的 LLM 客戶端 ======
+         # 常見命名：self.llm_client / self.chat_client / self.llm
+         # 若不存在或出錯，會落到 except 的文字兜底。
+         prompt = f"""
+            你是一位中醫辨證輔助系統。根據「輸入症狀」先給出「初步辨證方向」，並告知為何目前無法定論，以及需要補充哪些關鍵條件。禁止提供任何治療方案或處方。
+            
+            【當前資訊】
+            - 使用者描述/症狀：{question}
+            - 已有上下文（可能為空）：{patient_ctx}
+            - 為何沒有命中案例（內部原因，可簡述）：{why_no_cases}
+            
+            【輸出格式與要求】
+            1) 初步辨證方向（列 1~3 個可能證型，給出極簡依據）
+            2) 目前資訊不足之處（為何無法定論）
+            3) 需要補充的關鍵條件（列點，越具體越好），例如：年齡/性別/舌象（舌質/苔色/苔厚薄）/脈象（弦/細/滑/數等）/症狀出現時間與規律/伴隨症/情緒與壓力/作息/飲食/既往病史等
+            4) 語氣：中立、謹慎；不要給任何治療方案、藥材或劑量
+            
+            請用繁體中文輸出，段落清楚，條列項目前加「- 」。
+         """.strip()
+ 
+         try:
+             llm = getattr(self, "llm_client", None) or getattr(self, "chat_client", None) or getattr(self, "llm", None)
+             if llm is None:
+                 raise RuntimeError("LLM client 未注入至 ResponseGenerator")
+ 
+             # 依你專案內部封裝調整：有的用 llm.ask(prompt)，有的用 llm.chat(...)
+             if hasattr(llm, "ask"):
+                 text = await llm.ask(prompt) if callable(getattr(llm, "ask")) else str(llm.ask(prompt))  # type: ignore
+             elif hasattr(llm, "chat"):
+                 text = await llm.chat(prompt) if callable(getattr(llm, "chat")) else str(llm.chat(prompt))  # type: ignore
+             else:
+                 raise RuntimeError("未知的 LLM 介面；期待 ask(...) 或 chat(...)")
+ 
+             # 保底：空字串就用 fallback
+             if not text or not str(text).strip():
+                 raise ValueError("LLM 回傳為空")
+ 
+             return {"dialog": str(text)}
+ 
+         except Exception:
+             # ====== 文字兜底（LLM 不可用時）======
+             text = (
+                 "目前資訊不足，暫無法給出確切辨證結論。\n\n"
+                 "建議先補充以下關鍵條件，以利判斷：\n"
+                 "- 年齡、性別\n"
+                 "- 症狀起始時間、持續時長、發作規律（入睡困難／易醒／早醒？伴隨多夢、心悸、口乾、胸悶、頭脹等）\n"
+                 "- 舌象：舌質（淡/紅/暗/紫）、苔色（白/黃）、苔厚薄、苔是否膩\n"
+                 "- 脈象：弦/細/滑/數/遲 等\n"
+                 "- 情緒與壓力、作息與飲食、是否飲酒/咖啡因、既往病史與用藥\n\n"
+                 "補充上述資訊後，可進一步進行辨證分析。"
+             )
+             return {"dialog": text}
+    
     async def _calculate_evaluation_metrics(self, step_results: List[Dict], 
                                           conversation: ConversationState) -> Dict[str, Any]:
         """
