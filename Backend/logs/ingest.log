@@ -1424,3 +1424,36 @@ weaviate.exceptions.UnexpectedStatusCodeException: Creating object! Unexpected s
 2025-09-23 16:00:42,811 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-23 16:00:42,811 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
 2025-09-23 16:00:42,811 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 16:00:45,975 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 16:00:45,979 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 16:00:45,979 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 16:00:45,979 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 16:00:45,979 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 16:00:45,979 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 16:00:45,979 [INFO] backend.main - Application startup completed.
+2025-09-23 16:01:20,941 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 16:01:20,941 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 16:01:20,947 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 16:01:20,947 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 16:01:20,947 [INFO] SCBRConfig - ✅ 成功載入 Backend 配置
+2025-09-23 16:01:21,243 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 16:01:21,244 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 16:01:21,254 [INFO] SCBRConfig - 從文件載入配置: C:\work\系統-中醫\Pulse-project\Backend\s_cbr\config\..\..\configs\scbr_config.yaml
+2025-09-23 16:01:21,254 [INFO] SCBRConfig - S-CBR 配置管理器 v2.1 初始化完成
+2025-09-23 16:01:23,490 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-23 16:01:29,053 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 16:01:35,183 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 16:01:41,595 [INFO] httpx - HTTP Request: POST https://integrate.api.nvidia.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-23 16:16:25,669 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 16:16:25,670 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 16:16:25,670 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-23 16:16:28,751 [INFO] backend.main - ✅ S-CBR v2.0 螺旋推理模組載入成功
+2025-09-23 16:16:28,755 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-23 16:16:28,756 [INFO] backend.main -    - S-CBR 螺旋推理引擎: ✅ 已載入
+2025-09-23 16:16:28,756 [INFO] backend.main -    - API 端點 /api/query: ✅ 可用
+2025-09-23 16:16:28,756 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-23 16:16:28,756 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-23 16:16:28,756 [INFO] backend.main - Application startup completed.
+2025-09-23 16:16:28,757 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-23 16:16:28,757 [INFO] backend.main -    - S-CBR 資源清理: ✅ 完成
+2025-09-23 16:16:28,757 [INFO] backend.main - 🔻 Application shutdown completed.

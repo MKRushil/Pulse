@@ -166,36 +166,35 @@ async def run_spiral_cbr_v2(question: str,
         conversation_state = ConversationState(session_id, session)
         step_results = filtered_result.get("step_results", [])
 
-        if step_results:
-            # 命中案例 → 完整綜合回應
+        # 若未檢索到案例 → 根據最小資料產生診斷或兜底
+        if not step_results:
+            if minimal_ready:
+                dialog_response = await main_engine.response_generator.generate_minimal_diagnosis_v2(
+                    gender=patient_ctx.get("gender"),
+                    chief_complaint=patient_ctx.get("chief_complaint"),
+                    present_illness=patient_ctx.get("present_illness"),
+                    optional_ctx={  # 傳入可選輔助資訊（不包含舌象）
+                        "body_shape": patient_ctx.get("body_shape"),
+                        "head_face": patient_ctx.get("head_face"),
+                        "eye": patient_ctx.get("eye"),
+                        "skin": patient_ctx.get("skin"),
+                        "sleep_detail": patient_ctx.get("sleep_detail"),
+                        "mental_state": patient_ctx.get("mental_state"),
+                        "pulse": patient_ctx.get("pulse"),
+                    }
+                )
+            else:
+                why_no_cases = filtered_result.get("why_no_cases", "檢索未命中案例")
+                dialog_response = await main_engine.response_generator.generate_fallback_response_v2(
+                    question=question,
+                    patient_ctx=patient_ctx or {},
+                    why_no_cases=why_no_cases
+                )
+        else:
             dialog_response = await main_engine.response_generator.generate_comprehensive_response_v2(
                 conversation_state, step_results
             )
-        elif minimal_ready:
-            # 未命中案例但最小三要素齊全 → 用三要素產出初步辨證
-            dialog_response = await main_engine.response_generator.generate_minimal_diagnosis_v2(
-                gender=patient_ctx.get("gender"),
-                chief_complaint=patient_ctx.get("chief_complaint"),
-                present_illness=patient_ctx.get("present_illness"),
-                optional_ctx={
-                    "body_shape": patient_ctx.get("body_shape"),
-                    "head_face": patient_ctx.get("head_face"),
-                    "eye": patient_ctx.get("eye"),
-                    "skin": patient_ctx.get("skin"),
-                    "sleep_detail": patient_ctx.get("sleep_detail"),
-                    "mental_state": patient_ctx.get("mental_state"),
-                    "pulse": patient_ctx.get("pulse"),  # 脈診可選
-                    # 舌象不參與判斷，不傳
-                }
-            )
-        else:
-            # 既沒案例、三要素也不齊 → 引導補關鍵條件
-            why_no_cases = filtered_result.get("why_no_cases", "檢索未命中案例")
-            dialog_response = await main_engine.response_generator.generate_fallback_response_v2(
-                question=question,
-                patient_ctx=patient_ctx or {},
-                why_no_cases=why_no_cases
-            )
+
 
 
 
