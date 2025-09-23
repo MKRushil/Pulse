@@ -86,6 +86,66 @@ class ResponseGenerator:
             filtered_lines.append(line)
         
         return '\n'.join(filtered_lines)
+    async def generate_minimal_diagnosis_v2(self,
+                                        gender: str,
+                                        chief_complaint: str,
+                                        present_illness: str,
+                                        optional_ctx: dict | None = None) -> dict:
+        """
+        使用「最小三要素：性別 / 主訴 / 現病史」產生初步辨證與補充條件建議。
+        - 嚴禁提供治療/處方
+        - 舌象不參與判斷（即使 optional_ctx 有傳入也不使用）
+        """
+        optional_ctx = optional_ctx or {}
+        optional_notes = []
+        for k in ["body_shape", "head_face", "eye", "skin", "sleep_detail", "mental_state", "pulse"]:
+            v = optional_ctx.get(k)
+            if v:
+                optional_notes.append(f"{k}: {v}")
+
+        llm = getattr(self, "llm_client", None) or getattr(self, "chat_client", None) or getattr(self, "llm", None)
+        prompt = f"""
+    你是一位中醫辨證輔助系統。請根據以下三個最小關鍵條件，產生「初步辨證方向與簡要依據」，並列出為提升準確度應補充的其他條件。禁止提供任何治療方案或處方；不要使用舌象作為依據。
+
+    【最小三要素】
+    - 性別：{gender}
+    - 主訴：{chief_complaint}
+    - 現病史：{present_illness}
+
+    【可選輔助資訊（若有）】
+    {chr(10).join(f"- {x}" for x in optional_notes) if optional_notes else "- （未提供）"}
+
+    【輸出規則（繁體中文）】
+    1) 初步辨證方向：列 1~3 個可能證型，每個證型用 1 行說明依據（不得使用舌象）
+    2) 目前資訊仍不足之處（為何無法定論）
+    3) 建議補充的關鍵條件（條列，包含但不限於：年齡、病程變化、伴隨症、作息與壓力、脈象；**不要包含舌象**）
+    4) 嚴禁提供治療方案、藥材、劑量或具體處置
+        """.strip()
+
+        try:
+            if llm is None:
+                raise RuntimeError("LLM client 未注入至 ResponseGenerator")
+
+            if hasattr(llm, "ask"):
+                text = await llm.ask(prompt) if callable(getattr(llm, "ask")) else str(llm.ask(prompt))
+            elif hasattr(llm, "chat"):
+                text = await llm.chat(prompt) if callable(getattr(llm, "chat")) else str(llm.chat(prompt))
+            else:
+                raise RuntimeError("未知的 LLM 介面；期待 ask(...) 或 chat(...)")
+
+            if not text or not str(text).strip():
+                raise ValueError("LLM 回傳為空")
+
+            return {"dialog": str(text)}
+
+        except Exception:
+            text = (
+                "根據提供的性別、主訴與現病史，可先做初步辨證，但仍缺少關鍵資訊以確認證型。\n\n"
+                "建議補充：年齡、發作時間與規律、是否伴隨心悸/胸悶/口乾/頭脹、作息與壓力、"
+                "飲食/咖啡因/酒精使用、脈象（弦/細/滑/數/遲等），以及既往病史與用藥。"
+            )
+            return {"dialog": text}
+
     
     async def generate_fallback_response_v2(self, question: str, patient_ctx: dict | None = None, why_no_cases: str = "") -> dict:
          """
@@ -142,7 +202,6 @@ class ResponseGenerator:
                  "建議先補充以下關鍵條件，以利判斷：\n"
                  "- 年齡、性別\n"
                  "- 症狀起始時間、持續時長、發作規律（入睡困難／易醒／早醒？伴隨多夢、心悸、口乾、胸悶、頭脹等）\n"
-                 "- 舌象：舌質（淡/紅/暗/紫）、苔色（白/黃）、苔厚薄、苔是否膩\n"
                  "- 脈象：弦/細/滑/數/遲 等\n"
                  "- 情緒與壓力、作息與飲食、是否飲酒/咖啡因、既往病史與用藥\n\n"
                  "補充上述資訊後，可進一步進行辨證分析。"
