@@ -259,7 +259,7 @@ class SpiralCBREngine:
         """
         try:
             retrieved_cases = {
-                "cases": [],
+                "Case": [],
                 "pulse_knowledge": [],
                 "feedback_cases": [],
                 "total_retrieved": 0
@@ -548,7 +548,6 @@ class SpiralCBREngine:
                     "gender": "女",
                     "chief_complaint": "壓力大，失眠多夢，情緒不穩",
                     "diagnosis_main": "心腎不交，肝氣鬱結",
-                    "treatment_plan": "甘麥大棗湯合逍遙散加減：甘草10g, 小麥30g, 大棗10枚, 柴胡12g, 當歸15g, 白芍15g",
                     "summary": "模擬案例：壓力性失眠合併情緒不穩的中醫治療"
                 }
             ],

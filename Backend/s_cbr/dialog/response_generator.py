@@ -23,69 +23,97 @@ class ResponseGenerator:
         self.logger = SpiralLogger.get_logger("ResponseGenerator")
         self.version = "2.0"
         
-    async def generate_comprehensive_response_v2(self, conversation: ConversationState,
-                                                step_results: List[Dict]) -> Dict[str, Any]:
+    async def generate_comprehensive_response_v2(self, conversation, step_results) -> dict:
         """
-        生成綜合對話回應 v2.0
-        
-        v2.0 特色：
-        - 移除治療方案內容
-        - 包含 3 項自動化評估指標
-        - 動態評分展示
+        綜合回應（v2）：
+        - 優先輸出【診斷結果】與（若有）人性化【回覆】（spiral_dialog）
+        - 嚴禁輸出治療/處方細節
+        - 其餘分析/評估交由外層 evaluation_metrics 顯示（前端已有）
         """
-        
-        # 基礎回應生成
-        base_response = await self._generate_base_dialog(step_results)
-        
-        # 🔧 移除治療方案部分
-        filtered_response = self._remove_treatment_sections(base_response)
-        
-        # 🔧 計算 3 項評估指標
-        evaluation_metrics = await self._calculate_evaluation_metrics(step_results, conversation)
-        
-        # 🔧 添加評估指標到回應中
-        final_response = self._integrate_evaluation_metrics(filtered_response, evaluation_metrics)
-        
-        return {
-            "dialog": final_response,
-            "evaluation_metrics": evaluation_metrics,
-            "version": self.version,
-            "response_type": "comprehensive_v2"
-        }
-    
-    def _remove_treatment_sections(self, dialog_text: str) -> str:
-        """移除治療方案相關內容"""
-        
-        # 需要移除的關鍵詞段落
-        treatment_keywords = [
-            "💊 治療方案", "💊 **治療方案**", "治療方案", 
-            "用藥建議", "處方建議", "治療建議",
-            "🌿 中藥處方", "🌿 **中藥處方**", "中藥處方",
-            "藥物治療", "方劑推薦"
-        ]
-        
-        lines = dialog_text.split('\n')
-        filtered_lines = []
-        skip_section = False
-        
-        for line in lines:
-            # 檢查是否進入需要跳過的段落
-            if any(keyword in line for keyword in treatment_keywords):
-                skip_section = True
-                continue
-                
-            # 檢查是否離開治療段落（遇到新的標題或空行）
-            if skip_section:
-                if line.strip().startswith(('##', '###', '🔍', '📊', '💡', '⚠️')) or line.strip() == "":
-                    skip_section = False
-                    if line.strip() != "":  # 如果不是空行，加入新段落
-                        filtered_lines.append(line)
-                continue
-            
-            # 正常行，直接添加
-            filtered_lines.append(line)
-        
-        return '\n'.join(filtered_lines)
+        try:
+            # --- 1) 取出最後一步（通常是 Step4）的結構化結果 ---
+            final_step = step_results[-1] if step_results else {}
+
+            # 常見鍵位相容（不同模組命名可能不同）
+            diagnosis = (
+                final_step.get("final_diagnosis") or
+                final_step.get("diagnosis") or
+                final_step.get("result_diagnosis") or
+                ""
+            )
+
+            # 嚴禁治療/處方：不讀取 treatment_plan / prescription / herbs
+            # plan = final_step.get("treatment_plan")  # <-- 刻意不用
+            # herbs = final_step.get("herbs")          # <-- 刻意不用
+
+            # 對話友好文案（若引擎有給）
+            dialog_note = (
+                final_step.get("spiral_dialog") or
+                final_step.get("dialog") or
+                ""
+            )
+
+            # 若引擎在中間步驟已有小結，可補充（不包含治療）
+            reasoning_brief = (
+                final_step.get("reasoning_summary") or
+                final_step.get("reasoning") or
+                ""
+            )
+
+            # --- 2) 組裝輸出（不包含任何治療/處方） ---
+            blocks = []
+
+            # (a) 診斷結果
+            if diagnosis.strip():
+                blocks.append(f"## 📋 **診斷結果**\n- {diagnosis.strip()}\n")
+            else:
+                # 若沒有任何診斷字樣，提供清楚的缺資訊說明（避免前端空白）
+                blocks.append(
+                    "## 📋 **診斷結果**\n"
+                    "- 目前資訊不足，暫無法確定診斷。\n"
+                    "\n"
+                    "### 🔎 建議補充\n"
+                    "- 年齡、性別\n"
+                    "- 起病時間與持續時長、發作規律（入睡困難／易醒／早醒）\n"
+                    "- 伴隨症狀（心悸、口乾、胸悶、頭脹等）\n"
+                    "- 情緒與壓力、作息與飲食、咖啡因／酒精使用\n"
+                    "- 既往病史與用藥\n"
+                    "- 脈象（弦／細／滑／數／遲等）\n"
+                    "\n"
+                    "_說明：舌象不納入本次判斷流程。_\n"
+                )
+
+            # (b) 友好回覆（若有）
+            if dialog_note and dialog_note.strip():
+                blocks.append(f"### 🗣️ **回覆**\n{dialog_note.strip()}\n")
+
+            # (c) 推理依據（精簡；不包含治療）
+            if reasoning_brief and reasoning_brief.strip():
+                # 做一點簡單過濾，若內容含「處方、方劑、藥材、劑量」等字眼就不顯示
+                if not any(k in reasoning_brief for k in ["處方", "方劑", "藥材", "劑量"]):
+                    blocks.append(f"### 📑 **推理依據（精簡）**\n{reasoning_brief.strip()}\n")
+
+            # --- 3) 收斂輸出 ---
+            final_text = "\n".join(blocks).strip()
+            if not final_text:
+                # 理論上到不了這裡；再保一層兜底
+                final_text = (
+                    "目前資訊不足，暫無法給出確切辨證結論。\n\n"
+                    "建議補充：年齡、性別、症狀起始時間與持續時長、發作規律、"
+                    "伴隨症（心悸／口乾／胸悶／頭脹）、情緒與壓力、作息與飲食、既往病史與用藥、脈象。"
+                )
+
+            return {"dialog": final_text}
+
+        except Exception as e:
+            # 任何例外時的兜底（不輸出治療）
+            fallback = (
+                "系統在整合推理結果時發生錯誤，但不影響評估指標的顯示。\n\n"
+                "目前資訊仍不足以確認證型，請補充：年齡、起病時間與規律、伴隨症、"
+                "作息與壓力、飲食與咖啡因／酒精使用、既往病史與用藥、脈象。"
+            )
+            return {"dialog": fallback}
+
     async def generate_minimal_diagnosis_v2(self,
                                         gender: str,
                                         chief_complaint: str,
