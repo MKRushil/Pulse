@@ -13,7 +13,6 @@ from fastapi.responses import JSONResponse, FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 import sys
-from contextlib import asynccontextmanager
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
@@ -22,7 +21,7 @@ from cases.case_storage import save_case_data  # 新增病例處理鏈（DCIP）
 
 # S-CBR 螺旋推理引擎整合（容錯處理）
 try:
-    from scbr.scbr_app import router as scbr_router
+    from s_cbr.api import router as scbr_router
     _scbr_import_error = None
     _scbr_available = True
 except Exception as _e:
@@ -64,9 +63,8 @@ if _scbr_available and scbr_router:
 else:
     logger.error(f"❌ S-CBR 螺旋推理模組載入失敗: {_scbr_import_error}")
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # --- Startup ---
+@app.on_event("startup")
+async def _on_startup():
     logger.info("🚀 TCM S-CBR Backend v2.0 啟動")
     if _scbr_available:
         logger.info("   - S-CBR 螺旋推理引擎: ✅ 已載入")
@@ -74,24 +72,25 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning("   - S-CBR 螺旋推理引擎: ❌ 未載入")
         logger.warning("   - API 端點 /api/query: ❌ 不可用")
-
+    
     logger.info("   - 病例存儲 /api/case/save: ✅ 可用")
     logger.info("   - 健康檢查 /healthz: ✅ 可用")
     logger.info("Application startup completed.")
 
-    # 讓應用程式繼續運行
-    yield
-
-    # --- Shutdown ---
+@app.on_event("shutdown")
+async def _on_shutdown():
+    # 確保所有 handler 都被 flush/close，避免殘留把手
     logger.info("🔄 正在關閉應用程式...")
-
+    
+    # 關閉 S-CBR 相關資源（如有需要）
     if _scbr_available:
         try:
-            # 在這裡做 S-CBR 清理（連線關閉、cache 清除等）
+            # 可在此處添加 S-CBR 清理邏輯
             logger.info("   - S-CBR 資源清理: ✅ 完成")
         except Exception as e:
             logger.warning(f"   - S-CBR 資源清理異常: {e}")
-
+    
+    # 關閉日誌處理器
     root = logging.getLogger()
     for h in list(root.handlers):
         try:
@@ -99,11 +98,8 @@ async def lifespan(app: FastAPI):
             h.close()
         except Exception:
             pass
-
+    
     logger.info("🔻 Application shutdown completed.")
-
-# 建立 app 時掛 lifespan
-app = FastAPI(lifespan=lifespan)
 
 # -----------------------------------------------------------------------------
 # 1) 新增病例（由前端 TCMForm.jsx 送出表單 → DCIP 4 步完成去識別入庫）
@@ -160,26 +156,31 @@ async def api_scbr_status():
 # -----------------------------------------------------------------------------
 # 3) 相容性 API（如果 S-CBR 未載入，提供錯誤回應）
 # -----------------------------------------------------------------------------
-if not _scbr_available:
-    @app.post("/api/query")
-    async def api_query_fallback(request: Request):
-        """
-        查詢 API 備用端點（當 S-CBR 未載入時）
-        
-        這個端點只在 S-CBR 路由未成功載入時生效
-        正常情況下 /api/query 會由 S-CBR 路由器處理
-        """
-        logger.error("嘗試訪問 /api/query 但 S-CBR 引擎未載入")
+@app.post("/api/query")
+async def api_query_fallback(request: Request):
+    """
+    查詢 API 備用端點（當 S-CBR 未載入時）
+    
+    這個端點只在 S-CBR 路由未成功載入時生效
+    正常情況下會被 S-CBR 路由器覆蓋
+    """
+    if _scbr_available:
+        # 這種情況不應該發生，因為 S-CBR 路由器應該處理此端點
         return JSONResponse(
-            {
-                "error": "S-CBR 螺旋推理引擎未載入",
-                "detail": str(_scbr_import_error) if _scbr_import_error else "未知錯誤",
-                "suggestion": "請確認 scbr 模組（Backend/scbr/）存在並可匯入",
-                "status": "service_unavailable"
-            },
-            status_code=503,
+            {"error": "路由衝突：S-CBR 路由器應該處理此請求"},
+            status_code=500
         )
     
+    logger.error("嘗試訪問 /api/query 但 S-CBR 引擎未載入")
+    return JSONResponse(
+        {
+            "error": "S-CBR 螺旋推理引擎未載入",
+            "detail": str(_scbr_import_error) if _scbr_import_error else "未知錯誤",
+            "suggestion": "請檢查 s_cbr 模組是否正確安裝",
+            "status": "service_unavailable"
+        },
+        status_code=503,
+    )
 
 # -----------------------------------------------------------------------------
 # 4) 健康檢查（擴展版，包含 S-CBR 狀態）
