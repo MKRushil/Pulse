@@ -183,3 +183,47 @@ For further information visit https://errors.pydantic.dev/2.11/u/import-error
 2025-09-28 01:47:50,498 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
 2025-09-28 01:47:50,498 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
 2025-09-28 01:47:50,498 [INFO] backend.main - Application startup completed.
+2025-09-28 01:54:30,074 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 01:54:30,074 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 01:54:31,796 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.11/migration/#basesettings-has-moved-to-pydantic-settings for more details.
+
+For further information visit https://errors.pydantic.dev/2.11/u/import-error
+2025-09-28 01:54:31,801 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-28 01:54:31,801 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-28 01:54:31,801 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-28 01:54:31,801 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 01:54:31,803 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 01:54:31,803 [INFO] backend.main - Application startup completed.
+2025-09-28 02:11:35,673 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 02:11:35,673 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 02:11:37,378 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.11/migration/#basesettings-has-moved-to-pydantic-settings for more details.
+
+For further information visit https://errors.pydantic.dev/2.11/u/import-error
+2025-09-28 02:11:37,381 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-28 02:11:37,381 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-28 02:11:37,382 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-28 02:11:37,382 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 02:11:37,382 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 02:11:37,382 [INFO] backend.main - Application startup completed.
+2025-09-28 02:11:55,741 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 02:11:55,742 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 02:11:57,384 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.11/migration/#basesettings-has-moved-to-pydantic-settings for more details.
+
+For further information visit https://errors.pydantic.dev/2.11/u/import-error
+2025-09-28 02:11:57,387 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-28 02:11:57,387 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-28 02:11:57,387 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-28 02:11:57,387 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 02:11:57,387 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 02:11:57,387 [INFO] backend.main - Application startup completed.
+2025-09-28 02:12:19,389 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 02:12:19,389 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 02:12:21,211 [ERROR] backend.main - ❌ S-CBR 螺旋推理模組載入失敗: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.11/migration/#basesettings-has-moved-to-pydantic-settings for more details.
+
+For further information visit https://errors.pydantic.dev/2.11/u/import-error
+2025-09-28 02:12:21,215 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.0 啟動
+2025-09-28 02:12:21,215 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-28 02:12:21,215 [WARNING] backend.main -    - API 端點 /api/query: ❌ 不可用
+2025-09-28 02:12:21,215 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 02:12:21,215 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 02:12:21,215 [INFO] backend.main - Application startup completed.
