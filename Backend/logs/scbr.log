@@ -1569,3 +1569,797 @@ AttributeError: 'SCBRConfig' object has no attribute 'MAX_SPIRAL_ROUNDS'
 2025-09-24 05:17:25 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
 2025-09-24 05:17:25 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
 2025-09-24 05:17:25 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-25 19:55:35 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-25 19:56:13 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-25 19:56:13 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250925-12bd0eb0]
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-25 19:56:13 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250925_195613_5ab1a57f_301 (總會話數: 1)
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250925_195613_5ab1a57f_301
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - ERROR - ❌ LLM 客戶端初始化失敗: 'NoneType' object has no attribute 'get'
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - ERROR - 詳細錯誤信息
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\engines\spiral_cbr_engine.py", line 89, in _init_llm_client
+    api_key = llm_config.get("api_key", "")
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - ERROR - ❌ Weaviate 客戶端初始化失敗: 'NoneType' object has no attribute 'get'
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - ERROR - 詳細錯誤信息
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\engines\spiral_cbr_engine.py", line 116, in _init_weaviate_client
+    url = weaviate_config.get("url", "http://localhost:8080")
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-09-25 19:56:13 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-25 19:56:13 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-25 19:56:13 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-25 19:56:13 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-25 19:56:13 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=1
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - WARNING - LLM 客戶端不可用，使用模擬結果
+2025-09-25 19:56:13 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=0.00s, CMS=0.0
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250925-12bd0eb0]
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-25 19:56:13 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-25 22:31:12 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-25 22:32:47 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-25 22:32:48 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-25 22:32:48 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-25 22:32:48 - SCBR.S-CBR-API - ERROR - 重置螺旋會話失敗: 503: {'error': '會話管理器不可用', 'version': '2.0'}
+2025-09-25 22:32:55 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250925-18d35d33]
+2025-09-25 22:32:55 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-25 22:32:55 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-25 22:32:55 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-25 22:32:55 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-25 22:32:55 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250925_223255_5ab1a57f_577 (總會話數: 1)
+2025-09-25 22:32:55 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250925_223255_5ab1a57f_577
+2025-09-25 22:32:55 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['RPCase', 'SCBRFeedbackCases', 'SCBRSpiralSessions', 'CMS', 'SymptomRelation', 'Tmc', 'Tmc2', 'PulseRecord', 'Pulse', 'PatientCase', 'PulsePJ', 'Case']
+2025-09-25 22:32:56 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-25 22:32:56 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-25 22:32:56 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-25 22:32:56 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-25 22:32:56 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-25 22:32:56 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-25 22:32:56 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-25 22:32:56 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-25 22:32:56 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 📊 RPCase 知識庫檢索: 0 個結果
+2025-09-25 22:32:56 - SCBR.SpiralCBREngine - INFO - 📊 PulsePJ 知識庫檢索: 0 個結果
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-25 22:32:58 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-25 22:33:01 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-25 22:33:01 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.92s, CMS=0.0
+2025-09-25 22:33:01 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250925-18d35d33]
+2025-09-25 22:33:01 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-25 22:33:01 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-25 22:33:01 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-25 22:33:01 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-25 23:10:46 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-25 23:14:10 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-25 23:31:52 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-25 23:39:10 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 00:05:00 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 00:05:51 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:02:19 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:05:22 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:10:05 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:12:04 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:33:28 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:41:11 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:50:17 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:50:44 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:51:59 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:54:45 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:55:20 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 02:55:59 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 03:05:25 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 03:06:04 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 03:13:33 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 03:29:40 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 03:30:35 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-26 03:32:09 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 02:24:16 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:08:23 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:37:23 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:41:08 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:46:23 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:50:06 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:51:27 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:55:56 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 03:56:28 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:01:27 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:01:53 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:06:11 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:12:18 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:14:47 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:16:32 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:18:56 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:18:56 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 04:19:08 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 04:19:08 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 05:49:34 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:49:55 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 05:49:55 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 05:49:55 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-f5868e0d]
+2025-09-27 05:49:55 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 05:49:55 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 05:49:55 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 05:49:55 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 05:49:55 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_054955_5ab1a57f_936 (總會話數: 1)
+2025-09-27 05:49:55 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_054955_5ab1a57f_936
+2025-09-27 05:49:55 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 05:49:55 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 05:49:55 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PulsePJV', 'Case', 'CaseV', 'PulsePJ']
+2025-09-27 05:49:56 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-27 05:49:56 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-27 05:49:56 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 05:49:56 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 05:49:56 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 05:49:56 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 05:49:56 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 05:49:56 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 05:49:56 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 05:49:56 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 05:49:57 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 05:50:00 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 05:50:00 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.85s, CMS=0.0
+2025-09-27 05:50:00 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-f5868e0d]
+2025-09-27 05:50:00 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 05:50:00 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 05:50:00 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 05:50:00 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 05:50:38 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:51:20 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:51:22 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 05:51:22 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 05:51:22 - SCBR.S-CBR-API - ERROR - 重置螺旋會話失敗: 503: {'error': '會話管理器不可用', 'version': '2.0'}
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-ecd5f98c]
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 05:51:32 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_055132_5ab1a57f_121 (總會話數: 1)
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_055132_5ab1a57f_121
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'Case']
+2025-09-27 05:51:32 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-27 05:51:32 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-27 05:51:32 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 05:51:32 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 05:51:32 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 05:51:32 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 05:51:32 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 05:51:33 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 05:51:36 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 05:51:36 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.02s, CMS=0.0
+2025-09-27 05:51:36 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-ecd5f98c]
+2025-09-27 05:51:36 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 05:51:36 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 05:51:36 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 05:51:36 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 05:53:48 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:54:38 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:55:27 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:56:40 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:56:55 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 05:56:59 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 05:56:59 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 05:56:59 - SCBR.S-CBR-API - ERROR - 重置螺旋會話失敗: 503: {'error': '會話管理器不可用', 'version': '2.0'}
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-1b016231]
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 05:57:16 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_055716_5ab1a57f_484 (總會話數: 1)
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_055716_5ab1a57f_484
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'Case']
+2025-09-27 05:57:16 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-27 05:57:16 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-27 05:57:16 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 05:57:16 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 05:57:16 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 05:57:16 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 05:57:16 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 05:57:18 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 05:57:21 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 05:57:21 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.91s, CMS=0.0
+2025-09-27 05:57:21 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-1b016231]
+2025-09-27 05:57:21 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 05:57:21 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 05:57:21 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 05:57:21 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 05:57:28 - SCBR.SpiralSessionManager - INFO - 重置螺旋會話: spiral_20250927_055716_5ab1a57f_484
+2025-09-27 05:57:28 - SCBR.S-CBR-API - INFO - 🔄 會話 spiral_20250927_055716_5ab1a57f_484 已重置
+2025-09-27 11:01:34 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:02:56 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:06:22 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:12:44 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:13:43 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:21:39 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:21:59 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 11:21:59 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-188aed7e]
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 11:21:59 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_112159_5ab1a57f_545 (總會話數: 1)
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_112159_5ab1a57f_545
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PulsePJV', 'RPCase', 'Case', 'CaseV', 'PulsePJ']
+2025-09-27 11:21:59 - SCBR.RPCaseManager - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:21:59 - SCBR.RPCaseManager - INFO - 使用 API Key 認證模式
+2025-09-27 11:21:59 - SCBR.RPCaseManager - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:21:59 - SCBR.RPCaseManager - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 11:21:59 - SCBR.RPCaseManager - ERROR - RPCase Schema 檢查失敗: 'RPCaseManager' object has no attribute 'client'
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - ERROR - ❌ RPCase 管理器初始化失敗: 'RPCaseManager' object has no attribute '_ensure_rpcase_schema'
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - ERROR - 詳細錯誤信息
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\engines\spiral_cbr_engine.py", line 188, in _init_rpcase_manager
+    self.rpcase_manager = RPCaseManager()
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\knowledge\rpcase_manager.py", line 52, in __init__
+    self._ensure_rpcase_schema()
+AttributeError: 'RPCaseManager' object has no attribute '_ensure_rpcase_schema'. Did you mean: '_create_rpcase_schema'?
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 11:21:59 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 11:21:59 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 11:21:59 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 11:21:59 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 11:22:01 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 11:22:04 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 11:22:04 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.48s, CMS=0.0
+2025-09-27 11:22:04 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-188aed7e]
+2025-09-27 11:22:04 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 11:22:04 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 11:22:04 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 11:22:04 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 11:22:53 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 11:22:53 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:25:43 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 11:25:43 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:25:43 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 11:25:43 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 11:25:43 - SCBR.S-CBR-API - ERROR - 重置螺旋會話失敗: 503: {'error': '會話管理器不可用', 'version': '2.0'}
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-9fd17e1d]
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 11:26:00 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_112600_5ab1a57f_873 (總會話數: 1)
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_112600_5ab1a57f_873
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 11:26:00 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-27 11:26:00 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-27 11:26:00 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 11:26:00 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 11:26:00 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 11:26:00 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 11:26:00 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 11:26:01 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 11:26:04 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 11:26:04 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.09s, CMS=0.0
+2025-09-27 11:26:04 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-9fd17e1d]
+2025-09-27 11:26:04 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 11:26:04 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 11:26:04 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 11:26:04 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 11:27:13 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:27:20 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 11:27:20 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 11:27:20 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-09a27db6]
+2025-09-27 11:27:20 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 11:27:20 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 11:27:20 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 11:27:20 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 11:27:20 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_112720_5ab1a57f_512 (總會話數: 1)
+2025-09-27 11:27:20 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_112720_5ab1a57f_512
+2025-09-27 11:27:20 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 11:27:21 - SCBR.RPCaseManager - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:27:21 - SCBR.RPCaseManager - INFO - 使用 API Key 認證模式
+2025-09-27 11:27:21 - SCBR.RPCaseManager - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:27:21 - SCBR.RPCaseManager - INFO - 可用的 Schema Classes: ['PulsePJ', 'PulsePJV', 'RPCase', 'Case', 'CaseV']
+2025-09-27 11:27:21 - SCBR.RPCaseManager - ERROR - RPCase Schema 檢查失敗: 'RPCaseManager' object has no attribute 'client'
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - ERROR - ❌ RPCase 管理器初始化失敗: 'RPCaseManager' object has no attribute '_ensure_rpcase_schema'
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - ERROR - 詳細錯誤信息
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\engines\spiral_cbr_engine.py", line 188, in _init_rpcase_manager
+    self.rpcase_manager = RPCaseManager()
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\knowledge\rpcase_manager.py", line 52, in __init__
+    self._ensure_rpcase_schema()
+AttributeError: 'RPCaseManager' object has no attribute '_ensure_rpcase_schema'. Did you mean: '_create_rpcase_schema'?
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 11:27:21 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 11:27:21 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 11:27:21 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 11:27:21 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 11:27:21 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 11:27:21 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 11:27:21 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 11:27:22 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 11:27:25 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 11:27:25 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.22s, CMS=0.0
+2025-09-27 11:27:25 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-09a27db6]
+2025-09-27 11:27:25 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 11:27:25 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 11:27:25 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 11:27:25 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 11:32:11 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 11:32:11 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:32:16 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 11:32:16 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 11:32:16 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-6310c155]
+2025-09-27 11:32:16 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 11:32:16 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 11:32:16 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 11:32:16 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 11:32:16 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_113216_5ab1a57f_680 (總會話數: 1)
+2025-09-27 11:32:16 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_113216_5ab1a57f_680
+2025-09-27 11:32:16 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 11:32:16 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 11:32:16 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:32:16 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 11:32:16 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:32:16 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 11:32:17 - SCBR.RPCaseManager - ERROR - ❌ Weaviate 客戶端初始化失敗: Meta endpoint! Unexpected status code: 401, with response body: {'code': 401, 'message': 'anonymous access not enabled. Please authenticate through one of the available methods: [API-keys]'}.
+2025-09-27 11:32:17 - SCBR.RPCaseManager - WARNING - Weaviate 客戶端不可用，跳過 Schema 檢查
+2025-09-27 11:32:17 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 11:32:17 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 11:32:17 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 11:32:17 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 11:32:17 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 11:32:17 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 11:32:17 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 11:32:17 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 11:32:17 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 11:32:17 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 11:32:17 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 11:32:18 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 11:32:21 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 11:32:21 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.41s, CMS=0.0
+2025-09-27 11:32:21 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-6310c155]
+2025-09-27 11:32:21 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 11:32:21 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 11:32:21 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 11:32:21 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 11:37:59 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 11:37:59 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 11:38:08 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 11:38:08 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 11:38:08 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-d300a45f]
+2025-09-27 11:38:08 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 肚子痛
+2025-09-27 11:38:08 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 11:38:08 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 11:38:08 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 11:38:08 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_113808_5ab1a57f_855 (總會話數: 1)
+2025-09-27 11:38:08 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_113808_5ab1a57f_855
+2025-09-27 11:38:08 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 11:38:09 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 11:38:09 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 11:38:09 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 11:38:09 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 11:38:09 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 11:38:09 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 11:38:09 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 11:38:09 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='肚子痛...', 訊號=0個, 脈象線索=0個
+2025-09-27 11:38:09 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 肚子痛...
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=肚子痛, 生成=3個
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 11:38:10 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 11:38:13 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 11:38:13 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=4.47s, CMS=0.0
+2025-09-27 11:38:13 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-d300a45f]
+2025-09-27 11:38:13 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 11:38:13 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 11:38:13 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 11:38:13 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 14:45:46 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 14:45:46 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 14:46:10 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 14:46:10 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 14:46:36 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 14:46:36 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 14:46:36 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-eea85c87]
+2025-09-27 14:46:36 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 多夢
+2025-09-27 14:46:36 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 14:46:36 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 14:46:36 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 14:46:36 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_144636_49828641_314 (總會話數: 1)
+2025-09-27 14:46:36 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_144636_49828641_314
+2025-09-27 14:46:36 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 14:46:37 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 14:46:37 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 14:46:37 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 14:46:37 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 14:46:37 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 14:46:37 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': '多夢', 'present_illness': None}
+2025-09-27 14:46:37 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 14:46:37 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='多夢...', 訊號=0個, 脈象線索=0個
+2025-09-27 14:46:37 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 多夢...
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=多夢, 生成=3個
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 14:46:38 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 14:48:29 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 14:48:29 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=112.77s, CMS=0.0
+2025-09-27 14:48:29 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-eea85c87]
+2025-09-27 14:48:29 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 14:48:29 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 14:48:29 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 14:48:29 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 14:49:42 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-385a02ed]
+2025-09-27 14:49:42 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 胃脹
+2025-09-27 14:49:42 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: spiral_20250927_144636_49828641_314
+2025-09-27 14:49:42 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 14:49:42 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 14:49:42 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_144942_6fa21952_771 (總會話數: 2)
+2025-09-27 14:49:42 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_144942_6fa21952_771
+2025-09-27 14:49:42 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 14:49:43 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 14:49:43 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 14:49:43 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 14:49:43 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 14:49:43 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 14:49:43 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 14:49:43 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 14:49:43 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='胃脹...', 訊號=0個, 脈象線索=0個
+2025-09-27 14:49:43 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 胃脹...
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=胃脹, 生成=3個
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 14:50:27 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 14:50:30 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 14:50:30 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=47.60s, CMS=0.0
+2025-09-27 14:50:30 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-385a02ed]
+2025-09-27 14:50:30 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 14:50:30 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 14:50:30 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 14:50:30 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 17:23:58 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 17:23:58 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 17:24:30 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 17:24:30 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 17:31:40 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 17:31:40 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 17:32:48 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 17:32:48 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 17:33:22 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 17:33:22 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 17:34:52 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 17:34:52 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 17:35:13 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 17:35:13 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-e929f03a]
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 多夢、胸悶
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 17:35:13 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_173513_79b674fb_228 (總會話數: 1)
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_173513_79b674fb_228
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 17:35:13 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 17:35:13 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 17:35:13 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 17:35:13 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': '多夢', 'present_illness': None}
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 17:35:13 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='多夢、胸悶...', 訊號=0個, 脈象線索=0個
+2025-09-27 17:35:13 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 多夢、胸悶...
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=多夢、胸悶, 生成=3個
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 17:35:16 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 17:39:13 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 17:39:13 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=240.12s, CMS=0.0
+2025-09-27 17:39:13 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-e929f03a]
+2025-09-27 17:39:13 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 17:39:13 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 17:39:13 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 17:39:13 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 19:57:37 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 19:57:37 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 19:57:56 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 19:57:56 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 20:18:01 - SCBR.SpiralCBREngine - WARNING - 無法載入 RPCaseManager，回饋案例功能將不可用
+2025-09-27 20:18:01 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 20:18:35 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 20:18:35 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 20:18:47 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 20:18:47 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-3a227bf3]
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 多夢，胸悶
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 20:18:47 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_201847_49a85d48_835 (總會話數: 1)
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_201847_49a85d48_835
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 20:18:47 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 20:18:47 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 20:18:47 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 20:18:47 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': '多夢', 'present_illness': None}
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 20:18:47 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='多夢，胸悶...', 訊號=0個, 脈象線索=0個
+2025-09-27 20:18:47 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 多夢，胸悶...
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=多夢，胸悶, 生成=3個
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 20:18:53 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 20:19:01 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 20:19:01 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=13.53s, CMS=0.0
+2025-09-27 20:19:01 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-3a227bf3]
+2025-09-27 20:19:01 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 20:19:01 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 20:19:01 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 20:19:01 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 20:19:04 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-1a29f4b3]
+2025-09-27 20:19:04 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 繼續推理上一個問題
+2025-09-27 20:19:04 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: spiral_20250927_201847_49a85d48_835
+2025-09-27 20:19:04 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: True
+2025-09-27 20:19:04 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 20:19:04 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 繼續現有會話: spiral_20250927_201847_49a85d48_835
+2025-09-27 20:19:04 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['CaseV', 'PulsePJ', 'PulsePJV', 'RPCase', 'Case']
+2025-09-27 20:19:05 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 20:19:05 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 20:19:05 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 20:19:05 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 20:19:05 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 2 輪
+2025-09-27 20:19:05 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 20:19:05 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 20:19:05 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第1輪: 問題='繼續推理上一個問題...', 訊號=0個, 脈象線索=0個
+2025-09-27 20:19:05 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 繼續推理上一個問題...
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=繼續推理上一個問題, 生成=3個
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 20:19:06 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.5, 最終=8.5
+2025-09-27 20:19:53 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 20:19:53 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第1輪: 處理時間=47.80s, CMS=0.0
+2025-09-27 20:19:53 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-1a29f4b3]
+2025-09-27 20:19:53 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 2
+2025-09-27 20:19:53 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 20:19:53 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 20:19:53 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10
+2025-09-27 20:56:38 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 20:56:38 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 21:07:27 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 21:07:27 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 21:09:13 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 21:09:13 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 21:09:30 - SCBR.RPCaseManager - INFO - [jieba] 已載入詞庫：C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt
+2025-09-27 21:09:30 - SCBR.SpiralCBREngine - WARNING - 無法載入 CaseFinder，案例檢索備援功能將不可用
+2025-09-27 21:10:25 - SCBR.SpiralSessionManager - INFO - 螺旋會話管理器初始化 - 最大會話數: 1000
+2025-09-27 21:10:25 - SCBR.S-CBR-API - INFO - ✅ 螺旋會話管理器就緒 (單例)
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO - 🌀 S-CBR v2.1 螺旋推理啟動 [REQ-20250927-ed4b361d]
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO -   問題: 脾胃虛弱
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO -   會話ID: None
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO -   繼續推理: False
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO -   患者上下文: 0 個欄位
+2025-09-27 21:10:25 - SCBR.SpiralSessionManager - INFO - 創建新螺旋會話: spiral_20250927_211025_1b490473_155 (總會話數: 1)
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO - ✅ 創建新會話: spiral_20250927_211025_1b490473_155
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - LLM 配置載入: URL=https://integrate.api.nvidia.com/v1, Model=meta/llama-3.3-70b-instruct, Key=有
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - ✅ LLM 客戶端初始化成功: meta/llama-3.3-70b-instruct
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - Weaviate 配置載入: URL=http://localhost:8080, API Key=有, Timeout=30
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - 使用 API Key 認證模式
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - ✅ Weaviate 客戶端連接成功: http://localhost:8080
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - 可用的 Schema Classes: ['PulsePJ', 'PulsePJV', 'RPCase', 'Case', 'CaseV']
+2025-09-27 21:10:25 - SCBR.RPCaseManager - INFO - RPCase Schema 已存在，檢查缺欄位...
+2025-09-27 21:10:25 - SCBR.RPCaseManager - INFO - RPCase 管理器 v2.0 初始化完成
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - ✅ RPCase 管理器初始化成功
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - S-CBR 螺旋推理引擎 v2.1 初始化完成
+2025-09-27 21:10:25 - SCBR.SCBRAPIManager - INFO - S-CBR API管理器 v2.0 初始化完成
+2025-09-27 21:10:25 - SCBR.SpiralCBRMain - INFO - S-CBR 主引擎 v2.1 初始化完成
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO - 🧠 執行螺旋推理 - 第 1 輪
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] extracted={'gender': None, 'chief_complaint': None, 'present_illness': None}
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] patient_ctx_keys=['gender', 'chief_complaint', 'present_illness']
+2025-09-27 21:10:25 - SCBR.run_spiral_cbr_v2 - INFO - [DEBUG] minimal_ready=False
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - 螺旋推理開始 第0輪: 問題='脾胃虛弱...', 訊號=0個, 脈象線索=0個
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - 生成查詢向量: 脾胃虛弱...
+2025-09-27 21:10:25 - SCBR.SpiralCBREngine - INFO - 📊 Case(向量fallback) 知識庫檢索: 0 個結果
+2025-09-27 21:10:26 - SCBR.SpiralCBREngine - INFO - 📊 PulsePJV(向量fallback) 知識庫檢索: 0 個結果
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - LLM 同義詞生成: 原詞=脾胃虛弱, 生成=3個
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - 查詢詞擴展: 原始=1, 擴展後=4
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - 📊 Case 知識庫檢索: 0 個結果
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - 📊 Case(OR重試) 知識庫檢索: 0 個結果 (重試 1 次)
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - CMS 分數計算: Case=0.00, RPCase=0.00, Pulse=0.00, 總分=0.00
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - RCI 分數: 基礎=8.0, 輪次懲罰=0, 一致性獎勵=1.0, 最終=9.0
+2025-09-27 21:10:36 - SCBR.SpiralCBREngine - INFO - SALS 分數: 基礎=8.0, 學習成功=True, 回饋獎勵=0.0, 最終=8.0
+2025-09-27 21:10:41 - SCBR.SpiralCBREngine - INFO - ✅ LLM 推理完成: 信心度=0.8
+2025-09-27 21:10:41 - SCBR.SpiralCBREngine - INFO - ✅ 螺旋推理完成 第0輪: 處理時間=15.76s, CMS=0.0
+2025-09-27 21:10:41 - SCBR.run_spiral_cbr_v2 - INFO - ✅ S-CBR v2.1 螺旋推理完成 [REQ-20250927-ed4b361d]
+2025-09-27 21:10:41 - SCBR.run_spiral_cbr_v2 - INFO -   推理輪數: 1
+2025-09-27 21:10:41 - SCBR.run_spiral_cbr_v2 - INFO -   使用案例: 0
+2025-09-27 21:10:41 - SCBR.run_spiral_cbr_v2 - INFO -   可繼續: True
+2025-09-27 21:10:41 - SCBR.run_spiral_cbr_v2 - INFO -   評估指標: CMS=0.0/10

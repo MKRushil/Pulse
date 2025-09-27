@@ -9,8 +9,8 @@ import json
 import requests
 import weaviate
 
-EMBEDDING_MODEL_NAME = "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1"
-EMBEDDING_API_KEY = "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"
+EMBEDDING_MODEL_NAME = "nvidia/nv-embedqa-e5-v5"
+EMBEDDING_API_KEY = "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"
 EMBEDDING_BASE_URL = "https://integrate.api.nvidia.com/v1"
 
 WEAVIATE_URL = "http://localhost:8080"
@@ -80,7 +80,7 @@ def nvidia_embedding(text):
 
 
 # ---- 讀入資料 ----
-with open("PulsePJ_vector.json", "r", encoding="utf-8") as f:
+with open("C:\work\系統-中醫\Pulse-project\Embedding\PulsePJ_vector.json", "r", encoding="utf-8") as f:
     pulses = json.load(f)
 
 print(f"共載入 {len(pulses)} 筆脈象知識...\n開始寫入 Weaviate...")

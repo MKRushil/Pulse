@@ -277,19 +277,19 @@ class SCBRConfig:
             backend_config = {
                 "llm": {
                     "api_url": "https://integrate.api.nvidia.com/v1",
-                    "api_key": "",
-                    "model": "meta/llama-3.1-405b-instruct",
+                    "api_key": "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",
+                    "model": "meta/llama-3.3-70b-instruct",
                     "timeout": 60
                 },
                 "embedding": {
-                    "api_key": "",
+                    "api_key": "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",
                     "base_url": "https://integrate.api.nvidia.com/v1",
-                    "model": "nvidia/llama-3.2-nemoretriever-1b-vlm-embed-v1",
+                    "model": "nvidia/nv-embedqa-e5-v5",
                     "timeout": 30
                 },
                 "weaviate": {
                     "url": "http://localhost:8080",
-                    "api_key": None,
+                    "api_key": "key-admin",
                     "secure": False,
                     "host": "localhost",
                     "port": 8080,

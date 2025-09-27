@@ -22,8 +22,6 @@ import logging
 import openai
 import weaviate
 import jieba
-import re
-
 from openai import AsyncOpenAI
 
 # 保持原始模組引用名稱不變
@@ -85,8 +83,6 @@ class SpiralCBREngine:
         self.last_question: Optional[str] = None
         
         self.logger.info(f"S-CBR 螺旋推理引擎 v{self.version} 初始化完成")
-        self._init_tokenizer()
-
 
     def _init_llm_client(self):
         """初始化大語言模型客戶端"""
@@ -198,12 +194,6 @@ class SpiralCBREngine:
         except Exception as e:
             self._log_error("RPCase 管理器初始化失敗", e)
             self.rpcase_manager = None
-    
-    def _init_tokenizer(self):
-    # 基本停用詞（可再擴充）
-        self.stopwords = set(["的","了","和","與","及","呢","啊","哦","嗎","請問","可以","一下","一下下","有點","有一些"])
-        # 常見否定詞正規化：沒有咳嗽 → 無_咳嗽
-        self._neg_pattern = re.compile(r"(不|無|沒有|未見|否認)\s*([^\s，,。；;]{1,8})")
 
     # ========== 重構：統一日誌處理函式 ==========
     
@@ -253,26 +243,7 @@ class SpiralCBREngine:
             return False
         
     def _cut(self, text: str) -> str:
-        if not text:
-            return ""
-        # 否定詞規則化：無_咳嗽、未見_發燒…
-        text = self._neg_pattern.sub(lambda m: f"無_{m.group(2)}", text)
-        # jieba 斷詞 + 去停用詞
-        toks = [w.strip() for w in jieba.cut(text) if w.strip() and w not in self.stopwords]
-        # Hybrid 的 query 建議用「單一空白」分隔
-        return " ".join(toks)
-    
-    def _to_confidence(self, addi: dict) -> float:
-        # hybrid score → Sigmoid 放大 0~0.2 擠壓區
-        s = addi.get("score")
-        d = addi.get("distance")
-        if s is not None:
-            import math
-            return 1 / (1 + math.exp(-1.2 * (float(s) - 0.10)))
-        if d is not None:
-            sim = 1.0 / (1.0 + float(d))
-            return sim ** 0.8
-        return 0.0
+        return "  ".join(w for w in jieba.cut(text) if w.strip())
 
 
     async def _unified_vector_retrieval(self, 
@@ -404,8 +375,6 @@ class SpiralCBREngine:
 
             # 構建基本查詢
             query_builder = self.weaviate_client.query.get("Case", properties)
-            query_builder = query_builder.with_additional(["score","distance"])
-
 
             # 決定 hybrid 查詢的文本：優先使用本輪完整問題
             q_tokens = self._cut(self.last_question or "")
@@ -440,20 +409,6 @@ class SpiralCBREngine:
             result = query_builder.do()
             results = result.get("data", {}).get("Get", {}).get("Case", []) or []
 
-            # Hybrid 成功執行但 0 筆 → 退回向量查詢
-            if len(results) == 0:
-                vec_fallback = (self.weaviate_client.query
-                                .get("Case", properties)
-                                .with_near_vector({"vector": query_vector})
-                                .with_additional(["score","distance"])
-                                .with_limit(20)
-                                .do())
-                results = vec_fallback.get("data", {}).get("Get", {}).get("Case", []) or []
-                self._log_retrieval_result("Case(向量fallback)", len(results))
-            for it in results:
-                it["_confidence"] = self._to_confidence(it.get("_additional", {}))
-
-
             # 若命中數不足且有分類訊號，使用 OR 條件再試一次
             if len(results) < 3 and signals:
                 retry_results = await self._retry_with_or_conditions(
@@ -475,8 +430,6 @@ class SpiralCBREngine:
             self._log_error("Case 知識庫檢索", e)
             return []
 
-
-
     async def _retrieve_from_rpcase_kb(self, 
                                      query_vector: List[float],
                                      used_cases: List[str] = None) -> List[Dict[str, Any]]:
@@ -491,8 +444,6 @@ class SpiralCBREngine:
                 "search_all_seg", "symptom_tags", "pulse_tags", "observation_tags", "trust_score"
             ]
             query_builder = self.weaviate_client.query.get("RPCase", properties)
-            query_builder = query_builder.with_additional(["score","distance"])
-
 
             # hybrid 查詢：使用 last_question 作為關鍵詞
             q_tokens = self._cut(self.last_question or "")
@@ -525,13 +476,9 @@ class SpiralCBREngine:
             results = result.get("data", {}).get("Get", {}).get("RPCase", []) or []
             return results
 
-
         except Exception as e:
             self._log_error("RPCase 知識庫檢索", e)
             return []
-        
-
-
 
     async def _retrieve_from_pulse_kb(self, 
                                     query_vector: List[float],
@@ -550,8 +497,6 @@ class SpiralCBREngine:
 
             # 建立查詢
             query_builder = self.weaviate_client.query.get("PulsePJV", properties)
-            query_builder = query_builder.with_additional(["score","distance"])
-
 
             # 使用 hybrid 搜索
             q_tokens = self._cut(self.last_question or "")
@@ -571,20 +516,6 @@ class SpiralCBREngine:
             # 執行查詢
             result = query_builder.do()
             results = result.get("data", {}).get("Get", {}).get("PulsePJV", []) or []
-
-            # Hybrid 成功執行但 0 筆 → 退回向量查詢
-            if len(results) == 0:
-                vec_fallback = (self.weaviate_client.query
-                                .get("PulsePJV", properties)
-                                .with_near_vector({"vector": query_vector})
-                                .with_additional(["score","distance"])
-                                .with_limit(20)
-                                .do())
-                results = vec_fallback.get("data", {}).get("Get", {}).get("PulsePJV", []) or []
-                self._log_retrieval_result("PulsePJV(向量fallback)", len(results))
-            for it in results:
-                it["_confidence"] = self._to_confidence(it.get("_additional", {}))
-
 
             # 若有脈象線索且命中不足，根據脈名再做 OR 條件重試
             if len(results) < 3 and pulse_clues:
@@ -1264,7 +1195,7 @@ class SpiralCBREngine:
                 "step_results": [
                     {
                         "case_id": case.get("case_id"),
-                        "similarity": case.get("_confidence", 0.0),
+                        "similarity": 0.8,  # 預設相似度
                         "pulse_support": [],
                         "diagnosis": case.get("diagnosis", ""),
                         "treatment_plan": case.get("treatment_plan", "")

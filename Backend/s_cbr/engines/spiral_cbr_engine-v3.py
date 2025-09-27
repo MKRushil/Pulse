@@ -3,14 +3,13 @@ S-CBR v2.1 重構版 - 螺旋案例推理引擎
 
 重構重點：
 1. 統一檢索流程，減少重複代碼
-2. 優化權重計算與命中邏輯 (Case 0.6, RPCase 0.3, Pulse 0.1)
+2. 優化權重計算與命中邏輯
 3. 加強分類訊號處理
 4. 統一日誌與錯誤處理
 5. 完善滿意度與寫回機制
 
 版本：v2.1 (重構版)
 作者：SCBR Team
-更新日期：2025-09-25
 """
 
 import asyncio
@@ -21,9 +20,6 @@ from datetime import datetime
 import logging
 import openai
 import weaviate
-import jieba
-import re
-
 from openai import AsyncOpenAI
 
 # 保持原始模組引用名稱不變
@@ -81,116 +77,82 @@ class SpiralCBREngine:
         self._init_llm_client()
         self._init_weaviate_client()
         self._init_rpcase_manager()
-        # 在會話中保留最後一個問題，用於混合查詢
-        self.last_question: Optional[str] = None
         
         self.logger.info(f"S-CBR 螺旋推理引擎 v{self.version} 初始化完成")
-        self._init_tokenizer()
-
 
     def _init_llm_client(self):
         """初始化大語言模型客戶端"""
         try:
-            if not self.config:
-                self.logger.error("❌ SCBRConfig 不可用")
+            if self.config:
+                llm_config = self.config.get_config("llm_config")
+                api_key = llm_config.get("api_key", "")
+                base_url = llm_config.get("base_url", "")
+                model_name = llm_config.get("model_name", "meta/llama-3.3-70b-instruct")
+                
+                self.llm_client = AsyncOpenAI(
+                    api_key=api_key,
+                    base_url=base_url
+                )
+                self.llm_model = model_name
+                
+                self._log_step("LLM 配置載入", 
+                             f"URL={base_url}, Model={model_name}, Key={'有' if api_key else '無'}")
+                self._log_success("LLM 客戶端初始化成功", model_name)
+            else:
                 self.llm_client = None
-                return
-            
-            # 通過 SCBRConfig 獲取 LLM 配置
-            llm_config = self.config.get_llm_config()
-            
-            self.llm_api_url = llm_config.get("api_url", "")
-            self.llm_api_key = llm_config.get("api_key", "")
-            self.llm_model = llm_config.get("model", "meta/llama-3.3-70b-instruct")
-            
-            self.logger.info(f"LLM 配置載入: URL={self.llm_api_url}, Model={self.llm_model}, Key={'有' if self.llm_api_key else '無'}")
-            
-            if not self.llm_api_key:
-                self.logger.error("❌ LLM API Key 未配置")
-                self.llm_client = None
-                return
-            
-            if not self.llm_api_url:
-                self.logger.error("❌ LLM API URL 未配置")
-                self.llm_client = None
-                return
-            
-            # 初始化 AsyncOpenAI 客戶端
-            self.llm_client = AsyncOpenAI(
-                api_key=self.llm_api_key,
-                base_url=self.llm_api_url
-            )
-            
-            self.logger.info(f"✅ LLM 客戶端初始化成功: {self.llm_model}")
-            
+                self.llm_model = None
+                self.logger.warning("未找到 LLM 配置，LLM 功能將不可用")
         except Exception as e:
-            self.logger.error(f"❌ LLM 客戶端初始化失敗: {e}")
+            self._log_error("LLM 客戶端初始化失敗", e)
             self.llm_client = None
+            self.llm_model = None
 
     def _init_weaviate_client(self):
-        """初始化 Weaviate 向量資料庫客戶端 - v2.1 使用 SCBRConfig"""
+        """初始化 Weaviate 向量資料庫客戶端"""
         try:
-            if not self.config:
-                self.logger.error("❌ SCBRConfig 不可用")
-                self.weaviate_client = None
-                return
-            
-            # 通過 SCBRConfig 獲取 Weaviate 配置
-            weaviate_config = self.config.get_weaviate_config()
-            
-            weaviate_url = weaviate_config.get("url", "http://localhost:8080")
-            api_key = weaviate_config.get("api_key")
-            timeout = weaviate_config.get("timeout", 30)
-            
-            self.logger.info(f"Weaviate 配置載入: URL={weaviate_url}, API Key={'有' if api_key else '無'}, Timeout={timeout}")
-            
-            # 根據是否有 API Key 來初始化客戶端
-            if api_key and api_key != "" and api_key != "None":
-                # 使用 API Key 認證
-                auth_config = weaviate.AuthApiKey(api_key=api_key)
-                self.weaviate_client = weaviate.Client(
-                    url=weaviate_url,
-                    auth_client_secret=auth_config,
-                    timeout_config=(timeout, timeout)
-                )
-                self.logger.info("使用 API Key 認證模式")
-            else:
-                # 無認證模式
-                self.weaviate_client = weaviate.Client(
-                    url=weaviate_url,
-                    timeout_config=(timeout, timeout)
-                )
-                self.logger.info("使用無認證模式")
-            
-            # 測試連接
-            schema = self.weaviate_client.schema.get()
-            available_classes = [cls['class'] for cls in schema.get('classes', [])]
-            self.logger.info(f"✅ Weaviate 客戶端連接成功: {weaviate_url}")
-            self.logger.info(f"可用的 Schema Classes: {available_classes}")
-            
-        except Exception as e:
-            self.logger.error(f"❌ Weaviate 客戶端初始化失敗: {e}")
-            # 嘗試降級連接
-            try:
-                self.weaviate_client = weaviate.Client(
-                    url="http://localhost:8080",
-                    timeout_config=(10, 10)
-                )
-                # 簡單測試
-                ready = self.weaviate_client.is_ready()
-                if ready:
-                    self.logger.info("✅ Weaviate 降級連接成功")
+            if self.config:
+                weaviate_config = self.config.get_config("weaviate_config")
+                url = weaviate_config.get("url", "http://localhost:8080")
+                api_key = weaviate_config.get("api_key", "")
+                timeout = weaviate_config.get("timeout", 30)
+                
+                self._log_step("Weaviate 配置載入", 
+                             f"URL={url}, API Key={'有' if api_key else '無'}, Timeout={timeout}")
+                
+                if api_key:
+                    self.logger.info("使用 API Key 認證模式")
+                    auth_config = weaviate.AuthApiKey(api_key=api_key)
+                    self.weaviate_client = weaviate.Client(
+                        url=url,
+                        auth_client_secret=auth_config,
+                        timeout_config=(timeout, timeout)
+                    )
                 else:
-                    raise Exception("Weaviate 未準備就緒")
-            except Exception as e2:
-                self.logger.error(f"❌ Weaviate 降級連接也失敗: {e2}")
+                    self.logger.info("使用無認證模式")
+                    self.weaviate_client = weaviate.Client(
+                        url=url,
+                        timeout_config=(timeout, timeout)
+                    )
+                
+                # 測試連接並獲取schema
+                schema = self.weaviate_client.schema.get()
+                available_classes = [cls["class"] for cls in schema.get("classes", [])]
+                
+                self._log_success("Weaviate 客戶端連接成功", url)
+                self.logger.info(f"可用的 Schema Classes: {available_classes}")
+                
+            else:
                 self.weaviate_client = None
+                self.logger.warning("未找到 Weaviate 配置，向量檢索功能將不可用")
+        except Exception as e:
+            self._log_error("Weaviate 客戶端初始化失敗", e)
+            self.weaviate_client = None
 
     def _init_rpcase_manager(self):
+        """初始化 RPCase 管理器"""
         try:
             if RPCaseManager:
-                # 關鍵：把已存在的 weaviate_client 注入
-                self.rpcase_manager = RPCaseManager(weaviate_client=self.weaviate_client)
+                self.rpcase_manager = RPCaseManager()
                 self._log_success("RPCase 管理器初始化成功")
             else:
                 self.rpcase_manager = None
@@ -198,12 +160,6 @@ class SpiralCBREngine:
         except Exception as e:
             self._log_error("RPCase 管理器初始化失敗", e)
             self.rpcase_manager = None
-    
-    def _init_tokenizer(self):
-    # 基本停用詞（可再擴充）
-        self.stopwords = set(["的","了","和","與","及","呢","啊","哦","嗎","請問","可以","一下","一下下","有點","有一些"])
-        # 常見否定詞正規化：沒有咳嗽 → 無_咳嗽
-        self._neg_pattern = re.compile(r"(不|無|沒有|未見|否認)\s*([^\s，,。；;]{1,8})")
 
     # ========== 重構：統一日誌處理函式 ==========
     
@@ -251,29 +207,6 @@ class SpiralCBREngine:
         except Exception as e:
             self._log_error(f"檢查 Weaviate 類別 {class_name}", e)
             return False
-        
-    def _cut(self, text: str) -> str:
-        if not text:
-            return ""
-        # 否定詞規則化：無_咳嗽、未見_發燒…
-        text = self._neg_pattern.sub(lambda m: f"無_{m.group(2)}", text)
-        # jieba 斷詞 + 去停用詞
-        toks = [w.strip() for w in jieba.cut(text) if w.strip() and w not in self.stopwords]
-        # Hybrid 的 query 建議用「單一空白」分隔
-        return " ".join(toks)
-    
-    def _to_confidence(self, addi: dict) -> float:
-        # hybrid score → Sigmoid 放大 0~0.2 擠壓區
-        s = addi.get("score")
-        d = addi.get("distance")
-        if s is not None:
-            import math
-            return 1 / (1 + math.exp(-1.2 * (float(s) - 0.10)))
-        if d is not None:
-            sim = 1.0 / (1.0 + float(d))
-            return sim ** 0.8
-        return 0.0
-
 
     async def _unified_vector_retrieval(self, 
                                       class_name: str,
@@ -315,7 +248,8 @@ class SpiralCBREngine:
             result = query_builder.do()
             
             # 解析結果
-            raw_results = result.get("data", {}).get("Get", {}).get(class_name, []) or []
+            data_key = f"Get{class_name}"
+            raw_results = result.get("data", {}).get(data_key, [])
             
             # 統一結果格式
             formatted_results = []
@@ -391,39 +325,11 @@ class SpiralCBREngine:
                                    signals: List[str] = None) -> List[Dict[str, Any]]:
         """從 Case 知識庫檢索 (重構優化)"""
         try:
-            # 若 weaviate 客戶端不可用，直接返回空列表
-            if not self.weaviate_client:
-                return []
-
-            # 準備屬性列表：包括向量與全文檢索需要的欄位
-            properties = [
-                "case_id", "chief_complaint", "present_illness", "diagnosis_main", "treatment_plan",
-                "summary", "search_all", "search_all_seg", "symptom_tags", "pulse_tags",
-                "observation_tags", "provisional_dx", "summary_text"
-            ]
-
-            # 構建基本查詢
-            query_builder = self.weaviate_client.query.get("Case", properties)
-            query_builder = query_builder.with_additional(["score","distance"])
-
-
-            # 決定 hybrid 查詢的文本：優先使用本輪完整問題
-            q_tokens = self._cut(self.last_question or "")
-            try:
-                # 使用 hybrid 檢索（向量 + 關鍵字）
-                query_builder = query_builder.with_hybrid(
-                    query=q_tokens,
-                    alpha=0.5,
-                    vector=query_vector,
-                    properties=["search_all", "search_all_seg"]
-                )
-            except Exception:
-                # 如果混合查詢不可用，退回向量檢索
-                query_builder = query_builder.with_near_vector({"vector": query_vector})
-
-            # 排除已使用案例
+            # 構建過濾條件
+            where_conditions = None
             if used_cases:
-                where_filter = {
+                # 排除已使用的案例
+                where_conditions = {
                     "operator": "Not",
                     "operands": [{
                         "path": ["case_id"],
@@ -431,42 +337,28 @@ class SpiralCBREngine:
                         "valueTextArray": used_cases
                     }]
                 }
-                query_builder = query_builder.with_where(where_filter)
 
-            # 設定返回數量上限
-            query_builder = query_builder.with_limit(20)
+            # 基礎檢索
+            results = await self._unified_vector_retrieval(
+                class_name="Case",
+                query_vector=query_vector,
+                limit=10,
+                where_conditions=where_conditions
+            )
 
-            # 執行查詢
-            result = query_builder.do()
-            results = result.get("data", {}).get("Get", {}).get("Case", []) or []
-
-            # Hybrid 成功執行但 0 筆 → 退回向量查詢
-            if len(results) == 0:
-                vec_fallback = (self.weaviate_client.query
-                                .get("Case", properties)
-                                .with_near_vector({"vector": query_vector})
-                                .with_additional(["score","distance"])
-                                .with_limit(20)
-                                .do())
-                results = vec_fallback.get("data", {}).get("Get", {}).get("Case", []) or []
-                self._log_retrieval_result("Case(向量fallback)", len(results))
-            for it in results:
-                it["_confidence"] = self._to_confidence(it.get("_additional", {}))
-
-
-            # 若命中數不足且有分類訊號，使用 OR 條件再試一次
+            # 如果結果不足且有分類訊號，嘗試擴展檢索
             if len(results) < 3 and signals:
                 retry_results = await self._retry_with_or_conditions(
                     class_name="Case",
                     query_vector=query_vector,
                     retry_terms=signals,
-                    field_name="search_all",
-                    limit=5
+                    field_name="symptoms"
                 )
+                
+                # 合併結果，避免重複
                 case_ids = {item.get("case_id") for item in results if item.get("case_id")}
                 for item in retry_results:
-                    cid = item.get("case_id")
-                    if cid and cid not in case_ids:
+                    if item.get("case_id") not in case_ids:
                         results.append(item)
 
             return results
@@ -475,136 +367,68 @@ class SpiralCBREngine:
             self._log_error("Case 知識庫檢索", e)
             return []
 
-
-
     async def _retrieve_from_rpcase_kb(self, 
                                      query_vector: List[float],
                                      used_cases: List[str] = None) -> List[Dict[str, Any]]:
         """從 RPCase 知識庫檢索 (重構優化)"""
         try:
-            if not self.weaviate_client:
-                return []
-
-            # 屬性列表：依照 RPCase 結構
-            properties = [
-                "rpcase_id", "final_diagnosis", "confidence_score", "treatment_plan", "search_all",
-                "search_all_seg", "symptom_tags", "pulse_tags", "observation_tags", "trust_score"
-            ]
-            query_builder = self.weaviate_client.query.get("RPCase", properties)
-            query_builder = query_builder.with_additional(["score","distance"])
-
-
-            # hybrid 查詢：使用 last_question 作為關鍵詞
-            q_tokens = self._cut(self.last_question or "")
-            try:
-                query_builder = query_builder.with_hybrid(
-                    query=q_tokens,
-                    alpha=0.5,
-                    vector=query_vector,
-                    properties=["search_all", "search_all_seg"]
-                )
-            except Exception:
-                query_builder = query_builder.with_near_vector({"vector": query_vector})
-
-            # 排除已使用 RPCase
+            # 構建過濾條件
+            where_conditions = None
             if used_cases:
-                where_filter = {
+                where_conditions = {
                     "operator": "Not",
                     "operands": [{
                         "path": ["rpcase_id"],
-                        "operator": "ContainsAny",
+                        "operator": "ContainsAny", 
                         "valueTextArray": used_cases
                     }]
                 }
-                query_builder = query_builder.with_where(where_filter)
 
-            # 設置返回數量
-            query_builder = query_builder.with_limit(10)
+            # 基礎檢索
+            results = await self._unified_vector_retrieval(
+                class_name="RPCase",
+                query_vector=query_vector,
+                limit=5,
+                where_conditions=where_conditions
+            )
 
-            result = query_builder.do()
-            results = result.get("data", {}).get("Get", {}).get("RPCase", []) or []
             return results
-
 
         except Exception as e:
             self._log_error("RPCase 知識庫檢索", e)
             return []
-        
-
-
 
     async def _retrieve_from_pulse_kb(self, 
                                     query_vector: List[float],
                                     pulse_clues: List[str] = None) -> List[Dict[str, Any]]:
         """從 Pulse 知識庫檢索 (重構優化)"""
         try:
-            # 若無 weaviate，直接返回空
-            if not self.weaviate_client:
-                return []
+            # 基礎檢索
+            results = await self._unified_vector_retrieval(
+                class_name="PulsePJ",
+                query_vector=query_vector,
+                limit=8
+            )
 
-            # 指定屬性列表
-            properties = [
-                "pulse_id", "name", "category", "main_disease", "description", "characteristics",
-                "search_all", "search_all_seg", "pulse_tags"
-            ]
-
-            # 建立查詢
-            query_builder = self.weaviate_client.query.get("PulsePJV", properties)
-            query_builder = query_builder.with_additional(["score","distance"])
-
-
-            # 使用 hybrid 搜索
-            q_tokens = self._cut(self.last_question or "")
-            try:
-                query_builder = query_builder.with_hybrid(
-                    query=q_tokens,
-                    alpha=0.5,
-                    vector=query_vector,
-                    properties=["search_all", "search_all_seg"]
-                )
-            except Exception:
-                query_builder = query_builder.with_near_vector({"vector": query_vector})
-
-            # 設置返回數量
-            query_builder = query_builder.with_limit(15)
-
-            # 執行查詢
-            result = query_builder.do()
-            results = result.get("data", {}).get("Get", {}).get("PulsePJV", []) or []
-
-            # Hybrid 成功執行但 0 筆 → 退回向量查詢
-            if len(results) == 0:
-                vec_fallback = (self.weaviate_client.query
-                                .get("PulsePJV", properties)
-                                .with_near_vector({"vector": query_vector})
-                                .with_additional(["score","distance"])
-                                .with_limit(20)
-                                .do())
-                results = vec_fallback.get("data", {}).get("Get", {}).get("PulsePJV", []) or []
-                self._log_retrieval_result("PulsePJV(向量fallback)", len(results))
-            for it in results:
-                it["_confidence"] = self._to_confidence(it.get("_additional", {}))
-
-
-            # 若有脈象線索且命中不足，根據脈名再做 OR 條件重試
+            # 如果有脈象線索，嘗試精確匹配
             if len(results) < 3 and pulse_clues:
                 retry_results = await self._retry_with_or_conditions(
-                    class_name="PulsePJV",
+                    class_name="PulsePJ", 
                     query_vector=query_vector,
                     retry_terms=pulse_clues,
-                    field_name="search_all",
-                    limit=10
+                    field_name="pulse_type"
                 )
+                
+                # 合併結果
                 pulse_ids = {item.get("pulse_id") for item in results if item.get("pulse_id")}
                 for item in retry_results:
-                    pid = item.get("pulse_id")
-                    if pid and pid not in pulse_ids:
+                    if item.get("pulse_id") not in pulse_ids:
                         results.append(item)
 
             return results
 
         except Exception as e:
-            self._log_error("PulsePJV 知識庫檢索", e)
+            self._log_error("Pulse 知識庫檢索", e)
             return []
 
     # ========== 重構：JSON/Text 解析統一處理 ==========
@@ -755,101 +579,6 @@ class SpiralCBREngine:
             self._log_error("SALS 分數計算", e)
             return 6.0
 
-    # ========== 重構：生成同義詞與擴展查詢 ==========
-    
-    async def _generate_llm_synonyms(self, query: str, max_synonyms: int = 5) -> List[str]:
-        """
-        使用 LLM 生成同義詞 (重構優化)
-        
-        Args:
-            query: 原始查詢詞
-            max_synonyms: 最大同義詞數量
-            
-        Returns:
-            List[str]: 同義詞列表
-        """
-        try:
-            if not self.llm_client:
-                return []
-
-            prompt = f"""
-請為中醫症狀「{query}」生成 {max_synonyms} 個相關的同義詞或相似症狀描述。
-要求：
-1. 只返回中醫專業術語
-2. 一行一個詞
-3. 不要編號或其他標記
-4. 專注於症狀的不同表達方式
-
-示例輸入：頭痛
-示例輸出：
-頭脹痛
-腦痛
-偏頭痛
-頭部疼痛
-頭昏痛
-
-請為「{query}」生成同義詞：
-"""
-
-            response = await self.llm_client.chat.completions.create(
-                model=self.llm_model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=200,
-                temperature=0.3
-            )
-            
-            llm_text = response.choices[0].message.content.strip()
-            synonyms = [line.strip() for line in llm_text.split('\n') 
-                       if line.strip() and not line.strip().startswith(('示例', '請為'))]
-            
-            # 限制數量並過濾重複
-            unique_synonyms = list(dict.fromkeys(synonyms))[:max_synonyms]
-            
-            self._log_step("LLM 同義詞生成", f"原詞={query}, 生成={len(unique_synonyms)}個")
-            return unique_synonyms
-
-        except Exception as e:
-            self._log_error("LLM 同義詞生成", e)
-            return []
-
-    async def _expand_query_with_synonyms(self, original_query: str, 
-                                        signals: List[str] = None) -> List[str]:
-        """
-        擴展查詢詞與同義詞 (重構新增)
-        
-        Args:
-            original_query: 原始查詢
-            signals: 分類訊號列表
-            
-        Returns:
-            List[str]: 擴展後的查詢詞列表
-        """
-        try:
-            expanded_terms = [original_query]
-            
-            # 添加分類訊號
-            if signals:
-                expanded_terms.extend(signals)
-            
-            # 為主要症狀生成同義詞
-            main_symptoms = [original_query] + (signals[:2] if signals else [])
-            
-            for symptom in main_symptoms:
-                synonyms = await self._generate_llm_synonyms(symptom, 3)
-                expanded_terms.extend(synonyms)
-            
-            # 去除重複並限制總數
-            unique_terms = list(dict.fromkeys(expanded_terms))[:10]
-            
-            self.logger.info(f"查詢詞擴展: 原始={len([original_query] + (signals or []))}, "
-                           f"擴展後={len(unique_terms)}")
-            
-            return unique_terms
-
-        except Exception as e:
-            self._log_error("查詢詞擴展", e)
-            return [original_query] + (signals or [])
-
     # ========== 主要對外接口 (保持兼容性) ==========
     
     async def start_spiral_dialog(self, query_context: Dict[str, Any]) -> Dict[str, Any]:
@@ -882,15 +611,12 @@ class SpiralCBREngine:
             # 提取分類訊號與脈象線索 (重構新增)
             signals = patient_ctx.get("signals", [])
             pulse_clues = patient_ctx.get("pulse_clues", [])
-
-            # 將本輪問題保存到 last_question，供混合查詢使用
-            self.last_question = question
             
             self._log_step(f"螺旋推理開始 第{round_count}輪", 
                           f"問題='{question[:50]}...', 訊號={len(signals)}個, 脈象線索={len(pulse_clues)}個")
 
-            # Step 1: 生成查詢向量 (重構：整合分類訊號)
-            query_vector = await self._generate_query_vector(question, signals, pulse_clues)
+            # Step 1: 生成查詢向量 (簡化處理)
+            query_vector = self._generate_query_vector(question, signals, pulse_clues)
             
             # Step 2: 三庫並行檢索 (重構核心)
             case_results, rpcase_results, pulse_results = await asyncio.gather(
@@ -899,30 +625,17 @@ class SpiralCBREngine:
                 self._retrieve_from_pulse_kb(query_vector, pulse_clues)
             )
             
-            # Step 3: 如果結果不足，使用同義詞擴展重試
-            if len(case_results) < 3:
-                expanded_terms = await self._expand_query_with_synonyms(question, signals)
-                additional_case_results = await self._retry_with_or_conditions(
-                    "Case", query_vector, expanded_terms, "symptoms", 5
-                )
-                
-                # 合併結果，避免重複
-                case_ids = {item.get("case_id") for item in case_results}
-                for item in additional_case_results:
-                    if item.get("case_id") not in case_ids:
-                        case_results.append(item)
-            
-            # Step 4: 計算評估指標 (重構權重)
+            # Step 3: 計算評估指標 (重構權重)
             cms_score = self._calculate_weighted_cms_score(case_results, rpcase_results, pulse_results)
             rci_score = self._calculate_rci_score(round_count, {"llm_confidence": 0.85})
             sals_score = self._calculate_sals_score(True, round_count)
             
-            # Step 5: LLM 推理與適配 (保持原有邏輯)
+            # Step 4: LLM 推理與適配 (保持原有邏輯)
             llm_result = await self._llm_reasoning_and_adaptation(
                 question, case_results, rpcase_results, pulse_results, patient_ctx
             )
             
-            # Step 6: 構建螺旋推理結果 (重構輸出格式)
+            # Step 5: 構建螺旋推理結果 (重構輸出格式)
             processing_time = (datetime.now() - start_time).total_seconds()
             
             spiral_result = {
@@ -943,7 +656,7 @@ class SpiralCBREngine:
                     "total_retrieved": len(case_results) + len(rpcase_results)  # 不計入脈象
                 },
                 
-                # 評估指標（降級為觀測資料，不參與選案）
+                # 評估指標
                 "evaluation_metrics": {
                     "cms": {"name": "案例匹配相似性", "score": cms_score, "max_score": 10},
                     "rci": {"name": "推理一致性指標", "score": rci_score, "max_score": 10},
@@ -979,66 +692,34 @@ class SpiralCBREngine:
             self._log_error(f"螺旋推理失敗 第{round_count}輪", e)
             return self._create_error_result(session_id, round_count, str(e))
 
-    async def _generate_query_vector(self, question: str, signals: List[str], pulse_clues: List[str]) -> List[float]:
+    def _generate_query_vector(self, question: str, signals: List[str], pulse_clues: List[str]) -> List[float]:
         """
         生成查詢向量 (重構：整合分類訊號)
-
-        此函式將原始問題、分類訊號與脈象線索串連後送入 NVIDIA 嵌入服務，取得 1024 維向量。
-        如果無法調用外部嵌入服務，則退回隨機向量。您應在此位置接入真實的嵌入 API。
+        
+        TODO: 實際實作中應使用 sentence transformers 或其他向量化模型
+        現在返回隨機向量作為占位符
         """
         try:
-            # 組合完整查詢文本：將問題、signals 與 pulse_clues 串起來
-            parts: List[str] = []
-            if question:
-                parts.append(question)
+            # 組合完整查詢文本
+            full_query = question
             if signals:
-                parts.append("症狀特徵: " + ", ".join(signals))
+                full_query += f" 症狀特徵: {', '.join(signals)}"
             if pulse_clues:
-                parts.append("脈象特徵: " + ", ".join(pulse_clues))
-            full_query: str = " ".join(parts)
-
+                full_query += f" 脈象特徵: {', '.join(pulse_clues)}"
+            
             self.logger.info(f"生成查詢向量: {full_query[:100]}...")
-
-            # 調用外部嵌入服務產生 1024 維向量
-            vector: List[float] = await self._generate_nvidia_embedding(full_query)
-            # 若返回的向量不是 1024 維，進行截斷或填充
-            if len(vector) > 1024:
-                vector = vector[:1024]
-            elif len(vector) < 1024:
-                vector = vector + [0.0] * (1024 - len(vector))
-
+            
+            # 占位符實作 - 實際應使用真實的向量化模型
+            import random
+            random.seed(hash(full_query) % (2**32))
+            vector = [random.random() for _ in range(384)]  # 假設384維向量
+            
             return vector
+            
         except Exception as e:
             self._log_error("查詢向量生成", e)
             # 返回零向量作為降級
-            return [0.0] * 1024
-
-    async def _generate_nvidia_embedding(self, text: str) -> List[float]:
-        """
-        調用 NVIDIA 嵌入服務生成 1024 維向量。
-
-        實際環境中應調用您已部署的 nv-embedqa-e5-v5 或其他嵌入模型。
-        此處提供範例實作：首先嘗試調用 OpenAI 生成器，若失敗則退回隨機向量。
-
-        Args:
-            text: 用於生成嵌入的文本
-
-        Returns:
-            List[float]: 長度為 1024 的浮點數向量
-        """
-        # 如果無嵌入客戶端，直接返回隨機值占位
-        try:
-            # 這裡僅為示例，請替換為實際的 NVIDIA 嵌入 API 調用
-            # 例如：embedding = nvidia_embed_client.embed(text)
-            # 並確保返回的是一個長度為 1024 的 list[float]
-            import random
-            random.seed(hash(text) % (2**32))
-            return [random.random() for _ in range(1024)]
-        except Exception:
-            # 發生任何異常時返回隨機向量作為降級
-            import random
-            random.seed(hash(text) % (2**32))
-            return [random.random() for _ in range(1024)]
+            return [0.0] * 384
 
     async def _llm_reasoning_and_adaptation(self, 
                                           question: str,
@@ -1245,51 +926,6 @@ class SpiralCBREngine:
             self._log_error("重新推理準備", e)
             return {"status": "error", "message": str(e)}
 
-    # ========== 兼容性方法 (重構：添加缺失的方法) ==========
-    
-    async def execute_spiral_reasoning(self, query_context: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        執行螺旋推理 (兼容性方法)
-        
-        這個方法是為了與其他模組的兼容性而添加的
-        內部調用 start_spiral_dialog
-        """
-        try:
-            # 調用主要的螺旋推理方法
-            result = await self.start_spiral_dialog(query_context)
-            
-            # 調整輸出格式以匹配預期
-            formatted_result = {
-                "llm_struct": result.get("llm_struct", {}),
-                "step_results": [
-                    {
-                        "case_id": case.get("case_id"),
-                        "similarity": case.get("_confidence", 0.0),
-                        "pulse_support": [],
-                        "diagnosis": case.get("diagnosis", ""),
-                        "treatment_plan": case.get("treatment_plan", "")
-                    }
-                    for case in result.get("detailed_results", {}).get("case_results", [])[:3]
-                ],
-                "converged": result.get("spiral_state", {}).get("converged", False),
-                "confidence": result.get("spiral_state", {}).get("confidence", 0.8),
-                "session_id": result.get("session_id"),
-                "round": result.get("round"),
-                "raw_result": result
-            }
-            
-            return formatted_result
-            
-        except Exception as e:
-            self._log_error("execute_spiral_reasoning", e)
-            return {
-                "llm_struct": {"main_dx": "推理引擎錯誤", "confidence": 0.0},
-                "step_results": [],
-                "converged": False,
-                "confidence": 0.0,
-                "error": str(e)
-            }
-
 
 # ========== 工具函式 (保持原有) ==========
 
@@ -1305,7 +941,7 @@ def _safe_json_array(data) -> List[Dict[str, Any]]:
 
 # ========== 向後兼容 ==========
 
-# 保持舊版本函式名稱的兼容性
+# 保持舊版本函式名稱的兼容性 (如果需要)
 SpiralCBREngineV2 = SpiralCBREngine
 
 __all__ = ["SpiralCBREngine", "SpiralCBREngineV2", "_safe_json_array"]
