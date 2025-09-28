@@ -102,7 +102,8 @@ class EmbedClient:
         }
 
         url = f"{self.url}/embeddings" if self.url else "/embeddings"
-        async with aioffline_safe_session() as sess:
+        timeout = aiohttp.ClientTimeout(total=30)
+        async with aiohttp.ClientSession(timeout=timeout) as sess:
             async with sess.post(url, json=payload, headers=headers) as resp:
                 raw_text = await resp.text()
                 if resp.status < 200 or resp.status >= 300:
@@ -134,8 +135,4 @@ class EmbedClient:
 
         return vec
 
-# 讓 aiohttp 在離線/重試時穩一點（可與現有 Session 共用）
-class aioffline_safe_session(aiohttp.ClientSession):
-    def __init__(self, *args, **kwargs):
-        timeout = kwargs.pop("timeout", aiohttp.ClientTimeout(total=30))
-        super().__init__(*args, timeout=timeout, **kwargs)
+

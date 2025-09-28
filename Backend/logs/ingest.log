@@ -1887,3 +1887,61 @@ KeyError: '77ce34a5f7f74bdabeaccfd0acfb0812'
 2025-09-28 15:26:21,783 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-28 15:26:21,784 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
 2025-09-28 15:26:21,785 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 15:26:25,950 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-28 15:26:25,953 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-28 15:26:25,954 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-28 15:26:25,954 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-28 15:26:25,954 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-28 15:26:25,954 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-28 15:26:25,954 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 15:26:25,955 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 15:26:25,955 [INFO] backend.main - Application startup completed.
+2025-09-28 15:26:46,266 [ERROR] backend.main - /api/query payload debug type=dict, keys=['question', 'session_id', 'continue', 'patient_ctx']
+2025-09-28 15:26:46,266 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250928-152646-03d991b9] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-28 15:26:46,267 [INFO] s_cbr.DialogManager - 會話建立: 209faa4325c34d88aeea4a0f8582553d
+2025-09-28 15:26:46,267 [INFO] s_cbr.DialogManager - 會話建立: 209faa4325c34d88aeea4a0f8582553d
+2025-09-28 15:26:46,268 [INFO] s_cbr.DialogManager - 繼續會話: 209faa4325c34d88aeea4a0f8582553d
+2025-09-28 15:26:48,710 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-28 15:26:48,742 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-28 15:26:48,823 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-28 15:26:48,824 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 209faa4325c34d88aeea4a0f8582553d
+2025-09-28 15:26:48,824 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250928-152648-d35252b8] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-28 15:26:48,824 [INFO] s_cbr.DialogManager - 會話建立: 5df08bee62c04d49a301866e4a63ccbb
+2025-09-28 15:26:48,824 [INFO] s_cbr.DialogManager - 會話建立: 5df08bee62c04d49a301866e4a63ccbb
+2025-09-28 15:26:48,825 [INFO] s_cbr.DialogManager - 繼續會話: 5df08bee62c04d49a301866e4a63ccbb
+2025-09-28 15:26:50,210 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-28 15:26:50,263 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-28 15:26:50,326 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-28 15:26:50,327 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 5df08bee62c04d49a301866e4a63ccbb
+2025-09-28 15:27:20,227 [ERROR] backend.main - /api/query payload debug type=dict, keys=['question', 'session_id', 'continue', 'patient_ctx']
+2025-09-28 15:27:20,227 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250928-152720-49415e54] 問題: 肚子又痛
+2025-09-28 15:27:20,227 [INFO] s_cbr.DialogManager - 會話建立: deb5ffddd282425c974f9e87490ad59d
+2025-09-28 15:27:20,227 [INFO] s_cbr.DialogManager - 會話建立: deb5ffddd282425c974f9e87490ad59d
+2025-09-28 15:27:20,228 [INFO] s_cbr.DialogManager - 繼續會話: deb5ffddd282425c974f9e87490ad59d
+2025-09-28 15:27:21,582 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-28 15:27:21,644 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-28 15:27:21,710 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-28 15:27:21,711 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 deb5ffddd282425c974f9e87490ad59d
+2025-09-28 15:27:21,711 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250928-152721-da0787af] 問題: 肚子又痛
+2025-09-28 15:27:21,711 [INFO] s_cbr.DialogManager - 會話建立: fcbc094859c545ae80b1507279a5da02
+2025-09-28 15:27:21,711 [INFO] s_cbr.DialogManager - 會話建立: fcbc094859c545ae80b1507279a5da02
+2025-09-28 15:27:21,711 [INFO] s_cbr.DialogManager - 繼續會話: fcbc094859c545ae80b1507279a5da02
+2025-09-28 15:27:23,110 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-28 15:27:23,171 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-28 15:27:23,230 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-28 15:27:23,231 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 fcbc094859c545ae80b1507279a5da02
+2025-09-28 21:20:40,538 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 21:20:40,539 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-28 21:20:40,539 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 21:20:44,121 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-28 21:20:44,127 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-28 21:20:44,127 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-28 21:20:44,127 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-28 21:20:44,127 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-28 21:20:44,127 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-28 21:20:44,128 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 21:20:44,128 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 21:20:44,128 [INFO] backend.main - Application startup completed.
+2025-09-28 21:22:45,288 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 21:22:45,288 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-28 21:22:45,288 [INFO] backend.main - 🔻 Application shutdown completed.

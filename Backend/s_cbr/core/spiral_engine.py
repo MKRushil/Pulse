@@ -164,8 +164,20 @@ class SpiralEngine:
             "建議檢視睡眠衛生與刺激物（咖啡因/酒精/藥物）暴露，先排除干擾因子。"
         ]
 
+        def _pick_case_diagnosis(case: dict) -> str:
+            # 依序嘗試多種欄位名稱，抓到第一個非空字串就用
+            candidates = ["diagnosis_main", "diagnosis", "辨證", "syndrome", "主診斷", "pattern", "證型"]
+            for k in candidates:
+                val = case.get(k)
+                if isinstance(val, str) and val.strip():
+                    return val.strip()
+            return "未能確定"
+
+        diag_text = _pick_case_diagnosis(best_case) if best_case else "未能確定"
+
+
         diagnosis = {
-            "diagnosis": (best_case.get("diagnosis_main") if best_case else "未能確定"),
+            "diagnosis": diag_text,
             "confidence": min(1.0, cms_score/10.0),
             "reasoning": "；".join(bits) or f"依語義與屬性融合排序的最高匹配案例（CMS={cms_score}）",
             "advice": advice,
