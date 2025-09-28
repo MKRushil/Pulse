@@ -149,9 +149,13 @@ class SpiralEngine:
             weights={"semantic":0.6, "attribute":0.4},
         )
         best_case = fusion["best_case"]
-        logger.debug(f"best_case keys (sample): {list(best_case.keys())[:30] if isinstance(best_case, dict) else best_case}")
+        if isinstance(best_case, dict):
+            logging.getLogger("s_cbr.SCBREngine").debug(f"best_case keys (sample): {list(best_case.keys())[:20]}")
+        else:
+            logging.getLogger("s_cbr.SCBREngine").debug("best_case keys (sample): None")
+
         # 3) 監控：CMS（會用到 _confidence/_attr_score 與證據數）
-        cms_score = self.evaluator.calculate_cms_score(best_case, question)
+        cms_score = self.evaluator.calculate_cms_score(best_case, question) if best_case else 0.0
 
         # 4) 回饋：只輸出診斷結果與建議（不含任何治療方案）
         qa = fusion["query_attrs"]
@@ -167,29 +171,41 @@ class SpiralEngine:
             "建議檢視睡眠衛生與刺激物（咖啡因/酒精/藥物）暴露，先排除干擾因子。"
         ]
 
-        logger.debug(
-            f"best_case keys: {list(best_case.keys())[:20] if isinstance(best_case, dict) else best_case}"
-            )
-
         def _pick_case_diagnosis(case: dict) -> str:
-            # 依序嘗試多種欄位名稱，抓到第一個非空字串就用
-            candidates = ["diagnosis_main","diagnosis","辨證","syndrome","主診斷","pattern","證型",
-                "證候","證名","final_dx","dx","syndrome_name"]
-            for k in candidates:
-                val = case.get(k)
-                if isinstance(val, str) and val.strip():
-                    return val.strip()
-            return "未能確定"
+            if not case:
+                return ""
+            # 依序挑第一個有值的欄位（涵蓋不同資料源）
+            diag_candidates = [
+                "diagnosis_main", "diagnosis_sub", "diagnosis",
+                "final_diagnosis",  # RPCase
+                "syndrome", "pattern", "證名", "證候", "證型", "主診斷", "辨證",
+                "name"              # PulsePJV 至少有 name，可作為 fallback 顯示
+            ]
+            for k in diag_candidates:
+                v = case.get(k)
+                if isinstance(v, str) and v.strip():
+                    return v.strip()
+            return ""
+
+        # support_case_id：多來源回退策略
+        support_id = None
+        if best_case:
+            support_id = (
+                best_case.get("case_id") or
+                best_case.get("src_casev_uuid") or    # Case 類
+                best_case.get("category_id") or       # PulsePJV
+                best_case.get("case_uuid") or
+                (best_case.get("_additional") or {}).get("id")
+            )
 
         diag_text = _pick_case_diagnosis(best_case) if best_case else "未能確定"
 
-        logging.getLogger("s_cbr.SCBREngine").debug(f"best_case keys: {list(best_case.keys())[:20]}")
         diagnosis = {
             "diagnosis": diag_text,
             "confidence": min(1.0, cms_score/10.0),
             "reasoning": "；".join(bits) or f"依語義與屬性融合排序的最高匹配案例（CMS={cms_score}）",
             "advice": advice,
-            "support_case_id": (best_case.get("case_id") if best_case else None),
+            "support_case_id": support_id,
             "pulse_support": fusion["pulse_support"],
             "rpcase_support": fusion["rpcase_support"],
             "cms_score": cms_score,

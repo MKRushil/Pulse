@@ -97,7 +97,7 @@ class EmbedClient:
 
         payload = {
             "model": self.model,
-            "input": [text],
+            "input": text if isinstance(text, str) else "\n".join(text),
             "input_type": "query"   # ★ 新增：查詢階段用 query
         }
 

@@ -5,13 +5,38 @@
 """
 
 import asyncio
+import re  # 用於欄位名稱過濾
 from typing import Dict, Any, List, Optional
 import weaviate
 from ..config import SCBRConfig
 from ..utils.logger import get_logger
 from ..utils.text_processor import TextProcessor
 
+# 放在檔案開頭適當位置
+ALLOWED_RETURN_PROPS = {
+    "Case":    ["src_casev_uuid", "diagnosis_main", "pulse_text"],
+    "PulsePJV":["symptoms", "name", "category_id"],
+    "RPCase":  ["final_diagnosis", "pulse_tags", "symptom_tags"],
+}
+
+# 不同集合 → 對齊成共同鍵
+RENAME_MAP = {
+    "Case": {
+        "src_casev_uuid": "case_id",
+        # diagnosis_main 已是共同鍵
+    },
+    "PulsePJV": {
+        # 這組主要回 symptoms，其他對齊在後處理補齊
+    },
+    "RPCase": {
+        "final_diagnosis": "diagnosis_main",
+        # pulse_tags/symptom_tags 會在後處理合併成可讀字串
+    }
+}
+
+
 logger = get_logger("SearchEngine")
+logger.info(f"📦 SearchEngine loaded from: {__file__}")
 
 # 轉 float（容錯：字串、None、空白）
 def _to_float(v, default: float = 0.0) -> float:
@@ -36,79 +61,6 @@ def _l2_norm(vec) -> float:
         return s ** 0.5
     except Exception:
         return 0.0
-
-
-async def hybrid_search(
-    self,
-    class_name: str,
-    query_text: str,
-    query_vector: Optional[List[float]] = None,
-    limit: int = 10
-) -> List[Dict[str, Any]]:
-    if not self.weaviate_client:
-        return []
-    try:
-        processed_text = self.text_processor.segment_text(query_text) if query_text else ""
-
-        # 多帶幾個 _additional，方便觀察
-        query_builder = (
-            self.weaviate_client
-            .query
-            .get(class_name)
-            .with_additional(["id", "score", "distance"])
-        )
-
-        qlen = len(query_vector) if isinstance(query_vector, list) else 0
-        alpha = self.config.search.hybrid_alpha
-
-        if qlen > 0 and _to_float(alpha, 0.0) > 0.0:
-            # ★ 明確記錄：真的走混合（含向量），印維度與範數
-            logger.info(f"🔎 {class_name} HYBRID α={alpha}, qdim={qlen}, ‖v‖₂={_l2_norm(query_vector):.4f}")
-            query_builder = query_builder.with_hybrid(
-                query=processed_text,
-                vector=query_vector,
-                alpha=alpha,
-                properties=self.config.search.search_fields
-            )
-        else:
-            # ★ 若向量為空或 alpha=0，走 BM25-only
-            logger.info(f"🔎 {class_name} BM25-only α={alpha}, qdim={qlen}")
-            query_builder = query_builder.with_hybrid(
-                query=processed_text,
-                alpha=0.0,
-                properties=self.config.search.search_fields
-            )
-
-        result = query_builder.with_limit(limit).do()
-
-        if isinstance(result, dict) and "errors" in result:
-            logger.error(f"GraphQL 錯誤: {result['errors']}")
-            return []
-
-        # ★ 兼容 {"data":{"Get":...}} 或 {"Get":...}
-        get_section = {}
-        if isinstance(result, dict):
-            get_section = result.get("data", {}).get("Get") or result.get("Get") or {}
-        results = get_section.get(class_name) or []
-        if not isinstance(results, list):
-            results = []
-
-        # ★ 統一轉成 _confidence（用你既有的 _calculate_confidence）
-        ranked: List[Dict[str, Any]] = []
-        for item in results:
-            addi = item.get("_additional") or {}
-            score = _to_float(addi.get("score"), 0.0)
-            distance = _to_float(addi.get("distance"), float("inf"))
-            item["_confidence"] = self._calculate_confidence(score, distance)
-            ranked.append(item)
-
-        logger.info(f"📊 {class_name} 搜索: {len(ranked)} 個結果")
-        return ranked
-
-    except Exception as e:
-        logger.error(f"❌ 混合搜索失敗 ({class_name}): {e}")
-        return []
-
 
 
 class SearchEngine:
@@ -139,63 +91,96 @@ class SearchEngine:
             logger.error(f"❌ Weaviate 客戶端初始化失敗: {e}")
             self.weaviate_client = None
 
-    async def hybrid_search(self, class_name: str, query_text: str, 
-                           query_vector: Optional[List[float]] = None,
-                           limit: int = 10) -> List[Dict[str, Any]]:
-        """執行混合搜索"""
+    async def hybrid_search(
+        self,
+        class_name: str,
+        query_text: str,
+        query_vector: Optional[List[float]] = None,
+        limit: int = 10
+    ) -> List[Dict[str, Any]]:
         if not self.weaviate_client:
             return []
-
         try:
-            # 處理查詢文本
             processed_text = self.text_processor.segment_text(query_text) if query_text else ""
-            
-            # 構建查詢
-            query_builder = self.weaviate_client.query.get(class_name).with_additional(["score", "distance"])
-            
-            if query_vector and len(query_vector) > 0:
-                # 混合搜索
+
+            # 想要的欄位（可由 config 指定），實際查詢以 schema 白名單為準
+            wanted = set(getattr(self.config.search, "return_fields", []) or [])
+            allowed = set(ALLOWED_RETURN_PROPS.get(class_name, []))
+
+            # 真正要查的 props = 交集；若交集為空，就用該 class 的 allowed
+            props = list((wanted & allowed) or allowed)
+
+            # Log 想查但 schema 沒有的（包含你原本想查的中文欄位等）
+            dropped = sorted(list(wanted - allowed))
+            if dropped:
+                logger.warning(f"↯ Dropped non-schema property names for {class_name}: {dropped}")
+
+            # BM25 搜尋用欄位仍取設定檔
+            search_fields = self.config.search.search_fields
+
+            query_builder = (
+                self.weaviate_client
+                    .query
+                    .get(class_name, props)
+                    .with_additional(["id", "score", "distance"])
+            )
+
+            qlen  = len(query_vector) if isinstance(query_vector, list) else 0
+            alpha = _to_float(getattr(self.config.search, "hybrid_alpha", 0.5), 0.5)
+
+            # 記錄一下關鍵參數
+            logger.info(
+                f"🔎 {class_name} {'HYBRID' if (qlen > 0 and alpha > 0.0) else 'BM25-only'} "
+                f"α={alpha}, qdim={qlen}, ‖v‖₂={_l2_norm(query_vector):.4f}"
+            )
+            logger.info(f"↪ return props={props[:8]}... | search_fields={search_fields}")
+
+            # 根據是否有向量 + alpha 來決定 hybrid 參數
+            if qlen > 0 and alpha > 0.0:
                 query_builder = query_builder.with_hybrid(
                     query=processed_text,
                     vector=query_vector,
-                    alpha=self.config.search.hybrid_alpha,
-                    properties=self.config.search.search_fields
+                    alpha=alpha,
+                    properties=search_fields
                 )
             else:
-                # 純 BM25 搜索
+                # 純 BM25：alpha=0
                 query_builder = query_builder.with_hybrid(
                     query=processed_text,
                     alpha=0.0,
-                    properties=self.config.search.search_fields
+                    properties=search_fields
                 )
-            
+
             result = query_builder.with_limit(limit).do()
-            
+
             if isinstance(result, dict) and "errors" in result:
                 logger.error(f"GraphQL 錯誤: {result['errors']}")
                 return []
 
-            #  兼容 {"data":{"Get":...}} 與 {"Get":...}
+            # 兼容 {"data":{"Get":...}} 與 {"Get":...}
             get_section = {}
             if isinstance(result, dict):
                 get_section = result.get("data", {}).get("Get") or result.get("Get") or {}
-            results = get_section.get(class_name) or []
-            if not isinstance(results, list):
-                results = []
+            rows = get_section.get(class_name) or []
+            if not isinstance(rows, list):
+                rows = []
 
-            #  處理結果（先把型別統一成 float，再算信心分數）
-            for item in results:
-                addi = item.get("_additional") or {}
-                score = _to_float(addi.get("score"), default=0.0)
-                distance = _to_float(addi.get("distance"), default=float("inf"))
-                item["_confidence"] = self._calculate_confidence(score, distance)
-            
-            logger.info(f"📊 {class_name} 搜索: {len(results)} 個結果")
-            return results
-            
+            ranked: List[Dict[str, Any]] = []
+            for it in rows:
+                addi = it.get("_additional") or {}
+                score = _to_float(addi.get("score"), 0.0)
+                distance = _to_float(addi.get("distance"), float("inf"))
+                it["_confidence"] = self._calculate_confidence(score, distance)
+                ranked.append(it)
+
+            logger.info(f"📊 {class_name} 搜索: {len(ranked)} 個結果")
+            return ranked
+
         except Exception as e:
             logger.error(f"❌ 混合搜索失敗 ({class_name}): {e}")
             return []
+
+
 
     def _calculate_confidence(self, score: float | None, distance: float | None) -> float:
         """計算置信度分數（容錯型別與缺值）"""
