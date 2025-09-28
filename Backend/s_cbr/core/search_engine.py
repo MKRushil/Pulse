@@ -26,6 +26,90 @@ def _to_float(v, default: float = 0.0) -> float:
         pass
     return float(default)
 
+# 放在檔案頂部 _to_float 之後，加一個小工具算 L2 範數（避免印整條向量）
+def _l2_norm(vec) -> float:
+    try:
+        s = 0.0
+        for v in (vec or []):
+            fv = float(v)
+            s += fv * fv
+        return s ** 0.5
+    except Exception:
+        return 0.0
+
+
+async def hybrid_search(
+    self,
+    class_name: str,
+    query_text: str,
+    query_vector: Optional[List[float]] = None,
+    limit: int = 10
+) -> List[Dict[str, Any]]:
+    if not self.weaviate_client:
+        return []
+    try:
+        processed_text = self.text_processor.segment_text(query_text) if query_text else ""
+
+        # 多帶幾個 _additional，方便觀察
+        query_builder = (
+            self.weaviate_client
+            .query
+            .get(class_name)
+            .with_additional(["id", "score", "distance"])
+        )
+
+        qlen = len(query_vector) if isinstance(query_vector, list) else 0
+        alpha = self.config.search.hybrid_alpha
+
+        if qlen > 0 and _to_float(alpha, 0.0) > 0.0:
+            # ★ 明確記錄：真的走混合（含向量），印維度與範數
+            logger.info(f"🔎 {class_name} HYBRID α={alpha}, qdim={qlen}, ‖v‖₂={_l2_norm(query_vector):.4f}")
+            query_builder = query_builder.with_hybrid(
+                query=processed_text,
+                vector=query_vector,
+                alpha=alpha,
+                properties=self.config.search.search_fields
+            )
+        else:
+            # ★ 若向量為空或 alpha=0，走 BM25-only
+            logger.info(f"🔎 {class_name} BM25-only α={alpha}, qdim={qlen}")
+            query_builder = query_builder.with_hybrid(
+                query=processed_text,
+                alpha=0.0,
+                properties=self.config.search.search_fields
+            )
+
+        result = query_builder.with_limit(limit).do()
+
+        if isinstance(result, dict) and "errors" in result:
+            logger.error(f"GraphQL 錯誤: {result['errors']}")
+            return []
+
+        # ★ 兼容 {"data":{"Get":...}} 或 {"Get":...}
+        get_section = {}
+        if isinstance(result, dict):
+            get_section = result.get("data", {}).get("Get") or result.get("Get") or {}
+        results = get_section.get(class_name) or []
+        if not isinstance(results, list):
+            results = []
+
+        # ★ 統一轉成 _confidence（用你既有的 _calculate_confidence）
+        ranked: List[Dict[str, Any]] = []
+        for item in results:
+            addi = item.get("_additional") or {}
+            score = _to_float(addi.get("score"), 0.0)
+            distance = _to_float(addi.get("distance"), float("inf"))
+            item["_confidence"] = self._calculate_confidence(score, distance)
+            ranked.append(item)
+
+        logger.info(f"📊 {class_name} 搜索: {len(ranked)} 個結果")
+        return ranked
+
+    except Exception as e:
+        logger.error(f"❌ 混合搜索失敗 ({class_name}): {e}")
+        return []
+
+
 
 class SearchEngine:
     def __init__(self, config: SCBRConfig):

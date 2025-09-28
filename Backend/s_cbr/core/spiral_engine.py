@@ -5,6 +5,7 @@
 """
 
 import asyncio
+import logging
 from typing import Dict, Any, List, Optional
 from ..config import SCBRConfig
 from ..knowledge.vector_client import VectorClient
@@ -163,7 +164,11 @@ class SpiralEngine:
             "建議觀察：近一週脈象是否持續偏慢（遲脈）及有無寒熱虛實相關表現。",
             "建議檢視睡眠衛生與刺激物（咖啡因/酒精/藥物）暴露，先排除干擾因子。"
         ]
-        logger.debug(f"best_case keys: {list(best_case.keys())}")
+
+        logger.debug(
+            f"best_case keys: {list(best_case.keys())[:20] if isinstance(best_case, dict) else best_case}"
+            )
+
         def _pick_case_diagnosis(case: dict) -> str:
             # 依序嘗試多種欄位名稱，抓到第一個非空字串就用
             candidates = ["diagnosis_main","diagnosis","辨證","syndrome","主診斷","pattern","證型",
@@ -176,7 +181,7 @@ class SpiralEngine:
 
         diag_text = _pick_case_diagnosis(best_case) if best_case else "未能確定"
 
-
+        logging.getLogger("s_cbr.SCBREngine").debug(f"best_case keys: {list(best_case.keys())[:20]}")
         diagnosis = {
             "diagnosis": diag_text,
             "confidence": min(1.0, cms_score/10.0),
