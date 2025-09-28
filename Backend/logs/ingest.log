@@ -238,3 +238,143 @@ AttributeError: 'SpiralEngine' object has no attribute 'execute_spiral_cycle'
 2025-09-29 00:58:42,025 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-29 00:58:42,025 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
 2025-09-29 00:58:42,026 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 00:59:02,207 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 00:59:02,211 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 00:59:02,212 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 00:59:02,212 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 00:59:02,212 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 00:59:02,212 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 00:59:02,212 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 00:59:02,213 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 00:59:02,213 [INFO] backend.main - Application startup completed.
+2025-09-29 00:59:14,657 [ERROR] backend.main - /api/query payload debug type=dict, keys=['question', 'session_id', 'continue', 'patient_ctx']
+2025-09-29 00:59:14,659 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250929-005914-90360a47] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-29 00:59:14,659 [INFO] s_cbr.DialogManager - 會話建立: 1331fd974b7e40919d72e3838c8f58f8
+2025-09-29 00:59:14,659 [INFO] s_cbr.DialogManager - 會話建立: 1331fd974b7e40919d72e3838c8f58f8
+2025-09-29 00:59:14,659 [INFO] s_cbr.DialogManager - 繼續會話: 1331fd974b7e40919d72e3838c8f58f8
+2025-09-29 00:59:18,171 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=1024
+2025-09-29 00:59:18,172 [INFO] s_cbr.SearchEngine - 🔎 Case HYBRID α=0.5, qdim=1024, ‖v‖₂=0.9999
+2025-09-29 00:59:18,172 [INFO] s_cbr.SearchEngine - ↪ return props=['src_casev_uuid', 'diagnosis_main', 'pulse_text']... | search_fields=['search_all', 'search_all_seg']
+2025-09-29 00:59:18,233 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-29 00:59:18,234 [INFO] s_cbr.SearchEngine - 🔎 PulsePJV HYBRID α=0.5, qdim=1024, ‖v‖₂=0.9999
+2025-09-29 00:59:18,234 [INFO] s_cbr.SearchEngine - ↪ return props=['symptoms', 'category_id', 'name']... | search_fields=['search_all', 'search_all_seg']
+2025-09-29 00:59:18,298 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-29 00:59:18,311 [INFO] s_cbr.SearchEngine - 🔎 RPCase HYBRID α=0.5, qdim=1024, ‖v‖₂=0.9999
+2025-09-29 00:59:18,312 [INFO] s_cbr.SearchEngine - ↪ return props=['pulse_tags', 'symptom_tags', 'final_diagnosis']... | search_fields=['search_all', 'search_all_seg']
+2025-09-29 00:59:18,337 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-29 00:59:18,339 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 1331fd974b7e40919d72e3838c8f58f8
+2025-09-29 00:59:18,339 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250929-005918-f1776397] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-29 00:59:18,339 [INFO] s_cbr.DialogManager - 會話建立: c30a6baa3aab4761b279509f9a34f24d
+2025-09-29 00:59:18,340 [INFO] s_cbr.DialogManager - 會話建立: c30a6baa3aab4761b279509f9a34f24d
+2025-09-29 00:59:18,340 [INFO] s_cbr.DialogManager - 繼續會話: c30a6baa3aab4761b279509f9a34f24d
+2025-09-29 00:59:19,694 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=1024
+2025-09-29 00:59:19,695 [INFO] s_cbr.SearchEngine - 🔎 Case HYBRID α=0.5, qdim=1024, ‖v‖₂=0.9999
+2025-09-29 00:59:19,695 [INFO] s_cbr.SearchEngine - ↪ return props=['src_casev_uuid', 'diagnosis_main', 'pulse_text']... | search_fields=['search_all', 'search_all_seg']
+2025-09-29 00:59:19,761 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-29 00:59:19,762 [INFO] s_cbr.SearchEngine - 🔎 PulsePJV HYBRID α=0.5, qdim=1024, ‖v‖₂=0.9999
+2025-09-29 00:59:19,762 [INFO] s_cbr.SearchEngine - ↪ return props=['symptoms', 'category_id', 'name']... | search_fields=['search_all', 'search_all_seg']
+2025-09-29 00:59:19,829 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-29 00:59:19,829 [INFO] s_cbr.SearchEngine - 🔎 RPCase HYBRID α=0.5, qdim=1024, ‖v‖₂=0.9999
+2025-09-29 00:59:19,829 [INFO] s_cbr.SearchEngine - ↪ return props=['pulse_tags', 'symptom_tags', 'final_diagnosis']... | search_fields=['search_all', 'search_all_seg']
+2025-09-29 00:59:19,885 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-29 00:59:19,887 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 c30a6baa3aab4761b279509f9a34f24d
+2025-09-29 01:06:43,753 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:06:43,753 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:06:43,753 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:06:47,577 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 01:06:47,580 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:06:47,580 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 01:06:47,580 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 01:06:47,581 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 01:06:47,581 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 01:06:47,581 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:06:47,581 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:06:47,582 [INFO] backend.main - Application startup completed.
+2025-09-29 01:07:10,186 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:07:10,186 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:07:10,187 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:07:13,622 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 01:07:13,626 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:07:13,626 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 01:07:13,626 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 01:07:13,626 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 01:07:13,626 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 01:07:13,626 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:07:13,626 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:07:13,627 [INFO] backend.main - Application startup completed.
+2025-09-29 01:08:09,370 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:08:09,371 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:08:09,371 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:08:12,655 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 01:08:12,658 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:08:12,658 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 01:08:12,658 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 01:08:12,658 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 01:08:12,658 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 01:08:12,658 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:08:12,658 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:08:12,658 [INFO] backend.main - Application startup completed.
+2025-09-29 01:08:25,870 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:08:25,870 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:08:25,870 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:08:40,046 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 01:08:40,050 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:08:40,050 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 01:08:40,050 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 01:08:40,050 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 01:08:40,050 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 01:08:40,051 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:08:40,051 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:08:40,051 [INFO] backend.main - Application startup completed.
+2025-09-29 01:08:52,675 [ERROR] backend.main - /api/query payload debug type=dict, keys=['question', 'session_id', 'continue', 'patient_ctx']
+2025-09-29 01:08:52,677 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250929-010852-9685412d] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-29 01:08:52,677 [INFO] s_cbr.DialogManager - 會話建立: cca8b07b5a344484acfc5740fb4a2f54
+2025-09-29 01:08:52,677 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=0
+2025-09-29 01:08:52,678 [ERROR] backend.main - 相容性查詢處理失敗: AttributeError("'SpiralEngine' object has no attribute 'search_engine'")
+Traceback (most recent call last):
+  File "C:\work\系統-中醫\Pulse-project\Backend\main.py", line 231, in api_query_compatibility
+    result = await run_spiral_cbr(
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\main.py", line 64, in run_spiral_cbr
+    return await engine.diagnose(question, **kwargs)
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\main.py", line 50, in diagnose
+    result = await self.spiral.execute_spiral_cycle(question, session_id)
+  File "C:\work\系統-中醫\Pulse-project\Backend\s_cbr\core\spiral_engine.py", line 138, in execute_spiral_cycle
+    srch = self.search_engine
+AttributeError: 'SpiralEngine' object has no attribute 'search_engine'
+2025-09-29 01:18:33,017 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:18:33,018 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:18:33,018 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:18:36,677 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 01:18:36,685 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:18:36,685 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 01:18:36,685 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 01:18:36,685 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 01:18:36,685 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 01:18:36,686 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:18:36,686 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:18:36,686 [INFO] backend.main - Application startup completed.
+2025-09-29 01:18:52,349 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:18:52,349 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:18:52,349 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:18:54,522 [ERROR] backend.main - ❌ S-CBR v2.1 路由器整合失敗: 'SpiralEngine' object has no attribute 'searcher'
+2025-09-29 01:18:54,527 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:18:54,527 [WARNING] backend.main -    - S-CBR 螺旋推理引擎: ❌ 未載入
+2025-09-29 01:18:54,527 [WARNING] backend.main -    - API 端點 /api/scbr/v2/*: ❌ 不可用
+2025-09-29 01:18:54,528 [ERROR] backend.main -    - 載入錯誤: 'SpiralEngine' object has no attribute 'searcher'
+2025-09-29 01:18:54,528 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:18:54,528 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:18:54,528 [INFO] backend.main - Application startup completed.
+2025-09-29 01:19:25,100 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:19:25,100 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-29 01:19:28,637 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-29 01:19:28,640 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-29 01:19:28,641 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-29 01:19:28,641 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-29 01:19:28,641 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-29 01:19:28,641 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-29 01:19:28,641 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-29 01:19:28,642 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-29 01:19:28,642 [INFO] backend.main - Application startup completed.
+2025-09-29 01:19:35,554 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-29 01:19:35,554 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-29 01:19:35,555 [INFO] backend.main - 🔻 Application shutdown completed.

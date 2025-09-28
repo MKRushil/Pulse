@@ -116,102 +116,206 @@ class SpiralEngine:
         }
 
 
-    async def execute_spiral_cycle(
-        self,
-        question: str,
-        session_id: str
-    ) -> Dict[str, Any]:
+    async def execute_spiral_cycle(self, question: str, session_id: str | None = None) -> dict:
         """
-        執行一輪螺旋推理：檢索 → 適配 → 監控 → 回饋
+        1) 編碼問題 -> q_vector（取不到則退化為 BM25）
+        2) 對 Case / PulsePJV / RPCase 做 hybrid 檢索
+        3) 以「語義分數 × 屬性加權」融合排序，選出最佳案例
+        4) 組裝『診斷結果與建議』（不含任何治療方案）與結構化欄位，給前端直接顯示
         """
-        # 0) 先確保會話存在
-        self.dialog.continue_session(session_id=session_id, initial_question=question, patient_ctx={})
+        log = logging.getLogger("s_cbr.SpiralEngine")
 
-        # 1) 生成查詢向量並做三庫混合檢索
-        from ..llm.embedding import EmbedClient
-        embed_client = EmbedClient(self.config)
-        q_vector = await embed_client.embed(question)
-        logger.info(f"🧭 q_vector: dim={len(q_vector) if isinstance(q_vector, list) else 0}")
-        tasks = [
-            self.searcher.hybrid_search("Case",     question, q_vector, limit=self.config.search.vector_limit),
-            self.searcher.hybrid_search("PulsePJV", question, q_vector, limit=self.config.search.vector_limit),
-            self.searcher.hybrid_search("RPCase",   question, q_vector, limit=self.config.search.vector_limit),
-        ]
-        case_results, pulse_results, rpcase_results = await asyncio.gather(*tasks)
+        # ---- 0) 取得搜尋器（相容兩種屬性名） ----
+        srch = getattr(self, "searcher", None) or getattr(self, "search_engine", None)
+        if srch is None:
+            raise AttributeError("SearchEngine not attached (expected 'self.searcher' or 'self.search_engine').")
 
-        # 2) 語義×屬性 融合排序，取得最相近案例
-        fusion = self._fuse_and_rank(
-            question=question,
-            patient_ctx={},
-            case_results=case_results,
-            pulse_results=pulse_results,
-            rpcase_results=rpcase_results,
-            weights={"semantic":0.6, "attribute":0.4},
-        )
-        best_case = fusion["best_case"]
-        if isinstance(best_case, dict):
-            logging.getLogger("s_cbr.SCBREngine").debug(f"best_case keys (sample): {list(best_case.keys())[:20]}")
+        # ---- 1) 向量化問題（容錯，不致命） ----
+        q_vec = None
+        try:
+            if hasattr(self, "embedder"):
+                if hasattr(self.embedder, "encode_async"):
+                    q_vec = await self.embedder.encode_async(question)
+                else:
+                    q_vec = self.embedder.encode(question)
+        except Exception:
+            q_vec = None
+        log.info(f"🧭 q_vector: dim={len(q_vec) if isinstance(q_vec, list) else 0}")
+
+        # 供 BM25 的處理文字（若沒有預處理器就用原文）
+        processed_text = question or ""
+        try:
+            tp = getattr(srch, "text_processor", None)
+            if tp and hasattr(tp, "clean"):
+                processed_text = tp.clean(question)
+        except Exception:
+            pass
+
+        # ---- 2) 多庫檢索 ----
+        top_k = int(getattr(self.config.search, "top_k", 20) or 20)
+        case_res   = await srch.hybrid_search("Case",     processed_text, q_vec, top_k)
+        pjp_res    = await srch.hybrid_search("PulsePJV", processed_text, q_vec, top_k)
+        rpcase_res = await srch.hybrid_search("RPCase",   processed_text, q_vec, top_k)
+
+        def _hits(res: dict, cls: str) -> list[dict]:
+            try:
+                return res["data"]["Get"].get(cls, []) or []
+            except Exception:
+                return []
+
+        case_hits   = _hits(case_res,   "Case")
+        pjp_hits    = _hits(pjp_res,    "PulsePJV")
+        rpcase_hits = _hits(rpcase_res, "RPCase")
+
+        log.info(f"📊 Case 搜索: {len(case_hits)} 個結果")
+        log.info(f"📊 PulsePJV 搜索: {len(pjp_hits)} 個結果")
+        log.info(f"📊 RPCase 搜索: {len(rpcase_hits)} 個結果")
+
+        # ---- 3) 融合排序（語義 × 屬性） ----
+        # 3.1 計算語義置信分數
+        def _conf(item: dict) -> float:
+            addi = item.get("_additional", {}) if isinstance(item, dict) else {}
+            score = addi.get("score", None)
+            dist  = addi.get("distance", None)
+            if hasattr(srch, "_calculate_confidence"):
+                return float(srch._calculate_confidence(score, dist))
+            # fallback: 距離越小越好
+            try:
+                import math
+                if isinstance(dist, (int, float)):
+                    return 1.0 / (1.0 + max(float(dist), 1e-9))
+            except Exception:
+                pass
+            return float(score) if isinstance(score, (int, float)) else 0.0
+
+        # 3.2 取詢問文本屬性
+        q_attrs = self._extract_query_attrs(question, None)
+
+        # 3.3 對 Case 做屬性加權，若 Case 為空才用 RPCase 映射
+        candidates: list[dict] = []
+        source_used = "Case"
+
+        def _norm_case(hit: dict) -> dict:
+            it = dict(hit)  # 保留原始欄位
+            it.setdefault("diagnosis_main", it.get("diagnosis_main", "") or "")
+            it.setdefault("pulse_text", it.get("pulse_text", "") or "")
+            it["_confidence"] = _conf(hit)
+            it["_attr_score"] = self._attribute_affinity(q_attrs, it)
+            # 權重可由 config 調，這裡語義 0.6、屬性 0.4
+            it["_final_score"] = 0.6 * it["_confidence"] + 0.4 * it["_attr_score"]
+            return it
+
+        if case_hits:
+            candidates = [_norm_case(h) for h in case_hits]
         else:
-            logging.getLogger("s_cbr.SCBREngine").debug("best_case keys (sample): None")
+            # 將 RPCase 映射為通用欄位後再打分
+            source_used = "RPCase"
+            def _norm_rpcase(hit: dict) -> dict:
+                it = dict(hit)
+                # 映射 final_diagnosis -> diagnosis_main
+                diag = it.get("final_diagnosis", "")
+                it["diagnosis_main"] = diag or ""
+                # 將 pulse_tags / symptom_tags 串成可讀字串
+                ptxt = it.get("pulse_tags", "")
+                if isinstance(ptxt, list):
+                    ptxt = "、".join(map(str, ptxt))
+                stxt = it.get("symptom_tags", "")
+                if isinstance(stxt, list):
+                    stxt = "、".join(map(str, stxt))
+                it["pulse_text"] = ptxt or ""
+                it["symptoms"] = stxt or ""
+                it["_confidence"] = _conf(hit)
+                it["_attr_score"]  = self._attribute_affinity(q_attrs, it)
+                it["_final_score"] = 0.6 * it["_confidence"] + 0.4 * it["_attr_score"]
+                return it
 
-        # 3) 監控：CMS（會用到 _confidence/_attr_score 與證據數）
-        cms_score = self.evaluator.calculate_cms_score(best_case, question) if best_case else 0.0
+            candidates = [_norm_rpcase(h) for h in rpcase_hits]
 
-        # 4) 回饋：只輸出診斷結果與建議（不含任何治療方案）
-        qa = fusion["query_attrs"]
-        bits = []
-        if qa.get("gender"):   bits.append(f"性別匹配：{qa['gender']}")
-        if qa.get("age"):      bits.append(f"年齡相近：{qa['age']} 歲")
-        if qa.get("pulses"):   bits.append("脈象命中：" + "、".join(qa["pulses"]))
-        if qa.get("symptoms"): bits.append("症狀關鍵詞：" + "、".join(qa["symptoms"]))
+        candidates.sort(key=lambda x: float(x.get("_final_score", 0.0)), reverse=True)
+        best = candidates[0] if candidates else None
+        log.info(f"best_case keys (sample): {list(best.keys())[:20] if isinstance(best, dict) else None}")
 
-        advice = [
-            "建議補充問診：入睡潛伏期、夜醒次數/時段、是否早醒、日間嗜睡程度、情志壓力與生活作息。",
-            "建議觀察：近一週脈象是否持續偏慢（遲脈）及有無寒熱虛實相關表現。",
-            "建議檢視睡眠衛生與刺激物（咖啡因/酒精/藥物）暴露，先排除干擾因子。"
+        # ---- 4) 組裝：診斷文字（不含任何治療） ----
+        def _txt(v) -> str:
+            return "" if v is None else str(v)
+
+        diag_main   = _txt(best.get("diagnosis_main") if best else "")
+        pulse_text  = _txt(best.get("pulse_text") if best else "")
+
+        pjp_symptoms = _txt((pjp_hits[0] or {}).get("symptoms") if pjp_hits else "")
+        rp_final     = _txt((rpcase_hits[0] or {}).get("final_diagnosis") if rpcase_hits else "")
+        rp_pulse     = _txt((rpcase_hits[0] or {}).get("pulse_tags") if rpcase_hits else "")
+        rp_sym_tags  = _txt((rpcase_hits[0] or {}).get("symptom_tags") if rpcase_hits else "")
+
+        diagnosis_lines = []
+        if diag_main:
+            diagnosis_lines.append(f"初步診斷傾向：{diag_main}")
+        elif rp_final:
+            diagnosis_lines.append(f"初步診斷傾向（推測）：{rp_final}")
+        else:
+            diagnosis_lines.append("初步診斷傾向：依相似病例與脈象特徵推估，暫列失眠相關證型（待進一步確認）。")
+
+        evidence_bits = []
+        if pulse_text:
+            evidence_bits.append(f"脈象特徵：{pulse_text}")
+        if pjp_symptoms:
+            evidence_bits.append(f"症狀要點：{pjp_symptoms}")
+        if rp_pulse:
+            evidence_bits.append(f"對照脈象標籤：{rp_pulse}")
+        if rp_sym_tags:
+            evidence_bits.append(f"對照症狀標籤：{rp_sym_tags}")
+        if evidence_bits:
+            diagnosis_lines.append("主要依據：\n- " + "\n- ".join(evidence_bits))
+
+        advice_steps = [
+            "補充問診：入睡困難/多夢頻率、是否易醒、醒後是否難以再入睡、白天精神與記憶力狀況。",
+            "伴隨症觀察：心悸、胸悶、頭暈、口乾、盜汗、便溏/便秘、夜間頻尿等是否出現。",
+            "客觀資料：近1–2週作息與壓力事件、是否飲用濃茶/咖啡/酒精、藥物或保健品使用史。",
+            "脈舌補充：再次確認左寸、右關/尺脈變化；舌質舌苔（淡/紅、苔薄/少/白/黃）。",
+            "短期追蹤：記錄1週睡眠日誌（入睡時間、覺醒次數、總睡時、主觀恢復感）。",
         ]
+        advice_text = "建議步驟：\n- " + "\n- ".join(advice_steps)
 
-        def _pick_case_diagnosis(case: dict) -> str:
-            if not case:
-                return ""
-            # 依序挑第一個有值的欄位（涵蓋不同資料源）
-            diag_candidates = [
-                "diagnosis_main", "diagnosis_sub", "diagnosis",
-                "final_diagnosis",  # RPCase
-                "syndrome", "pattern", "證名", "證候", "證型", "主診斷", "辨證",
-                "name"              # PulsePJV 至少有 name，可作為 fallback 顯示
-            ]
-            for k in diag_candidates:
-                v = case.get(k)
-                if isinstance(v, str) and v.strip():
-                    return v.strip()
-            return ""
+        final_text = "\n\n".join([s for s in ( "\n".join(diagnosis_lines), advice_text ) if s])
 
-        # support_case_id：多來源回退策略
-        support_id = None
-        if best_case:
-            support_id = (
-                best_case.get("case_id") or
-                best_case.get("src_casev_uuid") or    # Case 類
-                best_case.get("category_id") or       # PulsePJV
-                best_case.get("case_uuid") or
-                (best_case.get("_additional") or {}).get("id")
-            )
+        # ---- 5) 回傳 payload（多鍵名同時給，方便前端讀取） ----
+        payload = {
+            "status": "ok",
+            "session_id": session_id,
+            "query": question,
 
-        diag_text = _pick_case_diagnosis(best_case) if best_case else "未能確定"
+            # 主要文字（同內容、多別名）
+            "diagnosis_text": final_text,
+            "final_text": final_text,
+            "result_text": final_text,
+            "summary": final_text,
 
-        diagnosis = {
-            "diagnosis": diag_text,
-            "confidence": min(1.0, cms_score/10.0),
-            "reasoning": "；".join(bits) or f"依語義與屬性融合排序的最高匹配案例（CMS={cms_score}）",
-            "advice": advice,
-            "support_case_id": support_id,
-            "pulse_support": fusion["pulse_support"],
-            "rpcase_support": fusion["rpcase_support"],
-            "cms_score": cms_score,
-            "round": self.dialog.increment_round(session_id),
-            "continue_available": cms_score < self.config.spiral.convergence_threshold
+            # 結構化資訊
+            "diagnosis": {
+                "conclusion": diagnosis_lines[0] if diagnosis_lines else "",
+                "evidence": evidence_bits,
+                "confidence": float(best.get("_confidence", 0.0)) if best else 0.0,
+                "semantic_score": float(best.get("_confidence", 0.0)) if best else 0.0,
+                "attribute_score": float(best.get("_attr_score", 0.0)) if best else 0.0,
+                "final_score": float(best.get("_final_score", 0.0)) if best else 0.0,
+                "source": source_used,
+            },
+            "recommendation": {
+                "steps": advice_steps,
+                "note": "以上為診斷流程與資訊補全建議，不含任何治療方案。",
+            },
+
+            # 檢索命中（保留做紀錄/除錯）
+            "hits": {
+                "Case": case_hits,
+                "PulsePJV": pjp_hits,
+                "RPCase": rpcase_hits,
+            },
+
+            # 最佳案例（含分數）
+            "best_case": best,
         }
 
-        self.dialog.record_step(session_id, diagnosis)
-        return diagnosis
+        return payload
+
+

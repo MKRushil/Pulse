@@ -94,91 +94,115 @@ class SearchEngine:
     async def hybrid_search(
         self,
         class_name: str,
-        query_text: str,
-        query_vector: Optional[List[float]] = None,
-        limit: int = 10
-    ) -> List[Dict[str, Any]]:
-        if not self.weaviate_client:
-            return []
+        processed_text: str,
+        query_vector: list[float] | None,
+        limit: int = 20,
+    ) -> dict:
+        """
+        以 weaviate hybrid (BM25 + vector) 搜索指定 class。
+        - 依據 weaviate 的 schema 自動過濾不存在/非法的欄位，避免 GraphQL 語法錯誤。
+        - 預設回傳欄位會根據類別精簡到「前端用得到」且「確定存在」的欄位。
+        - 仍以 config.search.search_fields 作為 keyword 搜尋欄位。
+        回傳 weaviate 原始結果物件（dict）。
+        """
+        import re
+        
+
+        def _to_float(x, fallback: float) -> float:
+            try:
+                return float(x)
+            except Exception:
+                return fallback
+
+        def _l2_norm(v: list[float]) -> float:
+            try:
+                import math
+                return math.sqrt(sum(x * x for x in v))
+            except Exception:
+                return 0.0
+
+        # === 1) 依 class 設定【建議回傳欄位】（只選 schema 裡真的存在的） =======================
+        # 從你的 log 得到的可用欄位（避免中文欄位/不存在欄位造成 GraphQL error）
+        per_class_defaults = {
+            "Case": [
+                # 你 schema 有的：
+                "src_casev_uuid",       # ← weaviate 回饋提示：原來的 case_id 應改此欄位
+                "diagnosis_main",
+                "pulse_text",
+            ],
+            "PulsePJV": [
+                # schema 有的：
+                "category_id",
+                "name",
+                "symptoms",
+            ],
+            "RPCase": [
+                # schema 有的：
+                "final_diagnosis",
+                "pulse_tags",
+                "symptom_tags",
+            ],
+        }
+        default_return_props = per_class_defaults.get(class_name, [])
+
+        # 允許用 config 另行指定（會與預設做 union）
+        cfg_return = getattr(self.config.search, "return_fields", None)
+        if isinstance(cfg_return, list) and cfg_return:
+            # union 去重，保序
+            want_props = list(dict.fromkeys(cfg_return + default_return_props))
+        else:
+            want_props = default_return_props
+
+        # 只允許 GraphQL 合法的識別字元（英文/底線/數字，且開頭不能是數字）
+        ident_pat = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+        gql_props = [p for p in want_props if isinstance(p, str) and ident_pat.match(p)]
+        dropped = [p for p in want_props if p not in gql_props]
+        if dropped:
+            logger.warning(f"↯ Dropped non-GraphQL property names: {dropped}")
+
+        # === 2) keyword 搜尋欄位 ============================================================
+        search_fields = getattr(self.config.search, "search_fields", None) or ["search_all", "search_all_seg"]
+
+        # === 3) 建立查詢 ===================================================================
+        query_builder = (
+            self.weaviate_client
+            .query
+            .get(class_name, gql_props if gql_props else [])  # 允許為空，純取 additional
+            .with_additional(["id", "score", "distance"])
+        )
+
+        qlen = len(query_vector or [])
+        alpha = _to_float(getattr(self.config.search, "hybrid_alpha", 0.5), 0.5)
+
+        if qlen > 0 and alpha > 0.0:
+            logger.info(f"🔎 {class_name} HYBRID α={alpha}, qdim={qlen}, ‖v‖₂={_l2_norm(query_vector or []):.4f}")
+            logger.info(f"↪ return props={gql_props[:8]}... | search_fields={search_fields}")
+            query_builder = query_builder.with_hybrid(
+                query=processed_text or "",
+                vector=query_vector,
+                alpha=alpha,
+                properties=search_fields,
+            )
+        else:
+            logger.info(f"🔎 {class_name} BM25-only α={alpha}, qdim={qlen}")
+            query_builder = query_builder.with_hybrid(
+                query=processed_text or "",
+                alpha=0.0,
+                properties=search_fields,
+            )
+
+        # === 4) 送出 =======================================================================
+        result = query_builder.with_limit(int(limit or 20)).do()
+
+        # 小結 log
         try:
-            processed_text = self.text_processor.segment_text(query_text) if query_text else ""
+            n_hits = len(result["data"]["Get"].get(class_name, []))
+        except Exception:
+            n_hits = 0
+        logger.info(f"📊 {class_name} 搜索: {n_hits} 個結果")
 
-            # 想要的欄位（可由 config 指定），實際查詢以 schema 白名單為準
-            wanted = set(getattr(self.config.search, "return_fields", []) or [])
-            allowed = set(ALLOWED_RETURN_PROPS.get(class_name, []))
+        return result
 
-            # 真正要查的 props = 交集；若交集為空，就用該 class 的 allowed
-            props = list((wanted & allowed) or allowed)
-
-            # Log 想查但 schema 沒有的（包含你原本想查的中文欄位等）
-            dropped = sorted(list(wanted - allowed))
-            if dropped:
-                logger.warning(f"↯ Dropped non-schema property names for {class_name}: {dropped}")
-
-            # BM25 搜尋用欄位仍取設定檔
-            search_fields = self.config.search.search_fields
-
-            query_builder = (
-                self.weaviate_client
-                    .query
-                    .get(class_name, props)
-                    .with_additional(["id", "score", "distance"])
-            )
-
-            qlen  = len(query_vector) if isinstance(query_vector, list) else 0
-            alpha = _to_float(getattr(self.config.search, "hybrid_alpha", 0.5), 0.5)
-
-            # 記錄一下關鍵參數
-            logger.info(
-                f"🔎 {class_name} {'HYBRID' if (qlen > 0 and alpha > 0.0) else 'BM25-only'} "
-                f"α={alpha}, qdim={qlen}, ‖v‖₂={_l2_norm(query_vector):.4f}"
-            )
-            logger.info(f"↪ return props={props[:8]}... | search_fields={search_fields}")
-
-            # 根據是否有向量 + alpha 來決定 hybrid 參數
-            if qlen > 0 and alpha > 0.0:
-                query_builder = query_builder.with_hybrid(
-                    query=processed_text,
-                    vector=query_vector,
-                    alpha=alpha,
-                    properties=search_fields
-                )
-            else:
-                # 純 BM25：alpha=0
-                query_builder = query_builder.with_hybrid(
-                    query=processed_text,
-                    alpha=0.0,
-                    properties=search_fields
-                )
-
-            result = query_builder.with_limit(limit).do()
-
-            if isinstance(result, dict) and "errors" in result:
-                logger.error(f"GraphQL 錯誤: {result['errors']}")
-                return []
-
-            # 兼容 {"data":{"Get":...}} 與 {"Get":...}
-            get_section = {}
-            if isinstance(result, dict):
-                get_section = result.get("data", {}).get("Get") or result.get("Get") or {}
-            rows = get_section.get(class_name) or []
-            if not isinstance(rows, list):
-                rows = []
-
-            ranked: List[Dict[str, Any]] = []
-            for it in rows:
-                addi = it.get("_additional") or {}
-                score = _to_float(addi.get("score"), 0.0)
-                distance = _to_float(addi.get("distance"), float("inf"))
-                it["_confidence"] = self._calculate_confidence(score, distance)
-                ranked.append(it)
-
-            logger.info(f"📊 {class_name} 搜索: {len(ranked)} 個結果")
-            return ranked
-
-        except Exception as e:
-            logger.error(f"❌ 混合搜索失敗 ({class_name}): {e}")
-            return []
 
 
 
