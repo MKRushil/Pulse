@@ -2186,3 +2186,34 @@ KeyError: '77ce34a5f7f74bdabeaccfd0acfb0812'
 2025-09-28 22:11:07,606 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-28 22:11:07,606 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
 2025-09-28 22:11:07,606 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-28 22:33:48,798 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-28 22:33:48,801 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-28 22:33:48,802 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-28 22:33:48,802 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-28 22:33:48,802 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-28 22:33:48,802 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-28 22:33:48,802 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-28 22:33:48,802 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-28 22:33:48,802 [INFO] backend.main - Application startup completed.
+2025-09-28 22:34:05,608 [ERROR] backend.main - /api/query payload debug type=dict, keys=['question', 'session_id', 'continue', 'patient_ctx']
+2025-09-28 22:34:05,610 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250928-223405-13d8b0e2] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-28 22:34:05,611 [INFO] s_cbr.DialogManager - 會話建立: 0dd5600b81644b378cbeb8e007c0a120
+2025-09-28 22:34:05,612 [INFO] s_cbr.DialogManager - 會話建立: 0dd5600b81644b378cbeb8e007c0a120
+2025-09-28 22:34:05,612 [INFO] s_cbr.DialogManager - 繼續會話: 0dd5600b81644b378cbeb8e007c0a120
+2025-09-28 22:34:07,915 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=1024
+2025-09-28 22:34:07,943 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-28 22:34:08,015 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-28 22:34:08,079 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-28 22:34:08,079 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 0dd5600b81644b378cbeb8e007c0a120
+2025-09-28 22:34:08,080 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250928-223408-ed7a09fe] 問題: 患者 67 歲 男，失眠多夢，左寸脈遲
+2025-09-28 22:34:08,080 [INFO] s_cbr.DialogManager - 會話建立: 658d17bbf74b49858646385d8ea7992c
+2025-09-28 22:34:08,080 [INFO] s_cbr.DialogManager - 會話建立: 658d17bbf74b49858646385d8ea7992c
+2025-09-28 22:34:08,080 [INFO] s_cbr.DialogManager - 繼續會話: 658d17bbf74b49858646385d8ea7992c
+2025-09-28 22:34:09,425 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=1024
+2025-09-28 22:34:09,483 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 20 個結果
+2025-09-28 22:34:09,546 [INFO] s_cbr.SearchEngine - 📊 PulsePJV 搜索: 20 個結果
+2025-09-28 22:34:09,600 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 3 個結果
+2025-09-28 22:34:09,602 [INFO] s_cbr.DialogManager - 記錄輪次 1 結果於 658d17bbf74b49858646385d8ea7992c
+2025-09-28 22:38:42,277 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-28 22:38:42,278 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-28 22:38:42,278 [INFO] backend.main - 🔻 Application shutdown completed.

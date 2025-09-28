@@ -15,6 +15,7 @@ from .evaluation import CMSEvaluator
 from ..utils.logger import get_logger
 
 logger = get_logger("SpiralEngine")
+logger.info(f"📦 SpiralEngine loaded from: {__file__}")
 
 
 class SpiralEngine:
@@ -130,6 +131,7 @@ class SpiralEngine:
         from ..llm.embedding import EmbedClient
         embed_client = EmbedClient(self.config)
         q_vector = await embed_client.embed(question)
+        logger.info(f"🧭 q_vector: dim={len(q_vector) if isinstance(q_vector, list) else 0}")
         tasks = [
             self.searcher.hybrid_search("Case",     question, q_vector, limit=self.config.search.vector_limit),
             self.searcher.hybrid_search("PulsePJV", question, q_vector, limit=self.config.search.vector_limit),
@@ -147,7 +149,7 @@ class SpiralEngine:
             weights={"semantic":0.6, "attribute":0.4},
         )
         best_case = fusion["best_case"]
-
+        logger.debug(f"best_case keys (sample): {list(best_case.keys())[:30] if isinstance(best_case, dict) else best_case}")
         # 3) 監控：CMS（會用到 _confidence/_attr_score 與證據數）
         cms_score = self.evaluator.calculate_cms_score(best_case, question)
 
@@ -172,7 +174,7 @@ class SpiralEngine:
         def _pick_case_diagnosis(case: dict) -> str:
             # 依序嘗試多種欄位名稱，抓到第一個非空字串就用
             candidates = ["diagnosis_main","diagnosis","辨證","syndrome","主診斷","pattern","證型",
-              "證候","證名","final_dx"]
+                "證候","證名","final_dx","dx","syndrome_name"]
             for k in candidates:
                 val = case.get(k)
                 if isinstance(val, str) and val.strip():
