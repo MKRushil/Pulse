@@ -163,10 +163,11 @@ class SpiralEngine:
             "建議觀察：近一週脈象是否持續偏慢（遲脈）及有無寒熱虛實相關表現。",
             "建議檢視睡眠衛生與刺激物（咖啡因/酒精/藥物）暴露，先排除干擾因子。"
         ]
-
+        logger.debug(f"best_case keys: {list(best_case.keys())}")
         def _pick_case_diagnosis(case: dict) -> str:
             # 依序嘗試多種欄位名稱，抓到第一個非空字串就用
-            candidates = ["diagnosis_main", "diagnosis", "辨證", "syndrome", "主診斷", "pattern", "證型"]
+            candidates = ["diagnosis_main","diagnosis","辨證","syndrome","主診斷","pattern","證型",
+              "證候","證名","final_dx"]
             for k in candidates:
                 val = case.get(k)
                 if isinstance(val, str) and val.strip():
