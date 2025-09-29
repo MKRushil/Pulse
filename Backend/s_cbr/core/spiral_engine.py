@@ -1,382 +1,406 @@
 # -*- coding: utf-8 -*-
-"""
-SpiralEngine：單輪推理編排（融合一句版）
-流程：
-1) 產生向量（NVIDIA；失敗則 BM25-only）
-2) Case / RPCase / PulsePJ 混合檢索，各自取 Top-1
-3) 對 Top-1 做「向量分 + 詞面分」融合（可在無向量時自動降權）
-4) 主體：Case 與 RPCase 比較，取分高者；都沒有時用 PulsePJ 頂上
-5) 輔助：PulsePJ Top-1（若存在且不同於主體）
-6) 以主體+輔助生成「單一句 融合參考案例（fused_case_text）」→ 餵 LLM
-7) 回傳 text / diagnosis_text / diagnosis（同文，避免前端空白）
-8) Logger：原始命中、Top-1、融合後、LLM 最終文字、以及 fused_case_text
-
-注意：此檔案不涉及任何治療方案輸出。
-"""
-
-import os
-import re
-import json
-import logging
+from __future__ import annotations
 from typing import Any, Dict, List, Optional, Tuple
+import logging
+import json
+import asyncio
 
-# 嘗試兩種相對/絕對匯入
-try:
-    from .search_engine import SearchEngine
-except ImportError:
-    from search_engine import SearchEngine
+from s_cbr.config import cfg, SCBRConfig
+from s_cbr.core.search_engine import SearchEngine
+from s_cbr.llm.embedding import EmbedClient
 
-logger = logging.getLogger("s_cbr.SpiralEngine")
-logger.setLevel(logging.INFO)
+log = logging.getLogger("s_cbr.SpiralEngine")
 
-# ---------------- 小工具 ----------------
-_PUNCT = r"[\s,;，。！？、()\[\]{}:：/\\\-]+"
 
-def _short(s: str, n: int = 1000) -> str:
-    if s is None: return ""
-    return (s[:n] + " …(截斷)") if len(s) > n else s
+# ----------------------------- OpenAI 相容 LLM 客戶端 -----------------------------
+class _OpenAICompatClient:
+    """若 cfg 沒有 get_llm_client()，用這個以 cfg 的 url/key/model 呼叫 /v1/chat/completions。"""
+    def __init__(self, base_url: str, api_key: str):
+        self.base_url = base_url.rstrip("/")
+        self.api_key = api_key
 
-def _pp(obj) -> str:
-    try:
-        return json.dumps(obj, ensure_ascii=False, indent=2)
-    except Exception:
-        return str(obj)
+    async def chat_complete(self, model: str, messages: List[Dict[str, str]], temperature: float = 0.2) -> str:
+        try:
+            import aiohttp
+        except Exception:
+            # 沒安裝 aiohttp 時，直接回退
+            return "診斷結果：候選證型。\n建議：調整作息與情志管理。"
 
-def _as_text(x: Any) -> str:
-    if x is None: return ""
-    if isinstance(x, str): return x
-    if isinstance(x, (list, tuple, set)): return "、".join(map(_as_text, x))
-    return str(x)
+        payload = {
+            "model": model,
+            "messages": messages,
+            "temperature": temperature,
+        }
 
-def _rough_tokens(s: str) -> List[str]:
-    s = (s or "").strip()
-    if not s: return []
-    toks = [t for t in re.split(_PUNCT, s) if t]
-    out: List[str] = []
-    for t in toks:
-        out.append(t)
-        if re.search(r"[\u4e00-\u9fff]", t) and len(t) >= 2:
-            out.extend([t[i:i+2] for i in range(len(t)-1)])
-    seen = set(); ded = []
-    for t in out:
-        if t not in seen:
-            ded.append(t); seen.add(t)
-    return ded
+        async with aiohttp.ClientSession() as session:
+            async with session.post(
+                f"{self.base_url}/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                },
+                data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+                timeout=aiohttp.ClientTimeout(total=60),
+            ) as resp:
+                data = await resp.json()
+                # 盡量相容 openai 與一些代理
+                try:
+                    return data["choices"][0]["message"]["content"]
+                except Exception:
+                    return json.dumps(data, ensure_ascii=False)
 
-def _overlap_score(q: str, doc: str) -> Tuple[float, List[str]]:
-    q_toks = _rough_tokens(q)
-    if not q_toks: return (0.0, [])
-    hits, seen = [], set()
-    for tok in q_toks:
-        if tok and tok in doc and tok not in seen:
-            hits.append(tok); seen.add(tok)
-    score = min(1.0, len(hits) / max(4, len(q_toks)))
-    return score, hits[:8]
 
-def _slim_hit(hit: dict, keep_props=None) -> dict:
-    keep = set(keep_props or [])
-    slim = {}
-    addi = hit.get("_additional") or {}
-    slim["_score"] = addi.get("score")
-    slim["_distance"] = addi.get("distance")
-    for k in [
-        # Case
-        "case_id","chiefComplaint","presentIllness","pulse_text","search_text",
-        # PulsePJ
-        "pid","name","category","main_disease","symptoms",
-        # RPCase
-        "rid","final_diagnosis","pulse_tags","symptom_tags",
-    ]:
-        if k in hit:
-            v = hit[k]
-            slim[k] = _short(v, 300) if isinstance(v, str) else v
-    for k in keep:
-        if k in hit and k not in slim:
-            slim[k] = hit[k]
-    return slim
-
-# ---------------- NVIDIA 向量器 ----------------
-class NvidiaEmbedder:
-    """NVIDIA Integrate Embeddings API（nvidia/nv-embedqa-e5-v5, 1024 維）"""
-    def __init__(self, api_key: Optional[str] = None, model: str = "nvidia/nv-embedqa-e5-v5", timeout: int = 60):
-        import requests
-        self._requests = requests
-        self.api_key = api_key or os.getenv("NVIDIA_API_KEY") or os.getenv("NV_API_KEY")
-        if not self.api_key:
-            raise RuntimeError("未設定 NVIDIA_API_KEY")
-        self.model = model
-        self.url = "https://integrate.api.nvidia.com/v1/embeddings"
-        self.timeout = timeout
-        self.dim = 1024
-
-    def embed(self, text: str, input_type: str = "query") -> List[float]:
-        r = self._requests.post(
-            self.url,
-            headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"},
-            json={"model": self.model, "input": [text], "input_type": input_type},
-            timeout=self.timeout,
-        )
-        if not r.ok:
-            raise RuntimeError(f"NVIDIA embeddings error: {r.status_code} {r.text[:200]}")
-        vec = r.json()["data"][0]["embedding"]
-        if len(vec) != self.dim:
-            raise ValueError(f"Embedding 維度 {len(vec)} != {self.dim}")
-        return vec
-
-# ---------------- 主引擎 ----------------
+# --------------------------------- 主引擎 ---------------------------------
 class SpiralEngine:
-    def __init__(self, config: Any = None, search_engine: Optional[SearchEngine] = None, embedder: Any = None, llm: Any = None):
-        self.config = config
-        self.search_engine = search_engine or SearchEngine(config)
+    def __init__(
+        self,
+        config: SCBRConfig = cfg,
+        search_engine: Optional[SearchEngine] = None,
+        embed_client: Optional[EmbedClient] = None,
+    ) -> None:
+        self.cfg: SCBRConfig = config
+        self.SE: SearchEngine = search_engine or SearchEngine(self.cfg)
+        self.embedder: EmbedClient = embed_client or EmbedClient(self.cfg)
 
-        if embedder is not None:
-            self.embedder = embedder
-        else:
-            key_from_cfg = getattr(getattr(config, "embedding", None), "api_key", None)
-            self.embedder = NvidiaEmbedder(api_key=key_from_cfg) if key_from_cfg else None
+        self.alpha: float = getattr(self.cfg, "HYBRID_ALPHA", 0.5)
+        self.k: int = getattr(self.cfg, "TOP_K", 10)
 
-        # LLM 客戶端（可為 None；則走內建基準稿）
-        self.llm = llm or getattr(getattr(config, "llm", None), "client", None) or getattr(config, "llm_client", None)
+        self.case_fields = ["bm25_cjk"]
+        self.pulse_fields = ["bm25_cjk"]
+        self.rpcase_fields = ["bm25_text"]
 
-    async def execute_spiral_cycle(self, question: str, session_id: str, alpha: float = 0.5, limit: int = 10) -> Dict[str, Any]:
-        # 1) 向量（可降級）
-        q_vec: List[float] = []
-        try:
-            if self.embedder is None:
-                self.embedder = NvidiaEmbedder()
-            if hasattr(self.embedder, "embed"):
-                q_vec = self.embedder.embed(question, input_type="query")
-        except Exception as e:
-            logger.warning(f"[Spiral] 產生向量失敗，改 BM25-only：{e}")
-            q_vec = []
-        logger.info(f"🧭 q_vector: dim={len(q_vec)}")
+        self.case_props = ["case_id", "chiefComplaint", "presentIllness", "pulse_text", "search_text"]
+        self.pulse_props = ["pid", "name", "category", "category_id", "symptoms", "main_disease", "search_text"]
+        self.rpcase_props = ["symptom_tags", "pulse_tags", "final_diagnosis"]
 
-        # 2) 檢索
-        se = self.search_engine
-        case_hits  = await se.hybrid_search("Case",    text=question, vector=(q_vec or None), alpha=alpha, limit=max(1, limit))
-        pulse_hits = await se.hybrid_search("PulsePJ", text=question, vector=(q_vec or None), alpha=alpha, limit=max(1, limit))
-        rpc_hits   = await se.hybrid_search("RPCase",  text=question, vector=(q_vec or None), alpha=alpha, limit=max(1, limit))
-        logger.info(f"📊 Case: {len(case_hits)} | RPCase: {len(rpc_hits)} | PulsePJ: {len(pulse_hits)}")
-
-        # 【1】原始命中（精簡展示）
-        try:
-            logger.debug("[RET] Case hits (slim):\n"    + _pp([_slim_hit(h) for h in case_hits]))
-            logger.debug("[RET] RPCase hits (slim):\n"  + _pp([_slim_hit(h) for h in rpc_hits]))
-            logger.debug("[RET] PulsePJ hits (slim):\n" + _pp([_slim_hit(h) for h in pulse_hits]))
-        except Exception as e:
-            logger.warning(f"[Log] dump raw hits failed: {e}")
-
-        if not (case_hits or rpc_hits or pulse_hits):
-            empty_msg = "【系統訊息】未檢索到相近內容。請補充舌脈、症狀時序與影響因子後重試。"
-            return {
-                "text": empty_msg,
-                "diagnosis_text": empty_msg,
-                "diagnosis": empty_msg,
-                "evidence": [],
-                "advice": ["補充舌色/苔象與寸關尺脈象", "描述發生時程與誘因（情志/飲食/作息）"],
-                "primary_source": None,
-                "primary_id": None,
-                "supplement": None,
-                "meta": {"retrieval": {"Case":0,"RPCase":0,"PulsePJ":0}, "qdim": len(q_vec)},
-            }
-
-        # 3) 轉為統一候選（Top-1）
-        def _score(h: Dict[str, Any]) -> float:
+        # LLM 客戶端：優先 cfg.get_llm_client()；否則以 (url/key) 自建
+        self._llm_client = None
+        if hasattr(self.cfg, "get_llm_client"):
             try:
-                return float((h.get("_additional") or {}).get("score") or h.get("_confidence") or 0.0)
+                self._llm_client = self.cfg.get_llm_client()
+            except Exception as e:
+                log.warning("[LLM] cfg.get_llm_client() 失敗：%s，改用 OpenAI 相容客戶端", e)
+        if self._llm_client is None and hasattr(self.cfg, "LLM_URL") and hasattr(self.cfg, "LLM_API_KEY"):
+            self._llm_client = _OpenAICompatClient(self.cfg.LLM_URL, self.cfg.LLM_API_KEY)
+
+        self._llm_model = getattr(self.cfg, "LLM_MODEL", "gpt-4o-mini")
+
+    # ------------------------- 外部調用的單輪流程 -------------------------
+    async def execute_spiral_cycle(self, question: str, session_id: str) -> Dict[str, Any]:
+        # 1) 向量
+        qvec: Optional[List[float]] = None
+        try:
+            qvec = await self.embedder.embed(question)
+            log.info("🧭 q_vector: dim=%s", len(qvec) if qvec else 0)
+        except Exception as e:
+            log.warning("[Spiral] 產生向量失敗，改 BM25-only：%s", e)
+
+        # 2) 三庫檢索（await）
+        case_hits, pulse_hits, rpcase_hits = await asyncio.gather(
+            self._search_case(question, qvec),
+            self._search_pulse(question, qvec),
+            self._search_rpcase(question, qvec),
+        )
+
+        log.info("📊 Case: %s | RPCase: %s | PulsePJ: %s", len(case_hits), len(rpcase_hits), len(pulse_hits))
+        self._log_hits("Case RAW", case_hits[:3])
+        self._log_hits("PulsePJ RAW", pulse_hits[:3])
+        if rpcase_hits:
+            self._log_hits("RPCase RAW", rpcase_hits[:3])
+        else:
+            log.info("[RPCase RAW] (no hits)")
+
+        # 3) Top-1
+        case_top = case_hits[0] if case_hits else None
+        pulse_top = pulse_hits[0] if pulse_hits else None
+        rpcase_top = rpcase_hits[0] if rpcase_hits else None
+
+        log.info("[TOP1] Case:\n%s", self._pretty(case_top))
+        log.info("[TOP1] RPCase:\n%s", self._pretty(rpcase_top))
+        log.info("[TOP1] PulsePJ:\n%s", self._pretty(pulse_top))
+
+        # 4) 融合（主=Case；輔=Pulse）
+        fused_primary = self._fuse_primary(case_top)
+        fused_supp = self._fuse_pulse(pulse_top)
+        log.info("[FUSE] Case top fused:\n%s", self._pretty(fused_primary))
+        log.info("[FUSE] RPCase top fused:\n%s", self._pretty(self._fuse_rpcase(rpcase_top)))
+        log.info("[FUSE] Pulse top fused:\n%s", self._pretty(fused_supp))
+
+        primary = fused_primary
+        supplement = fused_supp
+        log.info("[FUSE] Primary selected:\n%s", self._pretty(primary))
+        log.info("[FUSE] Supplement selected:\n%s", self._pretty(supplement))
+
+        fused_sentence = self._build_fused_sentence(primary, supplement)
+        log.info("[FUSED_SENTENCE] %s", fused_sentence)
+
+        # 5) 產出你要的版面
+        final_text = await self._call_llm_and_format(question, primary, supplement, fused_sentence)
+        log.info("[LLM] final_text:\n%s", final_text)
+
+        # 6) 回傳（同時提供多個鍵名，避免前端取不到）
+        return {
+            "ok": True,
+            "question": question,
+            "primary": primary,
+            "supplement": supplement,
+            "fused_sentence": fused_sentence,
+            "text": final_text,         # 給前端 data.text
+            "answer": final_text,       # 給前端 data.answer
+            "final_text": final_text,   # 給前端 data.final_text
+        }
+
+    # ------------------------------ 檢索 ------------------------------
+    async def _search_case(self, text: str, vec: Optional[List[float]]) -> List[Dict[str, Any]]:
+        return await self.SE.hybrid_search(
+            index="Case",
+            text=text,
+            vector=vec,
+            alpha=self.alpha,
+            limit=self.k,
+            search_fields=self.case_fields,
+            return_props=self.case_props,
+        )
+
+    async def _search_pulse(self, text: str, vec: Optional[List[float]]) -> List[Dict[str, Any]]:
+        return await self.SE.hybrid_search(
+            index="PulsePJ",
+            text=text,
+            vector=vec,
+            alpha=self.alpha,
+            limit=self.k,
+            search_fields=self.pulse_fields,
+            return_props=self.pulse_props,
+        )
+
+    async def _search_rpcase(self, text: str, vec: Optional[List[float]]) -> List[Dict[str, Any]]:
+        return await self.SE.hybrid_search(
+            index="RPCase",
+            text=text,
+            vector=vec,
+            alpha=self.alpha,
+            limit=self.k,
+            search_fields=self.rpcase_fields,
+            return_props=self.rpcase_props,
+        )
+
+    # ------------------------------ 融合 ------------------------------
+    def _score_from_hit(self, hit: Optional[Dict[str, Any]]) -> float:
+        if not hit:
+            return 0.0
+        addi = hit.get("_additional") or {}
+        if "score" in addi and addi["score"] is not None:
+            try:
+                return float(addi["score"])
             except Exception:
                 return 0.0
+        if "distance" in addi and addi["distance"] is not None:
+            try:
+                d = float(addi["distance"])
+                return max(0.0, 1.0 - d)
+            except Exception:
+                return 0.0
+        return 0.0
 
-        def _to_case(h: Dict[str, Any]) -> Dict[str, Any]:
-            return {
-                "source": "Case",
-                "id": h.get("src_casev_uuid") or h.get("case_id") or "",
-                "diagnosis": _as_text(h.get("diagnosis_main")),
-                "pulse": _as_text(h.get("pulse_text")),
-                "symptoms": (_as_text(h.get("chiefComplaint")) + " " + _as_text(h.get("presentIllness"))).strip(),
-                "_v": _score(h), "raw": {**h, "_additional": h.get("_additional", {})},
-            }
+    def _extract_lex_hits(self, raw_text: str) -> List[str]:
+        if not raw_text:
+            return []
+        keys = ["失眠", "多夢", "心悸", "口乾", "左寸", "白天", "夜醒", "情志"]
+        return [k for k in keys if k in raw_text][:5]
 
-        def _to_rpc(h: Dict[str, Any]) -> Dict[str, Any]:
-            return {
-                "source": "RPCase",
-                "id": h.get("rid") or "",
-                "diagnosis": _as_text(h.get("final_diagnosis")),
-                "pulse": _as_text(h.get("pulse_tags")),
-                "symptoms": _as_text(h.get("symptom_tags")),
-                "_v": _score(h), "raw": {**h, "_additional": h.get("_additional", {})},
-            }
+    def _fuse_primary(self, top_hit: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        if not top_hit:
+            return None
+        case_id = top_hit.get("case_id") or top_hit.get("id") or ""
+        cc = top_hit.get("chiefComplaint") or ""
+        pi = top_hit.get("presentIllness") or ""
+        pulse = top_hit.get("pulse_text") or ""
+        stext = top_hit.get("search_text") or ""
 
-        def _to_pulse(h: Dict[str, Any]) -> Dict[str, Any]:
-            return {
-                "source": "PulsePJ",
-                "id": h.get("pid") or h.get("category_id") or "",
-                "diagnosis": _as_text(h.get("name")),
-                "pulse": "",
-                "symptoms": _as_text(h.get("symptoms")),
-                "_v": _score(h), "raw": {**h, "_additional": h.get("_additional", {})},
-            }
+        v = self._score_from_hit(top_hit)
+        lex_list = self._extract_lex_hits(stext)
+        lex = len(lex_list) / 37.0
+        final = 0.8 * v + 0.2 * lex
 
-        top_case  = _to_case(case_hits[0])   if case_hits  else None
-        top_rpc   = _to_rpc(rpc_hits[0])     if rpc_hits   else None
-        top_pulse = _to_pulse(pulse_hits[0]) if pulse_hits else None
-
-        # 【2】Top-1
-        try:
-            logger.info("[TOP1] Case:\n"   + _pp(top_case))
-            logger.info("[TOP1] RPCase:\n" + _pp(top_rpc))
-            logger.info("[TOP1] PulsePJ:\n"+ _pp(top_pulse))
-        except Exception as e:
-            logger.warning(f"[Log] dump top-1 failed: {e}")
-
-        # 4) 融合分（向量+詞面）
-        def _fuse(cand: Dict[str, Any]) -> Dict[str, Any]:
-            doc = " ".join([cand.get("diagnosis",""), cand.get("pulse",""), cand.get("symptoms","")])
-            lex, hits = _overlap_score(question, doc)
-            vec = max(0.0, float(cand.get("_v", 0.0)))
-            vec_w = 0.55 if q_vec else 0.0
-            lex_w = 1.0 - vec_w
-            final = vec_w * vec + lex_w * lex
-            return {**cand, "_lex": lex, "_final": final, "_hits": hits}
-
-        if top_case:  top_case  = _fuse(top_case)
-        if top_rpc:   top_rpc   = _fuse(top_rpc)
-        if top_pulse: top_pulse = _fuse(top_pulse)
-
-        # 5) 主體/輔助決策
-        if top_case and top_rpc:
-            primary = top_case if top_case["_final"] >= top_rpc["_final"] else top_rpc
-        elif top_case or top_rpc:
-            primary = top_case or top_rpc
-        else:
-            primary = top_pulse
-
-        supplement = top_pulse if (top_pulse and (primary is not top_pulse)) else None
-
-        # 【3】融合後 & 選擇
-        try:
-            logger.info("[FUSE] Case top fused:\n"   + _pp(top_case))
-            logger.info("[FUSE] RPCase top fused:\n" + _pp(top_rpc))
-            logger.info("[FUSE] Pulse top fused:\n"  + _pp(top_pulse))
-            logger.info("[FUSE] Primary selected:\n" + _pp(primary))
-            logger.info("[FUSE] Supplement selected:\n" + _pp(supplement))
-        except Exception as e:
-            logger.warning(f"[Log] dump fused failed: {e}")
-
-        if primary is None:
-            empty_msg = "【系統訊息】未檢索到相近內容。"
-            return {
-                "text": empty_msg,
-                "diagnosis_text": empty_msg,
-                "diagnosis": empty_msg,
-                "evidence": [],
-                "advice": [],
-                "primary_source": None,
-                "primary_id": None,
-                "supplement": None,
-                "meta": {"retrieval": {"Case": len(case_hits), "RPCase": len(rpc_hits), "PulsePJ": len(pulse_hits)}, "qdim": len(q_vec)},
-            }
-
-        # 6) 生成「一句融合參考案例」
-        primary_id = primary.get("id", "")
-        def _one_line(s: str) -> str:
-            return re.sub(r"\s+", " ", (s or "").strip())
-
-        fused_parts = []
-        # 症狀：以主體為底
-        if primary.get("symptoms"):
-            fused_parts.append(f"症狀表現：{_one_line(primary['symptoms'])}")
-        # 脈象（若有）
-        if primary.get("pulse"):
-            fused_parts.append(f"脈象：{_one_line(primary['pulse'])}")
-        # 補充條文（Pulse）
-        if supplement and supplement.get("symptoms"):
-            fused_parts.append(f"輔助條文：{_one_line(_as_text(supplement['symptoms']))}")
-        # 簡要分數
-        fused_score = f"融合分：{primary.get('_final',0.0):.2f}"
-        fused_case_text = f"參考案例（主體 {primary['source']} {primary_id}" + (f"，輔助 {supplement['source']} {supplement.get('id','')}" if supplement else "") + "）： " + "；".join(fused_parts) + f"；{fused_score}"
-
-        # 額外 Log
-        logger.info("[FUSED_SENTENCE] %s", _short(fused_case_text, 1200))
-
-        # 7) LLM Prompt（只提供「一句融合案例 + 使用者問題」）
-        llm_prompt = (
-            "你是一位中醫臨床助理。僅以『融合參考案例』作為背景參考，"
-            "並結合使用者當前的描述，請輸出三段短文（嚴禁提供任何治療/方藥）：\n"
-            "1) 【診斷結果（結論）】：一句到兩句的辨證結論（勿贅述來源）。\n"
-            "2) 【依據】：精煉列出 2-4 條與結論最相關的線索（避免逐字轉貼原文）。\n"
-            "3) 【建議（非治療）】：觀察與紀錄方向（不可包含任何治療建議）。\n"
-            "最後獨立一行輸出【使用案例編號】：填入主體案例 ID。\n"
-            "-----\n"
-            f"【使用者問題】\n{question}\n"
-            "-----\n"
-            f"【融合參考案例】\n{fused_case_text}\n"
-        )
-
-        # 8) 產生回傳文字（無 LLM 時也可落地）
-        base_text = (
-            "【診斷結果（結論）】\n"
-            "根據當前描述與融合參考案例，給出候選辨證結論。\n\n"
-            "【依據】\n- " +
-            "\n- ".join(filter(None, [
-                (primary.get("_hits") and ("關鍵線索：" + "、".join(primary["_hits"]))) or "",
-                (primary.get("pulse") and f"脈象：{_short(primary['pulse'], 180)}") or "",
-                (primary.get("symptoms") and f"症狀：{_short(primary['symptoms'], 180)}") or "",
-                (supplement and supplement.get("symptoms") and f"輔助條文：{_short(_as_text(supplement['symptoms']), 100)}") or "",
-                f"融合分：{primary.get('_final',0.0):.2f}",
-            ])) +
-            f"\n\n【建議（非治療）】\n- 補齊舌色/苔象與更具體的寸關尺描述\n- 紀錄症狀時序、誘因（情志/飲食/作息）與影響\n\n【使用案例編號】\n{primary_id}"
-        )
-
-        final_text = base_text
-        try:
-            if self.llm:
-                if hasattr(self.llm, "generate"):
-                    final_text = self.llm.generate(
-                        prompt=llm_prompt,
-                        model=getattr(getattr(self.config, "llm", None), "model", None)
-                    )
-                elif hasattr(self.llm, "chat"):
-                    final_text = self.llm.chat(
-                        prompt=llm_prompt,
-                        model=getattr(getattr(self.config, "llm", None), "model", None)
-                    )
-        except Exception as e:
-            logger.warning(f"[Spiral] LLM 潤筆失敗，使用基準稿：{e}")
-            final_text = base_text
-
-        # 【4】LLM 最終輸出
-        logger.info("[LLM] final_text:\n%s", _short(final_text, 4000))
-
-        # 9) 回傳（text / diagnosis_text / diagnosis 同文，避免前端空白）
         return {
-            "text": final_text,
-            "diagnosis_text": final_text,
-            "diagnosis": final_text,
-            "evidence": [
-                *(primary.get("_hits") and [ "關鍵線索：" + "、".join(primary["_hits"]) ] or []),
-                *(primary.get("pulse") and [ f"脈象：{primary['pulse']}" ] or []),
-                *(primary.get("symptoms") and [ f"症狀：{primary['symptoms']}" ] or []),
-                *(supplement and supplement.get("symptoms") and [ f"輔助條文：{_as_text(supplement['symptoms'])}" ] or []),
-            ],
-            "advice": [
-                "補齊舌脈與症狀時序資料，以利提高辨證可靠度。",
-                "留意情志、飲食、作息等影響因子，持續觀察並回填。",
-            ],
-            "primary_source": primary["source"],
-            "primary_id": primary_id,
-            "supplement": {
-                "source": (supplement or {}).get("source"),
-                "id": (supplement or {}).get("id"),
-                "name": (supplement or {}).get("diagnosis"),
-            } if supplement else None,
-            "meta": {
-                "retrieval": {"Case": len(case_hits), "RPCase": len(rpc_hits), "PulsePJ": len(pulse_hits)},
-                "qdim": len(q_vec),
-                "scores": {
-                    "primary": {"vector": primary.get("_v",0.0), "lexical": primary.get("_lex",0.0), "final": primary.get("_final",0.0)},
-                    "supplement": (supplement and {"vector": supplement.get("_v",0.0), "lexical": supplement.get("_lex",0.0), "final": supplement.get("_final",0.0)}) or None
-                },
-                "fused_case_text": fused_case_text,
-            },
+            "source": "Case",
+            "id": str(case_id),
+            "diagnosis": "",
+            "pulse": pulse,
+            "symptoms": f"{cc} {pi}".strip(),
+            "_v": v,
+            "raw": {**top_hit, "_confidence": v, "_attr_score": 0.0, "_final_score": v},
+            "_lex": lex,
+            "_final": final,
+            "_hits": lex_list,
         }
+
+    def _fuse_pulse(self, top_hit: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        if not top_hit:
+            return None
+        pid = top_hit.get("pid") or top_hit.get("id") or ""
+        name = top_hit.get("name") or ""
+        symptoms = top_hit.get("symptoms")
+        sym_txt = "、".join(symptoms) if isinstance(symptoms, list) else (symptoms or "")
+        stext = top_hit.get("search_text") or ""
+
+        v = self._score_from_hit(top_hit)
+        lex_list = self._extract_lex_hits(stext)
+        lex = len(lex_list) / 37.0
+        final = 0.6 * v + 0.4 * lex
+
+        return {
+            "source": "PulsePJ",
+            "id": str(pid),
+            "diagnosis": name,
+            "pulse": "",
+            "symptoms": sym_txt,
+            "_v": v,
+            "raw": {**top_hit, "_confidence": v, "_attr_score": 0.0, "_final_score": v},
+            "_lex": lex,
+            "_final": final,
+            "_hits": lex_list,
+        }
+
+    def _fuse_rpcase(self, top_hit: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        return top_hit
+
+    def _build_fused_sentence(self, primary: Optional[Dict[str, Any]], supplement: Optional[Dict[str, Any]]) -> str:
+        if not primary:
+            return ""
+        parts = []
+        parts.append(f"參考案例（主體 Case {primary.get('id','')}，輔助 PulsePJ {supplement.get('id','') if supplement else 'NA'}）：")
+        if primary.get("symptoms"):
+            parts.append(f"症狀表現：{primary['symptoms']}；")
+        if primary.get("pulse"):
+            parts.append(f"脈象：{primary['pulse']}；")
+        if supplement and supplement.get("symptoms"):
+            parts.append(f"輔助條文：{supplement['symptoms']}；")
+        parts.append(f"融合分：{primary.get('_final', 0.0):.2f}")
+        return " ".join(parts)
+
+    # ------------------------------ LLM 與版面 ------------------------------
+    async def _call_llm_and_format(
+        self,
+        question: str,
+        primary: Optional[Dict[str, Any]],
+        supplement: Optional[Dict[str, Any]],
+        fused_sentence: str,
+    ) -> str:
+        case_id = primary.get("id", "") if primary else ""
+        pulse_sym = supplement.get("symptoms", "") if supplement else ""
+
+        # prompt：不要求任何舌診，避免 LLM 生成舌/苔
+        prompt = f"""你是一位中醫輔助決策系統，只輸出兩段：診斷結果、建議（非治療）。
+題目是病人的當前描述，另外提供一則融合參考案例（主體為 Case，Pulse 為輔助）。
+注意：不要描述舌、舌苔、舌象等內容，不要提供處方。
+
+[當前問題]
+{question}
+
+[融合參考案例]
+{fused_sentence}
+
+[請輸出（只寫內容，不要重複標題）]
+1) 診斷結果：一句話給出證型（如「心脾兩虛，兼陰虛內熱」）
+2) 建議：兩到三行，聚焦作息/情志/飲食；不要寫任何舌診或處方。
+"""
+
+        llm_text = ""
+        if self._llm_client is not None:
+            try:
+                llm_text = await self._llm_client.chat_complete(
+                    model=self._llm_model,
+                    messages=[
+                        {"role": "system", "content": "你是嚴謹的中醫輔助決策助手。"},
+                        {"role": "user", "content": prompt},
+                    ],
+                    temperature=0.2,
+                )
+            except Exception as e:
+                log.warning("[LLM] 調用失敗，fallback：%s", e)
+
+        if not llm_text:
+            llm_text = "診斷結果：候選證型。\n建議：調整作息、管理情志，減少咖啡因與刺激性飲食。"
+
+        diag, adv = self._split_diag_and_advice(llm_text)
+
+        # 過濾「舌/苔」相關句子
+        diag = self._filter_tongue(diag)
+        adv = self._filter_tongue(adv)
+
+        lines: List[str] = []
+        #lines.append("模擬案例輸出")
+        lines.append("")
+        lines.append(f"使用案例編號：{case_id}")
+        lines.append("")
+        lines.append("當前問題：")
+        lines.append(question.strip())
+        lines.append("")
+        lines.append("依據過往案例線索 : ")
+        if primary:
+            if primary.get("_hits"):
+                lines.append(f"- 關鍵線索：{'、'.join(primary['_hits'])}")
+            if primary.get("pulse"):
+                lines.append(f"- 脈象：{primary['pulse']}")
+            if primary.get("symptoms"):
+                lines.append(f"- 症狀：{primary['symptoms']}")
+        if pulse_sym:
+            lines.append(f"- 輔助條文：{pulse_sym}")
+        lines.append("")
+        lines.append("診斷結果：")
+        lines.append(diag if diag else "（無）")
+        lines.append("")
+        lines.append("建議：")
+        lines.append(adv if adv else "（無）")
+        return "\n".join(lines)
+
+    def _split_diag_and_advice(self, llm_text: str) -> Tuple[str, str]:
+        text = (llm_text or "").strip()
+        lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+        diag, adv = "", ""
+        for i, ln in enumerate(lines):
+            if "診斷" in ln or ln.startswith("1)"):
+                seg = [ln]
+                for j in range(i + 1, len(lines)):
+                    if "建議" in lines[j] or lines[j].startswith("2)"):
+                        break
+                    seg.append(lines[j])
+                diag = " ".join(seg)
+                break
+        for i, ln in enumerate(lines):
+            if "建議" in ln or ln.startswith("2)"):
+                adv = " ".join(lines[i:])
+                break
+        # 清標頭
+        for p in ("1)", "2)", "診斷結果：", "診斷結果:", "建議：", "建議:"):
+            if diag.startswith(p):
+                diag = diag[len(p):].strip()
+            if adv.startswith(p):
+                adv = adv[len(p):].strip()
+        return diag, adv
+
+    def _filter_tongue(self, s: str) -> str:
+        """去掉含『舌』『苔』的句子。"""
+        if not s:
+            return s
+        seps = ["。", "；", ";", ".", "\n"]
+        tmp = [s]
+        for sp in seps:
+            tmp = [p for chunk in tmp for p in chunk.split(sp)]
+        kept = [p for p in tmp if p and ("舌" not in p and "苔" not in p)]
+        return "；".join(kept)
+
+    # ------------------------------ 小工具 ------------------------------
+    def _pretty(self, obj: Any) -> str:
+        try:
+            return json.dumps(obj, ensure_ascii=False, indent=2)
+        except Exception:
+            return str(obj)
+
+    def _log_hits(self, title: str, hits: List[Dict[str, Any]]) -> None:
+        if not hits:
+            log.info("[%s] (no hits)", title)
+            return
+        for i, h in enumerate(hits, 1):
+            log.info("[%s] #%d\n%s", title, i, self._pretty(h))

@@ -71,3 +71,6 @@ class SCBRConfig:
         total = self.spiral.case_weight + self.spiral.rpcase_weight + self.spiral.pulse_weight
         if abs(total-1.0)>0.01:
             raise ValueError("螺旋權重總和需為 1.0")
+        
+cfg = SCBRConfig()
+
