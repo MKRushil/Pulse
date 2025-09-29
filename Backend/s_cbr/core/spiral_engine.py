@@ -8,6 +8,7 @@ SpiralEngine：單輪推理編排
 - 輔助：PulsePJ Top-1（若有）
 - LLM 僅做語氣/格式潤筆（不提供治療方案）
 - 內建 4 類關鍵 Log：原始命中、Top-1、融合後、LLM 最終文字
+- 回傳 payload 同時提供 text / diagnosis_text / diagnosis（向後相容）
 """
 
 import os
@@ -202,9 +203,13 @@ class SpiralEngine:
         if not (case_hits or rpc_hits or pulse_hits):
             return {
                 "text": "【系統訊息】未檢索到相近內容。請補充舌脈、症狀時序與影響因子後重試。",
-                "diagnosis": "",
+                "diagnosis_text": "【系統訊息】未檢索到相近內容。請補充舌脈、症狀時序與影響因子後重試。",
+                "diagnosis": "【系統訊息】未檢索到相近內容。請補充舌脈、症狀時序與影響因子後重試。",
                 "evidence": [],
                 "advice": ["補充舌色/苔象與寸關尺脈象", "描述發生時程與誘因（情志/飲食/作息）"],
+                "primary_source": None,
+                "primary_id": None,
+                "supplement": None,
                 "meta": {"retrieval": {"Case":0,"RPCase":0,"PulsePJ":0}, "qdim": len(q_vec)},
             }
 
@@ -295,9 +300,13 @@ class SpiralEngine:
             # 保底
             return {
                 "text": "【系統訊息】未檢索到相近內容。",
-                "diagnosis": "",
+                "diagnosis_text": "【系統訊息】未檢索到相近內容。",
+                "diagnosis": "【系統訊息】未檢索到相近內容。",
                 "evidence": [],
                 "advice": [],
+                "primary_source": None,
+                "primary_id": None,
+                "supplement": None,
                 "meta": {"retrieval": {"Case": len(case_hits), "RPCase": len(rpc_hits), "PulsePJ": len(pulse_hits)}, "qdim": len(q_vec)},
             }
 
@@ -364,9 +373,15 @@ class SpiralEngine:
         try:
             if self.llm:
                 if hasattr(self.llm, "generate"):
-                    final_text = self.llm.generate(prompt=prompt, model=getattr(getattr(self.config, "llm", None), "model", None))
+                    final_text = self.llm.generate(
+                        prompt=prompt,
+                        model=getattr(getattr(self.config, "llm", None), "model", None)
+                    )
                 elif hasattr(self.llm, "chat"):
-                    final_text = self.llm.chat(prompt=prompt, model=getattr(getattr(self.config, "llm", None), "model", None))
+                    final_text = self.llm.chat(
+                        prompt=prompt,
+                        model=getattr(getattr(self.config, "llm", None), "model", None)
+                    )
         except Exception as e:
             logger.warning(f"[Spiral] LLM 潤筆失敗，使用原文：{e}")
             final_text = base_text
@@ -377,10 +392,11 @@ class SpiralEngine:
         except Exception as e:
             logger.warning(f"[Log] dump final_text failed: {e}")
 
-        # 9) 回傳給前端
+        # 9) 回傳給前端 —— 為避免前端欄位不一致，三個欄位皆填入相同文字
         return {
-            "text": final_text,                          # 顯示文字（已潤筆或基準稿）
-            "diagnosis": primary.get("diagnosis") or "", # 提取的結論（方便前端單獨顯示）
+            "text": final_text,                           # ✅ 前端可直接渲染
+            "diagnosis_text": final_text,                 # ✅ 若前端讀 diagnosis_text 也有
+            "diagnosis": final_text,                      # ✅ 舊欄位相容，不再是空字串
             "evidence": [
                 *(primary.get("_hits") and [ "特徵對應：" + "、".join(primary["_hits"]) ] or []),
                 *(primary.get("pulse") and [ f"脈象：{primary['pulse']}" ] or []),
@@ -391,8 +407,8 @@ class SpiralEngine:
                 "補齊舌脈與症狀時序資料，以利提高辨證可靠度。",
                 "留意情志、飲食、作息等影響因子，持續觀察並回填。",
             ],
-            "primary_source": primary["source"],         # 主體來源（Case / RPCase / PulsePJ）
-            "primary_id": primary_id,                    # 使用案例編號（主體）
+            "primary_source": primary["source"],          # 主體來源（Case / RPCase / PulsePJ）
+            "primary_id": primary_id,                     # 使用案例編號（主體）
             "supplement": {
                 "source": (supplement or {}).get("source"),
                 "id": (supplement or {}).get("id"),
