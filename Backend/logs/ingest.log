@@ -472,3 +472,484 @@ null
 2025-09-30 00:19:19,932 [INFO] backend.main - 🔄 正在關閉應用程式...
 2025-09-30 00:19:19,932 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
 2025-09-30 00:19:19,932 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-30 00:20:20,064 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-30 00:20:20,067 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-30 00:20:20,068 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-30 00:20:20,068 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-30 00:20:20,068 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-30 00:20:20,068 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-30 00:20:20,068 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-30 00:20:20,069 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-30 00:20:20,069 [INFO] backend.main - Application startup completed.
+2025-09-30 00:29:05,308 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-30 00:29:05,308 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-30 00:29:05,308 [INFO] backend.main - 🔻 Application shutdown completed.
+2025-09-30 00:29:07,422 [INFO] backend.main - ✅ S-CBR v2.1 路由器整合成功
+2025-09-30 00:29:07,424 [INFO] backend.main - 🚀 TCM S-CBR Backend v2.1 啟動
+2025-09-30 00:29:07,425 [INFO] backend.main -    - S-CBR v2.1 螺旋推理引擎: ✅ 已載入
+2025-09-30 00:29:07,425 [INFO] backend.main -    - API 端點 /api/scbr/v2/*: ✅ 可用
+2025-09-30 00:29:07,425 [INFO] backend.main -    - 累積式多輪對話: ✅ 支援
+2025-09-30 00:29:07,425 [INFO] backend.main -    - Hybrid 搜索引擎: ✅ 可用
+2025-09-30 00:29:07,425 [INFO] backend.main -    - 病例存儲 /api/case/save: ✅ 可用
+2025-09-30 00:29:07,425 [INFO] backend.main -    - 健康檢查 /healthz: ✅ 可用
+2025-09-30 00:29:07,425 [INFO] backend.main - Application startup completed.
+2025-09-30 00:29:18,440 [ERROR] backend.main - /api/query payload debug type=dict, keys=['question', 'session_id', 'continue', 'patient_ctx']
+2025-09-30 00:29:18,441 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250930-002918-6f8042a7] 問題: 近常常失眠而且多夢，晚上容易驚醒，醫師說我左寸的脈有點遲，白天會心悸口乾，該怎麼辦？
+2025-09-30 00:29:18,441 [INFO] s_cbr.DialogManager - 會話建立: 74c6ef2e6c564790a110527d038a791e
+2025-09-30 00:29:19,796 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=1024
+2025-09-30 00:29:19,822 [INFO] s_cbr.SearchEngine - 🔎 Case HYBRID α=0.5, qdim=1024, fields=['bm25_cjk'], props=['chiefComplaint', 'pulse_text', 'search_text', 'case_id', 'presentIllness']
+2025-09-30 00:29:19,890 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 10 個結果
+2025-09-30 00:29:19,897 [INFO] s_cbr.SearchEngine - 🔎 PulsePJ HYBRID α=0.5, qdim=1024, fields=['bm25_cjk'], props=['search_text', 'symptoms', 'category_id', 'main_disease', 'pid', 'category', 'name']
+2025-09-30 00:29:19,955 [INFO] s_cbr.SearchEngine - 📊 PulsePJ 搜索: 10 個結果
+2025-09-30 00:29:19,964 [INFO] s_cbr.SearchEngine - 🔎 RPCase HYBRID α=0.5, qdim=1024, fields=['bm25_text'], props=['symptom_tags', 'pulse_tags', 'final_diagnosis']
+2025-09-30 00:29:20,020 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 0 個結果
+2025-09-30 00:29:20,020 [INFO] s_cbr.SpiralEngine - 📊 Case: 10 | RPCase: 0 | PulsePJ: 10
+2025-09-30 00:29:20,022 [INFO] s_cbr.SpiralEngine - [TOP1] Case:
+{
+  "source": "Case",
+  "id": "4611",
+  "diagnosis": "",
+  "pulse": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+  "symptoms": "失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+  "_v": 1.0,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "1"
+    },
+    "case_id": "4611",
+    "chiefComplaint": "失眠多夢",
+    "presentIllness": "近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+    "pulse_text": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "search_text": "失眠多夢；近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；bodyShape:瘦 | faceColor:精神萎靡/唇色淡紅/面色淡白 | eye:目睛黃 | skin:暗滯；左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "_confidence": 1.0,
+    "_attr_score": 0.0,
+    "_final_score": 1.0
+  }
+}
+2025-09-30 00:29:20,022 [INFO] s_cbr.SpiralEngine - [TOP1] RPCase:
+null
+2025-09-30 00:29:20,022 [INFO] s_cbr.SpiralEngine - [TOP1] PulsePJ:
+{
+  "source": "PulsePJ",
+  "id": "P16",
+  "diagnosis": "促脈",
+  "pulse": "",
+  "symptoms": "高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛",
+  "_v": 0.5,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "0.5"
+    },
+    "category": "數脈類",
+    "category_id": null,
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "name": "促脈",
+    "pid": "P16",
+    "search_text": "促脈；脈來急促而有不規則的間歇；數脈類；陽熱亢盛，氣滯血瘀；高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "_confidence": 0.5,
+    "_attr_score": 0.0,
+    "_final_score": 0.5
+  }
+}
+2025-09-30 00:29:20,025 [INFO] s_cbr.SpiralEngine - [FUSE] Case top fused:
+{
+  "source": "Case",
+  "id": "4611",
+  "diagnosis": "",
+  "pulse": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+  "symptoms": "失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+  "_v": 1.0,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "1"
+    },
+    "case_id": "4611",
+    "chiefComplaint": "失眠多夢",
+    "presentIllness": "近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+    "pulse_text": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "search_text": "失眠多夢；近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；bodyShape:瘦 | faceColor:精神萎靡/唇色淡紅/面色淡白 | eye:目睛黃 | skin:暗滯；左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "_confidence": 1.0,
+    "_attr_score": 0.0,
+    "_final_score": 1.0
+  },
+  "_lex": 0.13513513513513514,
+  "_final": 0.6108108108108109,
+  "_hits": [
+    "失眠",
+    "且多",
+    "多夢",
+    "左寸",
+    "白天"
+  ]
+}
+2025-09-30 00:29:20,026 [INFO] s_cbr.SpiralEngine - [FUSE] RPCase top fused:
+null
+2025-09-30 00:29:20,026 [INFO] s_cbr.SpiralEngine - [FUSE] Pulse top fused:
+{
+  "source": "PulsePJ",
+  "id": "P16",
+  "diagnosis": "促脈",
+  "pulse": "",
+  "symptoms": "高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛",
+  "_v": 0.5,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "0.5"
+    },
+    "category": "數脈類",
+    "category_id": null,
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "name": "促脈",
+    "pid": "P16",
+    "search_text": "促脈；脈來急促而有不規則的間歇；數脈類；陽熱亢盛，氣滯血瘀；高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "_confidence": 0.5,
+    "_attr_score": 0.0,
+    "_final_score": 0.5
+  },
+  "_lex": 0.02702702702702703,
+  "_final": 0.28716216216216217,
+  "_hits": [
+    "心悸"
+  ]
+}
+2025-09-30 00:29:20,026 [INFO] s_cbr.SpiralEngine - [FUSE] Primary selected:
+{
+  "source": "Case",
+  "id": "4611",
+  "diagnosis": "",
+  "pulse": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+  "symptoms": "失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+  "_v": 1.0,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "1"
+    },
+    "case_id": "4611",
+    "chiefComplaint": "失眠多夢",
+    "presentIllness": "近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+    "pulse_text": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "search_text": "失眠多夢；近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；bodyShape:瘦 | faceColor:精神萎靡/唇色淡紅/面色淡白 | eye:目睛黃 | skin:暗滯；左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "_confidence": 1.0,
+    "_attr_score": 0.0,
+    "_final_score": 1.0
+  },
+  "_lex": 0.13513513513513514,
+  "_final": 0.6108108108108109,
+  "_hits": [
+    "失眠",
+    "且多",
+    "多夢",
+    "左寸",
+    "白天"
+  ]
+}
+2025-09-30 00:29:20,026 [INFO] s_cbr.SpiralEngine - [FUSE] Supplement selected:
+{
+  "source": "PulsePJ",
+  "id": "P16",
+  "diagnosis": "促脈",
+  "pulse": "",
+  "symptoms": "高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛",
+  "_v": 0.5,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "0.5"
+    },
+    "category": "數脈類",
+    "category_id": null,
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "name": "促脈",
+    "pid": "P16",
+    "search_text": "促脈；脈來急促而有不規則的間歇；數脈類；陽熱亢盛，氣滯血瘀；高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "_confidence": 0.5,
+    "_attr_score": 0.0,
+    "_final_score": 0.5
+  },
+  "_lex": 0.02702702702702703,
+  "_final": 0.28716216216216217,
+  "_hits": [
+    "心悸"
+  ]
+}
+2025-09-30 00:29:20,027 [INFO] s_cbr.SpiralEngine - [FUSED_SENTENCE] 參考案例（主體 Case 4611，輔助 PulsePJ P16）： 症狀表現：失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；脈象：左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數；輔助條文：高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；融合分：0.61
+2025-09-30 00:29:20,028 [INFO] s_cbr.SpiralEngine - [LLM] final_text:
+【診斷結果（結論）】
+根據當前描述與融合參考案例，給出候選辨證結論。
+
+【依據】
+- 關鍵線索：失眠、且多、多夢、左寸、白天
+- 脈象：左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數
+- 症狀：失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。
+- 輔助條文：高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛
+- 融合分：0.61
+
+【建議（非治療）】
+- 補齊舌色/苔象與更具體的寸關尺描述
+- 紀錄症狀時序、誘因（情志/飲食/作息）與影響
+
+【使用案例編號】
+4611
+2025-09-30 00:29:20,028 [INFO] s_cbr.SCBREngine - 🌀 啟動診斷 [SCBR-20250930-002920-073929a2] 問題: 近常常失眠而且多夢，晚上容易驚醒，醫師說我左寸的脈有點遲，白天會心悸口乾，該怎麼辦？
+2025-09-30 00:29:20,028 [INFO] s_cbr.DialogManager - 會話建立: 78bdbab9b74948c3a26b076c830e07f5
+2025-09-30 00:29:21,411 [INFO] s_cbr.SpiralEngine - 🧭 q_vector: dim=1024
+2025-09-30 00:29:21,420 [INFO] s_cbr.SearchEngine - 🔎 Case HYBRID α=0.5, qdim=1024, fields=['bm25_cjk'], props=['chiefComplaint', 'pulse_text', 'search_text', 'case_id', 'presentIllness']
+2025-09-30 00:29:21,480 [INFO] s_cbr.SearchEngine - 📊 Case 搜索: 10 個結果
+2025-09-30 00:29:21,488 [INFO] s_cbr.SearchEngine - 🔎 PulsePJ HYBRID α=0.5, qdim=1024, fields=['bm25_cjk'], props=['search_text', 'symptoms', 'category_id', 'main_disease', 'pid', 'category', 'name']
+2025-09-30 00:29:21,557 [INFO] s_cbr.SearchEngine - 📊 PulsePJ 搜索: 10 個結果
+2025-09-30 00:29:21,565 [INFO] s_cbr.SearchEngine - 🔎 RPCase HYBRID α=0.5, qdim=1024, fields=['bm25_text'], props=['symptom_tags', 'pulse_tags', 'final_diagnosis']
+2025-09-30 00:29:21,642 [INFO] s_cbr.SearchEngine - 📊 RPCase 搜索: 0 個結果
+2025-09-30 00:29:21,642 [INFO] s_cbr.SpiralEngine - 📊 Case: 10 | RPCase: 0 | PulsePJ: 10
+2025-09-30 00:29:21,643 [INFO] s_cbr.SpiralEngine - [TOP1] Case:
+{
+  "source": "Case",
+  "id": "4611",
+  "diagnosis": "",
+  "pulse": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+  "symptoms": "失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+  "_v": 1.0,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "1"
+    },
+    "case_id": "4611",
+    "chiefComplaint": "失眠多夢",
+    "presentIllness": "近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+    "pulse_text": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "search_text": "失眠多夢；近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；bodyShape:瘦 | faceColor:精神萎靡/唇色淡紅/面色淡白 | eye:目睛黃 | skin:暗滯；左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "_confidence": 1.0,
+    "_attr_score": 0.0,
+    "_final_score": 1.0
+  }
+}
+2025-09-30 00:29:21,643 [INFO] s_cbr.SpiralEngine - [TOP1] RPCase:
+null
+2025-09-30 00:29:21,643 [INFO] s_cbr.SpiralEngine - [TOP1] PulsePJ:
+{
+  "source": "PulsePJ",
+  "id": "P16",
+  "diagnosis": "促脈",
+  "pulse": "",
+  "symptoms": "高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛",
+  "_v": 0.5,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "0.5"
+    },
+    "category": "數脈類",
+    "category_id": null,
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "name": "促脈",
+    "pid": "P16",
+    "search_text": "促脈；脈來急促而有不規則的間歇；數脈類；陽熱亢盛，氣滯血瘀；高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "_confidence": 0.5,
+    "_attr_score": 0.0,
+    "_final_score": 0.5
+  }
+}
+2025-09-30 00:29:21,644 [INFO] s_cbr.SpiralEngine - [FUSE] Case top fused:
+{
+  "source": "Case",
+  "id": "4611",
+  "diagnosis": "",
+  "pulse": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+  "symptoms": "失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+  "_v": 1.0,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "1"
+    },
+    "case_id": "4611",
+    "chiefComplaint": "失眠多夢",
+    "presentIllness": "近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+    "pulse_text": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "search_text": "失眠多夢；近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；bodyShape:瘦 | faceColor:精神萎靡/唇色淡紅/面色淡白 | eye:目睛黃 | skin:暗滯；左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "_confidence": 1.0,
+    "_attr_score": 0.0,
+    "_final_score": 1.0
+  },
+  "_lex": 0.13513513513513514,
+  "_final": 0.6108108108108109,
+  "_hits": [
+    "失眠",
+    "且多",
+    "多夢",
+    "左寸",
+    "白天"
+  ]
+}
+2025-09-30 00:29:21,645 [INFO] s_cbr.SpiralEngine - [FUSE] RPCase top fused:
+null
+2025-09-30 00:29:21,645 [INFO] s_cbr.SpiralEngine - [FUSE] Pulse top fused:
+{
+  "source": "PulsePJ",
+  "id": "P16",
+  "diagnosis": "促脈",
+  "pulse": "",
+  "symptoms": "高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛",
+  "_v": 0.5,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "0.5"
+    },
+    "category": "數脈類",
+    "category_id": null,
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "name": "促脈",
+    "pid": "P16",
+    "search_text": "促脈；脈來急促而有不規則的間歇；數脈類；陽熱亢盛，氣滯血瘀；高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "_confidence": 0.5,
+    "_attr_score": 0.0,
+    "_final_score": 0.5
+  },
+  "_lex": 0.02702702702702703,
+  "_final": 0.28716216216216217,
+  "_hits": [
+    "心悸"
+  ]
+}
+2025-09-30 00:29:21,645 [INFO] s_cbr.SpiralEngine - [FUSE] Primary selected:
+{
+  "source": "Case",
+  "id": "4611",
+  "diagnosis": "",
+  "pulse": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+  "symptoms": "失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+  "_v": 1.0,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "1"
+    },
+    "case_id": "4611",
+    "chiefComplaint": "失眠多夢",
+    "presentIllness": "近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。",
+    "pulse_text": "左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "search_text": "失眠多夢；近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；bodyShape:瘦 | faceColor:精神萎靡/唇色淡紅/面色淡白 | eye:目睛黃 | skin:暗滯；左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數",
+    "_confidence": 1.0,
+    "_attr_score": 0.0,
+    "_final_score": 1.0
+  },
+  "_lex": 0.13513513513513514,
+  "_final": 0.6108108108108109,
+  "_hits": [
+    "失眠",
+    "且多",
+    "多夢",
+    "左寸",
+    "白天"
+  ]
+}
+2025-09-30 00:29:21,645 [INFO] s_cbr.SpiralEngine - [FUSE] Supplement selected:
+{
+  "source": "PulsePJ",
+  "id": "P16",
+  "diagnosis": "促脈",
+  "pulse": "",
+  "symptoms": "高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛",
+  "_v": 0.5,
+  "raw": {
+    "_additional": {
+      "distance": null,
+      "score": "0.5"
+    },
+    "category": "數脈類",
+    "category_id": null,
+    "main_disease": "陽熱亢盛，氣滯血瘀",
+    "name": "促脈",
+    "pid": "P16",
+    "search_text": "促脈；脈來急促而有不規則的間歇；數脈類；陽熱亢盛，氣滯血瘀；高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；促脈（脈來急促而有不規則的間歇）屬於數脈類，主要對應陽熱亢盛，氣滯血瘀，常見現代病症有高熱, 胸悶, 血瘀紫斑, 如胃痙攣, 心悸氣促, 急性炎症疼痛, 急性胸痛。",
+    "symptoms": [
+      "高熱",
+      "胸悶",
+      "血瘀紫斑",
+      "如胃痙攣",
+      "心悸氣促",
+      "急性炎症疼痛",
+      "急性胸痛"
+    ],
+    "_confidence": 0.5,
+    "_attr_score": 0.0,
+    "_final_score": 0.5
+  },
+  "_lex": 0.02702702702702703,
+  "_final": 0.28716216216216217,
+  "_hits": [
+    "心悸"
+  ]
+}
+2025-09-30 00:29:21,646 [INFO] s_cbr.SpiralEngine - [FUSED_SENTENCE] 參考案例（主體 Case 4611，輔助 PulsePJ P16）： 症狀表現：失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。；脈象：左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數；輔助條文：高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛；融合分：0.61
+2025-09-30 00:29:21,646 [INFO] s_cbr.SpiralEngine - [LLM] final_text:
+【診斷結果（結論）】
+根據當前描述與融合參考案例，給出候選辨證結論。
+
+【依據】
+- 關鍵線索：失眠、且多、多夢、左寸、白天
+- 脈象：左寸:中/遲 | 左關:無力/軟 | 左尺:無力/浮 | 右寸:中/數 | 右關:無力/遲 | 右尺:有力/數
+- 症狀：失眠多夢 近5週入睡困難且多夢易醒，醒後難再入睡，白天倦怠乏力，偶有健忘與食慾差。
+- 輔助條文：高熱、胸悶、血瘀紫斑、如胃痙攣、心悸氣促、急性炎症疼痛、急性胸痛
+- 融合分：0.61
+
+【建議（非治療）】
+- 補齊舌色/苔象與更具體的寸關尺描述
+- 紀錄症狀時序、誘因（情志/飲食/作息）與影響
+
+【使用案例編號】
+4611
+2025-09-30 00:42:48,770 [INFO] backend.main - 🔄 正在關閉應用程式...
+2025-09-30 00:42:48,770 [INFO] backend.main -    - S-CBR v2.1 資源清理: ✅ 完成
+2025-09-30 00:42:48,770 [INFO] backend.main - 🔻 Application shutdown completed.
