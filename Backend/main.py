@@ -1,28 +1,48 @@
 # -*- coding: utf-8 -*-
 """
-TCM S-CBR Backend v2.1 - FastAPI main (compat shim for legacy /api/query)
+TCM S-CBR Backend v2.2 - FastAPI Main Application
+整合 ANC (Archive & Normalize Cases) 與 S-CBR 引擎
 """
 
 import os
 import uvicorn
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
-from fastapi import FastAPI, Body, Request
+from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+import warnings
 
-# ====== S-CBR v2.1 (engine facade) ======
-# NOTE: SCBREngine.diagnose(question, patient_ctx=None, session_id=None, continue_spiral=False)
-from s_cbr.main import run_spiral_cbr  # noqa: E402
+# 隱藏第三方套件的警告
+warnings.filterwarnings("ignore", category=ResourceWarning, module="jieba")
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="pkg_resources")
+warnings.filterwarnings("ignore", message=".*Weaviate v3 client.*")
+warnings.filterwarnings("ignore", message=".*weaviate-client version.*")
 
-# ====== logging ======
-from s_cbr.utils.logger import get_logger  # noqa: E402
+
+
+# Import S-CBR engine
+from s_cbr.main import run_spiral_cbr
+from s_cbr.utils.logger import get_logger
+
+# Import S-CBR router
+from s_cbr.api import router as scbr_router
+
+# Import ANC router
+from anc.api import router as anc_router
 
 log = get_logger("backend.main")
 
-app = FastAPI(title="TCM S-CBR Backend v2.1", version="2.1")
+app = FastAPI(
+    title="TCM S-CBR Backend v2.2",
+    version="2.2",
+    description="中醫螺旋推理系統 with 病例管理"
+)
 
-# ---- CORS ----
+# ============================================
+# CORS Configuration
+# ============================================
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.getenv("CORS_ALLOW_ORIGINS", "*").split(","),
@@ -31,66 +51,92 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# =========================================================
-# 生命週期
-# =========================================================
+# ============================================
+# Include Routers
+# ============================================
+# S-CBR 螺旋推理引擎路由
+app.include_router(scbr_router)
+
+# ANC 病例管理路由
+app.include_router(anc_router)
+
+# ============================================
+# Startup Event
+# ============================================
 @app.on_event("startup")
 async def on_startup():
-    # 這裡僅做啟動訊息；Weaviate 連線與 LLM 初始化會在引擎內自管
-    log.info("🚀 TCM S-CBR Backend v2.1 啟動")
-    log.info("   - S-CBR 螺旋推理引擎: ✅ 已載入")
-    log.info("   - API 端點 /api/scbr/v2/*: ✅ 可用")
-    log.info("   - 病例存儲 /api/case/save: ✅ 可用")
-    log.info("   - 健康檢查 /healthz: ✅ 可用")
+    log.info("🚀 TCM S-CBR Backend v2.2 啟動")
+    log.info("=" * 60)
+    log.info("📦 已載入模組:")
+    log.info("   ✅ S-CBR 螺旋推理引擎")
+    log.info("   ✅ ANC 病例管理系統")
+    log.info("")
+    log.info("🔗 可用端點:")
+    log.info("   - 螺旋推理: /api/scbr/v2/*")
+    log.info("   - 病例保存: POST /api/case/save")
+    log.info("   - 病例查詢: GET /api/case/get/{case_id}")
+    log.info("   - 病例搜索: POST /api/case/search")
+    log.info("   - 病例統計: GET /api/case/stats")
+    log.info("   - 健康檢查: GET /healthz")
+    log.info("=" * 60)
+    
+    # 初始化 ANC 系統
+    try:
+        from anc.case_processor import get_case_processor
+        processor = get_case_processor()
+        log.info("✅ ANC 病例處理器初始化成功")
+    except Exception as e:
+        log.error(f"❌ ANC 初始化失敗: {e}")
 
 
-# =========================================================
-# 健康檢查
-# =========================================================
+# ============================================
+# Health Check
+# ============================================
 @app.get("/healthz")
 async def healthz():
-    return {"ok": True, "service": "tcm-scbr-backend", "version": "2.1"}
+    """健康檢查端點"""
+    try:
+        from anc.case_processor import get_case_processor
+        processor = get_case_processor()
+        weaviate_status = "connected" if processor.weaviate_client else "disconnected"
+    except:
+        weaviate_status = "error"
+    
+    return {
+        "ok": True,
+        "service": "tcm-scbr-backend",
+        "version": "2.2",
+        "modules": {
+            "scbr": "active",
+            "anc": "active",
+            "weaviate": weaviate_status
+        }
+    }
 
 
-# =========================================================
-# 舊前端相容：/api/query
-#  - 轉接舊 payload: {"question","session_id","continue","continue_dialog","patient_ctx"}
-#  - 映射成 SCBREngine 需要的參數
-#  - 統一回傳包含舊前端期望字段：text（對應 final_text）
-# =========================================================
+# ============================================
+# Legacy Compatibility Endpoint
+# ============================================
 @app.post("/api/query")
 async def api_query_compatibility(payload: Dict[str, Any] = Body(...)):
+    """
+    Legacy API compatibility endpoint
+    保留舊版相容性
+    """
     try:
-        log.error("/api/query payload debug type=%s, keys=%s",
-                  type(payload).__name__, list(payload.keys()))
-
-        question: str = payload.get("question", "") or ""
-        if not question.strip():
+        question = payload.get("question", "").strip()
+        if not question:
             return JSONResponse(
                 status_code=400,
                 content={"detail": "question is required"}
             )
 
-        session_id: Optional[str] = payload.get("session_id") or None
+        session_id = payload.get("session_id")
+        continue_spiral = bool(payload.get("continue") or payload.get("continue_dialog"))
+        patient_ctx = payload.get("patient_ctx") if isinstance(payload.get("patient_ctx"), dict) else None
 
-        # 兼容兩個舊鍵名 → continue_spiral（bool）
-        continue_spiral: bool = bool(
-            payload.get("continue")
-            or payload.get("continue_dialog")
-            or False
-        )
+        log.info(f"🌀 啟動診斷 [相容模式] 問題: {question}")
 
-        # patient_ctx 可以是 dict，也可能缺省或是 None
-        patient_ctx: Optional[Dict[str, Any]] = None
-        raw_ctx = payload.get("patient_ctx")
-        if isinstance(raw_ctx, dict):
-            patient_ctx = raw_ctx
-        else:
-            patient_ctx = None  # 非 dict 一律忽略，交由引擎處理預設
-
-        log.info("🌀 啟動診斷 [相容模式] 問題: %s", question)
-
-        # 執行一次螺旋推理
         result = await run_spiral_cbr(
             question=question,
             patient_ctx=patient_ctx,
@@ -98,36 +144,35 @@ async def api_query_compatibility(payload: Dict[str, Any] = Body(...)):
             continue_spiral=continue_spiral,
         )
 
-        # 兼容舊前端字段：text（對應 final_text）
-        legacy = {
-            "text": result.get("final_text", "") or "",
-        }
-        merged = {**result, **legacy}
-
-        return JSONResponse(status_code=200, content=merged)
+        # Legacy field compatibility
+        result["text"] = result.get("final_text", "")
+        return JSONResponse(status_code=200, content=result)
 
     except Exception as e:
-        log.error("相容性查詢處理失敗: %r", e, exc_info=True)
-        return JSONResponse(
-            status_code=500,
-            content={"detail": str(e)}
-        )
+        log.error(f"相容性查詢處理失敗: {e}", exc_info=True)
+        return JSONResponse(status_code=500, content={"detail": str(e)})
 
 
-# =========================================================
-# 1) 新增病例（由前端 TCMForm.jsx 送出表單 → DCIP 4 步完成去識別入庫）
-#    *此區塊依你原本流程實作；下面留著簡易 stub，避免打斷既有路由*
-# =========================================================
-@app.post("/api/case/save")
-async def save_case(payload: Dict[str, Any] = Body(...)):
-    # TODO: 在這裡串接你現有的 DCIP 4 步流程
-    # 目前僅回傳回顧用訊息，確保端點存在且可用
-    return {"ok": True, "message": "case stub saved (replace with DCIP pipeline)"}
+# ============================================
+# Documentation Redirect
+# ============================================
+@app.get("/")
+async def root():
+    """根路徑重定向"""
+    return {
+        "message": "TCM S-CBR Backend v2.2",
+        "docs": "/docs",
+        "health": "/healthz",
+        "endpoints": {
+            "scbr": "/api/scbr/v2/",
+            "case_management": "/api/case/"
+        }
+    }
 
 
-# =========================================================
-# 主程式
-# =========================================================
+# ============================================
+# Main Entry Point
+# ============================================
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",

@@ -1,5 +1,5 @@
 import weaviate
-from config import WEAVIATE_URL, WV_API_KEY
+from Backend.anc.config import WEAVIATE_URL, WV_API_KEY
 
 def get_weaviate_client():
     return weaviate.Client(

@@ -5,7 +5,7 @@ import jieba, weaviate
 
 # === 設定 ===
 try:
-    import config
+    import Backend.anc.config as config
     WEAVIATE_URL       = getattr(config, "WEAVIATE_URL", "http://localhost:8080")
     WV_API_KEY         = getattr(config, "WV_API_KEY", "key-admin")
     EMBEDDING_BASE_URL = getattr(config, "EMBEDDING_BASE_URL", "https://integrate.api.nvidia.com/v1")
