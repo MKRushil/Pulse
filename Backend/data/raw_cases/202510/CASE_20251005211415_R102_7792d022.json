@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211415_R102_7792d022",
+  "created_at": "2025-10-05T21:14:15.478896",
+  "data": {
+    "basic": {
+      "name": "林思齊",
+      "gender": "男",
+      "age": "31",
+      "idLast4": "R102",
+      "phone": "0917-441-882",
+      "visitDate": "2025-10-18"
+    },
+    "complaint": {
+      "chiefComplaint": "胸悶易喘兩月",
+      "presentIllness": "活動後胸悶氣短，伴咳白痰，天冷時加重",
+      "medicalHistory": "支氣管炎史",
+      "familyHistory": "母親哮喘"
+    },
+    "inspection": {
+      "spirit": "氣短",
+      "bodyShape": [
+        "略胖"
+      ],
+      "faceColor": "面色白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "氣息微弱",
+      "breath": "喘息",
+      "cough": true,
+      "coughNote": "咳白稀痰"
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "自汗",
+      "head": "頭暈",
+      "body": "胸悶氣短",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弱"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弱"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒證"
+      ],
+      "zangfuPattern": [
+        "肺氣虛",
+        "脾虛"
+      ],
+      "diagnosis": "咳喘（肺脾兩虛）",
+      "treatment": "補肺益氣，健脾化痰",
+      "suggestion": "避免冷空氣刺激；可飲黨參白朮湯；適度運動強肺；注意防寒。"
+    }
+  }
+}

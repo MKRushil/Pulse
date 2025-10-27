@@ -1,0 +1,8 @@
+2025-10-16 20:41:20 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-16 20:41:20 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-16 20:41:20 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-16 20:41:20 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-16 20:41:20 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-16 20:41:21 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-16 20:41:21 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-16 20:41:21 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功

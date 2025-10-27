@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005211419_S255_f4f155ab",
+  "created_at": "2025-10-05T21:14:19.090678",
+  "data": {
+    "basic": {
+      "name": "方志瑋",
+      "gender": "男",
+      "age": "36",
+      "idLast4": "S255",
+      "phone": "0918-554-312",
+      "visitDate": "2025-10-19"
+    },
+    "complaint": {
+      "chiefComplaint": "頭暈耳鳴三月",
+      "presentIllness": "頭暈耳鳴，伴腰痠倦怠，勞累後加劇",
+      "medicalHistory": "高血壓初期",
+      "familyHistory": "父親眩暈史"
+    },
+    "inspection": {
+      "spirit": "精神尚可",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "少汗",
+      "head": "頭暈耳鳴",
+      "body": "腰膝痠軟",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "尚可",
+      "sleep": "睡眠不足",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩弱"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "腎虛"
+      ],
+      "diagnosis": "眩暈（腎虛精虧）",
+      "treatment": "補腎填精，養肝益氣",
+      "suggestion": "避免熬夜；緩慢起身；黑芝麻核桃粥；保持血壓穩定。"
+    }
+  }
+}

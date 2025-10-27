@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212338_W456_f277cf5c",
+  "created_at": "2025-10-05T21:23:38.367134",
+  "data": {
+    "basic": {
+      "name": "洪啟哲",
+      "gender": "男",
+      "age": "46",
+      "idLast4": "W456",
+      "phone": "0912-345-999",
+      "visitDate": "2025-12-17"
+    },
+    "complaint": {
+      "chiefComplaint": "胸悶煩躁一月",
+      "presentIllness": "胸悶煩躁，心煩口苦，伴易怒與多夢。",
+      "medicalHistory": "無",
+      "familyHistory": "父親高血壓"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色微紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "薄黃"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "胸悶",
+      "stool": "偏乾",
+      "urine": "黃",
+      "appetite": "尚可",
+      "sleep": "多夢",
+      "thirst": "口苦",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "肝氣鬱結"
+      ],
+      "zangfuPattern": [
+        "肝火上炎"
+      ],
+      "diagnosis": "煩躁（肝鬱化火）",
+      "treatment": "清肝瀉火，寬胸解鬱",
+      "suggestion": "保持心平氣和；可服加味逍遙散；多戶外活動紓壓。"
+    }
+  }
+}

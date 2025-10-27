@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212234_I456_e16df6d7",
+  "created_at": "2025-10-05T21:22:34.336199",
+  "data": {
+    "basic": {
+      "name": "趙文哲",
+      "gender": "男",
+      "age": "58",
+      "idLast4": "I456",
+      "phone": "0990-123-109",
+      "visitDate": "2025-11-22"
+    },
+    "complaint": {
+      "chiefComplaint": "膝關節腫痛三月",
+      "presentIllness": "患者三月前因登山後出現膝痛，陰雨天加重，伴關節腫脹僵硬。",
+      "medicalHistory": "退化性關節炎",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "神情痛苦",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "無",
+      "body": "膝關節腫痛",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "尚可",
+      "sleep": "痛醒",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "寒濕痹阻"
+      ],
+      "zangfuPattern": [
+        "經絡痺阻"
+      ],
+      "diagnosis": "膝痹（風寒濕痹）",
+      "treatment": "祛風除濕，溫經通絡",
+      "suggestion": "避免潮濕與受寒；可艾灸膝眼、陽陵泉；適度運動；保持體重。"
+    }
+  }
+}

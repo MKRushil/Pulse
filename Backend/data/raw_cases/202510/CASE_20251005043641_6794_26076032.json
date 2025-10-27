@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005043641_6794_26076032",
+  "created_at": "2025-10-05T04:36:41.205978",
+  "data": {
+    "basic": {
+      "name": "錢美玲",
+      "gender": "女",
+      "age": "51",
+      "idLast4": "6794",
+      "phone": "0978901237",
+      "visitDate": "2025-02-20"
+    },
+    "complaint": {
+      "chiefComplaint": "甲狀腺功能亢進心悸一月",
+      "presentIllness": "患者一月前確診甲亢,心悸,手抖,怕熱多汗,消瘦,急躁易怒。",
+      "medicalHistory": "甲狀腺功能亢進症",
+      "familyHistory": "母親有甲狀腺疾病"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "消瘦"
+      ],
+      "faceColor": "面紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃"
+      ],
+      "tongueShape": [],
+      "tongueNote": "舌尖紅"
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "怕熱",
+      "sweat": "多汗",
+      "head": "無",
+      "body": "心悸,手抖,急躁易怒",
+      "stool": "偏溏",
+      "urine": "正常",
+      "appetite": "易飢多食",
+      "sleep": "眠差",
+      "thirst": "口渴",
+      "gynecology": "月經減少"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "細數"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "數"
+      ],
+      "右尺(命門)": [
+        "細數"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "肝火"
+      ],
+      "zangfuPattern": [
+        "肝腎陰虛",
+        "肝火亢盛"
+      ],
+      "diagnosis": "癭病,肝腎陰虛,肝火亢盛",
+      "treatment": "滋陰降火,平肝潛陽",
+      "suggestion": "建議規律服用抗甲狀腺藥物,定期監測甲功。保持情緒穩定,避免激動。充足休息。飲食高蛋白高熱量,避免刺激性食物和碘攝入過多。避免劇烈運動。可食用百合、麥冬等滋陰食材。定期眼科檢查。若出現心律失常或甲亢危象症狀請立即就醫。"
+    }
+  }
+}

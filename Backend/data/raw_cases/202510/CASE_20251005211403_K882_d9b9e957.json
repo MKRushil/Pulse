@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211403_K882_d9b9e957",
+  "created_at": "2025-10-05T21:14:03.539705",
+  "data": {
+    "basic": {
+      "name": "林宥辰",
+      "gender": "男",
+      "age": "26",
+      "idLast4": "K882",
+      "phone": "0912-110-345",
+      "visitDate": "2025-10-11"
+    },
+    "complaint": {
+      "chiefComplaint": "腹瀉四天",
+      "presentIllness": "進食路邊攤後出現腹瀉每日4-5次，夾腹痛，食後加劇",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "腹痛脹鳴",
+      "stool": "稀溏",
+      "urine": "清長",
+      "appetite": "減退",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "滑"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "滑"
+      ],
+      "右關(脾胃)": [
+        "滑數"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕證",
+        "熱證"
+      ],
+      "zangfuPattern": [
+        "脾虛濕困"
+      ],
+      "diagnosis": "泄瀉（濕熱內蘊）",
+      "treatment": "清熱利濕，健脾止瀉",
+      "suggestion": "清淡飲食、避免油膩生冷；補充水分；小米粥調養；症狀加劇或發熱請就醫。"
+    }
+  }
+}

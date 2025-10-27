@@ -1,0 +1,93 @@
+[
+  {
+    "basic": { "name": "林宥辰", "gender": "男", "age": "26", "idLast4": "K882", "phone": "0912-110-345", "visitDate": "2025-10-11" },
+    "complaint": { "chiefComplaint": "腹瀉四天", "presentIllness": "進食路邊攤後出現腹瀉每日4-5次，夾腹痛，食後加劇", "medicalHistory": "無", "familyHistory": "無" },
+    "inspection": { "spirit": "正常", "bodyShape": ["偏瘦"], "faceColor": "面色正常", "tongueBody": ["淡紅"], "tongueCoating": ["白膩"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "無", "body": "腹痛脹鳴", "stool": "稀溏", "urine": "清長", "appetite": "減退", "sleep": "尚可", "thirst": "不渴", "gynecology": "" },
+    "pulse": { "左寸(心)": ["滑"], "左關(肝膽)": ["弦"], "左尺(腎)": ["沉"], "右寸(肺)": ["滑"], "右關(脾胃)": ["滑數"], "右尺(命門)": ["沉"] },
+    "diagnosis": { "syndromePattern": ["濕證", "熱證"], "zangfuPattern": ["脾虛濕困"], "diagnosis": "泄瀉（濕熱內蘊）", "treatment": "清熱利濕，健脾止瀉", "suggestion": "清淡飲食、避免油膩生冷；補充水分；小米粥調養；症狀加劇或發熱請就醫。" }
+  },
+  {
+    "basic": { "name": "蔡雅雯", "gender": "女", "age": "38", "idLast4": "K993", "phone": "0928-660-701", "visitDate": "2025-10-12" },
+    "complaint": { "chiefComplaint": "皮膚瘙癢兩週", "presentIllness": "夜間瘙癢加重，抓後見紅疹，近期嗜食海鮮辛辣", "medicalHistory": "過敏體質", "familyHistory": "母親濕疹" },
+    "inspection": { "spirit": "正常", "bodyShape": ["中等"], "faceColor": "面色正常", "tongueBody": ["紅"], "tongueCoating": ["薄黃"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "無", "body": "皮膚瘙癢伴紅疹", "stool": "正常", "urine": "色黃", "appetite": "正常", "sleep": "瘙癢影響入睡", "thirst": "口乾", "gynecology": "" },
+    "pulse": { "左寸(心)": ["滑"], "左關(肝膽)": ["弦"], "左尺(腎)": ["滑"], "右寸(肺)": ["滑數"], "右關(脾胃)": ["滑"], "右尺(命門)": ["滑"] },
+    "diagnosis": { "syndromePattern": ["濕熱", "風熱"], "zangfuPattern": ["脾虛濕困"], "diagnosis": "癮疹（風濕熱邪）", "treatment": "疏風清熱，利濕止癢", "suggestion": "停辣與海鮮；穿棉質寬鬆衣；外用止癢；薏米綠豆粥；避免熱水燙洗。" }
+  },
+  {
+    "basic": { "name": "張書豪", "gender": "男", "age": "50", "idLast4": "L105", "phone": "0933-220-998", "visitDate": "2025-10-12" },
+    "complaint": { "chiefComplaint": "鼻塞頭痛一月", "presentIllness": "晨起鼻塞流黃涕，前額頭痛，低頭加重", "medicalHistory": "鼻竇炎反覆", "familyHistory": "無" },
+    "inspection": { "spirit": "正常", "bodyShape": ["中等"], "faceColor": "面色晦暗", "tongueBody": ["暗紅"], "tongueCoating": ["黃膩"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "鼻音重", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "前額痛", "body": "鼻塞黃涕", "stool": "正常", "urine": "黃", "appetite": "尚可", "sleep": "打鼾", "thirst": "口渴", "gynecology": "" },
+    "pulse": { "左寸(心)": ["弦"], "左關(肝膽)": ["弦"], "左尺(腎)": ["沉"], "右寸(肺)": ["滑"], "右關(脾胃)": ["滑"], "右尺(命門)": ["沉"] },
+    "diagnosis": { "syndromePattern": ["濕熱", "痰濕"], "zangfuPattern": ["肺熱", "脾虛濕困"], "diagnosis": "鼻淵（濕熱鬱肺）", "treatment": "清熱宣肺，化痰通竅", "suggestion": "沖洗鼻腔；避免冷飲與油炸；室內加濕通風；必要時耳鼻喉科追蹤。" }
+  },
+  {
+    "basic": { "name": "吳怡萱", "gender": "女", "age": "45", "idLast4": "L776", "phone": "0966-530-112", "visitDate": "2025-10-13" },
+    "complaint": { "chiefComplaint": "偏頭痛三年", "presentIllness": "情緒波動、經前或熬夜後誘發，伴噁心畏光", "medicalHistory": "無", "familyHistory": "母親偏頭痛" },
+    "inspection": { "spirit": "煩躁", "bodyShape": ["中等"], "faceColor": "面紅目赤", "tongueBody": ["紅"], "tongueCoating": ["薄黃"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "偏頭脹痛", "body": "胸脅脹滿", "stool": "便乾", "urine": "黃少", "appetite": "尚可", "sleep": "多夢", "thirst": "口苦", "gynecology": "經前加重" },
+    "pulse": { "左寸(心)": ["弦"], "左關(肝膽)": ["弦數"], "左尺(腎)": ["弦"], "右寸(肺)": ["數"], "右關(脾胃)": ["弦"], "右尺(命門)": ["弦"] },
+    "diagnosis": { "syndromePattern": ["實證", "熱證", "肝鬱"], "zangfuPattern": ["肝陽上亢"], "diagnosis": "眩暈頭痛（肝陽上亢）", "treatment": "平肝潛陽，清熱熄風", "suggestion": "規律作息、減少熬夜；避免辛辣酒咖啡；按揉太陽、風池；緩和運動與放鬆訓練。" }
+  },
+  {
+    "basic": { "name": "陳冠宇", "gender": "男", "age": "33", "idLast4": "M508", "phone": "0951-880-764", "visitDate": "2025-10-14" },
+    "complaint": { "chiefComplaint": "急性腰扭傷三天", "presentIllness": "搬重物後腰部劇痛，轉身困難，咳嗽打噴嚏疼痛加劇", "medicalHistory": "無", "familyHistory": "無" },
+    "inspection": { "spirit": "痛苦表情", "bodyShape": ["中等"], "faceColor": "面色正常", "tongueBody": ["淡紅"], "tongueCoating": ["薄白"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": true, "coughNote": "咳嗽時牽扯腰痛" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "無", "body": "腰部疼痛拒按", "stool": "正常", "urine": "正常", "appetite": "正常", "sleep": "疼痛影響", "thirst": "不渴", "gynecology": "" },
+    "pulse": { "左寸(心)": ["弦"], "左關(肝膽)": ["弦"], "左尺(腎)": ["沉"], "右寸(肺)": ["弦"], "右關(脾胃)": ["弦"], "右尺(命門)": ["沉"] },
+    "diagnosis": { "syndromePattern": ["氣滯", "血瘀"], "zangfuPattern": ["無"], "diagnosis": "腰痛（氣滯血瘀）", "treatment": "活血化瘀，舒筋通絡", "suggestion": "急性期避免彎腰負重；局部冷敷48小時後改熱敷；輕柔牽伸；必要時影像學檢查。" }
+  },
+  {
+    "basic": { "name": "郭惠琳", "gender": "女", "age": "52", "idLast4": "N661", "phone": "0920-770-014", "visitDate": "2025-10-15" },
+    "complaint": { "chiefComplaint": "乾咳口乾兩週", "presentIllness": "秋燥後反覆乾咳無痰或少痰，聲音沙啞", "medicalHistory": "無", "familyHistory": "無" },
+    "inspection": { "spirit": "正常", "bodyShape": ["中等"], "faceColor": "面色偏紅", "tongueBody": ["紅"], "tongueCoating": ["少苔"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "聲音嘶啞", "breath": "正常", "cough": true, "coughNote": "乾咳少痰" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "無", "body": "咽乾喉癢", "stool": "便乾", "urine": "黃少", "appetite": "尚可", "sleep": "正常", "thirst": "口乾欲飲", "gynecology": "" },
+    "pulse": { "左寸(心)": ["數"], "左關(肝膽)": ["弦"], "左尺(腎)": ["細"], "右寸(肺)": ["數"], "右關(脾胃)": ["滑"], "右尺(命門)": ["細弱"] },
+    "diagnosis": { "syndromePattern": ["燥證", "熱證"], "zangfuPattern": ["肺陰虛"], "diagnosis": "燥咳（肺陰不足）", "treatment": "養陰潤肺，清燥止咳", "suggestion": "多飲溫水與梨百合湯；避免辛辣與酒；減少說話；保持室內濕度。" }
+  },
+  {
+    "basic": { "name": "羅建廷", "gender": "男", "age": "47", "idLast4": "P044", "phone": "0917-300-552", "visitDate": "2025-10-15" },
+    "complaint": { "chiefComplaint": "腳趾紅腫痛三天", "presentIllness": "夜間痛劇，觸痛明顯，近日攝入海鮮與酒", "medicalHistory": "高尿酸血症", "familyHistory": "父親痛風" },
+    "inspection": { "spirit": "煩躁", "bodyShape": ["偏胖"], "faceColor": "面色潮紅", "tongueBody": ["紅"], "tongueCoating": ["黃膩"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "無", "body": "右第一趾紅腫熱痛", "stool": "正常", "urine": "黃", "appetite": "尚可", "sleep": "疼痛影響", "thirst": "口渴欲冷飲", "gynecology": "" },
+    "pulse": { "左寸(心)": ["滑數"], "左關(肝膽)": ["弦"], "左尺(腎)": ["滑"], "右寸(肺)": ["滑數"], "右關(脾胃)": ["滑數"], "右尺(命門)": ["滑"] },
+    "diagnosis": { "syndromePattern": ["濕熱", "實證"], "zangfuPattern": ["脾虛濕困"], "diagnosis": "痺證（濕熱痺阻）", "treatment": "清熱利濕，通絡止痛", "suggestion": "低嘌呤飲食；多飲水；急性期抬高患肢冷敷；避免酒與內臟類；必要時風濕科評估。" }
+  },
+  {
+    "basic": { "name": "邱雅筑", "gender": "女", "age": "28", "idLast4": "P773", "phone": "0963-889-447", "visitDate": "2025-10-16" },
+    "complaint": { "chiefComplaint": "經行頭痛一年", "presentIllness": "每逢經前或經期前兩日頭痛，經後緩解", "medicalHistory": "無", "familyHistory": "母親痛經" },
+    "inspection": { "spirit": "煩躁", "bodyShape": ["中等"], "faceColor": "面色偏黃", "tongueBody": ["淡紅"], "tongueCoating": ["薄白"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "頭痛脹感", "body": "胸脅悶脹", "stool": "正常", "urine": "正常", "appetite": "正常", "sleep": "多夢", "thirst": "不渴", "gynecology": "經量時多時少，色暗有塊" },
+    "pulse": { "左寸(心)": ["弦"], "左關(肝膽)": ["弦"], "左尺(腎)": ["沉"], "右寸(肺)": ["弦"], "右關(脾胃)": ["緩"], "右尺(命門)": ["沉"] },
+    "diagnosis": { "syndromePattern": ["肝鬱", "氣滯"], "zangfuPattern": ["肝氣鬱結"], "diagnosis": "經行頭痛（肝鬱氣滯）", "treatment": "疏肝理氣，活血止痛", "suggestion": "經前情緒管理；避免熬夜；玫瑰花茶；按太衝、合谷；暖敷項背。"
+    }
+  },
+  {
+    "basic": { "name": "彭志偉", "gender": "男", "age": "41", "idLast4": "Q226", "phone": "0926-410-933", "visitDate": "2025-10-16" },
+    "complaint": { "chiefComplaint": "腹痛腹瀉反覆三月", "presentIllness": "壓力大時易腹瀉，便前腹痛，排後緩解", "medicalHistory": "無", "familyHistory": "無" },
+    "inspection": { "spirit": "精神一般", "bodyShape": ["中等"], "faceColor": "面色萎黃", "tongueBody": ["淡"], "tongueCoating": ["白膩"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "聲音低微", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "畏寒", "sweat": "無", "head": "無", "body": "腹痛腹瀉", "stool": "溏瀉", "urine": "清長", "appetite": "食少", "sleep": "尚可", "thirst": "不渴", "gynecology": "" },
+    "pulse": { "左寸(心)": ["細"], "左關(肝膽)": ["弦"], "左尺(腎)": ["沉"], "右寸(肺)": ["細"], "右關(脾胃)": ["緩弱"], "右尺(命門)": ["沉弱"] },
+    "diagnosis": { "syndromePattern": ["虛證", "濕證", "氣滯"], "zangfuPattern": ["脾氣虛", "肝氣鬱結"], "diagnosis": "腸易激綜合徵（肝鬱脾虛）", "treatment": "疏肝健脾，和中止瀉", "suggestion": "規律作息、少量多餐；避免油炸與冷飲；情緒舒緩訓練；腹部保暖與按揉中脘。" }
+  },
+  {
+    "basic": { "name": "曾品妤", "gender": "女", "age": "36", "idLast4": "Q990", "phone": "0915-778-604", "visitDate": "2025-10-17" },
+    "complaint": { "chiefComplaint": "目乾澀三月", "presentIllness": "長時間電腦工作後雙目乾澀疼痛，眨眼減輕", "medicalHistory": "無", "familyHistory": "無" },
+    "inspection": { "spirit": "正常", "bodyShape": ["中等"], "faceColor": "面色少華", "tongueBody": ["淡紅"], "tongueCoating": ["少苔"], "tongueShape": ["正常"], "tongueNote": "" },
+    "auscultation": { "voice": "正常", "breath": "正常", "cough": false, "coughNote": "" },
+    "inquiry": { "chills": "無", "sweat": "無", "head": "頭暈", "body": "腰膝痠軟", "stool": "正常", "urine": "正常", "appetite": "正常", "sleep": "睡眠不足", "thirst": "口乾", "gynecology": "月經量少色紅" },
+    "pulse": { "左寸(心)": ["細"], "左關(肝膽)": ["細"], "左尺(腎)": ["細弱"], "右寸(肺)": ["細"], "右關(脾胃)": ["細"], "右尺(命門)": ["細弱"] },
+    "diagnosis": { "syndromePattern": ["陰虛", "虛證"], "zangfuPattern": ["肝腎陰虛"], "diagnosis": "乾眼（肝腎陰虧）", "treatment": "滋養肝腎，明目", "suggestion": "每40分鐘遠眺休息；枸杞菊花茶；充足睡眠；避免長時間配戴隱形眼鏡與乾燥環境。" }
+  }
+]

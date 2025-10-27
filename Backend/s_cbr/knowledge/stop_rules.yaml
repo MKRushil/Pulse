@@ -1,0 +1,88 @@
+# Backend/s_cbr/config/stop_rules.yaml
+version: "2.1.0"
+description: "螺旋推理終止條件規則（硬條件 + 軟條件）"
+
+# ==================== 硬條件 ====================
+hard_rules:
+  # 規則 1: 綜合收斂 + 覆蓋率
+  - name: "convergence_coverage"
+    conditions:
+      ci_min: 0.88        # CI ≥ 0.88
+      sc_min: 0.75        # SC ≥ 0.75
+    priority: 1
+    
+  # 規則 2: 檢索穩定 + 診斷一致
+  - name: "retrieval_stability"
+    conditions:
+      rci_min: 0.90       # RCI ≥ 0.90
+      same_diagnosis_rounds: 2  # 連續 2 輪診斷相同
+    priority: 2
+    
+  # 規則 3: 使用者滿意
+  - name: "user_satisfied"
+    conditions:
+      user_confirmed: true
+    priority: 0  # 最高優先
+    
+  # 規則 4: 最大輪次保護
+  - name: "max_rounds_reached"
+    conditions:
+      max_rounds: 10
+    priority: 999  # 強制終止
+
+# ==================== 軟條件 ====================
+soft_rules:
+  # 軟規則 1: 收斂趨緩
+  - name: "convergence_plateau"
+    conditions:
+      delta_ci_max: 0.02   # ΔCI < 0.02
+      plateau_rounds: 2     # 持續 2 輪
+    weight: 0.3
+    
+  # 軟規則 2: 新症狀比例低
+  - name: "low_new_symptoms"
+    conditions:
+      new_symptom_rate_max: 0.10  # < 10%
+    weight: 0.2
+    
+  # 軟規則 3: 案例穩定度高
+  - name: "high_case_stability"
+    conditions:
+      case_stability_min: 0.85
+    weight: 0.25
+    
+  # 軟規則 4: 語義一致性高
+  - name: "high_semantic_consistency"
+    conditions:
+      semantic_consistency_min: 0.80
+    weight: 0.25
+
+# ==================== 終止策略 ====================
+stop_strategy:
+  # 硬條件：任一成立即終止
+  hard_mode: "any"
+  
+  # 軟條件：加權和 ≥ 閾值則建議終止
+  soft_threshold: 0.70
+  
+  # 最小輪次保護
+  min_rounds: 2
+  
+  # 降級輪次（開始計算軟條件）
+  soft_start_round: 3
+
+# ==================== 回饋判定 ====================
+feedback_criteria:
+  # 可儲存為 RPCase 的條件
+  can_save:
+    ci_min: 0.85
+    coverage_min: 0.70
+    stability_min: 0.75
+    min_rounds: 2
+    
+  # 治療有效判定
+  treatment_effective:
+    ci_min: 0.88
+    coverage_min: 0.75
+    stability_min: 0.80
+    semantic_min: 0.75

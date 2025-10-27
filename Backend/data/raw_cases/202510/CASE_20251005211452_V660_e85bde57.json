@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211452_V660_e85bde57",
+  "created_at": "2025-10-05T21:14:52.597771",
+  "data": {
+    "basic": {
+      "name": "葉俊宏",
+      "gender": "男",
+      "age": "53",
+      "idLast4": "V660",
+      "phone": "0917-445-920",
+      "visitDate": "2025-10-26"
+    },
+    "complaint": {
+      "chiefComplaint": "多飲多尿三月",
+      "presentIllness": "口渴喜冷飲，食量大易餓，尿頻量多，體重下降3kg",
+      "medicalHistory": "糖尿病新診",
+      "familyHistory": "父親糖尿病"
+    },
+    "inspection": {
+      "spirit": "煩渴",
+      "bodyShape": [
+        "中等偏瘦"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "多汗",
+      "head": "頭暈",
+      "body": "乏力",
+      "stool": "便乾",
+      "urine": "頻數量多",
+      "appetite": "亢進",
+      "sleep": "尚可",
+      "thirst": "口渴多飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細數"
+      ],
+      "右寸(肺)": [
+        "細數"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "細數"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "熱證"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "消渴（陰虛燥熱）",
+      "treatment": "滋陰清熱，生津止渴",
+      "suggestion": "配合血糖控制；定時運動；飲食少糖少精製；山藥南瓜等為主食替換。"
+    }
+  }
+}

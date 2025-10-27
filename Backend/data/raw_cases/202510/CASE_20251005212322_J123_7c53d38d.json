@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212322_J123_7c53d38d",
+  "created_at": "2025-10-05T21:23:22.347973",
+  "data": {
+    "basic": {
+      "name": "高啟明",
+      "gender": "男",
+      "age": "51",
+      "idLast4": "J123",
+      "phone": "0983-441-529",
+      "visitDate": "2025-12-10"
+    },
+    "complaint": {
+      "chiefComplaint": "關節腫痛半年",
+      "presentIllness": "膝關節腫痛反覆，遇冷加重，活動後緩解。",
+      "medicalHistory": "痛風",
+      "familyHistory": "父親關節炎"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "膝痛",
+      "stool": "正常",
+      "urine": "黃",
+      "appetite": "尚可",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉"
+      ],
+      "右關(脾胃)": [
+        "沉"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "寒濕痹"
+      ],
+      "zangfuPattern": [
+        "肝腎不足"
+      ],
+      "diagnosis": "痺證（寒濕阻絡）",
+      "treatment": "祛風散寒，補益肝腎",
+      "suggestion": "注意保暖；避免久坐潮濕；多運動；可泡腳促循環。"
+    }
+  }
+}

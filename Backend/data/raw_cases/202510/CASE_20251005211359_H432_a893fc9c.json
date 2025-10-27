@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211359_H432_a893fc9c",
+  "created_at": "2025-10-05T21:13:59.911915",
+  "data": {
+    "basic": {
+      "name": "范育豪",
+      "gender": "男",
+      "age": "36",
+      "idLast4": "H432",
+      "phone": "0925-221-199",
+      "visitDate": "2025-10-09"
+    },
+    "complaint": {
+      "chiefComplaint": "鼻塞噴嚏兩週",
+      "presentIllness": "晨起鼻塞流清涕，噴嚏頻作，天冷加重",
+      "medicalHistory": "過敏性鼻炎5年",
+      "familyHistory": "母親過敏體質"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "畏寒"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡白"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "鼻塞頭脹",
+      "body": "噴嚏",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "浮"
+      ],
+      "左關(肝膽)": [
+        "浮"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "浮"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒證"
+      ],
+      "zangfuPattern": [
+        "肺氣虛",
+        "腎陽虛"
+      ],
+      "diagnosis": "鼻鼽（肺氣虛寒）",
+      "treatment": "溫肺散寒，益氣固表",
+      "suggestion": "保暖防寒；避免過敏原；可溫灸迎香、印堂；強化體能；必要時配合抗過敏治療。"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211405_L105_86fd95ee",
+  "created_at": "2025-10-05T21:14:05.941325",
+  "data": {
+    "basic": {
+      "name": "張書豪",
+      "gender": "男",
+      "age": "50",
+      "idLast4": "L105",
+      "phone": "0933-220-998",
+      "visitDate": "2025-10-12"
+    },
+    "complaint": {
+      "chiefComplaint": "鼻塞頭痛一月",
+      "presentIllness": "晨起鼻塞流黃涕，前額頭痛，低頭加重",
+      "medicalHistory": "鼻竇炎反覆",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "暗紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "鼻音重",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "前額痛",
+      "body": "鼻塞黃涕",
+      "stool": "正常",
+      "urine": "黃",
+      "appetite": "尚可",
+      "sleep": "打鼾",
+      "thirst": "口渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "滑"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕熱",
+        "痰濕"
+      ],
+      "zangfuPattern": [
+        "肺熱",
+        "脾虛濕困"
+      ],
+      "diagnosis": "鼻淵（濕熱鬱肺）",
+      "treatment": "清熱宣肺，化痰通竅",
+      "suggestion": "沖洗鼻腔；避免冷飲與油炸；室內加濕通風；必要時耳鼻喉科追蹤。"
+    }
+  }
+}

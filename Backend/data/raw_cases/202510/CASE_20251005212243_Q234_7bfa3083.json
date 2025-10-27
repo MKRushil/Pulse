@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212243_Q234_7bfa3083",
+  "created_at": "2025-10-05T21:22:43.872519",
+  "data": {
+    "basic": {
+      "name": "鄭家豪",
+      "gender": "男",
+      "age": "33",
+      "idLast4": "Q234",
+      "phone": "0970-545-226",
+      "visitDate": "2025-11-27"
+    },
+    "complaint": {
+      "chiefComplaint": "腹瀉兩週",
+      "presentIllness": "近兩週食後腹瀉，便溏無臭，伴腹鳴脹滿。",
+      "medicalHistory": "腸易激症",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色淡黃",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低弱",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "無",
+      "body": "腹鳴",
+      "stool": "溏薄",
+      "urine": "清長",
+      "appetite": "食慾差",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒濕"
+      ],
+      "zangfuPattern": [
+        "脾腎陽虛"
+      ],
+      "diagnosis": "腹瀉（脾腎陽虛）",
+      "treatment": "溫中健脾，攝腎止瀉",
+      "suggestion": "忌生冷；餐後保暖腹部；可服附子理中湯調理脾陽。"
+    }
+  }
+}

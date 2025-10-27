@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211416_R333_25595188",
+  "created_at": "2025-10-05T21:14:16.691032",
+  "data": {
+    "basic": {
+      "name": "許怡君",
+      "gender": "女",
+      "age": "29",
+      "idLast4": "R333",
+      "phone": "0930-224-560",
+      "visitDate": "2025-10-18"
+    },
+    "complaint": {
+      "chiefComplaint": "月經不調半年",
+      "presentIllness": "經期延後10日以上，色淡量少，伴倦怠腰酸",
+      "medicalHistory": "無",
+      "familyHistory": "母親更年期提早"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色淡黃",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "輕柔",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "少汗",
+      "head": "頭暈",
+      "body": "腰痠",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "食慾不振",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": "月經延後，量少色淡"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細弱"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒證"
+      ],
+      "zangfuPattern": [
+        "腎陽虛",
+        "脾氣虛"
+      ],
+      "diagnosis": "月經後期（氣血不足）",
+      "treatment": "溫經養血，健脾補腎",
+      "suggestion": "避免寒涼食物；加強保暖；可用四君子湯調養；保持規律作息。"
+    }
+  }
+}

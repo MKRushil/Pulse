@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211355_E930_d76bfd92",
+  "created_at": "2025-10-05T21:13:55.660116",
+  "data": {
+    "basic": {
+      "name": "高于婷",
+      "gender": "女",
+      "age": "41",
+      "idLast4": "E930",
+      "phone": "0966-115-409",
+      "visitDate": "2025-10-07"
+    },
+    "complaint": {
+      "chiefComplaint": "痛經四年",
+      "presentIllness": "經期首日小腹絞痛，得熱緩解，經量偏少色暗有塊",
+      "medicalHistory": "無",
+      "familyHistory": "母親痛經"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "畏寒肢冷"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡白"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒肢冷",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "小腹冷痛",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": "經量少，色暗有塊，痛經得熱減"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉"
+      ],
+      "右關(脾胃)": [
+        "沉"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "寒證",
+        "血瘀",
+        "陽虛"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "痛經（寒凝血瘀）",
+      "treatment": "溫經散寒，活血止痛",
+      "suggestion": "經期保暖，避免生冷；溫灸關元、氣海；薑茶熱敷；規律作息，經前一週開始調理。"
+    }
+  }
+}

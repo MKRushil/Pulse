@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212259_H901_04b193e3",
+  "created_at": "2025-10-05T21:22:59.485385",
+  "data": {
+    "basic": {
+      "name": "李建成",
+      "gender": "男",
+      "age": "45",
+      "idLast4": "H901",
+      "phone": "0955-336-702",
+      "visitDate": "2025-12-09"
+    },
+    "complaint": {
+      "chiefComplaint": "腰膝酸軟三月",
+      "presentIllness": "三月來腰膝酸軟，畏寒肢冷，夜尿頻多。",
+      "medicalHistory": "高血壓5年",
+      "familyHistory": "父親腎病"
+    },
+    "inspection": {
+      "spirit": "神疲乏力",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "淡胖"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "胖大"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "自汗",
+      "head": "頭暈",
+      "body": "腰膝酸軟",
+      "stool": "偏溏",
+      "urine": "清長",
+      "appetite": "減退",
+      "sleep": "夜尿頻",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉"
+      ],
+      "右關(脾胃)": [
+        "沉弱"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陽虛"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "腰痠（腎陽虛）",
+      "treatment": "溫補腎陽，強腰健骨",
+      "suggestion": "避免受寒；可服右歸丸；適度運動；多食羊肉、核桃等溫補食物。"
+    }
+  }
+}

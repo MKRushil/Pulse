@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005211449_V337_948adf6f",
+  "created_at": "2025-10-05T21:14:49.001119",
+  "data": {
+    "basic": {
+      "name": "張庭瑜",
+      "gender": "女",
+      "age": "30",
+      "idLast4": "V337",
+      "phone": "0915-550-774",
+      "visitDate": "2025-10-25"
+    },
+    "complaint": {
+      "chiefComplaint": "帶下量多兩月",
+      "presentIllness": "白帶量多質稠，陰癢，腰酸，小腹墜脹",
+      "medicalHistory": "陰道炎既往史",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "久坐少動"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "外陰搔癢，小腹墜脹",
+      "stool": "便乾",
+      "urine": "黃少",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "口渴欲飲",
+      "gynecology": "帶下量多質稠有異味"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "滑"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "滑"
+      ],
+      "右寸(肺)": [
+        "滑"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "滑"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕熱"
+      ],
+      "zangfuPattern": [
+        "脾虛濕困"
+      ],
+      "diagnosis": "帶下病（濕熱下注）",
+      "treatment": "清熱利濕，止帶",
+      "suggestion": "勤換內褲保持乾爽；少辛辣甜膩；薏米冬瓜飲；適度運動與作息規律。"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211417_S015_f333e2ea",
+  "created_at": "2025-10-05T21:14:17.891397",
+  "data": {
+    "basic": {
+      "name": "鄭冠廷",
+      "gender": "男",
+      "age": "45",
+      "idLast4": "S015",
+      "phone": "0975-665-804",
+      "visitDate": "2025-10-19"
+    },
+    "complaint": {
+      "chiefComplaint": "夜咳兩週",
+      "presentIllness": "夜間乾咳不止，少痰，伴咽癢胸悶",
+      "medicalHistory": "抽菸十年",
+      "familyHistory": "父親支氣管炎"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色微紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "聲音沙啞",
+      "breath": "正常",
+      "cough": true,
+      "coughNote": "夜咳乾燥"
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "胸悶咽癢",
+      "stool": "正常",
+      "urine": "黃少",
+      "appetite": "正常",
+      "sleep": "因咳影響",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "細弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "燥證",
+        "熱證"
+      ],
+      "zangfuPattern": [
+        "肺陰虛"
+      ],
+      "diagnosis": "久咳（陰虛燥熱）",
+      "treatment": "養陰潤肺，止咳化痰",
+      "suggestion": "戒菸；多飲溫水；梨子枇杷膏；避免辛辣油炸；保持環境濕度。"
+    }
+  }
+}

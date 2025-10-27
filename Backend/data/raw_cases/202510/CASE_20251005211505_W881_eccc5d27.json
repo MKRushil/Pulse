@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211505_W881_eccc5d27",
+  "created_at": "2025-10-05T21:15:05.857101",
+  "data": {
+    "basic": {
+      "name": "廖鈺婷",
+      "gender": "女",
+      "age": "31",
+      "idLast4": "W881",
+      "phone": "0910-442-507",
+      "visitDate": "2025-11-02"
+    },
+    "complaint": {
+      "chiefComplaint": "經痛三年",
+      "presentIllness": "經前腹痛劇烈，經色暗有塊，伴乳脹",
+      "medicalHistory": "無",
+      "familyHistory": "母親痛經"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡黃",
+      "tongueBody": [
+        "暗紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腹痛",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": "經前腹痛，色暗有塊"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣滯",
+        "血瘀"
+      ],
+      "zangfuPattern": [
+        "肝鬱血瘀"
+      ],
+      "diagnosis": "痛經（氣滯血瘀）",
+      "treatment": "理氣活血，溫經止痛",
+      "suggestion": "月經期間保暖；避免生冷；多熱敷下腹；可飲薑棗紅糖水。"
+    }
+  }
+}

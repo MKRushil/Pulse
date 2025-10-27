@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212328_O678_418c65b9",
+  "created_at": "2025-10-05T21:23:28.361109",
+  "data": {
+    "basic": {
+      "name": "蔡雅芬",
+      "gender": "女",
+      "age": "40",
+      "idLast4": "O678",
+      "phone": "0928-332-415",
+      "visitDate": "2025-12-13"
+    },
+    "complaint": {
+      "chiefComplaint": "胃脹食少兩月",
+      "presentIllness": "餐後腹脹不舒，食慾減退，偶有噯氣。",
+      "medicalHistory": "胃炎",
+      "familyHistory": "父親胃病"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色萎黃",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "輕柔",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腹脹",
+      "stool": "偏軟",
+      "urine": "正常",
+      "appetite": "減退",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "脾虛氣滯"
+      ],
+      "zangfuPattern": [
+        "脾胃虛弱"
+      ],
+      "diagnosis": "脾胃氣滯",
+      "treatment": "健脾理氣，和中消脹",
+      "suggestion": "少量多餐；避免生冷油膩；可服香砂六君子湯。"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212228_E012_583376bd",
+  "created_at": "2025-10-05T21:22:28.842220",
+  "data": {
+    "basic": {
+      "name": "楊志強",
+      "gender": "男",
+      "age": "46",
+      "idLast4": "E012",
+      "phone": "0956-789-105",
+      "visitDate": "2025-11-18"
+    },
+    "complaint": {
+      "chiefComplaint": "咳嗽一週",
+      "presentIllness": "患者一週前感冒後出現咳嗽，痰多色白，伴惡寒無汗。",
+      "medicalHistory": "慢性支氣管炎",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "精神一般",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "氣短",
+      "cough": true,
+      "coughNote": "咳嗽痰多色白"
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無汗",
+      "head": "頭脹",
+      "body": "無",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "浮"
+      ],
+      "左關(肝膽)": [
+        "浮"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "浮緊"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "風寒",
+        "表證"
+      ],
+      "zangfuPattern": [
+        "肺氣虛"
+      ],
+      "diagnosis": "風寒咳嗽",
+      "treatment": "疏風散寒，宣肺止咳",
+      "suggestion": "注意保暖，多飲溫水；可飲薑湯；避免受涼與生冷食物。"
+    }
+  }
+}

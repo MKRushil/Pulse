@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212324_L345_f148d28c",
+  "created_at": "2025-10-05T21:23:24.753852",
+  "data": {
+    "basic": {
+      "name": "彭世豪",
+      "gender": "男",
+      "age": "43",
+      "idLast4": "L345",
+      "phone": "0959-226-873",
+      "visitDate": "2025-12-11"
+    },
+    "complaint": {
+      "chiefComplaint": "口苦胸悶三月",
+      "presentIllness": "三月來口苦胸悶，情緒急躁，偶有頭暈。",
+      "medicalHistory": "肝功能偏高",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色微紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "薄黃"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "胸悶",
+      "stool": "偏乾",
+      "urine": "黃",
+      "appetite": "尚可",
+      "sleep": "多夢",
+      "thirst": "口苦",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "肝火上炎"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結"
+      ],
+      "diagnosis": "肝鬱化火",
+      "treatment": "清肝瀉火，疏肝理氣",
+      "suggestion": "保持心情平和；避免熬夜；可飲菊花茶、決明子茶。"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212231_G234_73bec351",
+  "created_at": "2025-10-05T21:22:31.907397",
+  "data": {
+    "basic": {
+      "name": "羅文豪",
+      "gender": "男",
+      "age": "38",
+      "idLast4": "G234",
+      "phone": "0978-901-107",
+      "visitDate": "2025-11-20"
+    },
+    "complaint": {
+      "chiefComplaint": "口乾多飲三月",
+      "presentIllness": "患者三月來口乾多飲，夜間尤甚，伴體重下降3公斤。",
+      "medicalHistory": "糖尿病一年",
+      "familyHistory": "父親糖尿病"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "盜汗",
+      "head": "頭暈",
+      "body": "無",
+      "stool": "偏乾",
+      "urine": "頻數",
+      "appetite": "多食易飢",
+      "sleep": "尚可",
+      "thirst": "口渴多飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦細"
+      ],
+      "左尺(腎)": [
+        "細數"
+      ],
+      "右寸(肺)": [
+        "細數"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "細數"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "熱證"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "消渴",
+      "treatment": "滋陰清熱，生津止渴",
+      "suggestion": "控制糖分攝取；多飲水；保持運動；可食山藥、南瓜等補脾益腎。"
+    }
+  }
+}

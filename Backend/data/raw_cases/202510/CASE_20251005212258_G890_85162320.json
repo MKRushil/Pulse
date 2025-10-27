@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212258_G890_85162320",
+  "created_at": "2025-10-05T21:22:58.303974",
+  "data": {
+    "basic": {
+      "name": "林佩君",
+      "gender": "女",
+      "age": "29",
+      "idLast4": "G890",
+      "phone": "0932-448-913",
+      "visitDate": "2025-12-08"
+    },
+    "complaint": {
+      "chiefComplaint": "白帶量多色黃一月",
+      "presentIllness": "帶下量多色黃，伴下腹悶脹，偶有瘙癢。",
+      "medicalHistory": "陰道炎病史",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少",
+      "head": "無",
+      "body": "下腹悶",
+      "stool": "偏乾",
+      "urine": "黃",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "口乾",
+      "gynecology": "白帶量多色黃，有異味"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "滑"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "滑"
+      ],
+      "右寸(肺)": [
+        "滑"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "滑"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕熱"
+      ],
+      "zangfuPattern": [
+        "脾虛濕困"
+      ],
+      "diagnosis": "帶下病（濕熱下注）",
+      "treatment": "清熱利濕，止帶除臭",
+      "suggestion": "保持陰部清潔乾燥；避免辛辣油膩；可服龍膽瀉肝湯；定期婦科檢查。"
+    }
+  }
+}

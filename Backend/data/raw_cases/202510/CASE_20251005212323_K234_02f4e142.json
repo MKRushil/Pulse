@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212323_K234_02f4e142",
+  "created_at": "2025-10-05T21:23:23.558783",
+  "data": {
+    "basic": {
+      "name": "江詩涵",
+      "gender": "女",
+      "age": "47",
+      "idLast4": "K234",
+      "phone": "0902-111-804",
+      "visitDate": "2025-12-10"
+    },
+    "complaint": {
+      "chiefComplaint": "潮熱盜汗半年",
+      "presentIllness": "更年期半年出現潮熱盜汗，心煩易怒，口乾。",
+      "medicalHistory": "停經一年",
+      "familyHistory": "母親更年期症狀重"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "盜汗",
+      "head": "頭暈",
+      "body": "五心煩熱",
+      "stool": "偏乾",
+      "urine": "黃",
+      "appetite": "正常",
+      "sleep": "多夢",
+      "thirst": "口乾",
+      "gynecology": "停經"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦細"
+      ],
+      "左尺(腎)": [
+        "細數"
+      ],
+      "右寸(肺)": [
+        "細數"
+      ],
+      "右關(脾胃)": [
+        "細"
+      ],
+      "右尺(命門)": [
+        "細數"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛火旺"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "更年期綜合徵（陰虛火旺）",
+      "treatment": "滋陰降火，養心安神",
+      "suggestion": "多休息；避免辛辣；可服知柏地黃丸；保持規律作息。"
+    }
+  }
+}

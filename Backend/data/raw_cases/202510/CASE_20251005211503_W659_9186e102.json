@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211503_W659_9186e102",
+  "created_at": "2025-10-05T21:15:03.474696",
+  "data": {
+    "basic": {
+      "name": "簡庭瑜",
+      "gender": "女",
+      "age": "46",
+      "idLast4": "W659",
+      "phone": "0961-774-882",
+      "visitDate": "2025-11-01"
+    },
+    "complaint": {
+      "chiefComplaint": "頸肩痠痛兩月",
+      "presentIllness": "長期低頭工作後頸部僵硬痠痛，偶頭暈",
+      "medicalHistory": "肩頸僵直",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏風",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "肩頸痠痛",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣滯",
+        "血瘀"
+      ],
+      "zangfuPattern": [
+        "經絡不通"
+      ],
+      "diagnosis": "頸痹（氣滯血瘀）",
+      "treatment": "活血化瘀，舒筋通絡",
+      "suggestion": "熱敷肩頸；規律伸展；避免久坐；按摩風池、肩井穴。"
+    }
+  }
+}

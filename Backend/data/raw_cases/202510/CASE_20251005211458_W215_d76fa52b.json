@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211458_W215_d76fa52b",
+  "created_at": "2025-10-05T21:14:58.653558",
+  "data": {
+    "basic": {
+      "name": "蔡昱廷",
+      "gender": "男",
+      "age": "39",
+      "idLast4": "W215",
+      "phone": "0972-114-369",
+      "visitDate": "2025-10-30"
+    },
+    "complaint": {
+      "chiefComplaint": "下背酸痛三週",
+      "presentIllness": "久坐電腦後腰背痠痛，休息可緩，天冷更明顯",
+      "medicalHistory": "無",
+      "familyHistory": "父親腰椎退化"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡黃",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低弱",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰痠",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒證"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "腰痛（腎虛型）",
+      "treatment": "補腎壯陽，溫經散寒",
+      "suggestion": "保持下背保暖；避免久坐；可溫灸命門、腎俞穴；適度伸展運動。"
+    }
+  }
+}

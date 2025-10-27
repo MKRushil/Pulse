@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005043639_2351_64088f1a",
+  "created_at": "2025-10-05T04:36:39.684912",
+  "data": {
+    "basic": {
+      "name": "呂建華",
+      "gender": "男",
+      "age": "59",
+      "idLast4": "2351",
+      "phone": "0967890126",
+      "visitDate": "2025-02-19"
+    },
+    "complaint": {
+      "chiefComplaint": "中風後遺症半年",
+      "presentIllness": "患者半年前腦梗塞,現左側肢體偏癱,活動不利,言語不清,伴有頭暈,流涎。",
+      "medicalHistory": "高血壓病史15年,腦梗塞半年前",
+      "familyHistory": "父親有腦中風史"
+    },
+    "inspection": {
+      "spirit": "神情呆滯",
+      "bodyShape": [
+        "正常"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "暗紅"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [],
+      "tongueNote": "舌體歪斜,舌有瘀點"
+    },
+    "auscultation": {
+      "voice": "言語不清",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "正常",
+      "head": "頭暈",
+      "body": "左側肢體偏癱,活動不利,流涎",
+      "stool": "便秘",
+      "urine": "正常",
+      "appetite": "紆可",
+      "sleep": "尚可",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦滑"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "血瘀",
+        "痰濁"
+      ],
+      "zangfuPattern": [
+        "氣虛血瘀",
+        "痰濁阻絡"
+      ],
+      "diagnosis": "中風後遺症,氣虛血瘀,痰濁阻絡",
+      "treatment": "益氣活血,化痰通絡",
+      "suggestion": "建議堅持康復訓練,包括肢體功能鍛煉和語言訓練。控制血壓,規律服藥。低鹽低脂飲食。可食用山楂、丹參等活血食材。保持大便通暢。避免情緒激動。配合針灸、推拿治療。家屬協助日常生活。定期復查。預防再次中風。"
+    }
+  }
+}

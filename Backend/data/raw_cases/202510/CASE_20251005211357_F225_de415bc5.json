@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211357_F225_de415bc5",
+  "created_at": "2025-10-05T21:13:57.541035",
+  "data": {
+    "basic": {
+      "name": "邱志強",
+      "gender": "男",
+      "age": "58",
+      "idLast4": "F225",
+      "phone": "0970-442-880",
+      "visitDate": "2025-10-08"
+    },
+    "complaint": {
+      "chiefComplaint": "膝關節疼痛兩年",
+      "presentIllness": "雙膝遇寒痛加重，得熱可緩，陰雨天加劇，晨僵",
+      "medicalHistory": "骨關節炎2年",
+      "familyHistory": "母親關節炎"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "肥胖"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "無",
+      "body": "膝關節冷痛、活動受限",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉"
+      ],
+      "右關(脾胃)": [
+        "沉"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "寒證",
+        "濕證",
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "痺證（風寒濕痺）",
+      "treatment": "溫經散寒，祛濕通絡",
+      "suggestion": "保暖關節，避免受寒濕；適度運動與理療；體重控制；溫灸犢鼻、陽陵泉。"
+    }
+  }
+}

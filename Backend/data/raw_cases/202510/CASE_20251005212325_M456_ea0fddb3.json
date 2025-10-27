@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212325_M456_ea0fddb3",
+  "created_at": "2025-10-05T21:23:25.963768",
+  "data": {
+    "basic": {
+      "name": "陳惠玲",
+      "gender": "女",
+      "age": "36",
+      "idLast4": "M456",
+      "phone": "0935-998-760",
+      "visitDate": "2025-12-11"
+    },
+    "complaint": {
+      "chiefComplaint": "腹瀉三天",
+      "presentIllness": "三天來大便稀溏，每日5次，進食後加劇。",
+      "medicalHistory": "胃腸虛弱",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色少華",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低弱",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "腹瀉",
+      "stool": "稀溏",
+      "urine": "清長",
+      "appetite": "減退",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "脾虛"
+      ],
+      "zangfuPattern": [
+        "脾陽虛"
+      ],
+      "diagnosis": "泄瀉（脾虛）",
+      "treatment": "健脾益氣，溫中止瀉",
+      "suggestion": "飲食宜清淡；避免生冷；可服參苓白朮散；多休息。"
+    }
+  }
+}

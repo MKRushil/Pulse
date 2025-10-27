@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212329_P789_3c5f0057",
+  "created_at": "2025-10-05T21:23:29.551939",
+  "data": {
+    "basic": {
+      "name": "吳家豪",
+      "gender": "男",
+      "age": "35",
+      "idLast4": "P789",
+      "phone": "0931-229-670",
+      "visitDate": "2025-12-13"
+    },
+    "complaint": {
+      "chiefComplaint": "咽癢乾咳兩週",
+      "presentIllness": "兩週以來乾咳無痰，喉嚨癢，夜間較重。",
+      "medicalHistory": "過敏性鼻炎",
+      "familyHistory": "母親過敏史"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡紅",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "清亮",
+      "breath": "正常",
+      "cough": true,
+      "coughNote": "乾咳無痰"
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "喉癢",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "浮"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "燥熱傷肺"
+      ],
+      "zangfuPattern": [
+        "肺陰不足"
+      ],
+      "diagnosis": "乾咳（燥熱傷肺）",
+      "treatment": "潤肺止咳，養陰清熱",
+      "suggestion": "避免辛辣；多飲溫水；可服沙參麥冬湯；保持環境濕度。"
+    }
+  }
+}

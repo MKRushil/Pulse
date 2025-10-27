@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211501_W437_8fe4259d",
+  "created_at": "2025-10-05T21:15:01.095626",
+  "data": {
+    "basic": {
+      "name": "林哲安",
+      "gender": "男",
+      "age": "44",
+      "idLast4": "W437",
+      "phone": "0980-332-888",
+      "visitDate": "2025-10-31"
+    },
+    "complaint": {
+      "chiefComplaint": "便秘一月",
+      "presentIllness": "大便乾結，2–3日一行，腹脹口乾",
+      "medicalHistory": "飲水少",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃燥"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少",
+      "head": "頭脹",
+      "body": "腹滿",
+      "stool": "便乾難下",
+      "urine": "黃短",
+      "appetite": "食慾減退",
+      "sleep": "正常",
+      "thirst": "口渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "滑數"
+      ],
+      "右尺(命門)": [
+        "細"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "熱證",
+        "實證"
+      ],
+      "zangfuPattern": [
+        "腸胃燥熱"
+      ],
+      "diagnosis": "便秘（胃熱腸燥）",
+      "treatment": "清熱潤腸，行氣導滯",
+      "suggestion": "多飲水；多蔬果；早晨養成排便習慣；按摩天樞穴促蠕動。"
+    }
+  }
+}

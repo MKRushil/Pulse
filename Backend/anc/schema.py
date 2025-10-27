@@ -4,11 +4,33 @@ TCM Case Schema Definition
 中醫病例資料模型與 Weaviate Collection Schema
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel, Field
 import weaviate
 from weaviate.classes.config import Configure, Property, DataType, VectorDistances
+
+
+# ============================================
+# Helper Functions
+# ============================================
+
+def _to_rfc3339(dt: datetime) -> str:
+    """
+    將 datetime 轉換為 RFC3339 格式（Weaviate 要求）
+    
+    Args:
+        dt: datetime 物件
+    
+    Returns:
+        RFC3339 格式字串 (例: '2025-10-05T02:49:25.751347Z')
+    """
+    # 如果沒有時區資訊，設為 UTC
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    
+    # 轉為 ISO 格式並將 +00:00 替換為 Z
+    return dt.isoformat().replace('+00:00', 'Z')
 
 
 # ============================================
@@ -72,7 +94,7 @@ class DiagnosisInfo(BaseModel):
     zangfuPattern: List[str] = []
     diagnosis: Optional[str] = ""
     treatment: Optional[str] = ""
-    suggestion: Optional[str] = ""  # 診斷建議 (取代方劑與藥物)
+    suggestion: Optional[str] = ""
 
 
 class TCMCaseInput(BaseModel):
@@ -82,7 +104,7 @@ class TCMCaseInput(BaseModel):
     inspection: InspectionInfo
     auscultation: AuscultationInfo
     inquiry: InquiryInfo
-    pulse: Dict[str, List[str]] = {}  # 脈診 {部位: [脈象列表]}
+    pulse: Dict[str, List[str]] = {}
     diagnosis: DiagnosisInfo
 
 
@@ -96,7 +118,7 @@ def create_tcm_case_collection(client: weaviate.WeaviateClient, collection_name:
     
     設計理念:
     1. 混合搜索: 向量相似度 + BM25 關鍵詞
-    2. Jieba 分詞結果存儲為多個字段以支援精確搜索
+    2. Jieba 分詞結果存儲為多個字段以支持精確搜索
     3. 結構化資料保留原始 JSON 以便完整檢索
     """
     
@@ -108,10 +130,9 @@ def create_tcm_case_collection(client: weaviate.WeaviateClient, collection_name:
     # 創建 Collection
     collection = client.collections.create(
         name=collection_name,
-        description="中醫病例資料庫 - 支援混合搜索與結構化查詢",
+        description="中醫病例資料庫 - 支持混合搜索與結構化查詢",
         
-        # 向量化配置 - 使用 text2vec-transformers 或外部向量
-        vectorizer_config=None,  # 我們會使用外部 NVIDIA Embedding API
+        vectorizer_config=None,  # 使用外部 NVIDIA Embedding API
         
         properties=[
             # ==================== 基本資訊 ====================
@@ -125,7 +146,7 @@ def create_tcm_case_collection(client: weaviate.WeaviateClient, collection_name:
             Property(
                 name="patient_id",
                 data_type=DataType.TEXT,
-                description="患者匿名ID (基於身分證末4碼生成)",
+                description="患者匿名ID",
                 skip_vectorization=True,
                 index_searchable=True
             ),
@@ -154,7 +175,7 @@ def create_tcm_case_collection(client: weaviate.WeaviateClient, collection_name:
                 name="full_text",
                 data_type=DataType.TEXT,
                 description="完整病歷文本 (用於向量化)",
-                skip_vectorization=False,  # 此欄位會被向量化
+                skip_vectorization=False,
                 index_searchable=True
             ),
             
@@ -169,14 +190,14 @@ def create_tcm_case_collection(client: weaviate.WeaviateClient, collection_name:
             Property(
                 name="syndrome_terms",
                 data_type=DataType.TEXT_ARRAY,
-                description="證型術語 (如: 風寒感冒、氣虛)",
+                description="證型術語",
                 skip_vectorization=True,
                 index_searchable=True
             ),
             Property(
                 name="zangfu_terms",
                 data_type=DataType.TEXT_ARRAY,
-                description="臟腑術語 (如: 肝鬱、脾虛)",
+                description="臟腑術語",
                 skip_vectorization=True,
                 index_searchable=True
             ),
@@ -265,12 +286,12 @@ def create_tcm_case_collection(client: weaviate.WeaviateClient, collection_name:
         
         # 向量索引配置
         vector_index_config=Configure.VectorIndex.hnsw(
-            distance_metric=VectorDistances.COSINE,  # ← 使用 enum
+            distance_metric=VectorDistances.COSINE,
             ef_construction=128,
             ef=64
         ),
         
-        # 倒排索引配置 (支援 BM25)
+        # 倒排索引配置 (支持 BM25)
         inverted_index_config=Configure.inverted_index(
             bm25_b=0.75,
             bm25_k1=1.2,
@@ -297,7 +318,7 @@ class TCMCaseData:
         case_id: str,
         jieba_analysis: Dict[str, Any],
         embedding_vector: List[float]
-    ) -> Dict[str, Any]:
+    ) -> tuple[Dict[str, Any], List[float]]:
         """
         將前端資料轉換為 Weaviate 資料對象
         
@@ -308,10 +329,9 @@ class TCMCaseData:
             embedding_vector: 1024維向量
         
         Returns:
-            Weaviate 資料對象
+            (data_obj, vector) tuple
         """
         import json
-        from datetime import datetime
         
         # 生成患者匿名 ID
         patient_id = f"P_{case_input.basic.idLast4}_{case_input.basic.age}_{case_input.basic.gender}"
@@ -325,11 +345,14 @@ class TCMCaseData:
         except:
             age_int = 0
         
+        # 解析就診日期並轉換為 RFC3339 格式
+        visit_datetime = datetime.fromisoformat(case_input.basic.visitDate)
+        
         # 準備資料對象
         data_obj = {
             "case_id": case_id,
             "patient_id": patient_id,
-            "visit_date": datetime.fromisoformat(case_input.basic.visitDate).isoformat(),
+            "visit_date": _to_rfc3339(visit_datetime),
             "age": age_int,
             "gender": case_input.basic.gender,
             
@@ -342,8 +365,7 @@ class TCMCaseData:
             "symptom_terms": jieba_analysis.get("symptom", []),
             "pulse_terms": jieba_analysis.get("pulse", []),
             "tongue_terms": jieba_analysis.get("tongue", []),
-            "herb_terms": jieba_analysis.get("herb", []),
-            "formula_terms": jieba_analysis.get("formula", []),
+            "treatment_terms": jieba_analysis.get("treatment", []),
             
             # 結構化欄位
             "chief_complaint": case_input.complaint.chiefComplaint,
@@ -351,12 +373,12 @@ class TCMCaseData:
             "treatment_principle": case_input.diagnosis.treatment or "",
             "suggestion": case_input.diagnosis.suggestion or "",
             
-            # 原始資料
-            "raw_data": json.dumps(case_input.dict(), ensure_ascii=False),
+            # 原始資料 (使用 Pydantic V2 方法)
+            "raw_data": json.dumps(case_input.model_dump(), ensure_ascii=False),
             
-            # 元數據
-            "created_at": datetime.now().isoformat(),
-            "updated_at": datetime.now().isoformat(),
+            # 元數據 - 使用 RFC3339 格式
+            "created_at": _to_rfc3339(datetime.now(timezone.utc)),
+            "updated_at": _to_rfc3339(datetime.now(timezone.utc)),
         }
         
         return data_obj, embedding_vector
@@ -388,8 +410,8 @@ class TCMCaseData:
         if case.auscultation.cough:
             parts.append(f"咳嗽: {case.auscultation.coughNote}")
         
-        # 問診
-        for key, val in case.inquiry.dict().items():
+        # 問診 (使用 Pydantic V2 方法)
+        for key, val in case.inquiry.model_dump().items():
             if val:
                 parts.append(f"{key}: {val}")
         

@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211423_T881_edf330b8",
+  "created_at": "2025-10-05T21:14:23.878310",
+  "data": {
+    "basic": {
+      "name": "徐子翔",
+      "gender": "男",
+      "age": "40",
+      "idLast4": "T881",
+      "phone": "0979-601-374",
+      "visitDate": "2025-10-22"
+    },
+    "complaint": {
+      "chiefComplaint": "腰酸疲倦一年",
+      "presentIllness": "工作久坐，腰部酸痛，午後明顯",
+      "medicalHistory": "久坐工作型",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "疲乏",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰酸",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "腎虛",
+        "脾虛"
+      ],
+      "diagnosis": "勞損腰痛（腎虛型）",
+      "treatment": "補腎健脾，強筋壯骨",
+      "suggestion": "保持正坐姿；伸展腰背；多食黑豆、杜仲湯；避免久坐久站。"
+    }
+  }
+}

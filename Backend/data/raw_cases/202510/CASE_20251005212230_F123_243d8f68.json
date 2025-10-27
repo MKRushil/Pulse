@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212230_F123_243d8f68",
+  "created_at": "2025-10-05T21:22:30.737185",
+  "data": {
+    "basic": {
+      "name": "黃雅婷",
+      "gender": "女",
+      "age": "27",
+      "idLast4": "F123",
+      "phone": "0967-890-106",
+      "visitDate": "2025-11-19"
+    },
+    "complaint": {
+      "chiefComplaint": "經前乳房脹痛兩月",
+      "presentIllness": "患者每逢月經前兩三天乳房明顯脹痛，經後緩解，伴情緒煩躁。",
+      "medicalHistory": "無",
+      "familyHistory": "母親乳腺增生"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "乳房脹痛",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": "經前乳房脹痛"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣滯",
+        "肝鬱"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結"
+      ],
+      "diagnosis": "乳癖",
+      "treatment": "疏肝解鬱，理氣止痛",
+      "suggestion": "保持情緒穩定；避免辛辣與咖啡因；可飲玫瑰花茶；經前調理效果佳。"
+    }
+  }
+}

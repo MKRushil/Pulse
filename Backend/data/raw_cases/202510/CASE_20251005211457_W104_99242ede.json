@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211457_W104_99242ede",
+  "created_at": "2025-10-05T21:14:57.411943",
+  "data": {
+    "basic": {
+      "name": "鄭國祥",
+      "gender": "男",
+      "age": "62",
+      "idLast4": "W104",
+      "phone": "0911-338-066",
+      "visitDate": "2025-10-29"
+    },
+    "complaint": {
+      "chiefComplaint": "中風後口角歪斜一年",
+      "presentIllness": "語音含糊，左側肢體乏力，步態不穩，近月功能改善緩慢",
+      "medicalHistory": "腦梗塞一年，高血壓十年",
+      "familyHistory": "父親中風"
+    },
+    "inspection": {
+      "spirit": "神疲乏力",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "暗紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "歪斜"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "語言不清",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "自汗",
+      "head": "頭暈",
+      "body": "左側肢體無力",
+      "stool": "便乾",
+      "urine": "正常",
+      "appetite": "尚可",
+      "sleep": "尚可",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "弦"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "血瘀",
+        "氣虛"
+      ],
+      "zangfuPattern": [
+        "心氣虛",
+        "腎陽虛"
+      ],
+      "diagnosis": "中風後遺（氣虛血瘀）",
+      "treatment": "益氣活血，通絡",
+      "suggestion": "持續復健與針灸；控制血壓血脂；低鹽低脂飲食；保持樂觀，預防再次中風。"
+    }
+  }
+}

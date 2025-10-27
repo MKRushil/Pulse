@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212249_V789_51d097e5",
+  "created_at": "2025-10-05T21:22:49.934048",
+  "data": {
+    "basic": {
+      "name": "鄧姿涵",
+      "gender": "女",
+      "age": "37",
+      "idLast4": "V789",
+      "phone": "0981-223-654",
+      "visitDate": "2025-12-01"
+    },
+    "complaint": {
+      "chiefComplaint": "經前腹脹兩月",
+      "presentIllness": "月經前出現小腹脹痛，乳房脹痛，情緒煩躁。",
+      "medicalHistory": "無",
+      "familyHistory": "母親經前症候群"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色微紅",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腹脹",
+      "stool": "偏乾",
+      "urine": "正常",
+      "appetite": "尚可",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": "經前腹脹，乳房脹痛"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結"
+      ],
+      "diagnosis": "經前腹脹",
+      "treatment": "疏肝理氣，調經止痛",
+      "suggestion": "保持愉快心情；多做伸展；可飲玫瑰花茶調理情緒。"
+    }
+  }
+}

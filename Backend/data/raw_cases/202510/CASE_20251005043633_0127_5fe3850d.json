@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005043633_0127_5fe3850d",
+  "created_at": "2025-10-05T04:36:33.636813",
+  "data": {
+    "basic": {
+      "name": "顏雅芳",
+      "gender": "女",
+      "age": "24",
+      "idLast4": "0127",
+      "phone": "0934567893",
+      "visitDate": "2025-02-16"
+    },
+    "complaint": {
+      "chiefComplaint": "口腔潰瘍反復發作兩月",
+      "presentIllness": "患者兩月來口腔潰瘍反復發作,潰瘍疼痛,影響進食,伴有口乾口苦,心煩易怒。工作壓力大,常熬夜。",
+      "medicalHistory": "復發性口腔潰瘍",
+      "familyHistory": "無特殊"
+    },
+    "inspection": {
+      "spirit": "略煩躁",
+      "bodyShape": [
+        "正常"
+      ],
+      "faceColor": "面紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃"
+      ],
+      "tongueShape": [],
+      "tongueNote": "舌尖紅,可見潰瘍"
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "正常",
+      "head": "無",
+      "body": "口腔潰瘍疼痛",
+      "stool": "偏乾",
+      "urine": "色黃",
+      "appetite": "因潰瘍影響進食",
+      "sleep": "眠差,多夢",
+      "thirst": "口乾口苦",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "細數"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "數"
+      ],
+      "右尺(命門)": [
+        "細數"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "心火",
+        "陰虛火旺"
+      ],
+      "zangfuPattern": [
+        "心火上炎",
+        "陰虛火旺"
+      ],
+      "diagnosis": "口瘡,心火上炎,陰虛火旺",
+      "treatment": "清心瀉火,滋陰降火",
+      "suggestion": "建議保證充足睡眠,避免熬夜。飲食清淡,避免辛辣燥熱食物。多食新鮮蔬果,補充維生素B群和維生素C。可用淡鹽水或茶水漱口。保持口腔衛生。放鬆心情,減輕壓力。避免菸酒及刺激性食物。可局部使用口腔潰瘍藥膏。"
+    }
+  }
+}

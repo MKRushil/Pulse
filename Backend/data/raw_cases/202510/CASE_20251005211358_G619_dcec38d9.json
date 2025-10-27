@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211358_G619_dcec38d9",
+  "created_at": "2025-10-05T21:13:58.729058",
+  "data": {
+    "basic": {
+      "name": "蔡思妤",
+      "gender": "女",
+      "age": "31",
+      "idLast4": "G619",
+      "phone": "0918-006-744",
+      "visitDate": "2025-10-08"
+    },
+    "complaint": {
+      "chiefComplaint": "帶下量多一月",
+      "presentIllness": "帶下量多色黃質稠有異味，小腹墜脹",
+      "medicalHistory": "陰道炎既往史",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "久坐缺乏運動"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "小腹墜脹、外陰搔癢",
+      "stool": "便乾",
+      "urine": "色黃",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "口渴欲飲",
+      "gynecology": "帶下量多色黃質稠有異味"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "滑數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "滑"
+      ],
+      "右寸(肺)": [
+        "滑數"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "滑"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕熱",
+        "熱證"
+      ],
+      "zangfuPattern": [
+        "脾虛濕困"
+      ],
+      "diagnosis": "帶下病（濕熱下注）",
+      "treatment": "清熱利濕，止帶",
+      "suggestion": "加強個人衛生；飲食清淡少甜膩辛辣；可配合坐浴；薏米、冬瓜等利濕食材；規律作息。"
+    }
+  }
+}

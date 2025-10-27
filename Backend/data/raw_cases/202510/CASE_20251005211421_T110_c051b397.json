@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211421_T110_c051b397",
+  "created_at": "2025-10-05T21:14:21.499106",
+  "data": {
+    "basic": {
+      "name": "周志遠",
+      "gender": "男",
+      "age": "57",
+      "idLast4": "T110",
+      "phone": "0982-773-640",
+      "visitDate": "2025-10-20"
+    },
+    "complaint": {
+      "chiefComplaint": "小腿抽筋半年",
+      "presentIllness": "夜間或久坐後小腿抽筋疼痛",
+      "medicalHistory": "糖尿病五年",
+      "familyHistory": "母親高血糖"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "略胖"
+      ],
+      "faceColor": "面色暗",
+      "tongueBody": [
+        "淡紫"
+      ],
+      "tongueCoating": [
+        "白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "無",
+      "body": "下肢麻木",
+      "stool": "正常",
+      "urine": "多",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "血瘀"
+      ],
+      "zangfuPattern": [
+        "腎虛",
+        "血脈不暢"
+      ],
+      "diagnosis": "痺證（氣血兩虛）",
+      "treatment": "補氣養血，溫經通絡",
+      "suggestion": "規律伸展運動；補充電解質；控制血糖；按摩委中、承山穴。"
+    }
+  }
+}

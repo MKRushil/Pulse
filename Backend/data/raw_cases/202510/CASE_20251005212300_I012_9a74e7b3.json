@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212300_I012_9a74e7b3",
+  "created_at": "2025-10-05T21:23:00.666038",
+  "data": {
+    "basic": {
+      "name": "曾雅慧",
+      "gender": "女",
+      "age": "33",
+      "idLast4": "I012",
+      "phone": "0974-778-632",
+      "visitDate": "2025-12-09"
+    },
+    "complaint": {
+      "chiefComplaint": "月經延後經量少",
+      "presentIllness": "月經延後5-10天，量少色淡，伴小腹冷痛。",
+      "medicalHistory": "痛經史",
+      "familyHistory": "母親經量少"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡白"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "輕柔",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "小腹冷痛",
+      "stool": "偏乾",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": "月經延後量少"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "血虛",
+        "寒證"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "月經延後（陽虛血虛）",
+      "treatment": "溫陽補血，調經止痛",
+      "suggestion": "經期注意保暖；可服當歸四逆湯；避免冷飲與生食。"
+    }
+  }
+}

@@ -14,6 +14,15 @@ try:
     DEFAULT_JIEBA_DICT = str(TCM_DICT_PATH)
 except ImportError:
     DEFAULT_JIEBA_DICT = ""
+
+# ✅ 載入 TCM 配置
+try:
+    from .knowledge.tcm_config import get_tcm_config
+    _tcm_cfg = get_tcm_config()
+except Exception as e:
+    import logging
+    logging.warning(f"⚠️  TCM 配置載入失敗: {e}，使用預設配置")
+    _tcm_cfg = None
 # ==================== 結束 ====================
 
 @dataclass
@@ -46,10 +55,26 @@ class EmbeddingConfig:
 
 @dataclass
 class SearchConfig:
-    """搜索配置"""
-    hybrid_alpha: float = 0.5
+    hybrid_alpha: float = 0.5  # 從 0.7 改為 0.5
     top_k: int = 10
-    search_fields: List[str] = field(default_factory=lambda: ["bm25_cjk", "bm25_text"])
+    
+    # 新增：BM25 搜索欄位
+    search_fields: List[str] = field(default_factory=lambda: [
+        "jieba_tokens",
+        "syndrome_terms",
+        "symptom_terms"
+    ])
+    
+    # 新增：欄位權重配置（供未來使用）
+    field_weights: Dict[str, float] = field(default_factory=lambda: {
+        "syndrome_terms": 3.0,
+        "zangfu_terms": 2.5,
+        "symptom_terms": 2.0,
+        "pulse_terms": 2.0,
+        "treatment_terms": 2.0,
+        "chief_complaint": 1.5,
+        "diagnosis": 1.5
+    })
 
 @dataclass
 class SpiralConfig:
@@ -79,17 +104,38 @@ class ConvergenceConfig:
 
 @dataclass
 class TextProcessorConfig:
-    """文本處理配置"""
+    """文本處理配置 - 整合外部 TCM 配置"""
     jieba_dict_path: str = field(
         default_factory=lambda: os.getenv("JIEBA_DICT", DEFAULT_JIEBA_DICT)
     )
-    stopwords: List[str] = field(default_factory=lambda: [
-        "的", "了", "和", "與", "及", "呢", "啊", "嗎"
-    ])
-    tcm_keywords: List[str] = field(default_factory=lambda: [
-        "失眠", "多夢", "心悸", "口乾", "疲倦", "頭暈", 
-        "腰痠", "耳鳴", "潮熱", "盜汗", "便秘", "腹脹"
-    ])
+    
+    # ✅ 從 TCM 配置載入
+    stopwords: List[str] = field(
+        default_factory=lambda: list(_tcm_cfg.get_stopwords()) if _tcm_cfg else [
+            "的", "了", "和", "與", "及", "呢", "啊", "嗎"
+        ]
+    )
+    
+    tcm_keywords: List[str] = field(
+        default_factory=lambda: list(_tcm_cfg.get_tcm_keywords()) if _tcm_cfg else [
+            "失眠", "多夢", "心悸", "口乾", "疲倦", "頭暈",
+            "腰痠", "耳鳴", "潮熱", "盜汗", "便秘", "腹脹"
+        ]
+    )
+    
+    # ✅ 新增：證型、臟腑、症狀分類關鍵詞
+    syndrome_keywords: Dict[str, List[str]] = field(
+        default_factory=lambda: _tcm_cfg.get_syndrome_keywords() if _tcm_cfg else {}
+    )
+    
+    zangfu_keywords: Dict[str, List[str]] = field(
+        default_factory=lambda: _tcm_cfg.get_zangfu_keywords() if _tcm_cfg else {}
+    )
+    
+    symptom_categories: Dict[str, List[str]] = field(
+        default_factory=lambda: _tcm_cfg.get_symptom_categories() if _tcm_cfg else {}
+    )
+    
     negation_pattern: str = r"(無|沒有|不|未)([^。，；]{1,4})"
     ignore_tongue: bool = True
 
@@ -99,6 +145,7 @@ class FeatureFlags:
     enable_llm: bool = True
     enable_convergence: bool = True
     enable_dialog_accumulation: bool = True
+    enable_syndrome_analysis: bool = True    # 🆕
     mock_when_llm_fail: bool = True
     log_level: str = os.getenv("SCBR_LOG_LEVEL", "INFO")
 

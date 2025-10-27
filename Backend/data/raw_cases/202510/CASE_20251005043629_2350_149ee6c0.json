@@ -1,0 +1,85 @@
+{
+  "case_id": "CASE_20251005043629_2350_149ee6c0",
+  "created_at": "2025-10-05T04:36:29.192103",
+  "data": {
+    "basic": {
+      "name": "鍾美珍",
+      "gender": "女",
+      "age": "49",
+      "idLast4": "2350",
+      "phone": "0912345681",
+      "visitDate": "2025-02-14"
+    },
+    "complaint": {
+      "chiefComplaint": "手足心熱盜汗三月",
+      "presentIllness": "患者三月來手足心熱,夜間盜汗,醒後汗止,伴有腰膝酸軟,口乾咽燥。工作勞累,睡眠不足。",
+      "medicalHistory": "既往體健",
+      "familyHistory": "無特殊"
+    },
+    "inspection": {
+      "spirit": "略倦",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "顴紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [],
+      "tongueNote": "舌乾少津"
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "五心煩熱",
+      "sweat": "盜汗",
+      "head": "頭暈",
+      "body": "腰膝酸軟",
+      "stool": "偏乾",
+      "urine": "色黃量少",
+      "appetite": "紆可",
+      "sleep": "煩躁難眠",
+      "thirst": "口乾咽燥,欲飲冷水",
+      "gynecology": "月經規律"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "細數"
+      ],
+      "左尺(腎)": [
+        "細數"
+      ],
+      "右寸(肺)": [
+        "細數"
+      ],
+      "右關(脾胃)": [
+        "細"
+      ],
+      "右尺(命門)": [
+        "細數無力"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "陰虛火旺"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "腎陰虛,陰虛火旺",
+      "treatment": "滋陰降火,斂汗固表",
+      "suggestion": "建議保證充足睡眠,避免過度勞累。飲食滋陰,可食用百合、銀耳、枸杞、山藥等。避免辛辣燥熱食物及菸酒。睡前溫水泡腳。可配合按摩太溪、三陰交穴。保持室內涼爽通風。適度運動,避免大汗淋漓。"
+    }
+  }
+}

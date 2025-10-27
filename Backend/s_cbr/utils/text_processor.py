@@ -18,6 +18,13 @@ except ImportError:
 from ..config import TextProcessorConfig
 from .logger import get_logger
 
+# ✅ 載入 TCM 配置
+try:
+    from ..knowledge.tcm_config import get_tcm_config
+    _tcm_cfg = get_tcm_config()
+except ImportError:
+    _tcm_cfg = None
+
 logger = get_logger("TextProcessor")
 
 class TextProcessor:
@@ -239,3 +246,50 @@ class TextProcessor:
         union = tokens1 | tokens2
         
         return len(intersection) / len(union) if union else 0.0
+    
+    def prepare_for_tcmcase(self, text: str) -> Dict[str, List[str]]:
+        """為 TCMCase 準備分類術語"""
+        
+        # 分詞
+        tokens = self.segment_text(text).split()
+        
+        # 初始化結果
+        result = {
+            "jieba_tokens": tokens,
+            "syndrome_terms": [],
+            "zangfu_terms": [],
+            "symptom_terms": [],
+            "pulse_terms": [],
+            "tongue_terms": [],
+            "treatment_terms": []
+        }
+        
+        # 定義關鍵詞集合
+        syndrome_keywords = {"證", "虛", "實", "寒", "熱", "表", "裡", "陰", "陽"}
+        zangfu_keywords = {"心", "肝", "脾", "肺", "腎", "胃", "膽", "腸", "膀胱"}
+        symptom_keywords = {"痛", "咳", "嗽", "熱", "汗", "眩暈", "失眠"}
+        pulse_keywords = {"脈", "浮", "沉", "遲", "數", "滑", "澀", "弦", "緊"}
+        tongue_keywords = {"舌", "苔", "淡", "紅", "絳", "紫", "白", "黃"}
+        treatment_keywords = {"清", "補", "瀉", "溫", "涼", "散", "收"}
+        
+        # 分類術語
+        for token in tokens:
+            if any(kw in token for kw in syndrome_keywords):
+                result["syndrome_terms"].append(token)
+            if any(kw in token for kw in zangfu_keywords):
+                result["zangfu_terms"].append(token)
+            if any(kw in token for kw in symptom_keywords):
+                result["symptom_terms"].append(token)
+            if any(kw in token for kw in pulse_keywords):
+                result["pulse_terms"].append(token)
+            if any(kw in token for kw in tongue_keywords):
+                result["tongue_terms"].append(token)
+            if any(kw in token for kw in treatment_keywords):
+                result["treatment_terms"].append(token)
+        
+        # 去重
+        for key in result:
+            if key != "jieba_tokens":
+                result[key] = list(set(result[key]))
+        
+        return result

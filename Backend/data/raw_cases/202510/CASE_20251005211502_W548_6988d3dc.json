@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005211502_W548_6988d3dc",
+  "created_at": "2025-10-05T21:15:02.286458",
+  "data": {
+    "basic": {
+      "name": "郭品賢",
+      "gender": "男",
+      "age": "50",
+      "idLast4": "W548",
+      "phone": "0973-445-699",
+      "visitDate": "2025-11-01"
+    },
+    "complaint": {
+      "chiefComplaint": "夜尿頻三月",
+      "presentIllness": "夜間需起床小便3–4次，伴腰酸乏力",
+      "medicalHistory": "攝護腺肥大",
+      "familyHistory": "父親同症"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰痠乏力",
+      "stool": "正常",
+      "urine": "頻多",
+      "appetite": "正常",
+      "sleep": "因夜尿中斷",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "腎氣虛"
+      ],
+      "diagnosis": "遺尿（腎虛型）",
+      "treatment": "補腎固攝，溫陽利水",
+      "suggestion": "少飲夜水；睡前泡腳溫腎；可艾灸關元、中極穴；保持規律作息。"
+    }
+  }
+}

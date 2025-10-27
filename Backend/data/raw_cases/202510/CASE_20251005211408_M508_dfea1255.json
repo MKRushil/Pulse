@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211408_M508_dfea1255",
+  "created_at": "2025-10-05T21:14:08.344030",
+  "data": {
+    "basic": {
+      "name": "陳冠宇",
+      "gender": "男",
+      "age": "33",
+      "idLast4": "M508",
+      "phone": "0951-880-764",
+      "visitDate": "2025-10-14"
+    },
+    "complaint": {
+      "chiefComplaint": "急性腰扭傷三天",
+      "presentIllness": "搬重物後腰部劇痛，轉身困難，咳嗽打噴嚏疼痛加劇",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "痛苦表情",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": true,
+      "coughNote": "咳嗽時牽扯腰痛"
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "腰部疼痛拒按",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "疼痛影響",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "弦"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣滯",
+        "血瘀"
+      ],
+      "zangfuPattern": [
+        "無"
+      ],
+      "diagnosis": "腰痛（氣滯血瘀）",
+      "treatment": "活血化瘀，舒筋通絡",
+      "suggestion": "急性期避免彎腰負重；局部冷敷48小時後改熱敷；輕柔牽伸；必要時影像學檢查。"
+    }
+  }
+}

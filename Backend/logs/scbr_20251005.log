@@ -1,0 +1,1031 @@
+2025-10-05 02:16:16 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:16:16 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:16:16 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:16:16 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:16:16 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:16:16 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:16:16 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:16:16 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO - 
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:16:16 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:16:17 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:16:17 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:16:18 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:16:18 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:16:55 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:16:55 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:16:56 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:16:56 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:16:56 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:16:56 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:16:56 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:16:56 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO - 
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:16:56 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:16:56 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:16:57 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:16:57 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:16:57 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:17:39 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:17:39 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:17:40 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:17:40 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:17:40 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:17:40 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:17:40 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:17:40 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO - 
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:17:40 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:17:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:17:41 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:17:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:17:41 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:19:27 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:19:27 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:19:28 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:19:28 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:19:28 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:19:28 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:19:28 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:19:28 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO - 
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:19:28 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:19:29 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:19:29 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:19:29 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:19:30 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:19:30 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:19:42 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:19:42 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:19:43 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:19:43 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:19:43 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:19:43 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:19:43 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:19:43 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO - 
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:19:43 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:19:44 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:19:44 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:19:44 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:19:44 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:19:44 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:23:02 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:25:55 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:25:55 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:25:56 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:25:56 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:25:56 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:25:56 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:25:56 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:25:56 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO - 
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:25:56 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:25:57 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:25:57 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:25:57 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:25:58 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:25:58 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:29:42 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:29:42 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:29:42 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:29:42 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:29:42 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:29:42 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:29:42 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:29:42 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO - 
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:29:42 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:29:43 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:29:43 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:29:44 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:29:44 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:29:44 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:31:39 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:31:39 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:31:40 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:31:40 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:31:40 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:31:40 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:31:40 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:31:40 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO - 
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:31:40 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:31:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:31:41 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:31:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:31:41 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:31:41 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:35:20 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:39:01 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:39:01 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:39:01 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:39:01 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:39:01 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:39:01 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:39:01 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:39:01 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO - 
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:39:02 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:39:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:39:03 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:39:03 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:39:03 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:39:03 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:40:31 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:40:31 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:40:31 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:40:32 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:40:32 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:43:29 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:43:29 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:43:30 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:43:30 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:43:30 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:43:30 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:43:30 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:43:30 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO - 
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:43:30 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:43:30 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:43:31 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:43:31 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:43:31 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:43:31 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"
+2025-10-05 02:43:31 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:46:19 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:46:19 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:46:20 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:46:20 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:46:20 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:46:20 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:46:20 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:46:20 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO - 
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:46:20 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:46:20 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:46:21 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:46:21 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:46:21 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:49:25 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/objects "HTTP/1.1 422 Unprocessable Entity"
+2025-10-05 02:57:08 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:57:08 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:57:09 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:57:09 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:57:09 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:57:09 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:57:09 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:57:09 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO - 
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:57:09 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:57:09 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:57:10 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:57:10 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:57:10 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 02:57:36 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 02:57:36 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 02:57:37 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 02:57:37 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 02:57:37 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 02:57:37 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 02:57:37 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 02:57:37 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO - 
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 02:57:37 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 02:57:37 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 02:57:38 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 02:57:38 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 02:57:38 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:06:17 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:06:17 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:06:18 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:06:18 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:06:18 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:06:18 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:06:18 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:06:18 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO - 
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:06:18 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:06:19 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:06:19 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:06:19 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:06:19 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:08:09 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/objects "HTTP/1.1 200 OK"
+2025-10-05 03:10:08 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:10:08 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:10:09 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:10:09 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:10:09 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:10:09 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:10:09 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:10:09 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO - 
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:10:09 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:10:09 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:10:10 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:10:10 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:10:10 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:10:48 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:10:48 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:10:49 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:10:49 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:10:49 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:10:49 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:10:49 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:10:49 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO - 
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:10:49 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:10:50 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:10:50 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:10:51 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:10:51 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:12:02 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:12:02 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:12:03 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:12:03 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:12:03 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:12:03 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:12:03 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:12:03 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO - 
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:12:03 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:12:04 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:12:04 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:12:05 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:12:05 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:31:43 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:31:43 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:31:44 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:31:44 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:31:44 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:31:44 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:31:44 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:31:44 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO - 
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:31:44 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:31:45 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:31:45 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:31:45 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:31:45 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:31:54 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:31:54 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:31:54 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:31:54 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:31:54 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:31:54 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:31:54 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:31:54 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO - 
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:31:54 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:31:55 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:31:55 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:31:56 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:31:56 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:39:33 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:39:33 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:39:34 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:39:34 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:39:34 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:39:34 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:39:34 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:39:34 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO - 
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:39:34 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:39:35 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:39:35 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:39:35 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:39:35 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:39:39 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:39:39 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:39:40 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:39:40 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:39:40 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:39:40 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:39:40 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:39:40 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO - 
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:39:40 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:39:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:39:41 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:39:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:39:41 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:42:58 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:42:58 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:42:59 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:42:59 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:42:59 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:42:59 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:42:59 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:42:59 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO - 
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:42:59 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:43:00 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:43:00 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:43:00 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:43:00 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:43:40 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:43:40 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:43:41 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:43:41 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:43:41 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:43:41 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:43:41 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:43:41 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO - 
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:43:41 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:43:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:43:42 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:43:42 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:43:42 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:51:37 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:51:37 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:51:38 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:51:38 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:51:38 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:51:38 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:51:38 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:51:38 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO - 
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:51:38 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:51:39 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:51:39 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:51:39 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:51:39 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 03:51:43 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 03:51:43 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 03:51:44 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 03:51:44 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 03:51:44 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 03:51:44 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 03:51:44 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 03:51:44 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO - 
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 03:51:44 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 03:51:45 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 03:51:45 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 03:51:46 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 03:51:46 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 09:26:19 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 09:26:19 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 09:26:20 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 09:26:20 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 09:26:20 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 09:26:20 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 09:26:20 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 09:26:20 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO - 
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 09:26:20 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 09:26:21 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 09:26:22 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 09:26:22 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 09:26:22 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 09:26:26 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 09:26:26 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 09:26:27 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 09:26:27 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 09:26:27 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 09:26:27 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 09:26:27 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 09:26:27 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO - 
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 09:26:27 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 09:26:28 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 09:26:28 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 09:26:28 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 09:26:28 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 17:33:09 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 17:33:09 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 17:33:10 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 17:33:10 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 17:33:10 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 17:33:10 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 17:33:10 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 17:33:10 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO - 
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 17:33:10 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 17:33:11 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 17:33:11 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 17:33:11 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 17:33:11 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 17:35:07 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 17:35:07 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 17:35:08 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 17:35:08 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 17:35:08 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 17:35:08 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 17:35:08 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 17:35:08 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO - 
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 17:35:08 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 17:35:09 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 17:35:09 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 17:35:09 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 17:35:09 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 18:47:09 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 18:47:09 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 18:47:10 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 18:47:10 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 18:47:10 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 18:47:10 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 18:47:10 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 18:47:10 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO - 
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 18:47:10 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:47:10 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 18:47:11 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 18:47:11 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 18:47:11 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 18:47:39 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 18:47:39 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 18:47:39 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 18:47:39 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 18:47:39 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 18:47:39 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 18:47:39 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 18:47:39 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO - 
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 18:47:39 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:47:40 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 18:47:41 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 18:47:41 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 18:47:41 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 18:48:02 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 18:48:02 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 18:48:03 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 18:48:03 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 18:48:03 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 18:48:03 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 18:48:03 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 18:48:03 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO - 
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 18:48:03 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:48:03 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 18:48:04 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 18:48:04 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 18:48:04 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 18:48:33 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 18:48:33 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 18:48:34 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 18:48:34 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 18:48:34 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 18:48:34 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 18:48:34 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 18:48:34 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO - 
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 18:48:34 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 18:48:35 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 18:48:35 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 18:48:35 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 18:48:35 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 20:10:00 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 20:10:00 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 20:10:01 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 20:10:01 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 20:10:01 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 20:10:01 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 20:10:01 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 20:10:01 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO - 
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 20:10:01 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 20:10:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 20:10:02 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 20:10:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 20:10:02 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 20:10:09 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 20:10:09 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 20:10:10 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 20:10:10 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 20:10:10 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 20:10:10 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 20:10:10 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 20:10:10 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO - 
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 20:10:10 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 20:10:11 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 20:10:11 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 20:10:11 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 20:10:11 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 20:11:04 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 20:11:04 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 20:11:05 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 20:11:05 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 20:11:05 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 20:11:05 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 20:11:05 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 20:11:05 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO - 
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 20:11:05 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 20:11:06 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 20:11:06 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 20:11:06 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 20:11:06 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 21:13:22 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 21:13:22 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 21:13:23 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 21:13:23 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 21:13:23 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 21:13:23 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 21:13:23 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 21:13:23 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO - 
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 21:13:23 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 21:13:23 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 21:13:24 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 21:13:24 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 21:13:24 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 23:04:58 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 23:04:58 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 23:04:59 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 23:04:59 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 23:04:59 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 23:04:59 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 23:04:59 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 23:04:59 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO - 
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 23:04:59 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 23:05:00 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 23:05:00 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 23:05:00 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 23:05:00 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-05 23:05:05 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-05 23:05:05 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-05 23:05:06 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-05 23:05:06 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-05 23:05:06 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-05 23:05:06 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-05 23:05:06 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-05 23:05:06 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO - 
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-05 23:05:06 - s_cbr.backend.main - INFO - ============================================================
+2025-10-05 23:05:07 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-05 23:05:07 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-05 23:05:07 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-05 23:05:07 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功

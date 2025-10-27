@@ -1,0 +1,66 @@
+2025-10-07 16:43:22 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-07 16:43:22 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-07 16:43:22 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-07 16:43:22 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-07 16:43:22 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-07 16:43:22 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-07 16:43:23 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-07 16:43:23 - s_cbr.TextProcessor - INFO -    詞典路徑: c:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-07 16:43:23 - s_cbr.SpiralEngine - INFO - ✅ 辨證分析器初始化成功
+2025-10-07 16:43:23 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-07 16:43:23 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-07 16:43:23 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-07 16:43:23 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-07 16:44:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-07 16:44:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-07 16:44:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-07 16:44:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-07 16:44:18 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-07 16:44:18 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-07 16:44:19 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-07 16:44:19 - s_cbr.TextProcessor - INFO -    詞典路徑: c:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-07 16:44:19 - s_cbr.SpiralEngine - INFO - ✅ 辨證分析器初始化成功
+2025-10-07 16:44:19 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-07 16:44:19 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-07 16:44:19 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-07 16:44:19 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - 🔬 開始辨證分析 [第1輪]
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO - 🔬 開始病機分析 [第1輪]
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO - 📋 病機分析結果:
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO -    病因: 喜, 驚
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO -    病位: 心, 脾
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO -    病性: 血虛, 虛證
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO -    病機: 思慮過度，損傷心脾，氣血生化不足，心失所養，脾失健運
+2025-10-07 16:44:19 - s_cbr.PathogenesisEngine - INFO -    置信度: 76.4%
+2025-10-07 16:44:19 - s_cbr.ConstitutionClassifier - INFO - 🧬 開始體質分析
+2025-10-07 16:44:19 - s_cbr.ConstitutionClassifier - INFO - 🧬 體質判定結果:
+2025-10-07 16:44:19 - s_cbr.ConstitutionClassifier - INFO -    主要體質: 平和質 (0.0%)
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - ============================================================
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - 📋 辨證診斷結果
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - ============================================================
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - 【主證】心脾兩虛 (置信度: 76.4%)
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - 【病機】思慮過度，損傷心脾，氣血生化不足，心失所養，脾失健運
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - 【體質】平和質
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - 【治則】補益心脾，養血安神
+2025-10-07 16:44:19 - s_cbr.SyndromeAnalyzer - INFO - ============================================================
+2025-10-07 18:54:15 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-07 18:54:15 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-07 18:54:15 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-07 18:54:15 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-07 18:59:13 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-07 18:59:13 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-07 18:59:13 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-07 18:59:13 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-07 18:59:13 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-07 18:59:13 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-07 18:59:13 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-07 18:59:13 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-07 18:59:16 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-07 18:59:16 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-07 18:59:17 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-07 18:59:17 - s_cbr.TextProcessor - INFO -    詞典路徑: c:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-07 18:59:17 - s_cbr.SpiralEngine - INFO - ✅ 辨證分析器初始化成功
+2025-10-07 18:59:17 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-07 18:59:17 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-07 18:59:17 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-07 18:59:17 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成

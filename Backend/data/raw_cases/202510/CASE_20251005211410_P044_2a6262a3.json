@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211410_P044_2a6262a3",
+  "created_at": "2025-10-05T21:14:10.733947",
+  "data": {
+    "basic": {
+      "name": "羅建廷",
+      "gender": "男",
+      "age": "47",
+      "idLast4": "P044",
+      "phone": "0917-300-552",
+      "visitDate": "2025-10-15"
+    },
+    "complaint": {
+      "chiefComplaint": "腳趾紅腫痛三天",
+      "presentIllness": "夜間痛劇，觸痛明顯，近日攝入海鮮與酒",
+      "medicalHistory": "高尿酸血症",
+      "familyHistory": "父親痛風"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "偏胖"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "無",
+      "body": "右第一趾紅腫熱痛",
+      "stool": "正常",
+      "urine": "黃",
+      "appetite": "尚可",
+      "sleep": "疼痛影響",
+      "thirst": "口渴欲冷飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "滑數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "滑"
+      ],
+      "右寸(肺)": [
+        "滑數"
+      ],
+      "右關(脾胃)": [
+        "滑數"
+      ],
+      "右尺(命門)": [
+        "滑"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕熱",
+        "實證"
+      ],
+      "zangfuPattern": [
+        "脾虛濕困"
+      ],
+      "diagnosis": "痺證（濕熱痺阻）",
+      "treatment": "清熱利濕，通絡止痛",
+      "suggestion": "低嘌呤飲食；多飲水；急性期抬高患肢冷敷；避免酒與內臟類；必要時風濕科評估。"
+    }
+  }
+}

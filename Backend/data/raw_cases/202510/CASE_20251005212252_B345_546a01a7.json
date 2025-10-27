@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212252_B345_546a01a7",
+  "created_at": "2025-10-05T21:22:52.311253",
+  "data": {
+    "basic": {
+      "name": "趙凱倫",
+      "gender": "男",
+      "age": "59",
+      "idLast4": "B345",
+      "phone": "0958-443-711",
+      "visitDate": "2025-12-05"
+    },
+    "complaint": {
+      "chiefComplaint": "咽乾口苦三月",
+      "presentIllness": "三月來咽喉乾澀，口苦，午後潮熱，伴失眠盜汗。",
+      "medicalHistory": "無",
+      "familyHistory": "母親更年期潮熱"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "盜汗",
+      "head": "頭暈",
+      "body": "咽乾",
+      "stool": "偏乾",
+      "urine": "黃少",
+      "appetite": "正常",
+      "sleep": "難眠",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "細弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛火旺"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "咽喉乾痛",
+      "treatment": "滋陰降火，清咽潤喉",
+      "suggestion": "多飲水；避免辛辣與煙酒；可服知柏地黃丸。"
+    }
+  }
+}

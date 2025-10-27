@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211348_A512_d9abb483",
+  "created_at": "2025-10-05T21:13:48.261847",
+  "data": {
+    "basic": {
+      "name": "周于晴",
+      "gender": "女",
+      "age": "27",
+      "idLast4": "A512",
+      "phone": "0911-880-201",
+      "visitDate": "2025-10-05"
+    },
+    "complaint": {
+      "chiefComplaint": "經前乳房脹痛三月",
+      "presentIllness": "近三月經前一週乳房脹痛明顯，經後緩解",
+      "medicalHistory": "無特殊",
+      "familyHistory": "母親乳腺增生"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "工作壓力大",
+        "偶爾熬夜"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "易怒頭脹",
+      "body": "胸脅脹滿",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "尚可",
+      "sleep": "入睡困難",
+      "thirst": "不渴",
+      "gynecology": "經前乳房脹痛，經量正常"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "弦"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "肝鬱",
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結"
+      ],
+      "diagnosis": "乳癖（肝氣鬱滯）",
+      "treatment": "疏肝理氣，活血通絡",
+      "suggestion": "規律作息，減少熬夜；可飲玫瑰花茶；按摩膻中、太衝穴；情緒管理與舒緩運動。"
+    }
+  }
+}

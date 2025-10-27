@@ -1,0 +1,67 @@
+{
+  "case_id": "CASE_20251005030024_5678_b500315e",
+  "created_at": "2025-10-05T03:00:24.456764",
+  "data": {
+    "basic": {
+      "name": " 王小明",
+      "gender": "男",
+      "age": "32",
+      "idLast4": "5678",
+      "phone": "0912345678",
+      "visitDate": "2025-10-03"
+    },
+    "complaint": {
+      "chiefComplaint": "咽痛三天,發熱,咳嗽",
+      "presentIllness": "患者三天前淋雨後出現咽喉疼痛,自覺體溫升高約38.5°C,伴有咳嗽,痰黃黏稠不易咯出。昨日症狀加重,咽痛明顯,咳嗽頻繁影響睡眠。曾自行服用感冒藥物,症狀未明顯緩解。",
+      "medicalHistory": "平素體健,無慢性病史,無藥物過敏史",
+      "familyHistory": "父親有高血壓病史"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "正常"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "薄黃"
+      ],
+      "tongueShape": [],
+      "tongueNote": "舌尖紅赤明顯"
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": true,
+      "coughNote": "咳聲重濁,痰黃稠,不易咯出"
+    },
+    "inquiry": {
+      "chills": "惡風,發熱明顯",
+      "sweat": "汗出",
+      "head": "頭脹痛",
+      "body": "咽喉紅腫疼痛",
+      "stool": "正常",
+      "urine": "尿色偏黃",
+      "appetite": "食慾減退",
+      "sleep": "因咳嗽頻繁,夜寐不安",
+      "thirst": "口渴欲飲水",
+      "gynecology": ""
+    },
+    "pulse": {},
+    "diagnosis": {
+      "syndromePattern": [
+        "表證",
+        "熱證",
+        "實證"
+      ],
+      "zangfuPattern": [
+        "肺熱"
+      ],
+      "diagnosis": "風熱感冒,肺熱壅盛",
+      "treatment": "疏風清熱,宣肺止咳",
+      "suggestion": "建議多休息,保持室內空氣流通,多飲溫開水。飲食宜清淡,避免辛辣刺激及油膩食物。可配合針灸風池、大椎、合谷等穴位加強療效。建議服藥後觀察2-3天,若高熱持續或症狀加重,請及時複診。注意保暖,避免再次受涼。"
+    }
+  }
+}

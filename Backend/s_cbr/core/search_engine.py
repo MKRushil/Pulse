@@ -24,9 +24,18 @@ class SearchEngine:
     """ 與 Weaviate 溝通的檢索層。 """
 
     ALLOW: Dict[str, List[str]] = {
-        "Case": [
-            "case_id", "chiefComplaint", "presentIllness", "search_text",
-            "diagnosis_main", "pulse_text", "src_casev_uuid",
+        "TCMCase": [  # 改為 TCMCase
+            # 基本資訊
+            "case_id", "patient_id", "visit_date", "age", "gender",
+            # 向量搜索欄位
+            "full_text",
+            # BM25 欄位
+            "jieba_tokens", "syndrome_terms", "zangfu_terms", 
+            "symptom_terms", "pulse_terms", "tongue_terms", "treatment_terms",
+            # 結構化欄位
+            "chief_complaint", "diagnosis", "treatment_principle", "suggestion",
+            # 原始資料
+            "raw_data", "created_at", "updated_at"
         ],
         "PulsePJ": [
             "pid", "name", "category", "main_disease", "search_text", "symptoms", "category_id",
@@ -126,7 +135,7 @@ class SearchEngine:
         props = [p for p in props if p in real]
         if not props:
             fallback = {
-                "Case": ["case_id", "chiefComplaint", "presentIllness", "search_text"],
+                "TCMCase": ["case_id", "chief_complaint", "diagnosis", "full_text"],
                 "PulsePJ": ["pid", "name", "category", "main_disease", "search_text"],
                 "RPCase": ["rid", "final_diagnosis", "search_text"],
             }

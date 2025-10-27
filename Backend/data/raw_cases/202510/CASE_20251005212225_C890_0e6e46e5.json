@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212225_C890_0e6e46e5",
+  "created_at": "2025-10-05T21:22:25.057192",
+  "data": {
+    "basic": {
+      "name": "張建明",
+      "gender": "男",
+      "age": "54",
+      "idLast4": "C890",
+      "phone": "0934-567-103",
+      "visitDate": "2025-11-16"
+    },
+    "complaint": {
+      "chiefComplaint": "腰膝酸軟半年",
+      "presentIllness": "患者半年來感腰膝酸軟無力，夜尿增多，每夜3次。伴畏寒肢冷。",
+      "medicalHistory": "高血壓5年",
+      "familyHistory": "父親糖尿病"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "肥胖"
+      ],
+      "faceColor": "面色晦暗",
+      "tongueBody": [
+        "淡胖"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "齒痕"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "氣短",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "自汗",
+      "head": "頭暈",
+      "body": "腰酸",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "食慾正常",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "陽虛"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "腰膝痠軟",
+      "treatment": "溫補腎陽，強腰健骨",
+      "suggestion": "避免受寒，保持腰部溫暖；適度活動；可食用羊肉、核桃補腎陽。"
+    }
+  }
+}

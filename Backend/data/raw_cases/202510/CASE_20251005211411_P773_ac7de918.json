@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211411_P773_ac7de918",
+  "created_at": "2025-10-05T21:14:11.908080",
+  "data": {
+    "basic": {
+      "name": "邱雅筑",
+      "gender": "女",
+      "age": "28",
+      "idLast4": "P773",
+      "phone": "0963-889-447",
+      "visitDate": "2025-10-16"
+    },
+    "complaint": {
+      "chiefComplaint": "經行頭痛一年",
+      "presentIllness": "每逢經前或經期前兩日頭痛，經後緩解",
+      "medicalHistory": "無",
+      "familyHistory": "母親痛經"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色偏黃",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭痛脹感",
+      "body": "胸脅悶脹",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "多夢",
+      "thirst": "不渴",
+      "gynecology": "經量時多時少，色暗有塊"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "肝鬱",
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結"
+      ],
+      "diagnosis": "經行頭痛（肝鬱氣滯）",
+      "treatment": "疏肝理氣，活血止痛",
+      "suggestion": "經前情緒管理；避免熬夜；玫瑰花茶；按太衝、合谷；暖敷項背。"
+    }
+  }
+}

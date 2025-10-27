@@ -1,0 +1,89 @@
+{
+  "case_id": "CASE_20251005211508_X103_8e7dbc72",
+  "created_at": "2025-10-05T21:15:08.262440",
+  "data": {
+    "basic": {
+      "name": "陳湘和",
+      "gender": "男",
+      "age": "61",
+      "idLast4": "X103",
+      "phone": "0965-550-774",
+      "visitDate": "2025-11-03"
+    },
+    "complaint": {
+      "chiefComplaint": "慢性咳嗽三月",
+      "presentIllness": "晨起咳嗽有白痰，天冷明顯，久咳氣短",
+      "medicalHistory": "慢性支氣管炎",
+      "familyHistory": "父親哮喘"
+    },
+    "inspection": {
+      "spirit": "氣短",
+      "bodyShape": [
+        "略胖"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "喘息",
+      "cough": true,
+      "coughNote": "晨起咳白稀痰"
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "自汗",
+      "head": "無",
+      "body": "胸悶乏力",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "納差",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉弱"
+      ],
+      "右關(脾胃)": [
+        "沉弱"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒證",
+        "痰濕"
+      ],
+      "zangfuPattern": [
+        "肺氣虛",
+        "脾陽虛"
+      ],
+      "diagnosis": "咳嗽（肺脾兩虛痰濕）",
+      "treatment": "益氣健脾，化痰溫肺",
+      "suggestion": "立即戒菸；保暖避寒；霧化與呼吸訓練；清淡飲食，避免生冷。"
+    }
+  }
+}

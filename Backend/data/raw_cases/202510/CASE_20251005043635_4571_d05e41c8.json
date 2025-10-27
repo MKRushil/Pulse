@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005043635_4571_d05e41c8",
+  "created_at": "2025-10-05T04:36:35.902508",
+  "data": {
+    "basic": {
+      "name": "唐志強",
+      "gender": "男",
+      "age": "53",
+      "idLast4": "4571",
+      "phone": "0945678904",
+      "visitDate": "2025-02-17"
+    },
+    "complaint": {
+      "chiefComplaint": "手指關節疼痛變形一年",
+      "presentIllness": "患者一年來手指關節疼痛,晨起僵硬,手指關節逐漸變形,活動受限。陰雨天症狀加重。",
+      "medicalHistory": "類風濕性關節炎3年",
+      "familyHistory": "無特殊"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "正常"
+      ],
+      "faceColor": "面色少華",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白"
+      ],
+      "tongueShape": [],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒肢冷",
+      "sweat": "無異常",
+      "head": "無",
+      "body": "手指關節疼痛,晨僵,活動不利",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "紆可",
+      "sleep": "正常",
+      "thirst": "不多飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉細"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉"
+      ],
+      "右關(脾胃)": [
+        "沉弱"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "寒濕",
+        "腎虛"
+      ],
+      "zangfuPattern": [
+        "肝腎虧虛",
+        "寒濕痹阻"
+      ],
+      "diagnosis": "痹證,肝腎虧虛,寒濕痹阻",
+      "treatment": "補益肝腎,祛寒除濕,通絡止痛",
+      "suggestion": "建議規律服用抗風濕藥物,定期監測。注意保暖,避免受涼受潮。適度手指功能鍛煉,防止僵硬。可溫水泡手。飲食補肝腎,可食用黑豆、核桃、芝麻等。避免生冷寒涼食物。可配合理療、針灸。保持積極樂觀心態。"
+    }
+  }
+}

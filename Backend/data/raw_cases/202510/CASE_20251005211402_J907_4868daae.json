@@ -1,0 +1,89 @@
+{
+  "case_id": "CASE_20251005211402_J907_4868daae",
+  "created_at": "2025-10-05T21:14:02.338938",
+  "data": {
+    "basic": {
+      "name": "郭家銘",
+      "gender": "男",
+      "age": "47",
+      "idLast4": "J907",
+      "phone": "0936-550-321",
+      "visitDate": "2025-10-10"
+    },
+    "complaint": {
+      "chiefComplaint": "咳嗽痰多十日",
+      "presentIllness": "受涼後咳嗽，痰白而稀易咯，無明顯發熱",
+      "medicalHistory": "過敏體質",
+      "familyHistory": "父親慢性支氣管炎"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "久坐少動"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡白"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": true,
+      "coughNote": "咳嗽痰多，色白質稀"
+    },
+    "inquiry": {
+      "chills": "惡寒輕",
+      "sweat": "微汗",
+      "head": "鼻塞頭脹",
+      "body": "無",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "浮"
+      ],
+      "左關(肝膽)": [
+        "浮"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "浮緊"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "風寒",
+        "表證",
+        "痰濕"
+      ],
+      "zangfuPattern": [
+        "肺氣虛",
+        "脾虛濕困"
+      ],
+      "diagnosis": "風寒咳嗽（痰濕蘊肺）",
+      "treatment": "疏風散寒，化痰止咳",
+      "suggestion": "注意保暖，多飲溫水；避免生冷油膩；保持室內通風；症狀加重或超過兩週請就醫。"
+    }
+  }
+}

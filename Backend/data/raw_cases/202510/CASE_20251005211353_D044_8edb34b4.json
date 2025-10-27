@@ -1,0 +1,89 @@
+{
+  "case_id": "CASE_20251005211353_D044_8edb34b4",
+  "created_at": "2025-10-05T21:13:53.758546",
+  "data": {
+    "basic": {
+      "name": "許柏豪",
+      "gender": "男",
+      "age": "52",
+      "idLast4": "D044",
+      "phone": "0952-770-664",
+      "visitDate": "2025-10-07"
+    },
+    "complaint": {
+      "chiefComplaint": "胸悶氣短兩週",
+      "presentIllness": "兩週活動後胸悶氣短，偶有心悸，加班後加重",
+      "medicalHistory": "高血脂、冠心病3年",
+      "familyHistory": "父親心肌梗塞"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "體重過重"
+      ],
+      "faceColor": "面色暗紅",
+      "tongueBody": [
+        "暗紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "胖大齒痕"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "氣短",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "自汗",
+      "head": "無",
+      "body": "胸悶心悸",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "尚可",
+      "thirst": "口乾欲飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "結代"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "滑"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "痰濕",
+        "氣虛",
+        "血瘀"
+      ],
+      "zangfuPattern": [
+        "心氣虛",
+        "脾虛濕困"
+      ],
+      "diagnosis": "胸痺（痰瘀互結）",
+      "treatment": "益氣化痰，活血通脈",
+      "suggestion": "低油低鹽飲食，控制體重；配合內關、膻中穴針灸；規律服藥並定期檢查，運動循序漸進。"
+    }
+  }
+}

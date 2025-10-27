@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212237_L789_0daf1384",
+  "created_at": "2025-10-05T21:22:37.876450",
+  "data": {
+    "basic": {
+      "name": "周柏任",
+      "gender": "男",
+      "age": "45",
+      "idLast4": "L789",
+      "phone": "0951-322-771",
+      "visitDate": "2025-11-24"
+    },
+    "complaint": {
+      "chiefComplaint": "耳鳴兩月",
+      "presentIllness": "雙耳鳴聲如蟬鳴，夜間明顯，伴腰膝痠軟。",
+      "medicalHistory": "高血壓",
+      "familyHistory": "母親聽力減退"
+    },
+    "inspection": {
+      "spirit": "神情平和",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰膝酸",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "尚可",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "腎精不足"
+      ],
+      "diagnosis": "耳鳴（腎虛型）",
+      "treatment": "補腎益精，滋陰潛陽",
+      "suggestion": "保持良好睡眠；避免過勞與熬夜；可飲枸杞菊花茶輔助調理。"
+    }
+  }
+}

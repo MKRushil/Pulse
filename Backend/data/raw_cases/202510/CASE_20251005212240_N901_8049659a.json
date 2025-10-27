@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212240_N901_8049659a",
+  "created_at": "2025-10-05T21:22:40.290563",
+  "data": {
+    "basic": {
+      "name": "徐景弘",
+      "gender": "男",
+      "age": "61",
+      "idLast4": "N901",
+      "phone": "0972-541-203",
+      "visitDate": "2025-11-25"
+    },
+    "complaint": {
+      "chiefComplaint": "小便頻急半年",
+      "presentIllness": "半年來出現小便頻數、夜尿多，排尿無力，伴腰酸乏力。",
+      "medicalHistory": "攝護腺肥大",
+      "familyHistory": "父親同症"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡黃",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰痠",
+      "stool": "正常",
+      "urine": "頻數",
+      "appetite": "正常",
+      "sleep": "夜間易醒",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "腎氣不足"
+      ],
+      "zangfuPattern": [
+        "腎陽虛"
+      ],
+      "diagnosis": "遺尿（腎氣虛）",
+      "treatment": "補腎壯陽，固攝膀胱",
+      "suggestion": "避免受寒；少飲夜水；可艾灸關元、腎俞穴調理。"
+    }
+  }
+}

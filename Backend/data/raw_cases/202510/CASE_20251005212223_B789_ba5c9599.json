@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005212223_B789_ba5c9599",
+  "created_at": "2025-10-05T21:22:23.187525",
+  "data": {
+    "basic": {
+      "name": "林若涵",
+      "gender": "女",
+      "age": "30",
+      "idLast4": "B789",
+      "phone": "0923-456-102",
+      "visitDate": "2025-11-15"
+    },
+    "complaint": {
+      "chiefComplaint": "月經推遲兩月",
+      "presentIllness": "患者近兩月月經延後，經量少色淡，伴小腹隱痛及胸脹。近期加班熬夜，情緒緊張。",
+      "medicalHistory": "無",
+      "familyHistory": "母親痛經史"
+    },
+    "inspection": {
+      "spirit": "神情緊張",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "小腹隱痛",
+      "stool": "偏乾",
+      "urine": "正常",
+      "appetite": "尚可",
+      "sleep": "易醒",
+      "thirst": "不渴",
+      "gynecology": "月經延後，量少色淡"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "細弱"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "血虛",
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結",
+        "脾氣虛"
+      ],
+      "diagnosis": "月經不調",
+      "treatment": "養血疏肝，調經止痛",
+      "suggestion": "注意休息，避免熬夜；保持心情平和；可服用當歸、白芍等補血食材。"
+    }
+  }
+}

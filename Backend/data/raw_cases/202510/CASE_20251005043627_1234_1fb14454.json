@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005043627_1234_1fb14454",
+  "created_at": "2025-10-05T04:36:27.271676",
+  "data": {
+    "basic": {
+      "name": "王建國",
+      "gender": "男",
+      "age": "45",
+      "idLast4": "1234",
+      "phone": "0912345678",
+      "visitDate": "2025-01-15"
+    },
+    "complaint": {
+      "chiefComplaint": "咳嗽痰多兩週",
+      "presentIllness": "患者兩週前受涼後出現咳嗽,痰多色白質稀,晨起咳嗽加重,伴有胸悶氣短。平素體弱易感冒。",
+      "medicalHistory": "慢性支氣管炎病史3年",
+      "familyHistory": "父親有哮喘病史"
+    },
+    "inspection": {
+      "spirit": "略倦",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "胖大"
+      ],
+      "tongueNote": "舌有齒痕"
+    },
+    "auscultation": {
+      "voice": "略低",
+      "breath": "氣短",
+      "cough": true,
+      "coughNote": "咳聲重濁,痰多色白"
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "易汗出",
+      "head": "頭暈",
+      "body": "乏力,乳汁少",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "紆差",
+      "sleep": "尚可",
+      "thirst": "不思飲",
+      "gynecology": "產後兩週,惡露已淨"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉"
+      ],
+      "左關(肝膽)": [
+        "沉"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "沉弱"
+      ],
+      "右關(脾胃)": [
+        "沉弱"
+      ],
+      "右尺(命門)": [
+        "沉弱無力"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陽虛",
+        "腎虛"
+      ],
+      "zangfuPattern": [
+        "肺腎陽虛",
+        "腎不納氣"
+      ],
+      "diagnosis": "肺腎陽虛,腎不納氣",
+      "treatment": "溫補肺腎,納氣平喘",
+      "suggestion": "建議避免受涼,注意保暖。戒菸,避免刺激性氣體。飲食溫補,可食用核桃、生薑、羊肉等。適度運動如呼吸操,增強肺功能。保持室內空氣流通。可配合艾灸肺俞、腎俞、定喘穴。若氣喘加重或出現紫紺請立即就醫。"
+    }
+  }
+}

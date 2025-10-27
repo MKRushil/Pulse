@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212327_N567_ba333b12",
+  "created_at": "2025-10-05T21:23:27.156286",
+  "data": {
+    "basic": {
+      "name": "王柏翔",
+      "gender": "男",
+      "age": "60",
+      "idLast4": "N567",
+      "phone": "0911-707-943",
+      "visitDate": "2025-12-12"
+    },
+    "complaint": {
+      "chiefComplaint": "夜尿頻多半年",
+      "presentIllness": "夜尿4-5次，伴排尿無力，小腹脹滿。",
+      "medicalHistory": "前列腺增生3年",
+      "familyHistory": "父親同病"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色淡",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "胖"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低弱",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "夜尿多",
+      "stool": "偏溏",
+      "urine": "清長",
+      "appetite": "尚可",
+      "sleep": "淺眠",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "沉弱"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "腎虛"
+      ],
+      "zangfuPattern": [
+        "腎氣虛"
+      ],
+      "diagnosis": "遺尿頻數",
+      "treatment": "補腎固澀，溫陽化氣",
+      "suggestion": "避免晚間過多飲水；可服金匱腎氣丸；多運動強腰腎。"
+    }
+  }
+}

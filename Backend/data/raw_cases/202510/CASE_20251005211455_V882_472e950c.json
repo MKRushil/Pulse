@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005211455_V882_472e950c",
+  "created_at": "2025-10-05T21:14:55.019437",
+  "data": {
+    "basic": {
+      "name": "黃智凱",
+      "gender": "男",
+      "age": "45",
+      "idLast4": "V882",
+      "phone": "0931-220-640",
+      "visitDate": "2025-10-27"
+    },
+    "complaint": {
+      "chiefComplaint": "鼻衄反覆一月",
+      "presentIllness": "天乾時偶鼻出血，量少自止，伴口乾便乾",
+      "medicalHistory": "過敏性鼻炎",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少汗",
+      "head": "頭暈",
+      "body": "鼻乾癢",
+      "stool": "便乾",
+      "urine": "黃",
+      "appetite": "正常",
+      "sleep": "正常",
+      "thirst": "口乾",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "滑"
+      ],
+      "右尺(命門)": [
+        "細"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "燥熱"
+      ],
+      "zangfuPattern": [
+        "肺熱"
+      ],
+      "diagnosis": "鼻衄（肺熱傷絡）",
+      "treatment": "清肺涼血，潤燥止血",
+      "suggestion": "室內加濕；避免摳鼻與辛辣酒；多飲水；可冷敷鼻樑；若量多不止即就醫。"
+    }
+  }
+}

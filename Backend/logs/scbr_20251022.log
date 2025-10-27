@@ -1,0 +1,483 @@
+2025-10-22 02:11:54 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 02:11:54 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 02:11:54 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 02:11:54 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 02:11:54 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 02:11:54 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 02:11:54 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 02:11:54 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 02:12:09 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 02:12:09 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 02:12:09 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 02:12:09 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 02:12:09 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 02:12:09 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 02:12:10 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 02:12:10 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 02:12:13 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 02:12:13 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 02:12:14 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 02:12:14 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 02:12:14 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 02:12:14 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 02:12:14 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 02:12:14 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 02:12:14 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 02:12:14 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 02:12:14 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 02:12:14 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 02:12:14 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:12:14 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 02:12:14 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 02:12:14 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 02:12:14 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 02:12:14 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:12:14 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 02:12:14 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 02:12:14 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 02:12:14 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 02:12:14 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 02:12:14 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 02:12:14 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 02:12:14 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 02:12:14 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 02:12:14 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 02:12:14 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 02:12:14 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 02:12:14 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 02:12:14 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:12:14 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 02:12:14 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 02:12:14 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 02:12:14 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 02:12:14 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO - 
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 02:12:14 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 02:12:15 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 02:12:15 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 02:12:16 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 02:12:16 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 02:12:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 02:12:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 02:12:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 02:12:17 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 02:12:17 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 02:12:17 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 02:12:17 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 02:12:17 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 02:12:20 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 02:12:20 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 02:12:21 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 02:12:21 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 02:12:21 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 02:12:21 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 02:12:21 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 02:12:21 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 02:12:21 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 02:12:21 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 02:12:21 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 02:12:21 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 02:12:21 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:12:21 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 02:12:21 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 02:12:21 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 02:12:21 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 02:12:21 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:12:21 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 02:12:21 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 02:12:21 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 02:12:21 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 02:12:21 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 02:12:21 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 02:12:21 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 02:12:21 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 02:12:21 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 02:12:21 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 02:12:21 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 02:12:21 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 02:12:21 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 02:12:21 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:12:21 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 02:12:21 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 02:12:21 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 02:12:21 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 02:12:21 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO - 
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 02:12:21 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 02:12:22 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 02:12:23 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 02:12:23 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 02:12:23 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 02:13:24 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 02:13:25 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 02:13:25 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 02:13:25 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 02:13:25 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 02:13:25 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 02:13:25 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 02:13:25 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 02:13:27 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 02:13:27 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:13:27 - s_cbr.SCBREngine - ERROR - ❌ LLM 客戶端初始化失敗: name 'LLMClient' is not defined
+2025-10-22 02:13:28 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 02:13:28 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 02:13:29 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 02:13:29 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 02:13:29 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 02:13:29 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 02:13:29 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 02:13:29 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 02:13:29 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 02:13:29 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 02:13:29 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 02:13:29 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 02:13:29 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 02:13:29 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 02:13:29 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 02:13:29 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 02:13:29 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 02:13:29 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 02:13:29 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 02:13:29 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 02:13:29 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 02:13:29 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 02:13:29 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 02:13:29 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO - 
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 02:13:29 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 02:13:29 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 02:13:30 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 02:13:30 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 02:13:30 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 03:58:42 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 03:58:42 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 03:58:42 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 03:58:42 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 03:58:42 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 03:58:42 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 03:58:42 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 03:58:42 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 03:58:45 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 03:58:45 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 03:58:45 - s_cbr.SCBREngine - ERROR - ❌ LLM 客戶端初始化失敗: name 'LLMClient' is not defined
+2025-10-22 03:58:46 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 03:58:46 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 03:58:46 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 03:58:46 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 03:58:46 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 03:58:46 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 03:58:46 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 03:58:46 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 03:58:46 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 03:58:46 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 03:58:46 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 03:58:46 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 03:58:46 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 03:58:46 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 03:58:46 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 03:58:46 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 03:58:46 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 03:58:46 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 03:58:46 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 03:58:46 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 03:58:46 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 03:58:46 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 03:58:46 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 03:58:46 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO - 
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 03:58:46 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 03:58:47 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 03:58:48 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 03:58:48 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 03:58:48 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 04:03:41 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 04:03:41 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 04:03:41 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 04:03:41 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 04:03:41 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 04:03:41 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 04:03:41 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 04:03:41 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 04:03:44 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 04:03:44 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 04:03:44 - s_cbr.SCBREngine - ERROR - ❌ LLM 客戶端初始化失敗: name 'LLMClient' is not defined
+2025-10-22 04:03:44 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 04:03:44 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 04:03:45 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 04:03:45 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 04:03:45 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 04:03:45 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 04:03:45 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 04:03:45 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 04:03:45 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 04:03:45 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 04:03:45 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 04:03:45 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 04:03:45 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 04:03:45 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 04:03:45 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 04:03:45 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 04:03:45 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 04:03:45 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 04:03:45 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 04:03:45 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 04:03:45 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 04:03:45 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 04:03:45 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 04:03:45 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO - 
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 04:03:45 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 04:03:46 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 04:03:46 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 04:03:46 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 04:03:46 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 04:04:03 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 04:04:03 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 04:04:03 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 04:04:03 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 04:04:03 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 04:04:03 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 04:04:04 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 04:04:04 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 04:04:06 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 04:04:06 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 04:04:06 - s_cbr.SCBREngine - ERROR - ❌ LLM 客戶端初始化失敗: name 'LLMClient' is not defined
+2025-10-22 04:04:07 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 04:04:07 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 04:04:07 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 04:04:07 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 04:04:07 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 04:04:07 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 04:04:07 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 04:04:07 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 04:04:07 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 04:04:07 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 04:04:07 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 04:04:07 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 04:04:07 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 04:04:07 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 04:04:07 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 04:04:07 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 04:04:07 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 04:04:07 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 04:04:07 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 04:04:07 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 04:04:07 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 04:04:07 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 04:04:07 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 04:04:07 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO - 
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 04:04:07 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 04:04:08 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 04:04:09 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 04:04:09 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 04:04:09 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 04:04:57 - s_cbr.KnowledgeLoader - INFO - ✅ 載入證型規則: 12 種
+2025-10-22 04:04:57 - s_cbr.KnowledgeLoader - INFO - ✅ 載入體質分類: 9 種
+2025-10-22 04:04:57 - s_cbr.KnowledgeLoader - INFO - ✅ 載入病機模式庫
+2025-10-22 04:04:57 - s_cbr.KnowledgeLoader - INFO - ✅ 載入治則治法庫
+2025-10-22 04:04:57 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入停用詞: 39 個
+2025-10-22 04:04:57 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入 TCM 關鍵詞: 85 個
+2025-10-22 04:04:57 - s_cbr.knowledge.TCMConfig - INFO - ✅ 載入證型關鍵詞: 12 種
+2025-10-22 04:04:57 - s_cbr.knowledge.TCMConfig - INFO - ✅ TCM 配置載入成功
+2025-10-22 04:05:00 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-22 04:05:00 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 04:05:00 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 04:05:00 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-22 04:05:00 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-22 04:05:01 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-22 04:05:01 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-22 04:05:01 - s_cbr.DynamicRetrieval - INFO - ✅ 動態檢索優化器初始化
+2025-10-22 04:05:01 - s_cbr.DynamicRetrieval - INFO -    欄位權重: {'symptom_terms': 1.0, 'pulse_terms': 1.2, 'tongue_terms': 1.2, 'zangfu_terms': 0.9, 'syndrome_terms': 1.1, 'jieba_tokens': 0.6}
+2025-10-22 04:05:01 - s_cbr.DiscriminativeWeights - INFO - ✅ 高鑑別權重系統初始化
+2025-10-22 04:05:01 - s_cbr.DiscriminativeWeights - INFO -    舌脈關鍵詞: 92 個
+2025-10-22 04:05:01 - s_cbr.DiscriminativeWeights - INFO -    互斥對: 15 對
+2025-10-22 04:05:01 - s_cbr.DiscriminativeWeights - INFO -    高鑑別症狀: 104 個
+2025-10-22 04:05:01 - s_cbr.DiscriminativeWeights - INFO -    中等鑑別症狀: 28 個
+2025-10-22 04:05:01 - s_cbr.DiscriminativeWeights - INFO -    低鑑別症狀: 12 個
+2025-10-22 04:05:01 - s_cbr.TemporalSmoother - INFO - ✅ 證型時間平滑器初始化
+2025-10-22 04:05:01 - s_cbr.TemporalSmoother - INFO -    平滑係數: 當前=0.6, 歷史=0.4
+2025-10-22 04:05:01 - s_cbr.QueryExpander - INFO - ✅ 查詢擴充器初始化
+2025-10-22 04:05:01 - s_cbr.QueryExpander - INFO -    同義詞映射: 21 組
+2025-10-22 04:05:01 - s_cbr.QueryExpander - INFO -    中醫映射: 15 組
+2025-10-22 04:05:01 - s_cbr.OutputFormatter - INFO - ✅ 輸出格式化器初始化
+2025-10-22 04:05:01 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-22 04:05:01 - s_cbr.PatternDiagnosis - INFO - ✅ 辨證-診斷雙層推理器初始化
+2025-10-22 04:05:01 - s_cbr.ContextFuser - INFO - ✅ Context Fuser 初始化
+2025-10-22 04:05:01 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-22 04:05:01 - s_cbr.SCBREngine - WARNING - ⚠️  輔助模組初始化失敗: [Errno 2] No such file or directory: 'C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\config\\stop_rules.yaml'
+2025-10-22 04:05:01 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO - 
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-22 04:05:01 - s_cbr.backend.main - INFO - ============================================================
+2025-10-22 04:05:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-22 04:05:02 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-22 04:05:03 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-22 04:05:03 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-22 04:05:16 - s_cbr.backend.main - INFO - 🌀 啟動診斷 [相容模式] 問題: 最近常常失眠而且多夢，晚上容易驚醒，醫師說我左寸的脈有點遲，白天會心悸口乾，該怎麼辦？
+2025-10-22 04:05:16 - s_cbr.SCBREngine - INFO - 🌀 啟動診斷 [SCBR-20251022-040516-73c37478]
+2025-10-22 04:05:16 - s_cbr.SCBREngine - INFO -    問題: 最近常常失眠而且多夢，晚上容易驚醒，醫師說我左寸的脈有點遲，白天會心悸口乾，該怎麼辦？...
+2025-10-22 04:05:16 - s_cbr.SCBREngine - INFO -    session_id: None
+2025-10-22 04:05:16 - s_cbr.SCBREngine - INFO -    continue_spiral: False
+2025-10-22 04:05:16 - s_cbr.DialogManager - INFO - 📝 創建會話: 1a11d207-0f1d-4709-9bcc-db29bcfb5576
+2025-10-22 04:05:16 - s_cbr.DialogManager - INFO -    初始問題: 最近常常失眠而且多夢，晚上容易驚醒，醫師說我左寸的脈有點遲，白天會心悸口乾，該怎麼辦？...
+2025-10-22 04:05:16 - s_cbr.SCBREngine - INFO - 🆕 創建新會話: 1a11d207-0f1d-4709-9bcc-db29bcfb5576
+2025-10-22 04:05:16 - s_cbr.SCBREngine - INFO - 🔢 當前輪次: 1
+2025-10-22 04:05:16 - s_cbr.SpiralEngine - INFO - 🌀 執行第 1 輪螺旋推理
+2025-10-22 04:05:16 - s_cbr.SpiralEngine - INFO - 📋 症狀追蹤 [輪1]:
+2025-10-22 04:05:16 - s_cbr.SpiralEngine - INFO -    新增: ['失眠', '口乾', '多夢', '心悸']
+2025-10-22 04:05:16 - s_cbr.SpiralEngine - INFO -    累積: ['口乾', '多夢', '失眠', '心悸']
+2025-10-22 04:05:16 - s_cbr.SpiralEngine - INFO -    核心: ['失眠', '口乾', '多夢', '心悸']
+2025-10-22 04:05:16 - s_cbr.ContextFuser - INFO - 🔄 Context Fusion 完成 [Round 1]
+2025-10-22 04:05:16 - s_cbr.ContextFuser - INFO -    症狀數: 4, 否定數: 0
+2025-10-22 04:05:16 - s_cbr.ContextFuser - INFO -    關鍵症狀: ['失眠', '心悸', '口乾']
+2025-10-22 04:05:16 - s_cbr.SpiralEngine - INFO - 🔍 檢索查詢: 失眠 失眠 失眠 心悸 心悸 心悸 口乾 口乾 口乾 多夢 多夢...
+2025-10-22 04:05:18 - s_cbr.SpiralEngine - INFO - 🧭 生成向量: dim=1024
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    ⚠️  Coverage=0.00 < 0.4，降低 α
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🎯 動態 α 計算 [第1輪]:
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    症狀數=4, 覆蓋率=0.00
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    基礎α=0.500, 輪次α=0.426
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    最終α=0.400
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 🔎 TCMCase HYBRID α=0.3996847192096431, qdim=1024, fields=['symptom_terms', 'syndrome_terms', 'pulse_terms'], props=['case_id', 'diagnosis', 'symptom_terms', 'syndrome_terms']
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 📊 TCMCase 搜索: 30 個結果
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 🔎 PulsePJ HYBRID α=0.3996847192096431, qdim=1024, fields=['bm25_cjk'], props=['pid', 'name', 'symptoms']
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 📊 PulsePJ 搜索: 28 個結果
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 🔎 RPCase HYBRID α=0.3996847192096431, qdim=1024, fields=['bm25_text'], props=['final_diagnosis', 'symptom_tags']
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 📊 RPCase 搜索: 0 個結果
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🔄 RPCase 為空且覆蓋率低，降低 α 重搜
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 🔎 RPCase HYBRID α=0.3197477753677145, qdim=1024, fields=['bm25_text'], props=['final_diagnosis', 'symptom_tags']
+2025-10-22 04:05:18 - s_cbr.SearchEngine - INFO - 📊 RPCase 搜索: 0 個結果
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🔀 RRF 融合: 1 個排序 → 30 個結果
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🔀 RRF 融合: 1 個排序 → 1 個結果
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🔀 RRF 融合: 1 個排序 → 0 個結果
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🎨 MMR 重排: 30 → 10 個（λ=0.7）
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - 🎨 MMR 重排: 1 → 1 個（λ=0.7）
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO - ✅ 優化檢索完成:
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    TCMCase: 30 → 10
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    PulsePJ: 28 → 1
+2025-10-22 04:05:18 - s_cbr.DynamicRetrieval - INFO -    RPCase: 0 → 0
+2025-10-22 04:05:18 - s_cbr.SpiralEngine - INFO - 📊 優化檢索結果 - Case: 10, Pulse: 1, RPCase: 0
+2025-10-22 04:05:18 - s_cbr.DiscriminativeWeights - INFO - 🎯 症狀鑑別權重: 0 個症狀獲得加權
+2025-10-22 04:05:18 - s_cbr.DiscriminativeWeights - INFO - ✅ 鑑別權重應用完成:
+2025-10-22 04:05:18 - s_cbr.DiscriminativeWeights - INFO -    症狀加權: 0 個
+2025-10-22 04:05:18 - s_cbr.DiscriminativeWeights - INFO -    互斥懲罰: 0 對
+2025-10-22 04:05:18 - s_cbr.PatternDiagnosis - INFO - 🔍 第1輪雙層推理完成
+2025-10-22 04:05:18 - s_cbr.PatternDiagnosis - INFO -    主證: {'label': '證型', 'p_score': 0.93}
+2025-10-22 04:05:18 - s_cbr.PatternDiagnosis - INFO -    病機: 病機待定，需進一步辨證
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO - 📈 會話 1a11d207-0f1d-4709-9bcc-db29bcfb5576 收斂度: 0.402
+2025-10-22 04:05:20 - s_cbr.SpiralEngine - INFO - 📋 ROC 生成完成: ROC_1a11d207-0f1d-4709-9bcc-db29bcfb5576_1_20251022040520
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO - 📈 會話 1a11d207-0f1d-4709-9bcc-db29bcfb5576 收斂度: 0.402
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO - 📊 評估指標 [Round 2]:
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO -    RCI=0.682, CMS=0.402
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO -    CSC=0.000, CAS=0.040
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO -    Final=0.331
+2025-10-22 04:05:20 - s_cbr.ConvergenceMetrics - INFO - 未達最小輪次 2
+2025-10-22 04:05:20 - s_cbr.DialogManager - INFO - 📊 記錄第 1 輪結果到會話 1a11d207-0f1d-4709-9bcc-db29bcfb5576
+2025-10-22 04:05:20 - s_cbr.SCBREngine - INFO - ✅ 診斷完成 [SCBR-20251022-040516-73c37478] 耗時: 4.02s
+2025-10-22 04:05:20 - s_cbr.SCBREngine - INFO -    輪次: 1, 可繼續: True
+2025-10-22 04:05:20 - s_cbr.SCBREngine - INFO -    收斂: False, RCI=0.682, Final=0.331

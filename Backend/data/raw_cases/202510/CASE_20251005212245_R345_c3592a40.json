@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212245_R345_c3592a40",
+  "created_at": "2025-10-05T21:22:45.087354",
+  "data": {
+    "basic": {
+      "name": "潘琬婷",
+      "gender": "女",
+      "age": "26",
+      "idLast4": "R345",
+      "phone": "0915-772-308",
+      "visitDate": "2025-11-28"
+    },
+    "complaint": {
+      "chiefComplaint": "皮膚癢疹兩週",
+      "presentIllness": "兩週前出現皮膚紅疹瘙癢，夜間加劇，搔抓後紅腫。",
+      "medicalHistory": "過敏性皮膚炎",
+      "familyHistory": "母親異位性皮膚炎"
+    },
+    "inspection": {
+      "spirit": "焦躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "少",
+      "head": "頭暈",
+      "body": "皮膚癢",
+      "stool": "便黏",
+      "urine": "黃",
+      "appetite": "正常",
+      "sleep": "因癢難眠",
+      "thirst": "口渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "滑數"
+      ],
+      "右關(脾胃)": [
+        "滑數"
+      ],
+      "右尺(命門)": [
+        "細弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "濕熱",
+        "風熱"
+      ],
+      "zangfuPattern": [
+        "血熱風盛"
+      ],
+      "diagnosis": "濕疹（濕熱蘊膚）",
+      "treatment": "清熱解毒，祛風止癢",
+      "suggestion": "避免辛辣與海鮮；保持皮膚乾淨；可服龍膽瀉肝湯；勿抓搔。"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211420_S718_98f9c3c8",
+  "created_at": "2025-10-05T21:14:20.303757",
+  "data": {
+    "basic": {
+      "name": "陳湘庭",
+      "gender": "女",
+      "age": "41",
+      "idLast4": "S718",
+      "phone": "0960-330-774",
+      "visitDate": "2025-10-20"
+    },
+    "complaint": {
+      "chiefComplaint": "更年期煩躁失眠兩月",
+      "presentIllness": "夜間心煩潮熱，睡眠不安，伴盜汗",
+      "medicalHistory": "停經半年",
+      "familyHistory": "母親同症"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "盜汗",
+      "head": "頭暈",
+      "body": "五心煩熱",
+      "stool": "便乾",
+      "urine": "黃少",
+      "appetite": "正常",
+      "sleep": "失眠多夢",
+      "thirst": "口乾",
+      "gynecology": "停經後潮熱"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "細弱"
+      ],
+      "右尺(命門)": [
+        "細"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "內熱"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "更年期綜合症（陰虛內熱）",
+      "treatment": "滋陰降火，安神止汗",
+      "suggestion": "放鬆心情；多食黑豆、百合；調整睡眠；避免辛辣酒類。"
+    }
+  }
+}

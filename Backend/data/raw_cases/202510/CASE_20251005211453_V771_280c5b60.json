@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211453_V771_280c5b60",
+  "created_at": "2025-10-05T21:14:53.785955",
+  "data": {
+    "basic": {
+      "name": "陳姿妤",
+      "gender": "女",
+      "age": "33",
+      "idLast4": "V771",
+      "phone": "0922-118-367",
+      "visitDate": "2025-10-27"
+    },
+    "complaint": {
+      "chiefComplaint": "右脅脹悶兩月",
+      "presentIllness": "情緒波動後脅肋脹悶，嗳氣頻作，納差",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "易怒",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色微黃",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭脹",
+      "body": "胸脅脹滿",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "食慾不振",
+      "sleep": "多夢",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "肝鬱",
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "肝氣鬱結"
+      ],
+      "diagnosis": "脅痛（肝鬱氣滯）",
+      "treatment": "疏肝理氣，和中止痛",
+      "suggestion": "情緒管理；避免油膩與暴飲暴食；飯後散步；按太衝、期門穴。"
+    }
+  }
+}

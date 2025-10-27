@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211451_V559_bf9b08cc",
+  "created_at": "2025-10-05T21:14:51.397714",
+  "data": {
+    "basic": {
+      "name": "邱品瑜",
+      "gender": "女",
+      "age": "26",
+      "idLast4": "V559",
+      "phone": "0960-661-003",
+      "visitDate": "2025-10-26"
+    },
+    "complaint": {
+      "chiefComplaint": "腹痛腹瀉一週",
+      "presentIllness": "受涼後腹痛腹瀉，便稀有未消化食物，食後加劇",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色淡黃",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "齒痕"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腹痛腸鳴",
+      "stool": "溏瀉",
+      "urine": "清長",
+      "appetite": "食少",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩弱"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "寒證",
+        "濕證"
+      ],
+      "zangfuPattern": [
+        "脾陽虛"
+      ],
+      "diagnosis": "泄瀉（脾陽不足）",
+      "treatment": "溫中健脾，行氣止瀉",
+      "suggestion": "少量多餐；避免冷飲生冷；薑棗粥溫養；腹部保暖；症狀遷延請就醫。"
+    }
+  }
+}

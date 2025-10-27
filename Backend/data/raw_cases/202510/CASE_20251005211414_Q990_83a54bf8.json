@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005211414_Q990_83a54bf8",
+  "created_at": "2025-10-05T21:14:14.278961",
+  "data": {
+    "basic": {
+      "name": "曾品妤",
+      "gender": "女",
+      "age": "36",
+      "idLast4": "Q990",
+      "phone": "0915-778-604",
+      "visitDate": "2025-10-17"
+    },
+    "complaint": {
+      "chiefComplaint": "目乾澀三月",
+      "presentIllness": "長時間電腦工作後雙目乾澀疼痛，眨眼減輕",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "正常",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色少華",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰膝痠軟",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "睡眠不足",
+      "thirst": "口乾",
+      "gynecology": "月經量少色紅"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "細"
+      ],
+      "左尺(腎)": [
+        "細弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "細"
+      ],
+      "右尺(命門)": [
+        "細弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "肝腎陰虛"
+      ],
+      "diagnosis": "乾眼（肝腎陰虧）",
+      "treatment": "滋養肝腎，明目",
+      "suggestion": "每40分鐘遠眺休息；枸杞菊花茶；充足睡眠；避免長時間配戴隱形眼鏡與乾燥環境。"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "case_id": "CASE_20251005211350_B771_66765ec9",
+  "created_at": "2025-10-05T21:13:50.002157",
+  "data": {
+    "basic": {
+      "name": "林啟仁",
+      "gender": "男",
+      "age": "43",
+      "idLast4": "B771",
+      "phone": "0922-336-502",
+      "visitDate": "2025-10-06"
+    },
+    "complaint": {
+      "chiefComplaint": "胃脘灼痛一月",
+      "presentIllness": "一月來胃脘灼熱痛，空腹明顯，進食後稍緩，伴反酸噯氣",
+      "medicalHistory": "慢性胃炎2年",
+      "familyHistory": "父親胃潰瘍"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "嗜辛辣",
+        "飲酒"
+      ],
+      "faceColor": "面色潮紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "黃膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "自汗",
+      "head": "無",
+      "body": "胃脘灼痛",
+      "stool": "便乾",
+      "urine": "色黃",
+      "appetite": "尚可",
+      "sleep": "睡眠欠佳",
+      "thirst": "口渴欲冷飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "數"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "滑數"
+      ],
+      "右尺(命門)": [
+        "數"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "熱證",
+        "實證"
+      ],
+      "zangfuPattern": [
+        "胃熱"
+      ],
+      "diagnosis": "胃痛（胃熱熾盛）",
+      "treatment": "清胃瀉火，和中止痛",
+      "suggestion": "戒酒與辛辣油炸；定時定量飲食；按揉中脘、足三里；必要時消化內科追蹤。"
+    }
+  }
+}

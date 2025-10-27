@@ -1,0 +1,87 @@
+{
+  "case_id": "CASE_20251005212226_D901_ab1435ad",
+  "created_at": "2025-10-05T21:22:26.969635",
+  "data": {
+    "basic": {
+      "name": "陳怡君",
+      "gender": "女",
+      "age": "39",
+      "idLast4": "D901",
+      "phone": "0945-678-104",
+      "visitDate": "2025-11-17"
+    },
+    "complaint": {
+      "chiefComplaint": "頭痛兩週",
+      "presentIllness": "患者兩週前開始出現頭頂及太陽穴疼痛，伴有煩躁易怒及目赤口苦。",
+      "medicalHistory": "無",
+      "familyHistory": "母親高血壓"
+    },
+    "inspection": {
+      "spirit": "煩躁不安",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面紅目赤",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "薄黃"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭痛",
+      "body": "目赤",
+      "stool": "偏乾",
+      "urine": "黃少",
+      "appetite": "尚可",
+      "sleep": "失眠",
+      "thirst": "口苦",
+      "gynecology": "月經正常"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "弦"
+      ],
+      "右寸(肺)": [
+        "數"
+      ],
+      "右關(脾胃)": [
+        "弦"
+      ],
+      "右尺(命門)": [
+        "弦"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "熱證",
+        "肝鬱"
+      ],
+      "zangfuPattern": [
+        "肝陽上亢"
+      ],
+      "diagnosis": "眩暈頭痛",
+      "treatment": "平肝潛陽，清熱息風",
+      "suggestion": "保持心情平和，避免情緒激動；可飲菊花茶、決明子茶降火；規律作息。"
+    }
+  }
+}

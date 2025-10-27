@@ -1,0 +1,311 @@
+# 證型規則庫 - 按臟腑系統分類
+version: "2.1.0"
+update_date: "2025-10-07"
+
+syndromes:
+  # ========== 心系證候 ==========
+  心脾兩虛:
+    category: "虛證"
+    zangfu: ["心", "脾"]
+    nature: ["氣虛", "血虛"]
+    key_symptoms:
+      - "失眠"
+      - "多夢"
+      - "心悸"
+      - "健忘"
+      - "納呆"
+      - "便溏"
+      - "倦怠乏力"
+    tongue: ["舌淡", "苔薄白"]
+    pulse: ["脈細弱"]
+    min_symptom_match: 3
+    pathogenesis: "思慮過度，損傷心脾，氣血生化不足，心失所養，脾失健運"
+    treatment_principle: "補益心脾，養血安神"
+    reference_formula: "歸脾湯"
+    lifestyle_advice:
+      - "避免過度思慮"
+      - "規律作息，早睡早起"
+      - "適量運動如散步、太極"
+    diet_advice:
+      should_eat: ["紅棗", "桂圓", "山藥", "小米", "蓮子"]
+      should_avoid: ["辛辣", "生冷", "油膩"]
+
+  心腎不交:
+    category: "虛證"
+    zangfu: ["心", "腎"]
+    nature: ["陰虛", "火旺"]
+    key_symptoms:
+      - "失眠"
+      - "心煩"
+      - "健忘"
+      - "腰膝痠軟"
+      - "五心煩熱"
+      - "盜汗"
+      - "遺精"
+    tongue: ["舌紅", "苔少"]
+    pulse: ["脈細數"]
+    min_symptom_match: 4
+    pathogenesis: "腎水不能上濟心火，心火不能下溫腎水，心腎失交"
+    treatment_principle: "滋陰降火，交通心腎"
+    reference_formula: "六味地黃丸合黃連阿膠湯"
+    lifestyle_advice:
+      - "避免熬夜耗陰"
+      - "節制房事"
+      - "靜坐冥想養心"
+    diet_advice:
+      should_eat: ["百合", "蓮子", "銀耳", "枸杞", "黑芝麻"]
+      should_avoid: ["辛辣", "煙酒", "過鹹"]
+
+  心血瘀阻:
+    category: "實證"
+    zangfu: ["心"]
+    nature: ["血瘀", "氣滯"]
+    key_symptoms:
+      - "胸悶"
+      - "胸痛"
+      - "心悸"
+      - "唇舌紫暗"
+      - "刺痛"
+    tongue: ["舌暗", "有瘀斑"]
+    pulse: ["脈澀", "脈結代"]
+    min_symptom_match: 3
+    pathogenesis: "氣滯血瘀，心脈閉阻，血行不暢"
+    treatment_principle: "活血化瘀，理氣通脈"
+    reference_formula: "血府逐瘀湯"
+    lifestyle_advice:
+      - "保持情緒穩定"
+      - "適度有氧運動"
+      - "避免寒冷刺激"
+    diet_advice:
+      should_eat: ["山楂", "玫瑰花", "黑木耳", "紅花茶"]
+      should_avoid: ["油膩", "寒涼"]
+
+  # ========== 肝系證候 ==========
+  肝鬱脾虛:
+    category: "虛實夾雜"
+    zangfu: ["肝", "脾"]
+    nature: ["氣滯", "脾虛"]
+    key_symptoms:
+      - "胸脅脹痛"
+      - "腹脹"
+      - "納呆"
+      - "便溏"
+      - "情緒抑鬱"
+      - "善太息"
+    tongue: ["舌淡紅", "苔薄白"]
+    pulse: ["脈弦"]
+    min_symptom_match: 3
+    pathogenesis: "情志不暢，肝氣鬱結，橫逆犯脾，脾失健運"
+    treatment_principle: "疏肝健脾，理氣和中"
+    reference_formula: "逍遙散"
+    lifestyle_advice:
+      - "保持心情舒暢"
+      - "多參加社交活動"
+      - "戶外散步"
+    diet_advice:
+      should_eat: ["玫瑰花", "佛手", "陳皮", "山藥", "茯苓"]
+      should_avoid: ["油膩", "生冷", "酒"]
+
+  肝陽上亢:
+    category: "實證"
+    zangfu: ["肝", "腎"]
+    nature: ["陰虛", "陽亢"]
+    key_symptoms:
+      - "頭暈"
+      - "頭痛"
+      - "耳鳴"
+      - "面紅"
+      - "急躁易怒"
+      - "失眠多夢"
+    tongue: ["舌紅", "苔薄黃"]
+    pulse: ["脈弦", "脈數"]
+    min_symptom_match: 3
+    pathogenesis: "肝腎陰虛，水不涵木，肝陽偏亢，上擾清竅"
+    treatment_principle: "平肝潛陽，滋陰降火"
+    reference_formula: "天麻鉤藤飲"
+    lifestyle_advice:
+      - "控制情緒，避免發怒"
+      - "保證充足睡眠"
+      - "避免過度用眼"
+    diet_advice:
+      should_eat: ["天麻", "菊花", "芹菜", "海帶", "決明子"]
+      should_avoid: ["辛辣", "煙酒", "濃茶咖啡"]
+
+  肝火上炎:
+    category: "實證"
+    zangfu: ["肝"]
+    nature: ["實熱", "火證"]
+    key_symptoms:
+      - "頭痛"
+      - "目赤"
+      - "口苦"
+      - "急躁易怒"
+      - "脅痛"
+      - "耳鳴"
+      - "失眠"
+    tongue: ["舌紅", "苔黃"]
+    pulse: ["脈弦數"]
+    min_symptom_match: 3
+    pathogenesis: "肝火內熾，循經上炎，擾亂清竅"
+    treatment_principle: "清肝瀉火"
+    reference_formula: "龍膽瀉肝湯"
+    lifestyle_advice:
+      - "保持心平氣和"
+      - "避免熬夜"
+      - "戶外運動釋放情緒"
+    diet_advice:
+      should_eat: ["菊花", "決明子", "苦瓜", "芹菜", "綠豆"]
+      should_avoid: ["辛辣", "煙酒", "油炸"]
+
+  # ========== 脾胃證候 ==========
+  脾胃氣虛:
+    category: "虛證"
+    zangfu: ["脾", "胃"]
+    nature: ["氣虛"]
+    key_symptoms:
+      - "納呆"
+      - "腹脹"
+      - "便溏"
+      - "倦怠乏力"
+      - "氣短懶言"
+      - "食後脹滿"
+    tongue: ["舌淡", "邊有齒痕"]
+    pulse: ["脈細弱"]
+    min_symptom_match: 3
+    pathogenesis: "脾胃氣虛，運化無力，升降失常"
+    treatment_principle: "健脾益氣，和胃消食"
+    reference_formula: "四君子湯"
+    lifestyle_advice:
+      - "規律飲食"
+      - "細嚼慢嚥"
+      - "適度運動"
+    diet_advice:
+      should_eat: ["山藥", "茯苓", "白扁豆", "薏米", "小米"]
+      should_avoid: ["生冷", "油膩", "難消化食物"]
+
+  脾胃濕熱:
+    category: "實證"
+    zangfu: ["脾", "胃"]
+    nature: ["濕熱"]
+    key_symptoms:
+      - "脘腹脹滿"
+      - "噁心嘔吐"
+      - "口苦"
+      - "口臭"
+      - "大便黏滯"
+      - "小便短赤"
+    tongue: ["舌紅", "苔黃膩"]
+    pulse: ["脈滑數"]
+    min_symptom_match: 3
+    pathogenesis: "濕熱蘊結脾胃，氣機阻滯，升降失常"
+    treatment_principle: "清熱化濕，調理脾胃"
+    reference_formula: "藿香正氣散"
+    lifestyle_advice:
+      - "清淡飲食"
+      - "避免暴飲暴食"
+      - "適度運動"
+    diet_advice:
+      should_eat: ["薏米", "冬瓜", "綠豆", "苦瓜", "荷葉"]
+      should_avoid: ["油膩", "甜食", "酒", "辛辣"]
+
+  # ========== 肺系證候 ==========
+  痰濕阻肺:
+    category: "實證"
+    zangfu: ["肺", "脾"]
+    nature: ["痰濕"]
+    key_symptoms:
+      - "咳嗽"
+      - "痰多"
+      - "胸悶"
+      - "納呆"
+      - "身重困倦"
+    tongue: ["舌淡", "苔白膩"]
+    pulse: ["脈滑"]
+    min_symptom_match: 3
+    pathogenesis: "脾失健運，聚濕生痰，上犯於肺，肺失宣降"
+    treatment_principle: "健脾化痰，宣肺止咳"
+    reference_formula: "二陳湯"
+    lifestyle_advice:
+      - "避免潮濕環境"
+      - "適度運動排濕"
+      - "保持室內通風"
+    diet_advice:
+      should_eat: ["陳皮", "茯苓", "薏米", "白蘿蔔", "冬瓜"]
+      should_avoid: ["油膩", "甜食", "生冷"]
+
+  # ========== 腎系證候 ==========
+  腎陽虛:
+    category: "虛證"
+    zangfu: ["腎"]
+    nature: ["陽虛", "寒證"]
+    key_symptoms:
+      - "畏寒怕冷"
+      - "四肢不溫"
+      - "腰膝痠軟"
+      - "夜尿頻多"
+      - "陽痿"
+      - "水腫"
+    tongue: ["舌淡胖", "苔白"]
+    pulse: ["脈沉遲"]
+    min_symptom_match: 3
+    pathogenesis: "腎陽不足，溫煦失職，水濕內停"
+    treatment_principle: "溫補腎陽"
+    reference_formula: "金匱腎氣丸"
+    lifestyle_advice:
+      - "注意保暖"
+      - "避免房勞過度"
+      - "適度運動"
+    diet_advice:
+      should_eat: ["羊肉", "韭菜", "核桃", "栗子", "海參"]
+      should_avoid: ["生冷", "寒涼水果"]
+
+  腎陰虛:
+    category: "虛證"
+    zangfu: ["腎"]
+    nature: ["陰虛", "內熱"]
+    key_symptoms:
+      - "腰膝痠軟"
+      - "五心煩熱"
+      - "盜汗"
+      - "耳鳴"
+      - "頭暈"
+      - "失眠多夢"
+      - "遺精"
+    tongue: ["舌紅", "苔少"]
+    pulse: ["脈細數"]
+    min_symptom_match: 3
+    pathogenesis: "腎陰虧虛，水不濟火，虛火內擾"
+    treatment_principle: "滋補腎陰"
+    reference_formula: "六味地黃丸"
+    lifestyle_advice:
+      - "避免熬夜"
+      - "節制房事"
+      - "靜養為主"
+    diet_advice:
+      should_eat: ["黑芝麻", "黑豆", "枸杞", "桑葚", "山藥"]
+      should_avoid: ["辛辣", "煙酒", "燥熱食物"]
+
+  脾腎陽虛:
+    category: "虛證"
+    zangfu: ["脾", "腎"]
+    nature: ["陽虛", "寒證"]
+    key_symptoms:
+      - "畏寒肢冷"
+      - "腰膝痠軟"
+      - "五更泄瀉"
+      - "完穀不化"
+      - "水腫"
+      - "小便清長"
+    tongue: ["舌淡胖", "苔白滑"]
+    pulse: ["脈沉遲"]
+    min_symptom_match: 3
+    pathogenesis: "脾腎陽虛，運化失職，水濕泛濫"
+    treatment_principle: "溫補脾腎"
+    reference_formula: "附子理中丸合金匱腎氣丸"
+    lifestyle_advice:
+      - "保暖為要"
+      - "避免過度勞累"
+      - "早睡早起"
+    diet_advice:
+      should_eat: ["羊肉", "韭菜", "生薑", "核桃", "蝦"]
+      should_avoid: ["生冷", "寒涼", "難消化食物"]

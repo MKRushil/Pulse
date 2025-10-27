@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005211504_W770_4b40c2cb",
+  "created_at": "2025-10-05T21:15:04.687400",
+  "data": {
+    "basic": {
+      "name": "杜志翔",
+      "gender": "男",
+      "age": "55",
+      "idLast4": "W770",
+      "phone": "0983-225-416",
+      "visitDate": "2025-11-02"
+    },
+    "complaint": {
+      "chiefComplaint": "胸悶心悸一週",
+      "presentIllness": "活動後胸悶，心跳加快，伴氣短出汗",
+      "medicalHistory": "高血壓10年",
+      "familyHistory": "父親心臟病"
+    },
+    "inspection": {
+      "spirit": "焦慮",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低弱",
+      "breath": "氣短",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "自汗",
+      "head": "頭暈",
+      "body": "胸悶",
+      "stool": "正常",
+      "urine": "清長",
+      "appetite": "食少",
+      "sleep": "淺眠",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細弱"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣虛"
+      ],
+      "zangfuPattern": [
+        "心氣虛"
+      ],
+      "diagnosis": "心悸（氣虛血少）",
+      "treatment": "益氣養血，安神定志",
+      "suggestion": "保持平和心態；減少咖啡因；充足睡眠；配合醫囑調藥。"
+    }
+  }
+}

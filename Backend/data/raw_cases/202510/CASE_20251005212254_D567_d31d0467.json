@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212254_D567_d31d0467",
+  "created_at": "2025-10-05T21:22:54.702600",
+  "data": {
+    "basic": {
+      "name": "陳品蓁",
+      "gender": "女",
+      "age": "46",
+      "idLast4": "D567",
+      "phone": "0934-112-940",
+      "visitDate": "2025-12-06"
+    },
+    "complaint": {
+      "chiefComplaint": "失眠多夢半年",
+      "presentIllness": "半年來難入睡，多夢，心悸易驚，記憶力下降。",
+      "medicalHistory": "工作壓力大",
+      "familyHistory": "母親焦慮失眠"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色白",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "輕柔",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "心悸",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "尚可",
+      "sleep": "多夢難眠",
+      "thirst": "不渴",
+      "gynecology": "月經正常"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "心脾兩虛"
+      ],
+      "zangfuPattern": [
+        "心脾虛損"
+      ],
+      "diagnosis": "失眠（心脾兩虛）",
+      "treatment": "補益心脾，養血安神",
+      "suggestion": "規律作息；可飲酸棗仁湯；避免思慮過度。"
+    }
+  }
+}

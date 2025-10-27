@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212241_O012_3e063d1f",
+  "created_at": "2025-10-05T21:22:41.480773",
+  "data": {
+    "basic": {
+      "name": "黃子芸",
+      "gender": "女",
+      "age": "52",
+      "idLast4": "O012",
+      "phone": "0918-660-387",
+      "visitDate": "2025-11-26"
+    },
+    "complaint": {
+      "chiefComplaint": "更年期潮熱半年",
+      "presentIllness": "半年來出現潮熱盜汗，心煩易怒，夜眠不安。",
+      "medicalHistory": "無",
+      "familyHistory": "母親更年期症狀明顯"
+    },
+    "inspection": {
+      "spirit": "煩躁",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色紅",
+      "tongueBody": [
+        "紅"
+      ],
+      "tongueCoating": [
+        "少苔"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "盜汗",
+      "head": "頭暈",
+      "body": "潮熱",
+      "stool": "偏乾",
+      "urine": "黃少",
+      "appetite": "尚可",
+      "sleep": "難入眠",
+      "thirst": "口乾",
+      "gynecology": "月經漸少"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦數"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "細弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛火旺"
+      ],
+      "zangfuPattern": [
+        "腎陰虛"
+      ],
+      "diagnosis": "更年期綜合症",
+      "treatment": "滋陰降火，安神止汗",
+      "suggestion": "保持心情穩定；多食百合、銀耳；避免熬夜；規律運動緩解症狀。"
+    }
+  }
+}

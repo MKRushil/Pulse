@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005212255_E678_5388e04c",
+  "created_at": "2025-10-05T21:22:55.889480",
+  "data": {
+    "basic": {
+      "name": "張語恬",
+      "gender": "女",
+      "age": "55",
+      "idLast4": "E678",
+      "phone": "0919-777-235",
+      "visitDate": "2025-12-07"
+    },
+    "complaint": {
+      "chiefComplaint": "腰痛伴下肢麻兩月",
+      "presentIllness": "腰部痠痛，長時間站立後加重，伴右腿麻木。",
+      "medicalHistory": "椎間盤突出",
+      "familyHistory": "父親腰椎病"
+    },
+    "inspection": {
+      "spirit": "神情痛苦",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色正常",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "頭暈",
+      "body": "腰痠腿麻",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "正常",
+      "sleep": "痛醒",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "寒濕痹阻"
+      ],
+      "zangfuPattern": [
+        "經絡痺阻"
+      ],
+      "diagnosis": "腰痹（寒濕痹）",
+      "treatment": "祛風散寒，通絡止痛",
+      "suggestion": "保持腰部保暖；每日伸展；避免久坐；可艾灸腰俞穴。"
+    }
+  }
+}

@@ -6,7 +6,7 @@ TCM Case Processor
 
 import json
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Optional
 import weaviate
@@ -21,7 +21,7 @@ from .config import (
     AUTO_VECTORIZE,
     TCM_DICT_PATH
 )
-from .schema import TCMCaseInput, TCMCaseData, create_tcm_case_collection
+from .schema import TCMCaseInput, TCMCaseData, create_tcm_case_collection, _to_rfc3339
 from .jieba_processor import get_jieba_processor
 from .vectorizer import get_vectorizer
 
@@ -30,13 +30,11 @@ class CaseProcessor:
     """病例處理器 - 負責保存、正規化、向量化與上傳"""
     
     def __init__(self):
-        # 先初始化所有屬性為 None
         self.weaviate_client = None
         self.collection = None
         self.jieba = None
         self.vectorizer = None
         
-        # 然後逐步初始化
         try:
             self.jieba = get_jieba_processor(TCM_DICT_PATH)
             self.vectorizer = get_vectorizer()
@@ -52,19 +50,16 @@ class CaseProcessor:
             if hasattr(self, 'weaviate_client') and self.weaviate_client:
                 self.weaviate_client.close()
         except Exception:
-            pass  # 忽略清理時的錯誤
-
+            pass
     
     def _init_weaviate(self):
         """初始化 Weaviate 連接"""
         try:
             from weaviate.auth import AuthApiKey
             
-            # 解析 URL
             host = WEAVIATE_URL.replace("http://", "").replace("https://", "").split(":")[0]
             port = int(WEAVIATE_URL.split(":")[-1]) if ":" in WEAVIATE_URL else 8080
             
-            # 使用正確的 API Key 認證方式
             if WEAVIATE_API_KEY:
                 self.weaviate_client = weaviate.connect_to_local(
                     host=host,
@@ -73,18 +68,24 @@ class CaseProcessor:
                 )
                 print(f"✅ Weaviate 連接成功 (已認證): {WEAVIATE_URL}")
             else:
-                # 無認證連接
                 self.weaviate_client = weaviate.connect_to_local(
                     host=host,
                     port=port
                 )
                 print(f"✅ Weaviate 連接成功 (無認證): {WEAVIATE_URL}")
             
-            # 確保 Collection 存在
+            print(f"⏳ 正在檢查/建立 Collection: {CASE_COLLECTION_NAME}")
+            
             self.collection = create_tcm_case_collection(
                 self.weaviate_client,
                 CASE_COLLECTION_NAME
             )
+            
+            if self.collection is not None:
+                print(f"✅ Collection 已就緒: {self.collection.name}")
+            else:
+                print(f"❌ Collection 建立失敗!")
+                self.weaviate_client = None
             
         except Exception as e:
             print(f"❌ Weaviate 連接失敗: {e}")
@@ -98,23 +99,7 @@ class CaseProcessor:
         case_input: TCMCaseInput,
         save_location: Optional[Path] = None
     ) -> Dict[str, Any]:
-        """
-        處理病例完整流程
-        
-        Args:
-            case_input: 前端提交的病例資料
-            save_location: 自定義保存位置 (可選)
-        
-        Returns:
-            {
-                "success": bool,
-                "case_id": str,
-                "json_path": str,
-                "vectorized": bool,
-                "uploaded": bool,
-                "errors": []
-            }
-        """
+        """處理病例完整流程"""
         result = {
             "success": False,
             "case_id": None,
@@ -125,7 +110,6 @@ class CaseProcessor:
         }
         
         try:
-            # ==================== Step 1: 生成病例 ID ====================
             case_id = self._generate_case_id(case_input)
             result["case_id"] = case_id
             
@@ -133,12 +117,10 @@ class CaseProcessor:
             print(f"🏥 開始處理病例: {case_id}")
             print(f"{'='*60}")
             
-            # ==================== Step 2: 保存原始 JSON ====================
             json_path = self._save_raw_json(case_input, case_id, save_location)
             result["json_path"] = str(json_path)
             print(f"✅ 原始 JSON 已保存: {json_path}")
             
-            # ==================== Step 3: Jieba 分詞分析 ====================
             full_text = TCMCaseData._build_full_text(case_input)
             jieba_analysis = self.jieba.analyze_case(full_text)
             
@@ -149,7 +131,6 @@ class CaseProcessor:
             print(f"   - 症狀: {len(jieba_analysis['symptom'])} 個")
             print(f"   - 治法: {len(jieba_analysis['treatment'])} 個")
             
-            # ==================== Step 4: 向量化 ====================
             if AUTO_VECTORIZE:
                 try:
                     print("⏳ 正在生成 1024 維向量...")
@@ -160,12 +141,19 @@ class CaseProcessor:
                     error_msg = f"向量化失敗: {e}"
                     result["errors"].append(error_msg)
                     print(f"❌ {error_msg}")
-                    embedding = [0.0] * 1024  # 備用零向量
+                    embedding = [0.0] * 1024
             else:
                 embedding = [0.0] * 1024
             
-            # ==================== Step 5: 上傳到 Weaviate ====================
-            if self.weaviate_client and self.collection:
+            if self.weaviate_client is None:
+                error_msg = "Weaviate 客戶端未初始化"
+                result["errors"].append(error_msg)
+                print(f"⚠️ {error_msg}")
+            elif self.collection is None:
+                error_msg = "Collection 未初始化"
+                result["errors"].append(error_msg)
+                print(f"⚠️ {error_msg}")
+            else:
                 try:
                     data_obj, vector = TCMCaseData.prepare_for_upload(
                         case_input,
@@ -174,7 +162,6 @@ class CaseProcessor:
                         embedding
                     )
                     
-                    # 檢查是否已存在
                     existing = self._check_existing(case_id)
                     
                     if existing:
@@ -191,12 +178,9 @@ class CaseProcessor:
                     error_msg = f"Weaviate 上傳失敗: {e}"
                     result["errors"].append(error_msg)
                     print(f"❌ {error_msg}")
-            else:
-                error_msg = "Weaviate 未連接，跳過上傳"
-                result["errors"].append(error_msg)
-                print(f"⚠️ {error_msg}")
+                    import traceback
+                    traceback.print_exc()
             
-            # ==================== Step 6: 記錄處理日誌 ====================
             self._log_process(case_id, result)
             
             result["success"] = True
@@ -227,28 +211,23 @@ class CaseProcessor:
         save_location: Optional[Path] = None
     ) -> Path:
         """保存原始 JSON 檔案"""
-        # 確定保存目錄
         if save_location:
             save_dir = save_location
         else:
-            # 按日期分類存儲
             date_str = datetime.now().strftime("%Y%m")
             save_dir = RAW_CASES_DIR / date_str
         
         save_dir.mkdir(parents=True, exist_ok=True)
         
-        # 構建檔案路徑
         filename = f"{case_id}.json"
         filepath = save_dir / filename
         
-        # 準備 JSON 資料
         case_data = {
             "case_id": case_id,
             "created_at": datetime.now().isoformat(),
-            "data": case_input.dict()
+            "data": case_input.model_dump()
         }
         
-        # 寫入檔案
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(case_data, f, ensure_ascii=False, indent=2)
         
@@ -279,8 +258,8 @@ class CaseProcessor:
     
     def _update_case(self, uuid: str, data_obj: Dict[str, Any], vector: list):
         """更新現有病例"""
-        # 更新 updated_at
-        data_obj["updated_at"] = datetime.now().isoformat()
+        # 更新 updated_at - 使用 RFC3339 格式
+        data_obj["updated_at"] = _to_rfc3339(datetime.now(timezone.utc))
         
         self.collection.data.update(
             uuid=uuid,
@@ -290,6 +269,8 @@ class CaseProcessor:
     
     def _log_process(self, case_id: str, result: Dict[str, Any]):
         """記錄處理日誌"""
+        PROCESS_LOGS_DIR.mkdir(parents=True, exist_ok=True)
+        
         log_file = PROCESS_LOGS_DIR / f"{datetime.now().strftime('%Y%m%d')}.log"
         
         log_entry = {
@@ -306,7 +287,7 @@ class CaseProcessor:
     
     def get_case_by_id(self, case_id: str) -> Optional[Dict[str, Any]]:
         """根據 case_id 查詢病例"""
-        if not self.collection:
+        if self.collection is None:
             return None
         
         try:
@@ -317,7 +298,6 @@ class CaseProcessor:
             
             if response.objects and len(response.objects) > 0:
                 obj = response.objects[0]
-                # 解析原始資料
                 raw_data = json.loads(obj.properties.get("raw_data", "{}"))
                 return {
                     "case_id": obj.properties.get("case_id"),
@@ -341,25 +321,13 @@ class CaseProcessor:
         limit: int = 10,
         filters: Optional[Dict] = None
     ) -> list:
-        """
-        混合搜索病例
-        
-        Args:
-            query: 查詢文本
-            limit: 返回數量
-            filters: 額外篩選條件 {"gender": "女", "age_min": 30}
-        
-        Returns:
-            病例列表
-        """
-        if not self.collection:
+        """混合搜索病例"""
+        if self.collection is None:
             return []
         
         try:
-            # 生成查詢向量
             query_vector = self.vectorizer.encode(query)
             
-            # 構建篩選條件
             weaviate_filter = None
             if filters:
                 filter_conditions = []
@@ -381,11 +349,10 @@ class CaseProcessor:
                     for cond in filter_conditions[1:]:
                         weaviate_filter = weaviate_filter & cond
             
-            # 執行混合搜索 (向量相似度 + BM25)
             response = self.collection.query.hybrid(
                 query=query,
                 vector=query_vector,
-                alpha=0.7,  # 0.7 向量 + 0.3 BM25
+                alpha=0.7,
                 limit=limit,
                 filters=weaviate_filter,
                 return_metadata=["score", "distance"]
@@ -407,22 +374,52 @@ class CaseProcessor:
         except Exception as e:
             print(f"❌ 搜索失敗: {e}")
             return []
-    
-    def __del__(self):
-        """清理資源"""
-        if self.weaviate_client:
-            try:
-                self.weaviate_client.close()
-            except:
-                pass
 
 
-# ==================== 單例模式 ====================
+# ==================== 單例模式 (帶狀態檢查) ====================
 _processor_instance = None
 
 def get_case_processor() -> CaseProcessor:
-    """獲取全局病例處理器實例"""
+    """
+    獲取全局病例處理器實例
+    
+    使用單例模式以複用:
+    - Weaviate 連接
+    - NVIDIA Vectorizer
+    - Jieba 處理器
+    
+    包含自動狀態檢查與恢復機制
+    """
     global _processor_instance
-    if _processor_instance is None:
+    
+    need_init = (
+        _processor_instance is None or
+        _processor_instance.weaviate_client is None or
+        _processor_instance.collection is None or
+        _processor_instance.jieba is None or
+        _processor_instance.vectorizer is None
+    )
+    
+    if need_init:
+        if _processor_instance is not None:
+            print("⚠️ 檢測到 CaseProcessor 狀態異常,正在重新初始化...")
+            try:
+                if hasattr(_processor_instance, 'weaviate_client') and _processor_instance.weaviate_client:
+                    _processor_instance.weaviate_client.close()
+            except:
+                pass
+        
         _processor_instance = CaseProcessor()
+    
     return _processor_instance
+
+
+def reset_case_processor():
+    """重置病例處理器 (用於測試或強制重新初始化)"""
+    global _processor_instance
+    if _processor_instance is not None:
+        try:
+            _processor_instance.weaviate_client.close()
+        except:
+            pass
+    _processor_instance = None

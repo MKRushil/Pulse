@@ -604,3 +604,30 @@
 2025-10-03 23:46:19 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
 2025-10-03 23:46:19 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
 2025-10-03 23:46:19 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-03 23:46:24 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-10-03 23:46:24 - s_cbr.SpiralEngine - INFO - ✅ LLM 客戶端初始化成功
+2025-10-03 23:46:25 - s_cbr.TextProcessor - INFO - ✅ 載入 jieba 詞典: 287 個詞條
+2025-10-03 23:46:25 - s_cbr.TextProcessor - INFO -    詞典路徑: C:\work\系統-中醫\Pulse-project\Backend\anc\tcm_jieba_dict.txt
+2025-10-03 23:46:25 - s_cbr.SpiralEngine - INFO - 螺旋推理引擎初始化完成
+2025-10-03 23:46:25 - s_cbr.DialogManager - INFO - 對話管理器初始化完成
+2025-10-03 23:46:25 - s_cbr.ConvergenceMetrics - INFO - 收斂度計算器初始化完成
+2025-10-03 23:46:25 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO - ============================================================
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO - 
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-10-03 23:46:25 - s_cbr.backend.main - INFO - ============================================================
+2025-10-03 23:46:25 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-10-03 23:46:26 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-10-03 23:46:26 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-10-03 23:46:26 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-10-04 22:46:57 - httpx - INFO - HTTP Request: POST http://localhost:8080/v1/graphql "HTTP/1.1 200 OK"

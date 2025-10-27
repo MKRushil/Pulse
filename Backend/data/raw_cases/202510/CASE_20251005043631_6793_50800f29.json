@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005043631_6793_50800f29",
+  "created_at": "2025-10-05T04:36:31.370932",
+  "data": {
+    "basic": {
+      "name": "蕭建國",
+      "gender": "男",
+      "age": "31",
+      "idLast4": "6793",
+      "phone": "0923456782",
+      "visitDate": "2025-02-15"
+    },
+    "complaint": {
+      "chiefComplaint": "遺精頻繁兩月",
+      "presentIllness": "患者兩月來遺精頻繁,每週3-4次,伴有腰膝酸軟,頭暈耳鳴,精神疲憊。工作壓力大,常熬夜。",
+      "medicalHistory": "既往體健",
+      "familyHistory": "無特殊"
+    },
+    "inspection": {
+      "spirit": "神疲",
+      "bodyShape": [
+        "偏瘦"
+      ],
+      "faceColor": "面色蒼白",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "正常",
+      "head": "頭暈耳鳴",
+      "body": "腰膝酸軟,乏力",
+      "stool": "稀溏",
+      "urine": "夜尿頻",
+      "appetite": "紆差",
+      "sleep": "多夢,易驚醒",
+      "thirst": "不多飲",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "細"
+      ],
+      "左尺(腎)": [
+        "沉弱"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "細弱"
+      ],
+      "右尺(命門)": [
+        "沉弱無力"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "腎虛",
+        "腎氣不固"
+      ],
+      "zangfuPattern": [
+        "腎氣不固",
+        "心腎不交"
+      ],
+      "diagnosis": "腎氣不固,心腎不交",
+      "treatment": "補腎固精,交通心腎",
+      "suggestion": "建議規律作息,保證充足睡眠,避免熬夜。節制房事。飲食補腎,可食用核桃、韭菜、山藥、芡實等。適度運動如游泳、慢跑。避免辛辣刺激及酒類。睡前溫水泡腳。可配合提肛運動。減輕心理壓力,放鬆心情。"
+    }
+  }
+}

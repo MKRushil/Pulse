@@ -1,0 +1,89 @@
+{
+  "case_id": "CASE_20251005211351_C309_a4c59017",
+  "created_at": "2025-10-05T21:13:51.868775",
+  "data": {
+    "basic": {
+      "name": "張育琦",
+      "gender": "女",
+      "age": "34",
+      "idLast4": "C309",
+      "phone": "0933-118-903",
+      "visitDate": "2025-10-06"
+    },
+    "complaint": {
+      "chiefComplaint": "失眠多夢半年",
+      "presentIllness": "半年入睡困難、易醒多夢，日間乏力健忘",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "精神萎靡",
+      "bodyShape": [
+        "瘦弱"
+      ],
+      "faceColor": "面色少華",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "盜汗",
+      "head": "頭暈健忘",
+      "body": "心悸",
+      "stool": "正常",
+      "urine": "色淡",
+      "appetite": "食慾不振",
+      "sleep": "入睡困難、易醒多夢",
+      "thirst": "口乾",
+      "gynecology": "月經正常"
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細數"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "細"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "細弱"
+      ],
+      "右尺(命門)": [
+        "細"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "陰虛",
+        "血虛",
+        "虛證"
+      ],
+      "zangfuPattern": [
+        "心血虛",
+        "脾氣虛"
+      ],
+      "diagnosis": "不寐（心脾兩虛）",
+      "treatment": "補益心脾，養血安神",
+      "suggestion": "睡前減少藍光，泡腳放鬆；作息規律；飲食清淡用蓮子、百合；輕度瑜伽/太極。"
+    }
+  }
+}

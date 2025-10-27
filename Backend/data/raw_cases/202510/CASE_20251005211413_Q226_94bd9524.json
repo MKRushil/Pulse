@@ -1,0 +1,89 @@
+{
+  "case_id": "CASE_20251005211413_Q226_94bd9524",
+  "created_at": "2025-10-05T21:14:13.097905",
+  "data": {
+    "basic": {
+      "name": "彭志偉",
+      "gender": "男",
+      "age": "41",
+      "idLast4": "Q226",
+      "phone": "0926-410-933",
+      "visitDate": "2025-10-16"
+    },
+    "complaint": {
+      "chiefComplaint": "腹痛腹瀉反覆三月",
+      "presentIllness": "壓力大時易腹瀉，便前腹痛，排後緩解",
+      "medicalHistory": "無",
+      "familyHistory": "無"
+    },
+    "inspection": {
+      "spirit": "精神一般",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色萎黃",
+      "tongueBody": [
+        "淡"
+      ],
+      "tongueCoating": [
+        "白膩"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "聲音低微",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "畏寒",
+      "sweat": "無",
+      "head": "無",
+      "body": "腹痛腹瀉",
+      "stool": "溏瀉",
+      "urine": "清長",
+      "appetite": "食少",
+      "sleep": "尚可",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "細"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "細"
+      ],
+      "右關(脾胃)": [
+        "緩弱"
+      ],
+      "右尺(命門)": [
+        "沉弱"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "虛證",
+        "濕證",
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "脾氣虛",
+        "肝氣鬱結"
+      ],
+      "diagnosis": "腸易激綜合徵（肝鬱脾虛）",
+      "treatment": "疏肝健脾，和中止瀉",
+      "suggestion": "規律作息、少量多餐；避免油炸與冷飲；情緒舒緩訓練；腹部保暖與按揉中脘。"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "case_id": "CASE_20251005211425_U005_7fbf64b0",
+  "created_at": "2025-10-05T21:14:25.077742",
+  "data": {
+    "basic": {
+      "name": "張若綺",
+      "gender": "女",
+      "age": "27",
+      "idLast4": "U005",
+      "phone": "0987-772-905",
+      "visitDate": "2025-10-23"
+    },
+    "complaint": {
+      "chiefComplaint": "胃脹氣三週",
+      "presentIllness": "進食後胃脹不適，易打嗝，情緒緊張後加重",
+      "medicalHistory": "無",
+      "familyHistory": "父親胃潰瘍"
+    },
+    "inspection": {
+      "spirit": "情緒緊張",
+      "bodyShape": [
+        "中等"
+      ],
+      "faceColor": "面色微黃",
+      "tongueBody": [
+        "淡紅"
+      ],
+      "tongueCoating": [
+        "薄白"
+      ],
+      "tongueShape": [
+        "正常"
+      ],
+      "tongueNote": ""
+    },
+    "auscultation": {
+      "voice": "正常",
+      "breath": "正常",
+      "cough": false,
+      "coughNote": ""
+    },
+    "inquiry": {
+      "chills": "無",
+      "sweat": "無",
+      "head": "頭脹",
+      "body": "胃脹滿",
+      "stool": "正常",
+      "urine": "正常",
+      "appetite": "減退",
+      "sleep": "正常",
+      "thirst": "不渴",
+      "gynecology": ""
+    },
+    "pulse": {
+      "左寸(心)": [
+        "弦"
+      ],
+      "左關(肝膽)": [
+        "弦"
+      ],
+      "左尺(腎)": [
+        "沉"
+      ],
+      "右寸(肺)": [
+        "弦"
+      ],
+      "右關(脾胃)": [
+        "緩"
+      ],
+      "右尺(命門)": [
+        "沉"
+      ]
+    },
+    "diagnosis": {
+      "syndromePattern": [
+        "氣滯"
+      ],
+      "zangfuPattern": [
+        "肝氣犯胃"
+      ],
+      "diagnosis": "胃脹（肝氣鬱滯）",
+      "treatment": "疏肝理氣，和胃止脹",
+      "suggestion": "細嚼慢嚥；避免情緒激動；餐後輕走；多飲溫水；保持規律飲食。"
+    }
+  }
+}
