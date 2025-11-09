@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { SendHorizontal, Loader2, RotateCcw, CheckCircle2, Save, X, Plus } from "lucide-react";
+import { SendHorizontal, Loader2, RotateCcw, CheckCircle2, Save, X, Plus, ShieldAlert } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { analyzeInput, analyzeOutput } from "./security/llmSafety.js";
 
 export default function DiagnosisChat() {
   const [input, setInput] = useState("");
@@ -28,9 +29,24 @@ export default function DiagnosisChat() {
   const send = async (isSupplementary = false) => {
     if (!input.trim() || loading) return;
 
+    // Client-side OWASP checks before sending
+    const analysis = analyzeInput(input.trim());
+    if (analysis.blocked) {
+      setMessages((m) => [
+        ...m,
+        {
+          from: "bot",
+          type: "error",
+          text: `❌ **拒絕回答**\n\n為保護安全，您的輸入被拒絕。\n\n原因：\n- ${analysis.reasons.join("\n- ")}\n\n請僅輸入與中醫症狀有關的描述，避免提供個資/指令/程式碼。`
+        }
+      ]);
+      return;
+    }
+
+    const safeText = analysis.maskedText || input.trim();
     const question = isSupplementary && sessionId
-      ? `補充條件：${input}`  // 補充條件格式
-      : input;
+      ? `補充條件：${safeText}`  // 補充條件格式
+      : safeText;
 
     // 添加用戶消息
     setMessages((m) => [...m, { 
@@ -57,18 +73,51 @@ export default function DiagnosisChat() {
 
       console.log("發送請求", requestBody);
 
-      const res = await fetch("/api/query", {
+      const res = await fetch("/api/scbr/v2/diagnose", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify({
+          question,
+          session_id: sessionId,
+          continue_spiral: Boolean(isSupplementary && sessionId),
+          patient_ctx: {}
+        })
       });
 
       if (!res.ok) {
-        throw new Error(`伺服器錯誤 (${res.status})`);
+        let errBody = null;
+        try { errBody = await res.json(); } catch (_) {}
+        const detail = errBody?.detail || errBody;
+        const apiErr = (typeof detail === "string" ? detail : (detail?.message || detail?.error));
+        const status = res.status;
+
+        const friendly = apiErr || (
+          status === 403 ? "本次輸入已被系統安全規則拒絕，請僅描述中醫症狀。" :
+          status === 429 ? "請求過於頻繁，請稍後再試。" :
+          `伺服器錯誤 (${status})`
+        );
+
+        setMessages((m) => [
+          ...m,
+          { from: "bot", type: "error", text: `❌ **拒絕回答**\n\n${friendly}` }
+        ]);
+        setLoading(false);
+        return;
       }
 
       const data = await res.json();
       console.log('API回傳', data);
+
+      // Even if 200, backend may signal error in body
+      if (data?.error) {
+        const friendly = data?.message || data?.error || "本次輸入被拒絕，請僅描述中醫症狀。";
+        setMessages((m) => [
+          ...m,
+          { from: "bot", type: "error", text: `❌ **拒絕回答**\n\n${friendly}` }
+        ]);
+        setLoading(false);
+        return;
+      }
 
       // 更新狀態
       setSessionId(data.session_id);
@@ -78,7 +127,9 @@ export default function DiagnosisChat() {
       setCurrentDiagnosis(data);
 
       // 構建回應訊息
-      const responseText = data.final_text || data.text || data.answer || "[系統] 未取得回應";
+      const rawResponse = data.final_text || data.text || data.answer || "[系統] 未取得回應";
+      const out = analyzeOutput(rawResponse);
+      const responseText = out.sanitizedText;
       
       setMessages((m) => [
         ...m,
@@ -92,6 +143,17 @@ export default function DiagnosisChat() {
           convergenceMetrics: data.convergence_metrics
         }
       ]);
+
+      if (out.warnings?.length) {
+        setMessages((m) => [
+          ...m,
+          {
+            from: "bot",
+            type: "warning",
+            text: `⚠️ **安全提示**\n\n${out.warnings.map((w) => `- ${w}`).join("\n")}`
+          }
+        ]);
+      }
 
     } catch (err) {
       console.error("fetch 錯誤", err);
@@ -220,13 +282,21 @@ export default function DiagnosisChat() {
                       <div className="text-sm">
                         <span className="font-semibold">收斂度：</span>
                         <span className="ml-2">
-                          {(msg.convergenceMetrics.overall_convergence * 100).toFixed(1)}%
+                          {(() => {
+                            const m = msg.convergenceMetrics || {};
+                            const val = typeof m.Final === 'number' ? m.Final : (typeof m.overall_convergence === 'number' ? m.overall_convergence : 0);
+                            return `${(val * 100).toFixed(1)}%`;
+                          })()}
                         </span>
                         <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
                           <div 
                             className="bg-blue-600 h-2 rounded-full transition-all"
                             style={{ 
-                              width: `${msg.convergenceMetrics.overall_convergence * 100}%` 
+                              width: (() => {
+                                const m = msg.convergenceMetrics || {};
+                                const val = typeof m.Final === 'number' ? m.Final : (typeof m.overall_convergence === 'number' ? m.overall_convergence : 0);
+                                return `${val * 100}%`;
+                              })()
                             }}
                           />
                         </div>
@@ -320,7 +390,15 @@ function ChatBubble({ msg }) {
           : "bg-gradient-to-br from-blue-100 to-blue-200 border-blue-200 text-blue-900"
       }`}>
         {msg.from === "bot" ? (
-          <ReactMarkdown>{msg.text}</ReactMarkdown>
+          <div>
+            {msg.type === "warning" && (
+              <div className="flex items-center gap-2 mb-2 text-amber-700">
+                <ShieldAlert size={16} />
+                <span className="text-sm font-medium">安全檢查</span>
+              </div>
+            )}
+            <ReactMarkdown>{msg.text}</ReactMarkdown>
+          </div>
         ) : (
           msg.text
         )}

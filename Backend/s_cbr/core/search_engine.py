@@ -37,12 +37,7 @@ class SearchEngine:
             # 原始資料
             "raw_data", "created_at", "updated_at"
         ],
-        "PulsePJ": [
-            "pid", "name", "category", "main_disease", "search_text", "symptoms", "category_id",
-        ],
-        "RPCase": [
-            "rid", "final_diagnosis", "pulse_tags", "symptom_tags", "search_text",
-        ],
+        # RPCase 與其他來源已不使用於整改版
     }
 
     def __init__(self, config: Any = None, weaviate_client: Any = None):
@@ -97,11 +92,20 @@ class SearchEngine:
 
     def _pick_sparse_prop(self, index: str) -> str:
         names = set(self._schema_props(index))
-        if "bm25_cjk" in names:
-            return "bm25_cjk"
-        if "bm25_text" in names:
-            return "bm25_text"
+        # 優先順序：bm25_cjk > bm25_text > full_text > jieba_tokens > chief_complaint
+        for cand in ["bm25_cjk", "bm25_text", "full_text", "jieba_tokens", "chief_complaint"]:
+            if cand in names:
+                return cand
         return "bm25_text"
+
+    def _candidate_sparse_props(self, index: str) -> List[str]:
+        """回傳此 index 可用的 BM25 欄位候選清單（依優先順序）。"""
+        names = set(self._schema_props(index))
+        order = [
+            "bm25_cjk", "bm25_text", "full_text", "jieba_tokens",
+            "chief_complaint", "symptom_terms", "syndrome_terms",
+        ]
+        return [n for n in order if n in names]
 
     # ---------- 主入口 ----------
     async def hybrid_search(
@@ -143,10 +147,11 @@ class SearchEngine:
 
         qdim = len(vector) if vector else 0
         mode = "HYBRID" if qdim > 0 else "BM25-only"
-        logger.info(f"🔎 {index} {mode} α={alpha}, qdim={qdim}, fields={fields}, props={props}")
 
         # 3) 執行查詢
         def _do(flds: List[str]) -> List[Dict[str, Any]]:
+            # 查詢前紀錄這次實際使用的欄位
+            logger.info(f"🔎 {index} {mode} α={alpha}, qdim={qdim}, fields={flds}, props={props}")
             q = self.weaviate_client.query.get(index, props)\
                 .with_additional(["score", "distance"])\
                 .with_limit(limit)
@@ -164,9 +169,16 @@ class SearchEngine:
             return items
 
         hits = _do(fields)
-        if not hits and fields == ["bm25_cjk"]:
-            logger.info(f"[SearchEngine] {index} 無結果，改用 bm25_text 重試")
-            hits = _do(["bm25_text"])
+        if not hits:
+            # 動態 fallback：嘗試其他存在於 schema 的候選欄位
+            tried = set(fields)
+            for alt in self._candidate_sparse_props(index):
+                if alt in tried:
+                    continue
+                logger.info(f"[SearchEngine] {index} 無結果，改用 {alt} 重試")
+                hits = _do([alt])
+                if hits:
+                    break
 
         # 4) 正規化分數
         out: List[Dict[str, Any]] = []

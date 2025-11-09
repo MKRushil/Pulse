@@ -8,17 +8,22 @@ import os
 import uvicorn
 from typing import Any, Dict
 
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 import warnings
+
+from s_cbr.utils.error_handler import sanitize_error_message
 
 # 隱藏第三方套件的警告
 warnings.filterwarnings("ignore", category=ResourceWarning, module="jieba")
 warnings.filterwarnings("ignore", category=DeprecationWarning, module="pkg_resources")
 warnings.filterwarnings("ignore", message=".*Weaviate v3 client.*")
 warnings.filterwarnings("ignore", message=".*weaviate-client version.*")
+# ✅ 新增：隱藏 jieba 相關的 DeprecationWarning 和 ResourceWarning
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="jieba._compat")
+warnings.filterwarnings("ignore", category=ResourceWarning, module="jieba.analyse.tfidf")
 
 
 
@@ -59,6 +64,40 @@ app.include_router(scbr_router)
 
 # ANC 病例管理路由
 app.include_router(anc_router)
+
+# ============================================
+# Exception Handlers
+# ============================================
+
+@app.exception_handler(ValueError)
+async def value_error_handler(request: Request, exc: ValueError):
+    """
+    處理 ValueError（通常是輸入驗證錯誤）
+    """
+    log.warning(f"⚠️ 輸入驗證錯誤: {exc}")
+    return JSONResponse(
+        status_code=400,
+        content={
+            "error": "validation_error",
+            "message": str(exc)
+        }
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    """
+    通用異常處理器 - 不洩露技術細節
+    """
+    log.error(f"❌ 未處理的異常: {exc}", exc_info=True)
+    
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "internal_error",
+            "message": sanitize_error_message(exc)
+        }
+    )
 
 # ============================================
 # Startup Event
@@ -143,6 +182,23 @@ async def api_query_compatibility(payload: Dict[str, Any] = Body(...)):
             session_id=session_id,
             continue_spiral=continue_spiral,
         )
+
+        # Map engine signaled errors to HTTP status for legacy clients
+        if isinstance(result, dict) and result.get("error"):
+            err = (result.get("error") or "bad_request").lower()
+            msg = result.get("message") or "請求被拒絕"
+            status = 400
+            if err == "rate_limit_exceeded":
+                status = 429
+            elif err == "security_violation":
+                status = 403
+            return JSONResponse(status_code=status, content={
+                "detail": {
+                    "error": err,
+                    "message": msg,
+                    **({"retry_after": result.get("retry_after")} if result.get("retry_after") else {})
+                }
+            })
 
         # Legacy field compatibility
         result["text"] = result.get("final_text", "")
