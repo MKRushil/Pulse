@@ -37,7 +37,7 @@ CASE_COLLECTION_NAME = "TCMCase"
 EMBEDDING_API_URL = "https://integrate.api.nvidia.com/v1"
 EMBEDDING_API_KEY = os.getenv(
     "EMBEDDING_API_KEY",
-    "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"
+    "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"
 )
 EMBEDDING_MODEL = "nvidia/nv-embedqa-e5-v5"
 EMBEDDING_DIMENSION = 1024

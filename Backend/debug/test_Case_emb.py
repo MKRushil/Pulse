@@ -9,13 +9,13 @@ try:
     WEAVIATE_URL       = getattr(config, "WEAVIATE_URL", "http://localhost:8080")
     WV_API_KEY         = getattr(config, "WV_API_KEY", "key-admin")
     EMBEDDING_BASE_URL = getattr(config, "EMBEDDING_BASE_URL", "https://integrate.api.nvidia.com/v1")
-    NVIDIA_API_KEY     = getattr(config, "NVIDIA_API_KEY", "")
+    NVIDIA_API_KEY     = getattr(config, "NVIDIA_API_KEY", "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")
     EMBEDDING_MODEL    = getattr(config, "EMBEDDING_NV_MODEL_NAME", "nvidia/nv-embedqa-e5-v5")
 except Exception:
     WEAVIATE_URL       = os.getenv("WEAVIATE_URL", "http://localhost:8080")
     WV_API_KEY         = os.getenv("WV_API_KEY", "key-admin")
     EMBEDDING_BASE_URL = os.getenv("EMBEDDING_BASE_URL", "https://integrate.api.nvidia.com/v1")
-    NVIDIA_API_KEY     = os.getenv("NVIDIA_API_KEY", "")
+    NVIDIA_API_KEY     = os.getenv("NVIDIA_API_KEY", "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")
     EMBEDDING_MODEL    = os.getenv("EMBEDDING_MODEL", "nvidia/nv-embedqa-e5-v5")
 
 USERDICT_PATH = r"C:\work\系統-中醫\Pulse-project\Backend\prompt\tcm_userdict_jieba_v2.txt"

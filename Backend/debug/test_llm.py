@@ -3,7 +3,7 @@ import requests
 
 # 基本設定
 api_url: str = os.getenv("LLM_API_URL", "https://integrate.api.nvidia.com/v1")
-api_key: str = os.getenv("LLM_API_KEY", "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")
+api_key: str = os.getenv("LLM_API_KEY", "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")
 model: str = os.getenv("LLM_MODEL", "meta/llama-3.3-70b-instruct")
 
 # 對話函式

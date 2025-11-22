@@ -32,7 +32,7 @@ def get_env(name: str, default: str = "") -> str:
     v = os.getenv(name, default)
     return v.strip().strip('"').strip("'") if isinstance(v, str) else v
 
-NVIDIA_API_KEY = "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"
+NVIDIA_API_KEY = "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"
 WEAVIATE_URL   = get_env("WEAVIATE_URL", "http://localhost:8080")
 WV_API_KEY     = get_env("WV_API_KEY", "key-admin")
 

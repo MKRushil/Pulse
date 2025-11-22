@@ -37,7 +37,7 @@ load_dotenv_if_any()
 PULSE_JSON   = os.getenv("PULSE_JSON", r"C:\work\系統-中醫\Pulse-project\Embedding\PulsePJ_vector.json")
 WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
 WV_API_KEY   = os.getenv("WV_API_KEY", "key-admin")
-NVIDIA_API_KEY = "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"
+NVIDIA_API_KEY = "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"
 
 try:
     import weaviate

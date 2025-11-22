@@ -31,7 +31,7 @@ class LLMConfig:
     用於設置 LLM API 的連接參數和生成參數
     """
     api_url: str = os.getenv("LLM_API_URL", "https://integrate.api.nvidia.com/v1")
-    api_key: str = os.getenv("LLM_API_KEY", "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")
+    api_key: str = os.getenv("LLM_API_KEY", "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")
     model: str = os.getenv("LLM_MODEL", "meta/llama-3.3-70b-instruct")
     max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "2000"))
     temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.1"))
@@ -47,7 +47,7 @@ class EmbeddingConfig:
     用於生成文本向量，支援語義檢索
     """
     api_url: str = os.getenv("EMBEDDING_API_URL", "https://integrate.api.nvidia.com/v1")
-    api_key: str = os.getenv("NVIDIA_API_KEY", "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")
+    api_key: str = os.getenv("NVIDIA_API_KEY", "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")
     model: str = os.getenv("EMBEDDING_MODEL", "nvidia/nv-embedqa-e5-v5")
     dimension: int = int(os.getenv("EMBEDDING_DIMENSION", "1024"))
     timeout: float = float(os.getenv("EMBEDDING_TIMEOUT", "30"))
