@@ -168,6 +168,7 @@ class OWASPMapper:
         "rate_limit_exceeded": OWASPRisk.LLM10,
         "dos_attack": OWASPRisk.LLM10,
         "resource_exhaustion": OWASPRisk.LLM10,
+        "forced_convergence": OWASPRisk.LLM10,
     }
     
     @classmethod

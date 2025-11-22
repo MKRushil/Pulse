@@ -1,0 +1,8 @@
+2025-11-17 21:08:21 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-11-17 21:08:21 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-11-17 21:08:21 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-11-17 21:08:21 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-11-17 21:08:21 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-11-17 21:08:21 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=2000, timeout=30.0s
+2025-11-17 21:08:21 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-11-17 21:08:21 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功

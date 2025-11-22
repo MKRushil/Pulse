@@ -20,17 +20,23 @@ from .core.dialog_manager import DialogManager
 from .llm.client import LLMClient
 from .utils.logger import get_logger
 from .core.four_layer_pipeline import FourLayerSCBR
+from .llm.embedding import EmbedClient
+from .core.search_engine import SearchEngine
 
 # ==================== 安全模組匯入 ====================
 from .security.input_sanitizer import InputSanitizer, ThreatLevel
 from .security.output_validator import OutputValidator
 from .security.rate_limiter import RateLimiter, RateLimitConfig 
-from .security.owasp_mapper import OWASPMapper
-from .security.unified_response import (
-    create_security_rejection_response,
-    create_success_response,
-    ErrorType
-)
+from .security.owasp_mapper import OWASPMapper, OWASPRisk
+
+
+def _normalize_owasp_code(code: str) -> str:
+    """將簡化 OWASP 代碼（如 LLM01）轉換為完整代碼（如 LLM01_PROMPT_INJECTION）"""
+    # 檢查 code 是否是 OWASPRisk 的成員名稱 (例如 'LLM01')
+    if code in OWASPRisk.__members__:
+        # 返回該成員的 value (例如 'LLM01_PROMPT_INJECTION')
+        return OWASPRisk[code].value 
+    return code
 
 logger = get_logger("SCBREngine")
 
@@ -105,10 +111,31 @@ class SCBREngine:
         else:
             self.llm = None
             logger.info("⚠️ LLM 功能已禁用")
+
+        # 1. 初始化 EmbedClient
+        try:
+            # 假設 EmbedClient 在 llm.embedding 中定義
+            self.embed = EmbedClient(self.config) 
+            logger.info("✅ EmbedClient 初始化成功")
+        except NameError:
+            self.embed = None
+            logger.warning("⚠️ EmbedClient 未找到或初始化失敗")
+        
+        # 2. 初始化 SearchEngine
+        try:
+            self.SE = SearchEngine(self.config)
+            logger.info("✅ SearchEngine 初始化成功")
+        except NameError:
+            self.SE = None
+            logger.warning("⚠️ SearchEngine 未找到或初始化失敗")
         
         try:
-            # 假設 FourLayerSCBR 在 core.four_layer_pipeline 引入
-            self.four_layer = FourLayerSCBR(self.llm, config=self.config) if self.llm else None
+            self.four_layer = FourLayerSCBR(
+                self.llm, 
+                config=self.config,
+                search_engine=self.SE,      # 傳遞 SE
+                embed_client=self.embed     # 傳遞 EmbedClient
+            ) if self.llm else None
             logger.info("✅ 四層 SCBR 管線初始化完成")
         except Exception as e:
             logger.warning(f"⚠️ 四層管線初始化失敗: {e}")
@@ -116,6 +143,8 @@ class SCBREngine:
         
         self._initialized = True
         logger.info("✅ S-CBR Engine 初始化完成 (含安全防護)")
+    
+    
 
     async def diagnose(
         self, 
@@ -172,10 +201,24 @@ class SCBREngine:
         logger.info(f"   累積問題: {accumulated_question[:100]}...")
         
         # ==================== STEP 2-6: 四層推理 ====================
+        # 提取前輪診斷資訊（用於螺旋推理）
+        previous_diagnosis = None
+        if session.history and len(session.history) > 0:
+            # 獲取最後一輪的診斷結果
+            last_step = session.history[-1]
+            if 'l2' in last_step:
+                previous_diagnosis = {
+                    "selected_case": last_step.get('l2', {}).get('selected_case', {}),
+                    "primary_pattern": last_step.get('l2', {}).get('tcm_inference', {}).get('primary_pattern', ''),
+                    "coverage_ratio": last_step.get('l2', {}).get('coverage_evaluation', {}).get('coverage_ratio', 0.0)
+                }
+        
         try:
             result = await self.four_layer.run_once(
                 accumulated_question,
-                history_summary=kwargs.get("history_summary", "")
+                history_summary=kwargs.get("history_summary", ""),
+                round_count=round_num,
+                previous_diagnosis=previous_diagnosis
             )
         except Exception as e:
             logger.error(f"❌ 四層推理失敗: {e}", exc_info=True)
@@ -190,8 +233,9 @@ class SCBREngine:
         l1_result = result.get('l1', {})
         if l1_result.get('status') == 'reject' or l1_result.get('next_action') == 'reject':
             # L1 攔截 (LLM01/LLM07/LLM06)
-            flags = l1_result.get('owasp_screening', {}).get('flags', [])
-            risk_info = flags[0] if flags else "LLM01_PROMPT_INJECTION"
+            flags = result.get('security_checks', {}).get('l1_flags', [])
+            risk_info_raw = flags[0] if flags else "LLM01"
+            risk_info = _normalize_owasp_code(risk_info_raw)
             
             logger.warning(f"🛡️ L1 門禁攔截: {risk_info}。阻止 200 OK 響應。")
             
@@ -210,7 +254,7 @@ class SCBREngine:
                 detail={"message": "輸入內容違反系統安全政策，請重新嘗試。", 
                         "error": "L1_GATE_REJECT",
                         "security_checks": result.get('security_checks', {}),
-                        "l1_flags": flags}
+                        "l1_flags": [_normalize_owasp_code(f) for f in flags]}
             )
         
         # 檢查 L3 Gate 是否輸出了 'rejected'
@@ -218,9 +262,9 @@ class SCBREngine:
         if l3_result.get('status') == 'rejected':
             # L3 攔截 (LLM05/LLM09)
             # 這裡假設 L3 應返回 violations 列表
-            violations = l3_result.get('violations', [])
-            risk_info = violations[0].get('owasp_code') if violations else "LLM05_INSECURE_OUTPUT"
-            
+            violations = result.get('security_checks', {}).get('l3_violations', [])
+            risk_info_raw = violations[0].get('owasp_code') if violations else "LLM05"
+            risk_info = _normalize_owasp_code(risk_info_raw)
             logger.warning(f"🛡️ L3 輸出審核拒絕: {risk_info}。阻止 200 OK 響應。")
             
             self.dialog.record_step(session_id, {
@@ -238,7 +282,7 @@ class SCBREngine:
                 detail={"message": "診斷結果包含不當內容，已被安全策略阻止。", 
                         "error": "L3_REVIEW_REJECT",
                         "security_checks": result.get('security_checks', {}),
-                        "l3_violations": violations}
+                        "l3_violations": [{"owasp_code": _normalize_owasp_code(v.get('owasp_code', 'UNKNOWN'))} for v in violations]}
             )
         # ==================== 🚨 安全檢查結束 🚨 ====================
         

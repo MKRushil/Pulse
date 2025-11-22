@@ -34,7 +34,7 @@ class LLMConfig:
     api_key: str = os.getenv("LLM_API_KEY", "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")
     model: str = os.getenv("LLM_MODEL", "meta/llama-3.3-70b-instruct")
     max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "2000"))
-    temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.2"))
+    temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.1"))
     timeout: float = float(os.getenv("LLM_TIMEOUT", "30"))
     retry: int = int(os.getenv("LLM_RETRY", "2"))
 
@@ -63,14 +63,12 @@ class SearchConfig:
     
     用於設置混合檢索的參數和欄位權重
     """
-    hybrid_alpha: float = 0.5  # 混合檢索中語義檢索的權重（0-1）
-    top_k: int = 10  # 返回的最相似案例數量
+    hybrid_alpha: float = 0.55  # 混合檢索中語義檢索的權重（55% 向量 + 45% BM25）
+    top_k: int = 3  # 返回的最相似案例數量（L2需要Top 3）
     
     # BM25 搜索欄位
     search_fields: List[str] = field(default_factory=lambda: [
-        "jieba_tokens",
-        "syndrome_terms",
-        "symptom_terms"
+        "full_text"  # 主要使用 full_text 欄位進行檢索
     ])
     
     # 欄位權重配置（用於 BM25 檢索）
@@ -94,7 +92,7 @@ class SpiralConfig:
     
     控制螺旋推理的輪次和收斂條件
     """
-    max_rounds: int = 10             # 最大推理輪次
+    max_rounds: int = 7             # 最大推理輪次
     min_rounds: int = 2              # 最小推理輪次
     convergence_threshold: float = 0.85  # 收斂閾值
     min_confidence: float = 0.7      # 最小信心度
@@ -121,7 +119,7 @@ class ConvergenceConfig:
     # 停止條件
     convergence_threshold: float = 0.85  # 收斂閾值（0-1）
     min_rounds: int = 2                  # 最小輪次
-    max_rounds: int = 10                 # 最大輪次
+    max_rounds: int = 7                 # 最大輪次
 
 
 # ==================== 安全配置 ====================

@@ -128,9 +128,17 @@ class OutputValidator:
                     validation_level = ValidationLevel.WARNING
         
         # 步驟 4: 醫療合規性檢查
-        needs_disclaimer = self._needs_disclaimer(validated_output)
+        needs_disclaimer, extra_warning = self._needs_disclaimer_enhanced(validated_output, context)
+        
         if needs_disclaimer and self.disclaimer_text not in validated_output:
-            validated_output = validated_output + "\n\n" + self.disclaimer_text
+            
+            final_disclaimer = self.disclaimer_text
+            if extra_warning:
+                # 強化免責聲明 (LLM09 防護)
+                final_disclaimer = f"❗ **{extra_warning}**\n\n{self.disclaimer_text}"
+                modifications.append("添加強化醫療免責聲明")
+            
+            validated_output = validated_output + "\n\n" + final_disclaimer
             modifications.append("添加醫療免責聲明")
             if validation_level == ValidationLevel.PASS:
                 validation_level = ValidationLevel.WARNING
@@ -320,7 +328,7 @@ class OutputValidator:
         
         return len(violations) == 0, violations
     
-    def _needs_disclaimer(self, text: str) -> bool:
+    def _needs_disclaimer(self, text: str, context: Optional[Dict] = None) -> Tuple[bool, Optional[str]]:
         """
         判斷是否需要醫療免責聲明
         
@@ -333,11 +341,25 @@ class OutputValidator:
         # 如果包含診斷、治療、用藥相關內容，必須有聲明
         diagnosis_keywords = ['證型', '診斷', '治則', '治療', '方劑', '用藥', '調理']
         
+        needs_base_disclaimer = False
         for keyword in diagnosis_keywords:
             if keyword in text:
-                return True
+                needs_base_disclaimer = True
+                break
         
-        return False
+        extra_warning = None
+        
+        # 檢查是否為低覆蓋度的強制收斂 (LLM09 防護點)
+        # 假設 four_layer_pipeline.py 會將 is_forced_convergence 傳入 context
+        if context and context.get("is_forced_convergence", False):
+            # 這是低覆蓋度下的保底輸出，準確性風險極高
+            extra_warning = (
+                "強制收斂警告：因用戶提供的資訊嚴重不足且已達最大追問輪次，"
+                "本診斷結果的準確性極低。強烈建議您儘快尋求專業中醫師協助。"
+            )
+            needs_base_disclaimer = True # 強制要求聲明
+        
+        return needs_base_disclaimer, extra_warning
     
     def _check_dangerous_advice(self, text: str) -> Tuple[bool, List[str]]:
         """

@@ -148,6 +148,11 @@ class SearchEngine:
         qdim = len(vector) if vector else 0
         mode = "HYBRID" if qdim > 0 else "BM25-only"
 
+        logger.info(
+            f"🔎 {index} 啟動檢索: Mode={mode}, α={alpha:.2f}, "
+            f"查詢字串長度={len(text)} ({text[:20]}...)"
+        )
+
         # 3) 執行查詢
         def _do(flds: List[str]) -> List[Dict[str, Any]]:
             # 查詢前紀錄這次實際使用的欄位
@@ -192,5 +197,7 @@ class SearchEngine:
             h["_confidence"] = score
             h["_attr_score"] = 0.0
             h["_final_score"] = score
+            # 🚨 修正：確保 'score' 字段也存在，以兼容日誌和 L2 邏輯
+            h["score"] = score 
             out.append(h)
         return out
