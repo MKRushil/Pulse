@@ -7,6 +7,7 @@ TCM S-CBR Backend v2.2 - FastAPI Main Application
 import os
 import uvicorn
 from typing import Any, Dict
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Body, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,10 +40,52 @@ from anc.api import router as anc_router
 
 log = get_logger("backend.main")
 
+# ============================================
+# Lifespan Event Handler
+# ============================================
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    應用程式生命週期管理器
+    
+    使用 context manager 模式管理應用的啟動和關閉邏輯。
+    """
+    # ==================== Startup 啟動邏輯 ====================
+    log.info("🚀 TCM S-CBR Backend v2.2 啟動")
+    log.info("=" * 60)
+    log.info("📦 已載入模組:")
+    log.info("   ✅ S-CBR 螺旋推理引擎")
+    log.info("   ✅ ANC 病例管理系統")
+    log.info("")
+    log.info("🔗 可用端點:")
+    log.info("   - 螺旋推理: /api/scbr/v2/*")
+    log.info("   - 病例保存: POST /api/case/save")
+    log.info("   - 病例查詢: GET /api/case/get/{case_id}")
+    log.info("   - 病例搜索: POST /api/case/search")
+    log.info("   - 病例統計: GET /api/case/stats")
+    log.info("   - 健康檢查: GET /healthz")
+    log.info("=" * 60)
+    
+    # 初始化 ANC 系統
+    try:
+        from anc.case_processor import get_case_processor
+        processor = get_case_processor()
+        log.info("✅ ANC 病例處理器初始化成功")
+    except Exception as e:
+        log.error(f"❌ ANC 初始化失敗: {e}")
+    
+    yield  # 應用開始運行
+    
+    # ==================== Shutdown 關閉邏輯 ====================
+    # 如果未來需要添加清理邏輯，可以在這裡添加
+    pass
+
+
 app = FastAPI(
     title="TCM S-CBR Backend v2.2",
     version="2.2",
-    description="中醫螺旋推理系統 with 病例管理"
+    description="中醫螺旋推理系統 with 病例管理",
+    lifespan=lifespan
 )
 
 # ============================================
@@ -98,35 +141,6 @@ async def general_exception_handler(request: Request, exc: Exception):
             "message": sanitize_error_message(exc)
         }
     )
-
-# ============================================
-# Startup Event
-# ============================================
-@app.on_event("startup")
-async def on_startup():
-    log.info("🚀 TCM S-CBR Backend v2.2 啟動")
-    log.info("=" * 60)
-    log.info("📦 已載入模組:")
-    log.info("   ✅ S-CBR 螺旋推理引擎")
-    log.info("   ✅ ANC 病例管理系統")
-    log.info("")
-    log.info("🔗 可用端點:")
-    log.info("   - 螺旋推理: /api/scbr/v2/*")
-    log.info("   - 病例保存: POST /api/case/save")
-    log.info("   - 病例查詢: GET /api/case/get/{case_id}")
-    log.info("   - 病例搜索: POST /api/case/search")
-    log.info("   - 病例統計: GET /api/case/stats")
-    log.info("   - 健康檢查: GET /healthz")
-    log.info("=" * 60)
-    
-    # 初始化 ANC 系統
-    try:
-        from anc.case_processor import get_case_processor
-        processor = get_case_processor()
-        log.info("✅ ANC 病例處理器初始化成功")
-    except Exception as e:
-        log.error(f"❌ ANC 初始化失敗: {e}")
-
 
 # ============================================
 # Health Check

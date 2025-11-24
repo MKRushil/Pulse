@@ -83,6 +83,39 @@ class SearchConfig:
     })
 
 
+# ==================== Agentic NLU 配置 ====================
+
+@dataclass
+class AgenticNLUConfig:
+    """
+    Agentic NLU 配置
+    
+    用於控制 Agentic NLU 的自主決策行為
+    """
+    # 功能開關
+    enabled: bool = True  # 啟用 Agentic NLU（False 則使用傳統 L1）
+    
+    # Alpha 值範圍
+    alpha_min: float = 0.2  # 最小 alpha（BM25 為主）
+    alpha_max: float = 0.8  # 最大 alpha（向量為主）
+    alpha_default: float = 0.5  # 預設 alpha（均衡）
+    
+    # 置信度門檻
+    confidence_high: float = 0.75  # 高置信度門檻
+    confidence_mid: float = 0.55   # 中置信度門檻
+    confidence_low: float = 0.35   # 低置信度門檻
+    
+    # 檢索品質控制
+    fallback_enabled: bool = True  # 啟用自動 fallback
+    fallback_threshold: float = 0.65  # 品質門檻
+    max_fallback_attempts: int = 3  # 最大 fallback 嘗試次數
+    
+    # LLM 參數（Agentic 模式專用）
+    llm_temperature: float = 0.2  # Agentic 決策的溫度
+    llm_timeout: float = 30.0  # 超時時間
+
+
+
 # ==================== 螺旋推理配置 ====================
 
 @dataclass
@@ -170,6 +203,26 @@ class FeatureFlags:
     log_level: str = os.getenv("SCBR_LOG_LEVEL", "INFO")  # 日誌級別
 
 
+# ==================== 工具庫配置 ====================
+
+@dataclass
+class ToolCallConfig:
+    """外部工具調用配置"""
+    enable_tool_calls: bool = True      # 工具調用總開關
+    enable_tool_a: bool = True          # ICD-11 開關
+    enable_tool_b: bool = True          # A+百科 開關
+    enable_tool_c: bool = True          # ETCM 開關
+    
+    # 觸發條件
+    knowledge_gap_threshold: float = 0.6      # 知識缺口門檻
+    validation_confidence_threshold: float = 0.7  # 校驗置信度門檻
+    
+    # 效能控制
+    max_tool_calls_per_diagnosis: int = 3     # 單次最大調用數
+    tool_timeout: float = 15.0                # 超時時間（秒）
+
+
+
 # ==================== 主配置類 ====================
 
 class SCBRConfig:
@@ -185,7 +238,7 @@ class SCBRConfig:
         
         載入所有子配置並進行驗證
         """
-        self.version = "2.2.0"  # 系統版本號
+        self.version = "2.3.0"  # 系統版本號
         
         # 基礎配置
         self.weaviate = WeaviateConfig()
@@ -194,8 +247,12 @@ class SCBRConfig:
         
         # 功能配置
         self.search = SearchConfig()
+        self.agentic_nlu = AgenticNLUConfig()  # Agentic NLU 配置
         self.spiral = SpiralConfig()
         self.convergence = ConvergenceConfig()
+
+        # 添加工具調用配置
+        tool_call: ToolCallConfig = field(default_factory=ToolCallConfig)
         
         # 安全配置
         self.security = SecurityConfig()
@@ -205,6 +262,8 @@ class SCBRConfig:
         
         # 驗證配置
         self.validate()
+
+
     
     def validate(self):
         """
@@ -248,6 +307,20 @@ class SCBRConfig:
         
         if self.security.max_input_length <= 0:
             raise ValueError("max_input_length 必須 > 0")
+        
+        # 驗證 Agentic NLU 配置
+        if self.agentic_nlu.enabled:
+            if not (0.0 <= self.agentic_nlu.alpha_min <= 1.0):
+                raise ValueError("alpha_min 必須在 0.0-1.0 範圍內")
+            if not (0.0 <= self.agentic_nlu.alpha_max <= 1.0):
+                raise ValueError("alpha_max 必須在 0.0-1.0 範圍內")
+            if self.agentic_nlu.alpha_min >= self.agentic_nlu.alpha_max:
+                raise ValueError("alpha_min 必須小於 alpha_max")
+            if not (0.0 <= self.agentic_nlu.confidence_high <= 1.0):
+                raise ValueError("confidence_high 必須在 0.0-1.0 範圍內")
+            if not (0.0 <= self.agentic_nlu.fallback_threshold <= 1.0):
+                raise ValueError("fallback_threshold 必須在 0.0-1.0 範圍內")
+            
     
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -264,6 +337,7 @@ class SCBRConfig:
             "llm": self.llm.__dict__,
             "embedding": self.embedding.__dict__,
             "search": self.search.__dict__,
+            "agentic_nlu": self.agentic_nlu.__dict__,
             "spiral": self.spiral.__dict__,
             "convergence": self.convergence.__dict__,
             "security": self.security.__dict__,

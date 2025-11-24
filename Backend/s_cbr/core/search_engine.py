@@ -201,3 +201,72 @@ class SearchEngine:
             h["score"] = score 
             out.append(h)
         return out
+    
+    async def intelligent_hybrid_search(
+        self,
+        index: str,
+        *,
+        text: str,
+        vector: Optional[List[float]] = None,
+        alpha: float = 0.5,
+        limit: int = 10,
+        search_fields: Optional[List[str]] = None,
+        return_props: Optional[List[str]] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        智能混合檢索（為 Agentic 模式優化）
+        
+        與 hybrid_search 相似，但添加了額外的智能化處理：
+        1. 更詳細的日誌記錄
+        2. 更好的錯誤處理
+        3. 為 Agentic 決策提供更多元數據
+        
+        Args:
+            index: Weaviate 索引名稱
+            text: 查詢文本
+            vector: 查詢向量（可選）
+            alpha: 混合檢索權重（0.0-1.0）
+            limit: 返回數量
+            search_fields: BM25 搜索欄位（可選）
+            return_props: 返回欄位（可選）
+        
+        Returns:
+            檢索結果列表，每個結果包含額外的元數據
+        """
+        # 直接調用原有的 hybrid_search，但添加額外的智能化處理
+        logger.info(
+            f"[SearchEngine] 智能檢索啟動 - "
+            f"Index: {index}, Alpha: {alpha:.2f}, "
+            f"向量: {'是' if vector else '否'}, Limit: {limit}"
+        )
+        
+        # 調用原有方法
+        results = await self.hybrid_search(
+            index=index,
+            text=text,
+            vector=vector,
+            alpha=alpha,
+            limit=limit,
+            search_fields=search_fields,
+            return_props=return_props
+        )
+        
+        # 為每個結果添加額外的元數據（用於 Agentic 決策）
+        for result in results:
+            # 確保有統一的分數欄位
+            if "_final_score" in result and "score" not in result:
+                result["score"] = result["_final_score"]
+            
+            # 添加 Agentic 專用的元數據
+            result["_agentic_metadata"] = {
+                "alpha_used": alpha,
+                "retrieval_mode": "hybrid" if vector else "bm25_only",
+                "search_fields_used": search_fields or [self._pick_sparse_prop(index)]
+            }
+        
+        logger.info(
+            f"[SearchEngine] 智能檢索完成 - "
+            f"返回 {len(results)} 個結果"
+        )
+        
+        return results

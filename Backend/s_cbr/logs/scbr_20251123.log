@@ -1,0 +1,13 @@
+2025-11-23 03:28:11 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-11-23 03:28:11 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-11-23 03:28:11 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-11-23 03:28:11 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-11-23 03:28:11 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-11-23 03:28:11 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=2000, timeout=30.0s
+2025-11-23 03:28:11 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-11-23 03:28:11 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-11-23 03:28:12 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-11-23 03:28:12 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-11-23 03:28:12 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-11-23 03:28:12 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-11-23 03:28:12 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)

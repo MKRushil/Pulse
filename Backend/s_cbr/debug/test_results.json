@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-11-23T02:48:11.412333",
+  "phases": [
+    {
+      "phase": 1,
+      "phase_name": "配置與基礎功能驗證",
+      "total_tests": 3,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 3,
+      "duration": 0.001006,
+      "test_results": [
+        {
+          "test_name": "config_load",
+          "phase": 1,
+          "status": "SKIP",
+          "duration": 0.0,
+          "details": {
+            "reason": "配置模組不可用"
+          },
+          "error": null
+        },
+        {
+          "test_name": "mode_switch",
+          "phase": 1,
+          "status": "SKIP",
+          "duration": 0.0,
+          "details": {
+            "reason": "配置模組不可用"
+          },
+          "error": null
+        },
+        {
+          "test_name": "basic_retrieval",
+          "phase": 1,
+          "status": "SKIP",
+          "duration": 0.0,
+          "details": {
+            "reason": "需要完整系統初始化",
+            "note": "請使用實際 API 進行測試"
+          },
+          "error": null
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
 - LLM10: Token 限制與超時控制
 """
 
-import aiohttp
+import aiohttp,asyncio
 import json
 import re
 import hashlib
@@ -47,7 +47,7 @@ class LLMClient:
         self.model = config.llm.model
         
         # ✅ 安全限制
-        self.max_tokens = min(config.llm.max_tokens, 2000)  # 硬性上限 2000
+        self.max_tokens = min(config.llm.max_tokens, 4000)  # 硬性上限 2000
         self.timeout = min(config.llm.timeout, 60)  # 最多 60 秒
         self.max_retries = 2  # 最多重試 2 次
 
@@ -320,7 +320,7 @@ class LLMClient:
                             last_error = "Invalid response format"
                             continue
                         
-            except aiohttp.ClientTimeout:
+            except asyncio.TimeoutError:
                 logger.error(f"⏱️ LLM 請求超時 (嘗試 {attempt + 1}/{self.max_retries + 1})")
                 last_error = "Timeout"
                 continue
@@ -474,16 +474,9 @@ class LLMClient:
         }
 
     # ==================== 四層管線相容層 ====================
-    async def complete_json(self, system_prompt: str, user_prompt: Any) -> Dict[str, Any]:
+    async def complete_json(self, system_prompt: str, user_prompt: Any, temperature: Optional[float] = None) -> Dict[str, Any]:
         """
         四層 SCBR 專用相容方法：讀取系統提示詞與 payload，呼叫聊天完成，並嘗試將輸出解析為 JSON。
-
-        Args:
-            system_prompt: 四層對應層級的 system prompt 文字
-            user_prompt: 允許 dict（將自動轉 JSON 字串）或 str（直接當作 user）
-
-        Returns:
-            解析後的 JSON 物件（dict）。若無法解析，將嘗試從文字中抓取第一個 {...} 區塊。
         """
         # 允許 dict/str 作為輸入
         if isinstance(user_prompt, (dict, list)):
@@ -491,135 +484,142 @@ class LLMClient:
         else:
             user_text = str(user_prompt)
 
-        text = await self.chat_complete(system_prompt=system_prompt, user_prompt=user_text)
+        # 傳遞 temperature 參數
+        text = await self.chat_complete(system_prompt=system_prompt, user_prompt=user_text, temperature=temperature)
 
-        # 嘗試解析 JSON
+        # 嘗試直接解析
         try:
             return json.loads(text)
         except Exception:
-            # 從文字中抽出第一個類 JSON 片段（物件或陣列）
-            import re
+            pass
 
-            def _find_jsonish_segment(s: str) -> Optional[str]:
-                m_obj = re.search(r"\{.*\}", s, re.DOTALL)
-                if m_obj:
-                    return m_obj.group(0)
-                m_arr = re.search(r"\[.*\]", s, re.DOTALL)
-                if m_arr:
-                    return m_arr.group(0)
-                return None
+        # [增強版] JSON 提取邏輯：基於堆疊尋找最外層的 {} 或 []
+        import re
+        
+        def _extract_outermost_json(text: str) -> str:
+            stack = 0
+            start = -1
+            
+            # 尋找第一個 { 或 [
+            match = re.search(r'[\[\{]', text)
+            if not match:
+                return text
+            
+            start = match.start()
+            opener = match.group()
+            closer = '}' if opener == '{' else ']'
+            
+            # 從 start 開始掃描，尋找對應的結束符號
+            # 注意：這裡忽略了字串內部的括號，對於簡單修復通常足夠
+            # 若要更嚴謹需實作完整的狀態機，但這裡我們求快求穩
+            for i, char in enumerate(text[start:], start):
+                if char == opener:
+                    stack += 1
+                elif char == closer:
+                    stack -= 1
+                    if stack == 0:
+                        return text[start:i+1]
+            
+            # 如果沒找到閉合的，返回從開始到最後的內容，交給後續修復
+            return text[start:]
 
-            seg = _find_jsonish_segment(text)
-            if seg is None:
-                logger.error("❌ LLM 輸出非 JSON，且找不到 JSON/Array 片段")
-                raise
+        seg = _extract_outermost_json(text)
+        
+        # 清理 Markdown code block
+        seg = seg.strip()
+        seg = re.sub(r"^```\s*json\s*", "", seg, flags=re.IGNORECASE)
+        seg = re.sub(r"^```\s*", "", seg)
+        seg = re.sub(r"\s*```\s*$", "", seg)
+        seg = seg.strip()
 
-            # 直接嘗試 parse 片段（先處理可能的 code fence 包裹）
-            seg = seg.strip()
-            # 去除 ```json / ``` 包裹，並再次去除前後空白
-            seg = re.sub(r"^```\s*json\s*", "", seg, flags=re.IGNORECASE)
-            seg = re.sub(r"^```\s*", "", seg)
-            seg = re.sub(r"\s*```\s*$", "", seg)
-            seg = seg.strip()
+        try:
+            return json.loads(seg)
+        except Exception:
+            # 進入修復流程
+            original_seg = seg
 
-            # 先只保留第一個平衡的 JSON 物件或陣列，避免 "Extra data"（合法 JSON + 另一段合法 JSON）
-            def _truncate_to_first_balanced(snippet: str) -> str:
-                if not snippet:
-                    return snippet
-                opens = {'{': '}', '[': ']'}
-                closes = {'}': '{', ']': '['}
+            # 1) 砍掉行尾 // 註解
+            def _strip_line_comments(snippet: str) -> str:
+                lines = []
+                for line in snippet.splitlines():
+                    if "//" in line:
+                        line = line.split("//", 1)[0]
+                    lines.append(line)
+                return "\n".join(lines)
+
+            # 2) 補引號（過濾器破壞的 key）
+            def _quote_filtered_keys(snippet: str) -> str:
+                fixed_lines = []
+                for line in snippet.splitlines():
+                    if ":" in line and "[系統資訊已隱藏]" in line:
+                        prefix, rest = line.split(":", 1)
+                        key = prefix.strip()
+                        if not (key.startswith('"') and key.endswith('"')):
+                            leading_ws = prefix[: len(prefix) - len(prefix.lstrip())]
+                            qkey = '"' + key.replace('"', '\\"') + '"'
+                            line = f"{leading_ws}{qkey}:{rest}"
+                    fixed_lines.append(line)
+                return "\n".join(fixed_lines)
+
+            seg = _strip_line_comments(seg)
+            
+            # 值為 {...} / ... 的佔位改為合法字串
+            placeholder = '"__omitted__"'
+            seg = re.sub(r"(:\s*)\{\.\.\.\}(\s*[,}\]])", r"\1" + placeholder + r"\2", seg)
+            seg = re.sub(r"(:\s*)\.\.\.(\s*[,}\]])", r"\1" + placeholder + r"\2", seg)
+            
+            seg = _quote_filtered_keys(seg)
+
+            # 移除尾逗號
+            seg = re.sub(r",\s*(\})", r"\1", seg)
+            seg = re.sub(r",\s*(\])", r"\1", seg)
+
+            # [增強版] 括號平衡修正 & 尾部垃圾清理
+            def _balance_brackets(snippet: str) -> str:
+                # 1. 簡單的堆疊平衡補全
                 stack = []
-                start = None
-                for i, ch in enumerate(snippet):
-                    if ch in opens:
-                        if start is None:
-                            start = i
-                        stack.append(opens[ch])
-                    elif ch in closes:
-                        if stack and stack[-1] == ch:
-                            stack.pop()
-                            if not stack and start is not None:
-                                # 第一個完整平衡結束
-                                return snippet[start:i+1]
-                        else:
-                            # 不匹配時，讓後續修復處理
-                            pass
+                for ch in snippet:
+                    if ch in '{[':
+                        stack.append('}' if ch == '{' else ']')
+                    elif ch in '}]':
+                        if stack:
+                            if stack[-1] == ch:
+                                stack.pop()
+                            # 如果不匹配，可能是多餘的閉合括號，這裡暫不處理
+                if stack:
+                    snippet += "".join(reversed(stack))
                 return snippet
 
-            seg = _truncate_to_first_balanced(seg)
+            seg = _balance_brackets(seg)
 
+            # 最終嘗試
             try:
                 return json.loads(seg)
-            except Exception:
-                # 進行修復（依 11.md 指定順序）：
-                original_seg = seg
-
-                # 定義小工具
-                def _strip_line_comments(snippet: str) -> str:
-                    lines = []
-                    for line in snippet.splitlines():
-                        if "//" in line:
-                            line = line.split("//", 1)[0]
-                        lines.append(line)
-                    return "\n".join(lines)
-
-                def _quote_filtered_keys(snippet: str) -> str:
-                    fixed_lines = []
-                    for line in snippet.splitlines():
-                        if ":" in line and "[系統資訊已隱藏]" in line:
-                            prefix, rest = line.split(":", 1)
-                            key = prefix.strip()
-                            if not (key.startswith('"') and key.endswith('"')):
-                                leading_ws = prefix[: len(prefix) - len(prefix.lstrip())]
-                                qkey = '"' + key.replace('"', '\\"') + '"'
-                                line = f"{leading_ws}{qkey}:{rest}"
-                        fixed_lines.append(line)
-                    return "\n".join(fixed_lines)
-
-                # 1) 砍掉行尾 // 註解
-                seg = _strip_line_comments(seg)
-
-                # 2) 值為 {...} / ... 的佔位改為合法字串
-                placeholder = '"__omitted__"'
-                seg = re.sub(r"(:\s*)\{\.\.\.\}(\s*[,}\]])", r"\1" + placeholder + r"\2", seg)
-                seg = re.sub(r"(:\s*)\.\.\.(\s*[,}\]])", r"\1" + placeholder + r"\2", seg)
-                seg = re.sub(r"([\[,]\s*)\{\.\.\.\}(\s*[,\]])", r"\1" + placeholder + r"\2", seg)
-                seg = re.sub(r"([\[,]\s*)\.\.\.(\s*[,\]])", r"\1" + placeholder + r"\2", seg)
-
-                # 3) 補引號（過濾器破壞的 key）
-                seg = _quote_filtered_keys(seg)
-
-                # 4) 移除尾逗號
-                seg = re.sub(r",\s*(\})", r"\1", seg)
-                seg = re.sub(r",\s*(\])", r"\1", seg)
-
-                # 5) 括號平衡修正：若起始為 { 或 [ 且括號數不平衡，於尾部補齊缺漏的關閉括號
-                def _balance_brackets(snippet: str) -> str:
-                    stack = []  # 儲存預期的關閉括號順序
-                    for ch in snippet:
-                        if ch == '{':
-                            stack.append('}')
-                        elif ch == '[':
-                            stack.append(']')
-                        elif ch in ('}', ']'):
-                            if stack and stack[-1] == ch:
-                                stack.pop()
-                            # 若不匹配則忽略，交由 json.loads 判斷
-                    if stack:
-                        # 依相反順序補上缺失關閉括號
-                        snippet = snippet + ''.join(reversed(stack))
-                    return snippet
-
-                seg = _balance_brackets(seg)
-
-                # 嘗試以修正後的內容 parse
+            except json.JSONDecodeError as e:
+                # [新增] 針對 "Unterminated string" 的修復
+                if "Unterminated string" in str(e):
+                    logger.warning("⚠️ 檢測到 JSON 字串未閉合 (可能是 Token 截斷)，嘗試修復...")
+                    # 嘗試找到最後一個未閉合的雙引號，並補上 "
+                    # 簡單策略：如果最後一個非空字符不是 " 或 } 或 ]，嘗試補上 "
+                    trimmed = seg.rstrip()
+                    if trimmed and trimmed[-1] not in ['"', '}', ']']:
+                        # 嘗試補上雙引號和閉合括號
+                        fixed = trimmed + '"}' * 5 # 暴力嘗試
+                        # 這裡比較難完美修復，建議直接回傳一個錯誤結構讓上層重試或降級
+                        # 或者：砍掉最後一個欄位
+                        last_comma = seg.rfind(',')
+                        if last_comma != -1:
+                            seg = seg[:last_comma] + "}" * 5 # 砍掉最後一個爛掉的欄位，並嘗試閉合
+                            seg = _balance_brackets(seg)
+                            try:
+                                return json.loads(seg)
+                            except:
+                                pass
+                
+                # 如果還是失敗，記錄日誌並拋出
                 try:
-                    return json.loads(seg)
-                except Exception as e2:
-                    # 修正後仍失敗，記錄修前/修後片段以供排查
-                    try:
-                        logger.error("❌ LLM JSON 解析失敗（修復前片段）：\n%s", original_seg)
-                        logger.error("❌ LLM JSON 解析失敗（修復後片段）：\n%s", seg)
-                    except Exception:
-                        pass
-                    raise
+                    logger.error("❌ LLM JSON 解析失敗（修復前片段）：\n%s", original_seg)
+                    logger.error("❌ LLM JSON 解析失敗（修復後片段）：\n%s", seg)
+                except Exception:
+                    pass
+                raise

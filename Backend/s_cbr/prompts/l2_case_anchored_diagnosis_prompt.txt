@@ -93,25 +93,6 @@ JSON Schema（L2_CASE_ANCHORED_DIAGNOSIS）：
 {
   "layer": "L2_CASE_ANCHORED_DIAGNOSIS",
   "status": "ok | low_confidence | need_more_info",
-  "input": {
-    "user_accumulated_query": "string",
-    "retrieved_cases": [
-      {
-        "case_id": "string",
-        "score": 0.0,
-        "chief_complaint": "string",
-        "symptom_terms": ["string"],
-        "syndrome_terms": ["string"],
-        "diagnosis": "string",
-        "treatment_principle": "string",
-        "tongue_terms": ["string"],
-        "pulse_terms": ["string"],
-        "zangfu_terms": ["string"],
-        "treatment_terms": ["string"],
-        "full_text": "string"
-      }
-    ]
-  },
   "selected_case": {
     "case_id": "string",
     "match_score": 0.0,
@@ -206,10 +187,10 @@ JSON Schema（L2_CASE_ANCHORED_DIAGNOSIS）：
 你只能根據以下兩個來源進行診斷：
 
 1. 提供的 retrieved_cases：
-   - 這是你能用的全部案例，不能自己生成新的案例
-   - 不能聲稱查閱了其他未提供的資料庫或病例
-   - 不能為案例捏造不存在的欄位內容（例如案例原文沒有的舌象、脈象、治則細節）
-   - 若案例某欄位為空或未提供，不可假裝有資料
+   - 這是你能用的全部案例。若這些案例的資訊不足以支撐完整診斷（例如缺乏病機詳情、現代科學證據、或案例分數過低）:
+    1. 請務必誠實反映在 status 中（設為 low_confidence 或 need_more_info）。
+    2. 嚴禁強行確診或編造案例內容。
+    3. 系統後續會根據你的狀態標記，自動調用外部工具補充知識，所以請放心承認「資料不足」。
 
 2. 你本身具備的中醫理論知識：
    - 允許使用：臟腑理論（心肝脾肺腎、五臟六腑相關）
@@ -396,9 +377,9 @@ D. 覆蓋度與狀態標準（結合主症權重）：
 - 主症必須有明確的症狀依據與病機對應
 - 兼證不能與主證邏輯矛盾
 
-若不滿足以上條件，且 selected_case 的 score >= 0.60：
-- 設置 status: "need_more_info"
-- primary_pattern: 參考錨定案例的證型並標註「暫以此證型為主要方向，現有資訊不足」。
+若不滿足以上條件，或你認為當前資訊需要外部工具驗證：
+- 設置 status: "need_more_info" 或 "low_confidence"。
+- primary_pattern: 填寫你認為最可能的方向，系統會看到你的 status 並啟動工具來驗證它。切記：標記 low_confidence 不是錯誤，而是啟動高階 Agentic 功能的必要步驟。
 - 禁止使用「證型待定」作為 primary_pattern 主體。
   若系統欲表達診斷不確定，必須以「初步傾向」「暫以」等詞語標註，
   不得出現「待定」「不明」「不確定」等字樣。
@@ -767,9 +748,10 @@ status: "ok"
 
 status: "low_confidence"
 - 0.60 <= coverage_ratio < 0.80
-- 或主症有部分未覆蓋但可勉強解釋
-- 或症狀少於 3 個但仍有一定趨向
-- syndrome_analysis 中必須說明此為初步判斷
+- 或檢索到的 anchor case 缺乏詳細的病因病機描述
+- 或你認為該證型缺乏現代科學證據支持
+- 只要你覺得需要外部知識庫（如百科、文獻）輔助才能確診，就應選此狀態。
+
 
 status: "need_more_info"
 - coverage_ratio < 0.60
@@ -853,3 +835,14 @@ vector_weakness_note：
 - 可以使用中醫理論知識解釋症狀，但不得為案例捏造內容。
 - 每個診斷都應該基於實際症狀的獨特推理，而非套用固定模板或預設證型清單。
 - 候選證型必須圍繞 selected_case 深度展開，不得橫向擴展到其他案例，這是螺旋案例推理的核心。
+
+
+[輸出格式補充]
+您的診斷結果將經過外部工具庫驗證和增強，包括：
+- WHO ICD-11 術語標準化驗證
+- A+ 醫學百科辨證邏輯補充
+- ETCM 2.0 現代科學對照
+
+因此，請在輸出中明確標註：
+- primary_pattern（主要證型）：清晰的證型名稱，便於外部查詢
+- pathogenesis（病因病機）：如有不確定，可標註「待補充」

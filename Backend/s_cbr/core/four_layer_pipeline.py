@@ -24,7 +24,10 @@ from ..config import SCBRConfig
 from ..utils.logger import get_logger
 from ..security.owasp_mapper import OWASPMapper 
 from ..llm.embedding import EmbedClient
-from .search_engine import SearchEngine # 假設 SearchEngine 存在
+from .search_engine import SearchEngine 
+from .agentic_retrieval import AgenticRetrieval
+from .l2_agentic_diagnosis import L2AgenticDiagnosis
+from ..utils.terminology_manager import TerminologyManager
 
 logger = get_logger("FourLayerPipeline")
 
@@ -63,7 +66,7 @@ async def call_llm_with_prompt(llm: LLMClient, prompt_path: Path, payload: Dict[
     # 🚨 修正點：只傳遞 LLMClient.complete_json 接受的參數
     # 假設 LLMClient.complete_json 內部會處理 temperature/其它參數。
     # 如果 LLMClient.complete_json 內部沒有處理，這會是下一個問題。
-    resp = await llm.complete_json(system_prompt=system_prompt, user_prompt=payload) 
+    resp = await llm.complete_json(system_prompt=system_prompt, user_prompt=payload, temperature=temperature) 
 
     if isinstance(resp, dict):
         return resp
@@ -99,6 +102,35 @@ class FourLayerSCBR:
         self.cfg = config
         self.SE = search_engine or (SearchEngine(self.cfg) if self.cfg else None)
         self.embed = embed_client or (EmbedClient(self.cfg) if self.cfg else None)
+        # 🆕 初始化 Agentic 檢索器
+        self.agentic_enabled = (
+            self.cfg.agentic_nlu.enabled 
+            if self.cfg and hasattr(self.cfg, 'agentic_nlu') 
+            else False
+        )
+        if self.agentic_enabled and self.SE and self.embed:
+            self.agentic_retrieval = AgenticRetrieval(
+                search_engine=self.SE,
+                embed_client=self.embed,
+                config=self.cfg
+            )
+        else:
+            self.agentic_retrieval = None
+        
+        # 🆕 初始化 L2 Agentic 診斷器
+        if self.agentic_enabled and self.cfg:
+            try:
+                self.l2_agentic = L2AgenticDiagnosis(config=self.cfg)
+                logger.info("[L2Agentic] 初始化完成")
+            except Exception as e:
+                logger.warning(f"[L2Agentic] 初始化失敗: {e}，將降級為傳統 L2 模式")
+                self.l2_agentic = None
+        else:
+            self.l2_agentic = None
+            if not self.agentic_enabled:
+                logger.info("[L2] Agentic 模式未啟用，使用傳統 L2 模式")
+        
+        self.term_manager = TerminologyManager()
         self.base_dir = Path(__file__).resolve().parents[1]
         self.prompts_dir = self.base_dir / "prompts"
 
@@ -120,17 +152,50 @@ class FourLayerSCBR:
         }
         
         # ==================== L1: 門禁層 (Gate Layer) ====================
-        l1_payload = {
-            "layer": "L1_GATE",
-            "input": {"user_query": user_query, "history_summary": history_summary or ""}
-        }
-        # 🚨 L1 實際 LLM 調用 (使用溫度 0.0)
-        l1 = await call_llm_with_prompt(self.llm, self.prompts_dir / "l1_gate_prompt.txt", l1_payload, temperature=0.0)
+        # 🆕 根據配置選擇 L1 Prompt
+        if self.agentic_enabled:
+            l1_prompt_file = "l1_gate_agentic_prompt.txt"
+            l1_payload = {
+                "layer": "L1_AGENTIC_GATE",
+                "input": {"user_query": user_query, "history_summary": history_summary or ""}
+            }
+            logger.info("[L1] 使用 Agentic NLU 模式")
+        else:
+            l1_prompt_file = "l1_gate_prompt.txt"
+            l1_payload = {
+                "layer": "L1_GATE",
+                "input": {"user_query": user_query, "history_summary": history_summary or ""}
+            }
+            logger.info("[L1] 使用傳統模式")
+        
+        # 🚨 L1 實際 LLM 調用 (使用溫度 0.0 或 Agentic 溫度)
+        l1_temperature = (
+            self.cfg.agentic_nlu.llm_temperature 
+            if self.agentic_enabled and self.cfg 
+            else 0.0
+        )
+        l1 = await call_llm_with_prompt(
+            self.llm, 
+            self.prompts_dir / l1_prompt_file, 
+            l1_payload, 
+            temperature=l1_temperature
+        )
         result['l1'] = l1
         
         logger.info(f"[L1 FINAL RESULT] L1 狀態: {l1.get('status', 'N/A')}")
-        # L1 Schema 定義了 keyword_plan
-        logger.info(f"[L1 KEYWORD PLAN]\n{json.dumps(l1.get('keyword_plan', {}), indent=2, ensure_ascii=False)}")
+        
+        # 🆕 記錄 Agentic 決策（如果啟用）
+        if self.agentic_enabled:
+            logger.info(
+                f"[L1 AGENTIC DECISION]\n"
+                f"  Overall Confidence: {l1.get('overall_confidence', 0.0):.3f}\n"
+                f"  Decided Alpha: {l1.get('retrieval_strategy', {}).get('decided_alpha', 0.5)}\n"
+                f"  Strategy Type: {l1.get('retrieval_strategy', {}).get('strategy_type', 'N/A')}\n"
+                f"  Expected Quality: {l1.get('retrieval_strategy', {}).get('expected_quality', 'N/A')}"
+            )
+        else:
+            # 傳統模式記錄
+            logger.info(f"[L1 KEYWORD PLAN]\n{json.dumps(l1.get('keyword_plan', {}), indent=2, ensure_ascii=False)}")
 
         # 舊版日誌的 L1 BEFORE/AFTER FILTER 邏輯（保留）
         try:
@@ -147,6 +212,42 @@ class FourLayerSCBR:
                 logger.info("[L1 AFTER  FILTER]\n%s", _pp(flt))
         except Exception:
             pass
+
+        # =================================================================
+        # 🆕 [新增] L1 策略微調 (基於本地詞庫的 Hybrid 修正)
+        # =================================================================
+        if self.agentic_enabled and l1.get("status") == "ok":
+            try:
+                # 1. 收集 L1 提取的所有關鍵字
+                extracted_terms = []
+                kw_data = l1.get("keyword_extraction", {})
+                extracted_terms.extend(kw_data.get("symptom_terms", []))
+                extracted_terms.extend(kw_data.get("tongue_pulse_terms", []))
+                
+                # 2. 計算「術語密度」 (有多少比例是已知標準詞)
+                density = self.term_manager.get_density(extracted_terms)
+                
+                # 3. 策略自動修正 (Auto-Correction)
+                # 規則：如果 50% 以上是標準術語，且目前 Alpha > 0.4 (非 Keyword Focus)，強制降轉
+                current_strategy = l1.get("retrieval_strategy", {})
+                current_alpha = current_strategy.get("decided_alpha", 0.5)
+                
+                if density >= 0.5 and current_alpha > 0.4:
+                    logger.info(f"🔧 [L1 Correction] 檢測到高密度標準術語 ({density:.0%})，強制調整 Alpha: {current_alpha} -> 0.3")
+                    
+                    # 修改 L1 的決策結果 (In-place modification)
+                    if "retrieval_strategy" not in l1: l1["retrieval_strategy"] = {}
+                    
+                    l1["retrieval_strategy"]["decided_alpha"] = 0.3
+                    l1["retrieval_strategy"]["strategy_type"] = "keyword_focus_forced"
+                    
+                    # 記錄修正原因，方便後續除錯
+                    original_reason = l1["retrieval_strategy"].get("reasoning", "")
+                    l1["retrieval_strategy"]["reasoning"] = (
+                        f"{original_reason} (系統檢測到 {density:.0%} 標準術語，已由本地詞庫強制修正策略)"
+                    )
+            except Exception as e:
+                logger.warning(f"⚠️ L1 策略修正執行失敗 (不影響主流程): {e}")
         
         # 🚨 L1 檢查點 (關鍵點：將拒絕邏輯返回給 main.py 處理)
         if l1.get("status") == "reject" or l1.get("next_action") == "reject":
@@ -158,53 +259,90 @@ class FourLayerSCBR:
         
         # 2. 檢索層 (Retrieval Layer)
         cases: List[Dict] = []
+        retrieval_metadata = {}
+        
         if l1.get("next_action") == "vector_search":
             if not self.SE or not self.embed:
                 logger.error("❌ SearchEngine 或 EmbedClient 未初始化，無法進行檢索。")
                 return result 
             
-            # 從 L1 結果中提取關鍵字（BM25 用，但我們遵循舊日誌使用 full_text）
             text_query = user_query 
             
-            # 1. 獲取查詢向量
-            try:
-                # 實際調用 embed 服務
-                vector = await self.embed.embed(text_query) 
-            except Exception as e:
-                 logger.warning(f"⚠️ 向量生成失敗，嘗試純 BM25: {e}")
-                 vector = None
+            # 🆕 根據模式選擇檢索方式
+            if self.agentic_enabled and self.agentic_retrieval:
+                # === Agentic 智能檢索模式 ===
+                logger.info("[RETRIEVAL] 使用 Agentic 智能檢索")
                 
-            # 2. 執行混合檢索
-            try:
-                # 🚨 關鍵檢索呼叫：使用 hybrid_search (參考 v2.3.md Step 5: alpha=0.55, search_fields=["full_text"])
-                cases = await self.SE.hybrid_search(
-                    index="TCMCase", 
-                    text=text_query, 
-                    vector=vector, 
-                    alpha=self.cfg.search.hybrid_alpha if vector else 1.0, 
-                    limit=self.cfg.search.top_k,
-                    # 從 config 讀取搜索欄位
-                    search_fields=self.cfg.search.search_fields 
-                )
-            except Exception as e:
-                logger.error(f"❌ 檢索失敗: {e}", exc_info=True)
-                # 檢索失敗，將返回空列表 []
+                try:
+                    # 執行智能檢索（包含動態 alpha、品質評估、自動 fallback）
+                    retrieval_result = await self.agentic_retrieval.intelligent_search(
+                        index="TCMCase",
+                        text=text_query,
+                        l1_strategy=l1.get("retrieval_strategy", {}),
+                        limit=3
+                    )
+                    
+                    cases = retrieval_result.get("cases", [])
+                    retrieval_metadata = retrieval_result.get("metadata", {})
+                    
+                    # 記錄 Agentic 檢索決策
+                    logger.info(
+                        f"[AGENTIC RETRIEVAL]\n"
+                        f"  初始 Alpha: {retrieval_metadata.get('initial_alpha', 0.0):.2f}\n"
+                        f"  最終 Alpha: {retrieval_metadata.get('final_alpha', 0.0):.2f}\n"
+                        f"  嘗試次數: {retrieval_metadata.get('attempts', 0)}\n"
+                        f"  品質評分: {retrieval_metadata.get('quality_score', 0.0):.3f}\n"
+                        f"  Fallback: {'是' if retrieval_metadata.get('fallback_triggered') else '否'}"
+                    )
+                    
+                except Exception as e:
+                    logger.error(f"❌ Agentic 檢索失敗: {e}", exc_info=True)
+                    cases = []
+                    
+            else:
+                # === 傳統檢索模式 ===
+                logger.info("[RETRIEVAL] 使用傳統檢索模式")
+                
+                # 1. 獲取查詢向量
+                try:
+                    vector = await self.embed.embed(text_query) 
+                except Exception as e:
+                     logger.warning(f"⚠️ 向量生成失敗，嘗試純 BM25: {e}")
+                     vector = None
+                    
+                # 2. 執行混合檢索
+                try:
+                    cases = await self.SE.hybrid_search(
+                        index="TCMCase", 
+                        text=text_query, 
+                        vector=vector, 
+                        alpha=0.55 if vector else 1.0, 
+                        limit=3,
+                        search_fields=["full_text"] 
+                    )
+                except Exception as e:
+                    logger.error(f"❌ 檢索失敗: {e}", exc_info=True)
+                    cases = []
 
         # 🚨 日誌點 2：檢索結果摘要
         log_samples = []
         if cases:
             log_samples = [
-                # 使用 _score_of 函式，兼容 score/final_score
                 {"case_id": c.get("case_id", "N/A"), "score": f"{_score_of(c):.4f}"}
                 for c in cases[:3] 
             ]
         logger.info(f"[RETRIEVAL RESULT] 成功找到 {len(cases)} 個案例. Top 3 範例: {log_samples}")
+
+        # 🆕 將檢索元數據添加到結果中
+        if retrieval_metadata:
+            result['retrieval_metadata'] = retrieval_metadata
 
         if not cases:
             debug_notes.append("Retrieval returned zero cases.")
             result["debug_note"] = "; ".join(debug_notes)
             return result 
 
+        
         # 3. L2: 生成層 (Diagnosis Layer)
         l2_payload = {
             "layer": "L2_CASE_ANCHORED_DIAGNOSIS",
@@ -215,14 +353,62 @@ class FourLayerSCBR:
                 "previous_diagnosis": previous_diagnosis if previous_diagnosis else {}
             }
         }
-        # 🚨 L2 實際 LLM 調用 (使用溫度 0.1)
-        l2_result = await call_llm_with_prompt(self.llm, self.prompts_dir / "l2_case_anchored_diagnosis_prompt.txt", l2_payload, temperature=0.1)
-        result['l2'] = l2_result
+
+        # 3.1 傳統 L2 診斷（LLM 推理）
+        l2_raw_result = await call_llm_with_prompt(
+            self.llm, 
+            self.prompts_dir / "l2_case_anchored_diagnosis_prompt.txt", 
+            l2_payload, 
+            temperature=0.1
+        )
+
+        # 3.2 L2 Agentic 增強（如果啟用）
+        if self.agentic_enabled and self.l2_agentic:
+            logger.info("[L2] 使用 Agentic 增強模式")
+            
+            # 執行工具增強診斷
+            l2_agentic_output = await self.l2_agentic.enhance_diagnosis(
+                l2_raw_result=l2_raw_result,
+                l1_decision=l1,
+                retrieved_cases=cases
+            )
+            
+            # 將增強資訊添加到結果中
+            result['l2'] = l2_raw_result
+            result['l2_agentic_metadata'] = {
+                "validation_status": l2_agentic_output.validation_status,
+                "tool_calls": len(l2_agentic_output.tool_results),
+                "confidence_boost": l2_agentic_output.confidence_boost,
+                "case_completeness": l2_agentic_output.case_completeness,
+                "diagnosis_confidence": l2_agentic_output.diagnosis_confidence
+            }
+            
+            # 將工具增強的資訊添加到結果中供後續層使用
+            if l2_agentic_output.authority_references:
+                result['l2']['authority_references'] = l2_agentic_output.authority_references
+            if l2_agentic_output.knowledge_supplements:
+                result['l2']['knowledge_supplements'] = l2_agentic_output.knowledge_supplements
+            if l2_agentic_output.modern_evidence:
+                result['l2']['modern_evidence'] = l2_agentic_output.modern_evidence
+            
+            # 記錄工具調用詳情
+            logger.info(
+                f"[L2 AGENTIC ENHANCEMENT]\n"
+                f"  驗證狀態: {l2_agentic_output.validation_status}\n"
+                f"  工具調用數: {len(l2_agentic_output.tool_results)}\n"
+                f"  置信度提升: +{l2_agentic_output.confidence_boost:.2f}\n"
+                f"  案例完整度: {l2_agentic_output.case_completeness:.2f}\n"
+                f"  診斷置信度: {l2_agentic_output.diagnosis_confidence:.2f}"
+            )
+        else:
+            # 傳統模式（無工具增強）
+            logger.info("[L2] 使用傳統模式（無工具增強）")
+            result['l2'] = l2_raw_result
 
         # 🚨 [日誌點 3: L2 案例錨定摘要]
-        selected_case_id = l2_result.get("selected_case", {}).get("case_id", "未錨定")
-        coverage = l2_result.get("coverage_evaluation", {}).get("coverage_ratio", 0.0)
-        primary_pattern = l2_result.get('tcm_inference', {}).get('primary_pattern', 'N/A')
+        selected_case_id = l2_raw_result.get("selected_case", {}).get("case_id", "未錨定")
+        coverage = l2_raw_result.get("coverage_evaluation", {}).get("coverage_ratio", 0.0)
+        primary_pattern = l2_raw_result.get('tcm_inference', {}).get('primary_pattern', 'N/A')
         
         logger.info(
             f"[L2 DIAGNOSIS SUMMARY] 錨定 ID: {selected_case_id}, 證型: {primary_pattern}, "
@@ -230,7 +416,7 @@ class FourLayerSCBR:
         )
 
         # 4. L3: 審核層 (Safety Review Layer)
-        l3_payload = {"layer": "L3_SAFETY_REVIEW", "input": {"diagnosis_payload": l2_result}}
+        l3_payload = {"layer": "L3_SAFETY_REVIEW", "input": {"diagnosis_payload": l2_raw_result}}
         # 🚨 L3 實際 LLM 調用 (使用溫度 0.0)
         l3_result = await call_llm_with_prompt(self.llm, self.prompts_dir / "l3_safety_review_prompt.txt", l3_payload, temperature=0.0)
         result['l3'] = l3_result
@@ -261,7 +447,7 @@ class FourLayerSCBR:
         result['diagnosis'] = l4_result.get('presentation', {})
         
         # 檢查收斂 (依據 SCBR 文件 [10.2] 的收斂條件)
-        coverage_ratio = l2_result.get('coverage_evaluation', {}).get('coverage_ratio', 0.0)
+        coverage_ratio = l2_raw_result.get('coverage_evaluation', {}).get('coverage_ratio', 0.0)
         # 修正收斂判斷邏輯，納入最大輪次檢查 (強制收斂)
         is_coverage_ok = coverage_ratio >= 0.8
         is_max_round_reached = round_count >= max_rounds

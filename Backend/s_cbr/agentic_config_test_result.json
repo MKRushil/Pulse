@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-11-23T03:28:12.205733",
+  "execution_dir": "C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr",
+  "script_location": "C:\\work\\系統-中醫\\Pulse-project\\Backend\\s_cbr\\test_agentic_nlu.py",
+  "total_tests": 5,
+  "passed": 5,
+  "failed": 0,
+  "test_results": [
+    {
+      "test": "config_import",
+      "status": "PASS"
+    },
+    {
+      "test": "config_instance",
+      "status": "PASS"
+    },
+    {
+      "test": "agentic_nlu_exists",
+      "status": "PASS"
+    },
+    {
+      "test": "params_completeness",
+      "status": "PASS"
+    },
+    {
+      "test": "params_validation",
+      "status": "PASS"
+    }
+  ],
+  "config": {
+    "功能開關": {
+      "enabled": true
+    },
+    "Alpha 值範圍": {
+      "alpha_min": 0.2,
+      "alpha_max": 0.8,
+      "alpha_default": 0.5
+    },
+    "置信度門檻": {
+      "confidence_low": 0.35,
+      "confidence_mid": 0.55,
+      "confidence_high": 0.75
+    },
+    "Fallback 控制": {
+      "fallback_enabled": true,
+      "fallback_threshold": 0.65,
+      "max_fallback_attempts": 3
+    },
+    "LLM 參數": {
+      "llm_temperature": 0.2,
+      "llm_timeout": 30.0
+    }
+  }
+}

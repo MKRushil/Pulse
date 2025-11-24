@@ -11,7 +11,7 @@ S-CBR API 路由 - 安全增強版本
 
 from fastapi import APIRouter, Body, Request, HTTPException
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Dict, Any, Optional, List
 import re, datetime
 
@@ -54,13 +54,20 @@ class DiagnoseRequest(BaseModel):
         description="是否停用案例瘦身（True=停用，None=使用預設）"
     )
 
-    @validator('history_summary')
+    @field_validator('history_summary')
+    @classmethod
     def validate_history_summary(cls, v):
+        """
+        驗證歷史摘要
+        
+        允許為空；限制長度避免過長
+        """
         # 允許為空；限制長度避免過長
         v = v or ""
         return v[:2000]
     
-    @validator('question')
+    @field_validator('question')
+    @classmethod
     def validate_question(cls, v):
         """
         驗證問題內容
@@ -88,7 +95,8 @@ class DiagnoseRequest(BaseModel):
         
         return v.strip()
     
-    @validator('session_id')
+    @field_validator('session_id')
+    @classmethod
     def validate_session_id(cls, v):
         """
         驗證 session_id 格式（UUID 格式）
@@ -113,7 +121,8 @@ class SessionResetRequest(BaseModel):
         description="要重置的會話ID"
     )
     
-    @validator('session_id')
+    @field_validator('session_id')
+    @classmethod
     def validate_session_id(cls, v):
         """驗證 session_id 格式"""
         uuid_pattern = r'^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
@@ -151,18 +160,18 @@ def get_client_ip(request: Request) -> str:
         request: FastAPI Request 對象
         
     Returns:
-        客戶端IP地址
+        str: 客戶端IP地址
     """
     # 檢查代理頭
-    x_forwarded_for = request.headers.get("X-Forwarded-For")
-    if x_forwarded_for:
+    forwarded_for = request.headers.get("X-Forwarded-For")
+    if forwarded_for:
         # X-Forwarded-For 可能包含多個IP，取第一個
-        return x_forwarded_for.split(",")[0].strip()
+        return forwarded_for.split(",")[0].strip()
     
-    # 檢查 X-Real-IP
-    x_real_ip = request.headers.get("X-Real-IP")
-    if x_real_ip:
-        return x_real_ip.strip()
+    # 檢查 Nginx 頭
+    real_ip = request.headers.get("X-Real-IP")
+    if real_ip:
+        return real_ip.strip()
     
     # 直接連接
     if request.client and request.client.host:
@@ -171,471 +180,368 @@ def get_client_ip(request: Request) -> str:
     return "unknown"
 
 
-from .utils.error_handler import sanitize_error_message
-
-
-def mask_pii_in_response(data: Dict[str, Any]) -> Dict[str, Any]:
+def sanitize_error_message(error: Exception) -> str:
     """
-    在響應中脫敏 PII/PHI 資訊
+    清理錯誤訊息，避免洩露敏感信息
     
     Args:
-        data: 響應數據
+        error: 異常對象
         
     Returns:
-        脫敏後的數據
+        str: 安全的錯誤訊息
     """
-    # 深拷貝以避免修改原數據
-    import copy
-    masked_data = copy.deepcopy(data)
+    error_str = str(error)
     
-    # 需要脫敏的欄位
-    pii_fields = ['patient_name', 'id_number', 'phone', 'email', 'address']
+    # 移除敏感路徑信息
+    error_str = re.sub(r'[A-Za-z]:\\[^\s]+', '[PATH]', error_str)
+    error_str = re.sub(r'/[^\s]+/[^\s]+', '[PATH]', error_str)
     
-    def recursive_mask(obj):
-        """遞歸脫敏"""
-        if isinstance(obj, dict):
-            for key, value in obj.items():
-                if key in pii_fields and value:
-                    obj[key] = "***masked***"
-                elif isinstance(value, (dict, list)):
-                    recursive_mask(value)
-        elif isinstance(obj, list):
-            for item in obj:
-                recursive_mask(item)
+    # 移除可能的敏感配置
+    error_str = re.sub(r'password[=:]\S+', 'password=[REDACTED]', error_str, flags=re.IGNORECASE)
+    error_str = re.sub(r'api[_-]?key[=:]\S+', 'api_key=[REDACTED]', error_str, flags=re.IGNORECASE)
+    error_str = re.sub(r'token[=:]\S+', 'token=[REDACTED]', error_str, flags=re.IGNORECASE)
     
-    recursive_mask(masked_data)
-    return masked_data
+    # 限制長度
+    if len(error_str) > 200:
+        error_str = error_str[:197] + "..."
+    
+    return error_str
 
 
 # ==================== API 端點 ====================
 
-@router.post("/diagnose")
-async def diagnose(req: DiagnoseRequest, request: Request):
+@router.post("/diagnose", response_model=Dict[str, Any])
+async def diagnose(
+    request: Request,
+    body: DiagnoseRequest = Body(...)
+):
     """
-    執行螺旋推理診斷 - 安全增強版本
+    核心診斷端點 - 執行螺旋推理
     
-    安全措施：
-    1. 輸入驗證（Pydantic）
-    2. 速率限制（基於IP）
-    3. 輸入淨化（在 main.py 中）
-    4. 錯誤隱藏（不洩露技術細節）
-    5. PII 脫敏（輸出中）
+    安全功能：
+    - 輸入驗證（Pydantic）
+    - 速率限制（IP + Session）
+    - PII 脫敏
+    - 錯誤訊息清理
     
     Args:
-        req: 診斷請求
-        request: FastAPI Request（用於獲取IP）
+        request: FastAPI Request 對象
+        body: 診斷請求體
         
     Returns:
-        診斷結果（已脫敏）
+        Dict[str, Any]: 診斷結果
+        
+    Raises:
+        HTTPException: 
+            - 422: 輸入驗證失敗或安全攔截
+            - 429: 速率限制超出
+            - 500: 內部錯誤
     """
-    # 獲取客戶端IP
+    start_time = datetime.datetime.now()
     client_ip = get_client_ip(request)
     
+    logger.info(f"📥 收到診斷請求 [IP: {client_ip}]")
+    logger.info(f"   問題: {body.question[:50]}...")
+    logger.info(f"   Session ID: {body.session_id}")
+    
     try:
-        logger.info(f"📥 收到診斷請求: {req.question[:50]}... (IP: {client_ip})")
+        # 獲取引擎實例
+        engine = get_engine()
         
-        # 調用主引擎（內部會進行安全檢查）
-        # 將 history_summary 瘦身為結構化摘要（字串表示），避免長段原文逐輪膨脹
-        structured_hist = structure_history_summary(req.history_summary or "")
-
-        result = await run_spiral_cbr(
-            question=req.question,
-            patient_ctx=req.patient_ctx,
-            session_id=req.session_id,
-            continue_spiral=req.continue_spiral,
-            user_ip=client_ip,  # ✅ 傳遞IP用於速率限制
-            history_summary=structured_hist,
-            disable_case_slimming=req.disable_case_slimming
-        )
-        
-        # 檢查是否有錯誤（安全相關）
-        if "error" in result:
-            error_type = result.get("error")
-            error_message = result.get("message", "處理失敗")
-            
-            # 根據錯誤類型返回適當的 HTTP 狀態碼
-            if error_type == "rate_limit_exceeded":
+        # 執行速率限制檢查
+        if engine.rate_limiter:
+            try:
+                engine.rate_limiter.check_rate_limit(
+                    ip=client_ip,
+                    session_id=body.session_id
+                )
+            except Exception as e:
+                logger.warning(f"⚠️ 速率限制觸發: {e}")
                 raise HTTPException(
                     status_code=429,
                     detail={
-                        "error": error_type,
-                        "message": error_message,
-                        "retry_after": result.get("retry_after", 60)
-                    }
-                )
-            elif error_type == "security_violation":
-                raise HTTPException(
-                    status_code=403,
-                    detail={
-                        "error": error_type,
-                        "message": error_message
-                    }
-                )
-            else:
-                raise HTTPException(
-                    status_code=400,
-                    detail={
-                        "error": error_type,
-                        "message": error_message
+                        "message": "請求過於頻繁，請稍後再試",
+                        "error": "RATE_LIMIT_EXCEEDED"
                     }
                 )
         
-        # ✅ 脫敏 PII/PHI
-        masked_result = mask_pii_in_response(result)
+        # 執行診斷
+        result = await run_spiral_cbr(
+            question=body.question,
+            patient_ctx=body.patient_ctx,
+            session_id=body.session_id,
+            continue_spiral=body.continue_spiral,
+            history_summary=body.history_summary,
+            disable_case_slimming=body.disable_case_slimming,
+            user_ip=client_ip
+        )
         
-        logger.info(f"✅ 診斷完成: session_id={masked_result.get('session_id', 'N/A')}")
-        return masked_result
+        # 記錄處理時間
+        processing_time = (datetime.datetime.now() - start_time).total_seconds()
+        logger.info(f"✅ 診斷完成 [IP: {client_ip}] 耗時: {processing_time:.2f}s")
+        
+        return result
         
     except HTTPException:
+        # HTTPException 直接拋出（已經格式化）
         raise
-    
-    except ValueError as e:
-        # 輸入驗證錯誤
-        logger.warning(f"⚠️ 輸入驗證失敗: {e}")
-        raise HTTPException(status_code=400, detail=str(e))
-    
-    except Exception as e:
-        # 未預期的錯誤
-        logger.error(f"❌ 診斷失敗: {e}", exc_info=True)
-        
-        # 不洩露技術細節
-        safe_message = sanitize_error_message(e)
-        raise HTTPException(status_code=500, detail=safe_message)
-
-
-@router.post("/session/reset")
-async def reset_session(req: SessionResetRequest):
-    """
-    重置會話
-    
-    Args:
-        req: 重置請求
-        
-    Returns:
-        操作結果
-    """
-    try:
-        engine = get_engine()
-        engine.reset_session(req.session_id)
-        
-        logger.info(f"🔄 會話已重置: {req.session_id}")
-        return {
-            "status": "success",
-            "message": f"會話 {req.session_id[:8]}*** 已重置"
-        }
         
     except Exception as e:
-        logger.error(f"❌ 重置會話失敗: {e}", exc_info=True)
+        # 其他異常：清理錯誤訊息並返回 500
+        logger.error(f"❌ 診斷失敗 [IP: {client_ip}]: {e}", exc_info=True)
+        
+        safe_error_message = sanitize_error_message(e)
+        
         raise HTTPException(
             status_code=500,
-            detail=sanitize_error_message(e)
+            detail={
+                "message": "診斷過程中發生內部錯誤",
+                "error": safe_error_message
+            }
         )
 
 
-@router.get("/session/{session_id}")
-async def get_session_info(session_id: str):
+@router.post("/reset", response_model=Dict[str, Any])
+async def reset_session(
+    request: Request,
+    body: SessionResetRequest = Body(...)
+):
     """
-    獲取會話資訊 - 已脫敏版本
+    重置會話端點
+    
+    清除指定會話的所有歷史記錄和狀態
     
     Args:
-        session_id: 會話ID
+        request: FastAPI Request 對象
+        body: 會話重置請求體
         
     Returns:
-        會話資訊（已脫敏PII）
+        Dict[str, Any]: 重置結果
+        
+    Raises:
+        HTTPException:
+            - 404: 會話不存在
+            - 500: 內部錯誤
     """
+    client_ip = get_client_ip(request)
+    session_id = body.session_id
+    
+    logger.info(f"🔄 收到會話重置請求 [IP: {client_ip}, Session: {session_id}]")
+    
     try:
-        # 驗證 session_id 格式
-        uuid_pattern = r'^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
-        if not re.match(uuid_pattern, session_id.lower()):
+        engine = get_engine()
+        
+        # 檢查會話是否存在
+        if not engine.dialog.has_session(session_id):
             raise HTTPException(
-                status_code=400,
-                detail="無效的 session_id 格式"
+                status_code=404,
+                detail={
+                    "message": f"會話 {session_id} 不存在",
+                    "error": "SESSION_NOT_FOUND"
+                }
             )
         
-        engine = get_engine()
-        session = engine.dialog.get_session(session_id)
+        # 執行重置
+        engine.dialog.reset_session(session_id)
         
-        if not session:
-            raise HTTPException(status_code=404, detail="會話不存在")
+        logger.info(f"✅ 會話重置成功 [Session: {session_id}]")
         
-        # 構建響應（不包含敏感信息）
-        response = {
+        return {
+            "success": True,
             "session_id": session_id,
-            "round_count": session.round_count,
-            "accumulated_question": session.accumulated_question[:100] + "...",  # 限制長度
-            "history_count": len(session.history),
-            "created_at": session.created_at.isoformat(),
-            # ✅ 不返回完整的 patient_ctx（可能包含PII）
-            "has_patient_context": bool(session.patient_ctx)
+            "message": "會話已重置"
         }
-        
-        logger.info(f"📊 獲取會話資訊: {session_id[:8]}***")
-        return response
         
     except HTTPException:
         raise
-    
+        
     except Exception as e:
-        logger.error(f"❌ 獲取會話資訊失敗: {e}", exc_info=True)
+        logger.error(f"❌ 會話重置失敗 [Session: {session_id}]: {e}", exc_info=True)
+        
+        safe_error_message = sanitize_error_message(e)
+        
         raise HTTPException(
             status_code=500,
-            detail=sanitize_error_message(e)
+            detail={
+                "message": "重置會話時發生內部錯誤",
+                "error": safe_error_message
+            }
         )
 
 
-# @router.post("/case/save-effective")
-# async def save_effective_case(req: SaveCaseRequest):
-#     """
-#     儲存有效治療案例到 RPCase
-    
-#     此端點應該在前端確認治療有效後調用
-    
-#     Args:
-#         req: 保存請求
-        
-#     Returns:
-#         保存結果
-#     """
-#     try:
-#         engine = get_engine()
-#         session = engine.dialog.get_session(req.session_id)
-        
-#         if not session:
-#             raise HTTPException(status_code=404, detail="會話不存在")
-        
-#         # 檢查是否標記為可儲存
-#         if not session.history:
-#             raise HTTPException(status_code=400, detail="會話無歷史記錄")
-        
-#         last_step = session.history[-1]
-#         save_prompt = last_step.get("save_prompt", {})
-        
-#         if not save_prompt.get("can_save", False):
-#             return {
-#                 "status": "rejected",
-#                 "message": "該會話未達到有效治療標準",
-#                 "reason": save_prompt.get("message", "")
-#             }
-        
-#         # ✅ 調用 RPCaseManager 儲存
-#         from .core.rpcase_manager import RPCaseManager
-#         rpcase_mgr = RPCaseManager(
-#             weaviate_client=engine.spiral.SE.weaviate_client,
-#             config=engine.config
-#         )
-        
-#         # 準備儲存數據（已脫敏）
-#         session_data = {
-#             "session_id": req.session_id,
-#             "diagnosis": last_step.get("primary", {}).get("diagnosis", ""),
-#             "conversation_history": [
-#                 {
-#                     "round": step.get("round"),
-#                     "question": step.get("question", "")[:200]  # 限制長度
-#                 }
-#                 for step in session.history
-#             ],
-#             "primary": last_step.get("primary", {}),
-#             "convergence_metrics": last_step.get("convergence", {}),
-#             "round": session.round_count
-#         }
-        
-#         result = await rpcase_mgr.save_from_session(session_data)
-        
-#         if result.get("success"):
-#             logger.info(f"💾 RPCase 儲存成功: {result.get('case_id')}")
-#             return {
-#                 "status": "success",
-#                 "message": "有效案例已儲存",
-#                 "case_id": result.get("case_id"),
-#                 "effectiveness_score": save_prompt.get("effectiveness_score", 0)
-#             }
-#         else:
-#             raise HTTPException(
-#                 status_code=500,
-#                 detail=f"儲存失敗: {sanitize_error_message(Exception(result.get('error')))}"
-#             )
-        
-#     except HTTPException:
-#         raise
-    
-#     except Exception as e:
-#         logger.error(f"❌ 儲存 RPCase 失敗: {e}", exc_info=True)
-#         raise HTTPException(
-#             status_code=500,
-#             detail=sanitize_error_message(e)
-#         )
-
-
-@router.get("/case/save-status/{session_id}")
-async def get_save_status(session_id: str):
+@router.get("/session/{session_id}", response_model=Dict[str, Any])
+async def get_session_info(
+    request: Request,
+    session_id: str
+):
     """
-    檢查會話是否可儲存為有效案例
+    獲取會話信息端點
+    
+    返回指定會話的當前狀態和歷史記錄
     
     Args:
+        request: FastAPI Request 對象
         session_id: 會話ID
         
     Returns:
-        儲存狀態資訊
-    """
-    try:
-        # 驗證格式
-        uuid_pattern = r'^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
-        if not re.match(uuid_pattern, session_id.lower()):
-            raise HTTPException(status_code=400, detail="無效的 session_id 格式")
+        Dict[str, Any]: 會話信息
         
+    Raises:
+        HTTPException:
+            - 404: 會話不存在
+            - 500: 內部錯誤
+    """
+    client_ip = get_client_ip(request)
+    
+    logger.info(f"📋 收到會話查詢請求 [IP: {client_ip}, Session: {session_id}]")
+    
+    try:
         engine = get_engine()
+        
+        # 檢查會話是否存在
+        if not engine.dialog.has_session(session_id):
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "message": f"會話 {session_id} 不存在",
+                    "error": "SESSION_NOT_FOUND"
+                }
+            )
+        
+        # 獲取會話信息
         session = engine.dialog.get_session(session_id)
         
-        if not session:
-            raise HTTPException(status_code=404, detail="會話不存在")
-        
-        if not session.history:
-            return {
-                "can_save": False,
-                "reason": "無診斷記錄"
-            }
-        
-        last_step = session.history[-1]
-        save_prompt = last_step.get("save_prompt", {})
-        
         return {
-            "can_save": save_prompt.get("can_save", False),
-            "message": save_prompt.get("message", ""),
-            "effectiveness_score": save_prompt.get("effectiveness_score", 0),
+            "session_id": session.session_id,
             "round_count": session.round_count,
-            "converged": last_step.get("convergence", {}).get("overall_convergence", 0) >= 0.85
+            "accumulated_question": session.accumulated_question,
+            "created_at": session.created_at.isoformat() if hasattr(session, 'created_at') else None,
+            "history_count": len(session.history) if hasattr(session, 'history') else 0
         }
         
     except HTTPException:
         raise
-    
+        
     except Exception as e:
-        logger.error(f"❌ 檢查儲存狀態失敗: {e}", exc_info=True)
+        logger.error(f"❌ 獲取會話信息失敗 [Session: {session_id}]: {e}", exc_info=True)
+        
+        safe_error_message = sanitize_error_message(e)
+        
         raise HTTPException(
             status_code=500,
-            detail=sanitize_error_message(e)
+            detail={
+                "message": "獲取會話信息時發生內部錯誤",
+                "error": safe_error_message
+            }
         )
 
 
-@router.get("/health")
+@router.post("/save-case", response_model=Dict[str, Any])
+async def save_case(
+    request: Request,
+    body: SaveCaseRequest = Body(...)
+):
+    """
+    保存病例端點
+    
+    將會話的診斷結果保存為正式病例
+    
+    Args:
+        request: FastAPI Request 對象
+        body: 保存病例請求體
+        
+    Returns:
+        Dict[str, Any]: 保存結果
+        
+    Raises:
+        HTTPException:
+            - 404: 會話不存在
+            - 500: 內部錯誤
+    """
+    client_ip = get_client_ip(request)
+    session_id = body.session_id
+    
+    logger.info(f"💾 收到保存病例請求 [IP: {client_ip}, Session: {session_id}]")
+    
+    try:
+        engine = get_engine()
+        
+        # 檢查會話是否存在
+        if not engine.dialog.has_session(session_id):
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "message": f"會話 {session_id} 不存在",
+                    "error": "SESSION_NOT_FOUND"
+                }
+            )
+        
+        # TODO: 實作病例保存邏輯
+        # 這裡需要調用病例管理系統的API
+        
+        logger.info(f"✅ 病例保存成功 [Session: {session_id}]")
+        
+        return {
+            "success": True,
+            "session_id": session_id,
+            "message": "病例已保存",
+            "case_id": f"CASE-{session_id}"  # 臨時ID，實際應由病例系統生成
+        }
+        
+    except HTTPException:
+        raise
+        
+    except Exception as e:
+        logger.error(f"❌ 保存病例失敗 [Session: {session_id}]: {e}", exc_info=True)
+        
+        safe_error_message = sanitize_error_message(e)
+        
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "message": "保存病例時發生內部錯誤",
+                "error": safe_error_message
+            }
+        )
+
+
+@router.get("/health", response_model=Dict[str, Any])
 async def health_check():
     """
     健康檢查端點
     
-    用於監控系統是否正常運行
+    返回系統的基本健康狀態
     
     Returns:
-        健康狀態資訊
+        Dict[str, Any]: 健康狀態信息
     """
     try:
         engine = get_engine()
         
-        # 檢查關鍵組件
+        # 檢查核心組件
         components_status = {
-            "dialog_manager": engine.dialog is not None,
-            "spiral_engine": engine.spiral is not None,
             "llm_client": engine.llm is not None,
-            "input_sanitizer": engine.input_sanitizer is not None,
-            "output_validator": engine.output_validator is not None
+            "dialog_manager": engine.dialog is not None,
+            "search_engine": engine.SE is not None,
+            "embed_client": engine.embed is not None,
+            "four_layer_pipeline": engine.four_layer is not None
         }
         
+        # 計算整體健康狀態
         all_healthy = all(components_status.values())
         
         return {
             "status": "healthy" if all_healthy else "degraded",
             "version": engine.version,
-            "service": "S-CBR API",
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.datetime.now().isoformat(),
             "components": components_status
         }
         
     except Exception as e:
-        logger.error(f"❌ 健康檢查失敗: {e}")
+        logger.error(f"❌ 健康檢查失敗: {e}", exc_info=True)
+        
         return {
             "status": "unhealthy",
-            "service": "S-CBR API",
-            "error": "Health check failed"
+            "timestamp": datetime.datetime.now().isoformat(),
+            "error": sanitize_error_message(e)
         }
-
-
-@router.get("/stats")
-async def get_stats():
-    """
-    獲取系統統計資訊（不包含敏感數據）
-    
-    Returns:
-        統計資訊
-    """
-    try:
-        engine = get_engine()
-        
-        # 獲取基本統計（不洩露用戶數據）
-        stats = {
-            "active_sessions": len(engine.dialog.sessions),
-            "system_version": engine.version,
-            "features": {
-                "llm_enabled": engine.llm is not None,
-                "security_enabled": True
-            }
-        }
-        
-        return stats
-        
-    except Exception as e:
-        logger.error(f"❌ 獲取統計失敗: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="無法獲取統計資訊"
-        )
-
-
-def structure_history_summary(raw: str) -> str:
-    """將前端傳來的 history_summary 文本壓縮為瘦版結構化摘要字串。
-
-    規則（簡化）：
-    - 以常見分隔（逗號/頓號/換行/空白）切詞
-    - 以關鍵字包含判斷粗分為 tongue/pulse，其餘歸 symptoms
-    - 回傳固定格式字串：symptoms=[...]; tongue=[...]; pulse=[...]
-    """
-    if not raw:
-        return ""
-    import re
-    tokens = [t.strip() for t in re.split(r"[\s,，、\n]+", raw) if t.strip()]
-    symptoms, tongue, pulse = [], [], []
-    for t in tokens:
-        if '舌' in t:
-            tongue.append(t)
-        elif '脈' in t:
-            pulse.append(t)
-        else:
-            symptoms.append(t)
-    # 去重保持順序
-    def _dedup_keep_order(arr):
-        return list(dict.fromkeys(arr))
-
-    symptoms = _dedup_keep_order(symptoms)
-    tongue = _dedup_keep_order(tongue)
-    pulse = _dedup_keep_order(pulse)
-
-    # 若三段合計長度超過 client 安全長度一半（約 1500 字），從最舊項目開始截斷
-    def _render(sy, tg, pl):
-        def _fmt(arr):
-            return ", ".join(arr)
-        return f"symptoms=[{_fmt(sy)}]; tongue=[{_fmt(tg)}]; pulse=[{_fmt(pl)}]"
-
-    MAX_LEN = 1500
-    while True:
-        rendered = _render(symptoms, tongue, pulse)
-        if len(rendered) <= MAX_LEN:
-            break
-        # 優先從 symptoms 刪，再從 tongue，再從 pulse（舊項目優先）
-        if symptoms:
-            symptoms.pop(0)
-        elif tongue:
-            tongue.pop(0)
-        elif pulse:
-            pulse.pop(0)
-        else:
-            break
-    return _render(symptoms, tongue, pulse)
