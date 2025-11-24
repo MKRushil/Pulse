@@ -624,7 +624,7 @@ class L2AgenticDiagnosis:
         l1_decision: Dict[str, Any]
     ) -> ToolCallDecision:
         """
-        自主決策是否需要調用工具
+        自主決策是否需要調用工具(深度整合決策樹)
         
         決策邏輯：
         1. 案例完整度 < 0.6 → 調用 Tool B 補充知識
@@ -637,38 +637,41 @@ class L2AgenticDiagnosis:
         decision = ToolCallDecision()
         target_syndrome = initial_diagnosis.get("primary_syndrome", "")
         
-        # 決策 1：知識補充（Tool B）
-        if case_completeness < self.tool_config["knowledge_gap_threshold"]:
-            if self.tool_config["enable_tool_b"] and target_syndrome:
+        # 基礎檢查：如果沒有目標證型，工具也無法查詢，直接返回
+        if not target_syndrome or "待定" in target_syndrome:
+            return decision
+
+        # --- 策略 A: 知識缺口 (Knowledge Gap) -> Tool B (A+百科) ---
+        # 觸發條件：完整度低，或「病因病機」欄位缺失/過短
+        has_pathogenesis = len(initial_diagnosis.get("pathogenesis", "")) > 20
+        if case_completeness < self.tool_config["knowledge_gap_threshold"] or not has_pathogenesis:
+            if self.tool_config["enable_tool_b"]:
                 decision.should_call_tool_b = True
                 decision.reasons.append(ToolCallReason.KNOWLEDGE_GAP)
                 decision.target_terms.append(target_syndrome)
-                logger.info(
-                    f"[L2Agentic] 觸發 Tool B - "
-                    f"案例完整度 {case_completeness:.2f} < {self.tool_config['knowledge_gap_threshold']}"
-                )
-        
-        # 決策 2：幻覺校驗（Tool C）
+                logger.info(f"[L2Agentic] 觸發 Tool B (病機缺失/完整度不足: {case_completeness:.2f})")
+
+        # --- 策略 B: 幻覺校驗 (Hallucination Check) -> Tool C (ETCM) ---
+        # 觸發條件：置信度低，或缺乏現代科學證據支持
+        # 這裡假設 LLM 輸出的 initial_diagnosis 可能包含空的 modern_evidence 欄位
         if diagnosis_confidence < self.tool_config["validation_confidence_threshold"]:
-            if self.tool_config["enable_tool_c"] and target_syndrome:
+            if self.tool_config["enable_tool_c"]:
                 decision.should_call_tool_c = True
                 decision.reasons.append(ToolCallReason.HALLUCINATION_CHECK)
                 if target_syndrome not in decision.target_terms:
                     decision.target_terms.append(target_syndrome)
-                logger.info(
-                    f"[L2Agentic] 觸發 Tool C - "
-                    f"診斷置信度 {diagnosis_confidence:.2f} < {self.tool_config['validation_confidence_threshold']}"
-                )
-        
-        # 決策 3：權威背書（Tool A）
-        # 當診斷較為明確時，獲取 ICD-11 標準化參考
-        if diagnosis_confidence >= 0.75 and target_syndrome:
+                logger.info(f"[L2Agentic] 觸發 Tool C (置信度不足: {diagnosis_confidence:.2f})")
+
+        # --- 策略 C: 權威背書 (Authority Endorsement) -> Tool A (ICD-11) ---
+        # 觸發條件：只要有明確證型，就嘗試進行標準化驗證 (不再只看高置信度)
+        # 這是為了達成「缺乏標準病名 -> 調用 Tool A」的邏輯
+        if target_syndrome and len(target_syndrome) < 10: # 避免拿長句子去查
             if self.tool_config["enable_tool_a"]:
                 decision.should_call_tool_a = True
                 decision.reasons.append(ToolCallReason.AUTHORITY_ENDORSEMENT)
                 if target_syndrome not in decision.target_terms:
                     decision.target_terms.append(target_syndrome)
-                logger.info("[L2Agentic] 觸發 Tool A - 診斷明確，獲取權威背書")
+                logger.info("[L2Agentic] 觸發 Tool A (尋求 ICD-11 標準化背書)")
         
         return decision
     
@@ -833,7 +836,7 @@ class L2AgenticDiagnosis:
         tool_results: List[ToolCallResult]
     ) -> Dict[str, Any]:
         """
-        整合工具結果到診斷中
+        整合工具結果到診斷中(資訊融合)
         
         整合策略：
         - Tool A 結果 → 添加到權威引用
@@ -844,54 +847,51 @@ class L2AgenticDiagnosis:
             增強後的診斷結果
         """
         enhanced = initial_diagnosis.copy()
-        enhanced["authority_references"] = []
-        enhanced["knowledge_supplements"] = []
-        enhanced["modern_evidence"] = []
-        enhanced["validation_notes"] = []
+        # 初始化增強欄位
+        for field in ["authority_references", "knowledge_supplements", "modern_evidence", "validation_notes"]:
+            if field not in enhanced: enhanced[field] = []
         
         for result in tool_results:
             if not result.success:
-                enhanced["validation_notes"].append(
-                    f"{result.tool_name} 調用失敗: {result.error}"
-                )
+                enhanced["validation_notes"].append(f"{result.tool_name} 調用失敗: {result.error}")
                 continue
 
-            if result.success:
-                target_term = initial_diagnosis.get("primary_syndrome", "")
-                # 簡單過濾：確保不是空字串或包含 "待定" 的詞
-                if target_term and len(target_term) > 1 and "待定" not in target_term:
-                    # 使用 terminology_manager (需在 __init__ 中初始化 self.term_manager)
-                    # 如果您還沒在 L2 __init__ 加 self.term_manager = TerminologyManager()，請記得加上
-                    if hasattr(self, 'term_manager'):
-                        self.term_manager.add_term(target_term)
+            # 自動學習新詞 (保留原本邏輯)
+            target_term = initial_diagnosis.get("primary_syndrome", "")
+            if target_term and len(target_term) > 1 and "待定" not in target_term:
+                if hasattr(self, 'term_manager'):
+                    self.term_manager.add_term(target_term)
             
+            # --- 融合邏輯 ---
             if "Tool A" in result.tool_name:
-                # ICD-11 結果作為權威引用
+                # ICD-11 (權威性最高)
                 if "ICD-11" in result.content and "未找到" not in result.content:
                     enhanced["authority_references"].append(result.content)
-                    enhanced["validation_notes"].append("✓ 已獲取 WHO ICD-11 標準參考")
+                    # 標記為標準化名稱參考 (雖然不直接覆蓋 primary_syndrome 以免破壞上下文，但給予最高權重標註)
+                    enhanced["validation_notes"].insert(0, "★ 證型名稱已獲 WHO ICD-11 標準驗證")
             
             elif "Tool B" in result.tool_name:
-                # A+百科結果作為知識補充
+                # A+百科 (內容最豐富)
                 if "臨床表現" in result.content or "辨證" in result.content:
                     enhanced["knowledge_supplements"].append(result.content)
-                    enhanced["validation_notes"].append("✓ 已從 A+百科補充辨證知識")
+                    enhanced["validation_notes"].append("✓ 已補充辨證邏輯")
                     
-                    # 如果原診斷缺乏病因病機，從 Tool B 補充
-                    if not enhanced.get("pathogenesis"):
-                        # 嘗試從 Tool B 結果提取病因病機
-                        enhanced["pathogenesis_source"] = "A+醫學百科"
+                    # [關鍵融合] 若原診斷缺乏病機，直接使用 Tool B 的內容填補
+                    if not enhanced.get("pathogenesis") or len(enhanced.get("pathogenesis", "")) < 10:
+                        # 這裡做簡單提取，實際可用 Regex 提取 "病機" 段落
+                        enhanced["pathogenesis"] = f"(由外部知識庫補充) 參考 A+百科：{result.content[:100]}..."
             
             elif "Tool C" in result.tool_name:
-                # ETCM 結果作為現代科學對照
+                # ETCM (科學證據)
                 if "ETCM" in result.content and "未找到" not in result.content:
                     enhanced["modern_evidence"].append(result.content)
-                    enhanced["validation_notes"].append("✓ 已獲取 ETCM 現代科學對照")
+                    enhanced["validation_notes"].append("✓ 已獲取現代科學證據")
         
         return enhanced
     
-    # ==================== 輸出構建 ====================
+    # ==================== 輸出構建-使用動態模型 ====================
     
+    # [修改 3] 輸出構建：使用動態模型
     def _build_output(
         self,
         anchored_case: Dict[str, Any],
@@ -914,14 +914,8 @@ class L2AgenticDiagnosis:
         else:
             validation_status = "partially_validated"
         
-        # 計算置信度提升
-        confidence_boost = 0.0
-        if enhanced_diagnosis.get("authority_references"):
-            confidence_boost += 0.1
-        if enhanced_diagnosis.get("knowledge_supplements"):
-            confidence_boost += 0.1
-        if enhanced_diagnosis.get("modern_evidence"):
-            confidence_boost += 0.05
+        # [修改點] 使用動態算法計算置信度增益
+        confidence_boost = self._calculate_confidence_boost(enhanced_diagnosis)
         
         # 生成追問問題（如果覆蓋度不足）
         follow_up_questions = []
@@ -941,7 +935,7 @@ class L2AgenticDiagnosis:
             knowledge_supplements=enhanced_diagnosis.get("knowledge_supplements", []),
             modern_evidence=enhanced_diagnosis.get("modern_evidence", []),
             coverage_score=case_completeness,
-            confidence_boost=confidence_boost,
+            confidence_boost=confidence_boost, # 這裡使用動態計算的值
             follow_up_questions=follow_up_questions
         )
     
@@ -980,3 +974,34 @@ class L2AgenticDiagnosis:
             questions.append("有什麼情況會加重或緩解這些症狀？")
         
         return questions[:3]  # 最多返回 3 個追問
+    
+    #  動態置信度增益算法
+    def _calculate_confidence_boost(self, enhanced_diagnosis: Dict[str, Any]) -> float:
+        """
+        計算診斷置信度增益 (Confidence Gain Model)
+        公式: Boost = Σ (Tool_Relevance * Authority_Weight)
+        """
+        boost = 0.0
+        
+        # 1. 權威背書 (權重最高 0.15)
+        # 邏輯：如果有 ICD-11 的結果，代表方向正確
+        if enhanced_diagnosis.get("authority_references"):
+            boost += 0.15
+            
+        # 2. 知識補充 (權重 0.10)
+        # 邏輯：內容越長，代表知識填補越完整 (簡單的 heuristic)
+        supplements = enhanced_diagnosis.get("knowledge_supplements", [])
+        if supplements:
+            content_len = sum(len(s) for s in supplements)
+            if content_len > 100:
+                boost += 0.10
+            elif content_len > 0:
+                boost += 0.05
+                
+        # 3. 科學驗證 (權重 0.05)
+        # 邏輯：這是加分項
+        if enhanced_diagnosis.get("modern_evidence"):
+            boost += 0.05
+            
+        # 上限控制：工具最多提升 0.3 (30%) 的置信度，避免過度依賴
+        return min(0.3, boost)
