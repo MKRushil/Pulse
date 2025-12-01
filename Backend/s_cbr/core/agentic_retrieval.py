@@ -76,28 +76,10 @@ class AgenticRetrieval:
         limit: int = 3
     ) -> Dict[str, Any]:
         """
-        智能檢索主入口
+        智能檢索主入口 (含強制保底機制)
         
-        根據 L1 的策略決策執行檢索，並自動評估品質和執行 fallback
-        
-        Args:
-            index: Weaviate 索引名稱（如 "TCMCase"）
-            text: 查詢文本
-            l1_strategy: L1 Agentic Gate 輸出的 retrieval_strategy
-            limit: 返回案例數量
-        
-        Returns:
-            {
-                "cases": List[Dict],  # 檢索到的案例
-                "metadata": {
-                    "initial_alpha": float,  # 初始 alpha 值
-                    "final_alpha": float,  # 最終使用的 alpha 值
-                    "attempts": int,  # 嘗試次數
-                    "quality_score": float,  # 品質評分
-                    "fallback_triggered": bool,  # 是否觸發 fallback
-                    "fallback_reason": str  # fallback 原因
-                }
-            }
+        根據 L1 的策略決策執行檢索，並自動評估品質和執行 fallback。
+        若首次檢索結果為空，強制啟動寬鬆模式以確保有回傳值。
         """
         # 提取 L1 策略決策
         decided_alpha = l1_strategy.get("decided_alpha", 0.5)
@@ -133,42 +115,57 @@ class AgenticRetrieval:
             attempt=1
         )
         
-        result["cases"] = cases
-        result["metadata"]["quality_score"] = quality
         result["metadata"]["attempts"] = 1
         
-        # 檢查品質是否達標
-        if quality >= self.quality_threshold:
-            logger.info(
-                f"[AgenticRetrieval] ✅ 首次檢索成功 - "
-                f"品質: {quality:.3f} >= 門檻: {self.quality_threshold}"
+        # [MODIFIED] 強制保底：如果第一次嘗試結果為空 (0 cases)，立即啟動「寬鬆模式」
+        if not cases:
+            logger.warning(f"[AgenticRetrieval] 🚨 首次檢索結果為空，啟動強制寬鬆保底模式！")
+            
+            # 強制使用純 BM25 傾向 (alpha=0.1) + 擴大 Limit * 2
+            # 這樣能確保即使向量不匹配，也能透過關鍵字抓到東西
+            fallback_limit = limit * 2
+            cases, quality = await self._execute_search(
+                index=index,
+                text=text,
+                alpha=0.1, 
+                limit=fallback_limit,
+                attempt=99 # 特殊標記
             )
-            return result
-        
-        # 品質不達標，觸發 fallback
-        logger.warning(
-            f"[AgenticRetrieval] ⚠️ 首次檢索品質不足 - "
-            f"品質: {quality:.3f} < 門檻: {self.quality_threshold}, "
-            f"觸發 fallback: {fallback_plan}"
-        )
-        
-        result["metadata"]["fallback_triggered"] = True
-        result["metadata"]["fallback_reason"] = f"品質不足: {quality:.3f} < {self.quality_threshold}"
-        
-        # 執行 fallback 策略
-        cases, quality, final_alpha = await self._execute_fallback(
-            index=index,
-            text=text,
-            fallback_plan=fallback_plan,
-            initial_quality=quality,
-            limit=limit,
-            current_attempt=1
-        )
-        
-        result["cases"] = cases
+            
+            result["metadata"]["fallback_triggered"] = True
+            result["metadata"]["fallback_reason"] = "Zero results force fallback (寬鬆保底)"
+            result["metadata"]["final_alpha"] = 0.1
+            result["metadata"]["attempts"] += 1
+
+        # 如果經過保底有結果，但品質仍不達標，且還沒超過重試上限，才執行標準 fallback
+        # (注意：如果剛剛已經執行過強制保底，這裡通常不會再進，除非品質極差且還有次數)
+        elif quality < self.quality_threshold:
+            logger.warning(
+                f"[AgenticRetrieval] ⚠️ 檢索品質不足 ({quality:.3f} < {self.quality_threshold})，"
+                f"觸發標準 Fallback: {fallback_plan}"
+            )
+            
+            result["metadata"]["fallback_triggered"] = True
+            result["metadata"]["fallback_reason"] = f"品質不足: {quality:.3f}"
+            
+            # 執行標準 fallback 策略
+            cases, quality, final_alpha = await self._execute_fallback(
+                index=index,
+                text=text,
+                fallback_plan=fallback_plan,
+                initial_quality=quality,
+                limit=limit,
+                current_attempt=1
+            )
+            result["metadata"]["final_alpha"] = final_alpha
+            result["metadata"]["attempts"] += 1
+
+        # 最終賦值
+        result["cases"] = cases[:limit] # 確保不超過 limit
         result["metadata"]["quality_score"] = quality
-        result["metadata"]["final_alpha"] = final_alpha
-        result["metadata"]["attempts"] += 1
+        
+        if quality >= self.quality_threshold:
+            logger.info(f"[AgenticRetrieval] ✅ 檢索成功 (品質: {quality:.3f})")
         
         return result
     

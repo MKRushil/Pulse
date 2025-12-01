@@ -1,0 +1,67 @@
+﻿CaseID,Mode,Round,Question,Latency,PredPattern,Expected,EvidenceCount,L1_Strategy,L1_Alpha,L1_Confidence,Converged,Error,SessionID
+CASE_20251005211351_C309_a4c59017,Agentic,1,失眠多夢半年...,34.7079,心脾兩虛,不寐（心脾兩虛）,2,keyword_focus_forced,0.3,0.65,False,,a913a178-5fdc-4699-ba95-3e705fdb929d
+CASE_20251005211351_C309_a4c59017,Agentic,2,半年入睡困難、易醒多夢，日間乏力健忘...,42.473,心脾兩虛（初步傾向）,不寐（心脾兩虛）,0,keyword_focus_forced,0.3,0.8,False,,a913a178-5fdc-4699-ba95-3e705fdb929d
+CASE_20251005211351_C309_a4c59017,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):細數, 左關(肝膽):弦...",40.0564,心脾兩虛（初步傾向）,不寐（心脾兩虛）,0,keyword_focus_forced,0.3,0.8,False,,a913a178-5fdc-4699-ba95-3e705fdb929d
+CASE_20251005211458_W215_d76fa52b,Agentic,1,下背酸痛三週...,34.144,腎虛型腰痛（初步傾向）,腰痛（腎虛型）,1,balanced,0.55,0.65,False,,34e3699a-b6c2-44f8-947c-07e344845379
+CASE_20251005211458_W215_d76fa52b,Agentic,2,久坐電腦後腰背痠痛，休息可緩，天冷更明顯...,33.7375,腎虛型腰痛（初步傾向）,腰痛（腎虛型）,1,balanced,0.55,0.65,False,,34e3699a-b6c2-44f8-947c-07e344845379
+CASE_20251005211458_W215_d76fa52b,Agentic,3,"舌象：淡 白。脈象：左寸(心):細, 左關(肝膽):弦, 左...",33.0025,腎虛型腰痛（初步傾向）,腰痛（腎虛型）,1,balanced,0.55,0.65,False,,34e3699a-b6c2-44f8-947c-07e344845379
+CASE_20251005212237_L789_0daf1384,Agentic,1,耳鳴兩月...,20.6174,N/A,耳鳴（腎虛型）,0,balanced,0.5,0.0,False,,92c176af-adff-4b27-a50b-fb8cbf480d98
+CASE_20251005212237_L789_0daf1384,Agentic,2,雙耳鳴聲如蟬鳴，夜間明顯，伴腰膝痠軟。...,20.605,N/A,耳鳴（腎虛型）,0,balanced,0.5,0.0,False,,92c176af-adff-4b27-a50b-fb8cbf480d98
+CASE_20251005212237_L789_0daf1384,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦,...",20.5908,無法形成可靠證型（資訊極度不足）,耳鳴（腎虛型）,0,balanced,0.5,0.0,False,,92c176af-adff-4b27-a50b-fb8cbf480d98
+CASE_20251005211508_X103_8e7dbc72,Agentic,1,慢性咳嗽三月...,39.4074,咳嗽（肺脾兩虛痰濕）,咳嗽（肺脾兩虛痰濕）,1,balanced,0.5,0.6,False,,f2bfdfb1-7874-4400-9cc9-cf808dd3a378
+CASE_20251005211508_X103_8e7dbc72,Agentic,2,晨起咳嗽有白痰，天冷明顯，久咳氣短...,35.6746,咳嗽（肺脾兩虛痰濕）,咳嗽（肺脾兩虛痰濕）,1,balanced,0.6,0.65,False,,f2bfdfb1-7874-4400-9cc9-cf808dd3a378
+CASE_20251005211508_X103_8e7dbc72,Agentic,3,"舌象：淡 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, ...",40.6894,咳嗽（肺脾兩虛痰濕）,咳嗽（肺脾兩虛痰濕）,1,balanced,0.55,0.65,False,,f2bfdfb1-7874-4400-9cc9-cf808dd3a378
+CASE_20251005211503_W659_9186e102,Agentic,1,頸肩痠痛兩月...,32.8639,氣滯血瘀證型（初步傾向）,頸痹（氣滯血瘀）,1,balanced,0.5,0.6,False,,5b001040-28ae-4d60-89a2-a4c2f4a7298e
+CASE_20251005211503_W659_9186e102,Agentic,2,長期低頭工作後頸部僵硬痠痛，偶頭暈...,34.6816,氣滯血瘀證型（初步傾向）,頸痹（氣滯血瘀）,1,balanced,0.55,0.65,False,,5b001040-28ae-4d60-89a2-a4c2f4a7298e
+CASE_20251005211503_W659_9186e102,Agentic,3,"舌象：淡 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, ...",34.1696,氣滯血瘀證型（初步傾向）,頸痹（氣滯血瘀）,1,balanced,0.55,0.65,False,,5b001040-28ae-4d60-89a2-a4c2f4a7298e
+CASE_20251005211453_V771_280c5b60,Agentic,1,右脅脹悶兩月...,21.2449,no primary pattern can be determined,脅痛（肝鬱氣滯）,0,balanced,0.5,0.0,False,,d0da8c18-5a2b-41f0-aa80-8d5ecdeadedb
+CASE_20251005211453_V771_280c5b60,Agentic,2,情緒波動後脅肋脹悶，嗳氣頻作，納差...,19.6621,no primary pattern can be determined,脅痛（肝鬱氣滯）,0,balanced,0.5,0.0,False,,d0da8c18-5a2b-41f0-aa80-8d5ecdeadedb
+CASE_20251005211453_V771_280c5b60,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦,...",19.5736,no primary pattern can be determined,脅痛（肝鬱氣滯）,0,balanced,0.5,0.0,False,,d0da8c18-5a2b-41f0-aa80-8d5ecdeadedb
+CASE_20251005211414_Q990_83a54bf8,Agentic,1,目乾澀三月...,20.5037,No primary pattern can be determined due to lack of information,乾眼（肝腎陰虧）,0,balanced,0.5,0.0,False,,09a7da90-68ef-4b2d-9bb8-f762e2456467
+CASE_20251005211414_Q990_83a54bf8,Agentic,2,長時間電腦工作後雙目乾澀疼痛，眨眼減輕...,31.0562,肝腎陰虛證,乾眼（肝腎陰虧）,2,balanced,0.55,0.65,True,,09a7da90-68ef-4b2d-9bb8-f762e2456467
+CASE_20251005211414_Q990_83a54bf8,Agentic,3,"舌象：淡紅 少苔。脈象：左寸(心):細, 左關(肝膽):細,...",31.37,肝腎陰虛證,乾眼（肝腎陰虧）,2,balanced,0.6,0.65,True,,09a7da90-68ef-4b2d-9bb8-f762e2456467
+CASE_20251005212333_S012_e54179f7,Agentic,1,夜咳氣喘一月...,33.7189,哮喘（寒痰內盛）,哮喘（寒痰內盛）,2,keyword_focus_forced,0.3,0.65,True,,09b39dc9-7f51-44da-afce-a36e31225511
+CASE_20251005212333_S012_e54179f7,Agentic,2,夜間咳嗽氣喘，痰多色白，遇寒加重。...,32.3754,哮喘（寒痰內盛）,哮喘（寒痰內盛）,1,balanced,0.6,0.8,True,,09b39dc9-7f51-44da-afce-a36e31225511
+CASE_20251005212333_S012_e54179f7,Agentic,3,"舌象：淡 白滑。脈象：左寸(心):沉, 左關(肝膽):弦, ...",32.7972,哮喘（寒痰內盛）,哮喘（寒痰內盛）,1,balanced,0.6,0.8,True,,09b39dc9-7f51-44da-afce-a36e31225511
+CASE_20251005212254_D567_d31d0467,Agentic,1,失眠多夢半年...,38.1053,心脾兩虛,失眠（心脾兩虛）,2,keyword_focus_forced,0.3,0.65,True,,87b336b0-a2ba-45f0-a9fa-620a6efa74ee
+CASE_20251005212254_D567_d31d0467,Agentic,2,半年來難入睡，多夢，心悸易驚，記憶力下降。...,32.6665,心脾兩虛,失眠（心脾兩虛）,1,keyword_focus_forced,0.3,0.8,True,,87b336b0-a2ba-45f0-a9fa-620a6efa74ee
+CASE_20251005212254_D567_d31d0467,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦,...",48.9317,心脾兩虛,失眠（心脾兩虛）,1,keyword_focus_forced,0.3,0.75,True,,87b336b0-a2ba-45f0-a9fa-620a6efa74ee
+CASE_20251005211425_U005_7fbf64b0,Agentic,1,胃脹氣三週...,20.3192,No primary pattern can be determined due to lack of information,胃脹（肝氣鬱滯）,0,balanced,0.5,0.0,False,,1aa1ad20-c84e-483f-9951-b880734b0ae0
+CASE_20251005211425_U005_7fbf64b0,Agentic,2,進食後胃脹不適，易打嗝，情緒緊張後加重...,38.2755,肝氣鬱滯證,胃脹（肝氣鬱滯）,2,balanced,0.55,0.65,True,,1aa1ad20-c84e-483f-9951-b880734b0ae0
+CASE_20251005211425_U005_7fbf64b0,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦,...",32.6386,肝氣鬱滯證,胃脹（肝氣鬱滯）,2,balanced,0.55,0.65,True,,1aa1ad20-c84e-483f-9951-b880734b0ae0
+CASE_20251005211509_X214_7e0a8552,Agentic,1,肩周活動受限四月...,18.6384,no primary pattern,肩痹（風寒濕痺）,0,balanced,0.5,0.0,False,,68369251-de5f-49af-bde3-8326666f4d56
+CASE_20251005211509_X214_7e0a8552,Agentic,2,右肩逐漸疼痛僵硬，夜間痛重，梳頭穿衣困難...,36.6957,肩痹（風寒濕痺）(初步傾向),肩痹（風寒濕痺）,1,balanced,0.6,0.65,False,,68369251-de5f-49af-bde3-8326666f4d56
+CASE_20251005211509_X214_7e0a8552,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦,...",36.5925,肩痹（風寒濕痺）(初步傾向),肩痹（風寒濕痺）,1,balanced,0.55,0.65,False,,68369251-de5f-49af-bde3-8326666f4d56
+CASE_20251005212223_B789_ba5c9599,Agentic,1,月經推遲兩月...,26.3489,no primary pattern can be determined,月經不調,0,balanced,0.5,0.0,False,,b9b2ee34-0abf-43d4-aad0-73fc6af6e890
+CASE_20251005212223_B789_ba5c9599,Agentic,2,患者近兩月月經延後，經量少色淡，伴小腹隱痛及胸脹。近期加班熬...,30.12,血虛氣滯證型（初步傾向）,月經不調,0,balanced,0.6,0.8,False,,b9b2ee34-0abf-43d4-aad0-73fc6af6e890
+CASE_20251005212223_B789_ba5c9599,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦,...",30.0154,血虛氣滯證型（初步傾向）,月經不調,0,balanced,0.6,0.8,False,,b9b2ee34-0abf-43d4-aad0-73fc6af6e890
+CASE_20251005211502_W548_6988d3dc,Agentic,1,夜尿頻三月...,19.5767,no primary pattern can be determined,遺尿（腎虛型）,0,balanced,0.5,0.0,False,,d66025cb-dbd4-40a0-adbc-4b79bcbe6b6b
+CASE_20251005211502_W548_6988d3dc,Agentic,2,夜間需起床小便3–4次，伴腰酸乏力...,38.5432,肥背型肥海,遺尿（腎虛型）,2,balanced,0.55,0.65,True,,d66025cb-dbd4-40a0-adbc-4b79bcbe6b6b
+CASE_20251005211502_W548_6988d3dc,Agentic,3,"舌象：淡 薄白。脈象：左寸(心):細, 左關(肝膽):弦, ...",38.4557,腎虛型遺尿,遺尿（腎虛型）,2,balanced,0.5,0.65,True,,d66025cb-dbd4-40a0-adbc-4b79bcbe6b6b
+CASE_20251005043638_8905_6cf021c3,Agentic,1,習慣性流產兩次...,20.4057,No primary pattern can be determined,"胎動不安,腎虛沖任不固",0,expand,0.5,0.0,False,,2cc2af4a-4e02-426b-aa2d-eba235eb0a92
+CASE_20251005043638_8905_6cf021c3,Agentic,2,"患者兩年內兩次懷孕均於8-10週自然流產,現懷孕6週,少量陰...",20.7086,No primary pattern can be determined,"胎動不安,腎虛沖任不固",0,balanced,0.5,0.0,False,,2cc2af4a-4e02-426b-aa2d-eba235eb0a92
+CASE_20251005043638_8905_6cf021c3,Agentic,3,"舌象：淡 薄白。脈象：左寸(心):細弱, 左關(肝膽):細,...",20.1589,No primary pattern can be determined,"胎動不安,腎虛沖任不固",0,balanced,0.5,0.0,False,,2cc2af4a-4e02-426b-aa2d-eba235eb0a92
+CASE_20251005211404_K993_c1156660,Agentic,1,皮膚瘙癢兩週...,35.8279,濕熱證型（初步傾向）,癮疹（風濕熱邪）,1,balanced,0.5,0.6,False,,541f4d74-f71a-4f72-b6fa-bdb4c9862d83
+CASE_20251005211404_K993_c1156660,Agentic,2,夜間瘙癢加重，抓後見紅疹，近期嗜食海鮮辛辣...,42.8354,濕熱證型（初步傾向）,癮疹（風濕熱邪）,1,balanced,0.6,0.65,False,,541f4d74-f71a-4f72-b6fa-bdb4c9862d83
+CASE_20251005211404_K993_c1156660,Agentic,3,"舌象：紅 薄黃。脈象：左寸(心):滑, 左關(肝膽):弦, ...",41.3544,濕熱證型（初步傾向）,癮疹（風濕熱邪）,1,balanced,0.55,0.65,False,,541f4d74-f71a-4f72-b6fa-bdb4c9862d83
+CASE_20251005212322_J123_7c53d38d,Agentic,1,關節腫痛半年...,32.282,寒濕痹（初步傾向）,痺證（寒濕阻絡）,2,balanced,0.5,0.6,False,,f658bfa5-79ee-4831-bcb5-d98baee650b7
+CASE_20251005212322_J123_7c53d38d,Agentic,2,膝關節腫痛反覆，遇冷加重，活動後緩解。...,35.622,寒濕痹（初步傾向）,痺證（寒濕阻絡）,2,balanced,0.55,0.65,False,,f658bfa5-79ee-4831-bcb5-d98baee650b7
+CASE_20251005212322_J123_7c53d38d,Agentic,3,"舌象：淡紅 白膩。脈象：左寸(心):沉, 左關(肝膽):沉,...",34.9827,寒濕痹（初步傾向）,痺證（寒濕阻絡）,2,balanced,0.55,0.65,False,,f658bfa5-79ee-4831-bcb5-d98baee650b7
+CASE_20251005212249_V789_51d097e5,Agentic,1,經前腹脹兩月...,19.9875,No primary pattern can be determined,經前腹脹,0,balanced,0.5,0.0,False,,6ef6a95d-fb82-404b-aa04-c8aa6a19158b
+CASE_20251005212249_V789_51d097e5,Agentic,2,月經前出現小腹脹痛，乳房脹痛，情緒煩躁。...,34.7141,肝氣鬱結（初步傾向）,經前腹脹,1,balanced,0.55,0.65,False,,6ef6a95d-fb82-404b-aa04-c8aa6a19158b
+CASE_20251005212249_V789_51d097e5,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦,...",35.38,肝氣鬱結（初步傾向）,經前腹脹,0,balanced,0.6,0.75,False,,6ef6a95d-fb82-404b-aa04-c8aa6a19158b
+CASE_20251005212328_O678_418c65b9,Agentic,1,胃脹食少兩月...,18.6733,no primary pattern,脾胃氣滯,0,balanced,0.5,0.0,False,,1ee611a5-1f38-46e4-84fc-677fc8940093
+CASE_20251005212328_O678_418c65b9,Agentic,2,餐後腹脹不舒，食慾減退，偶有噯氣。...,19.633,no primary pattern,脾胃氣滯,0,balanced,0.5,0.0,False,,1ee611a5-1f38-46e4-84fc-677fc8940093
+CASE_20251005212328_O678_418c65b9,Agentic,3,"舌象：淡紅 白膩。脈象：左寸(心):細, 左關(肝膽):弦,...",19.839,no primary pattern,脾胃氣滯,0,balanced,0.5,0.0,False,,1ee611a5-1f38-46e4-84fc-677fc8940093
+CASE_20251005212324_L345_f148d28c,Agentic,1,口苦胸悶三月...,31.5101,肝火上炎,肝鬱化火,2,keyword_focus_forced,0.3,0.65,True,,5eca4a34-9ab1-4652-b4cc-d0a3bc017d63
+CASE_20251005212324_L345_f148d28c,Agentic,2,三月來口苦胸悶，情緒急躁，偶有頭暈。...,39.5524,肝火上炎,肝鬱化火,2,keyword_focus_forced,0.3,0.65,True,,5eca4a34-9ab1-4652-b4cc-d0a3bc017d63
+CASE_20251005212324_L345_f148d28c,Agentic,3,"舌象：紅 薄黃。脈象：左寸(心):弦數, 左關(肝膽):弦,...",32.0251,肝火上炎,肝鬱化火,2,keyword_focus_forced,0.3,0.65,True,,5eca4a34-9ab1-4652-b4cc-d0a3bc017d63
+CASE_20251005211422_T512_41c98f5d,Agentic,1,口腔潰瘍反覆兩年...,19.2951,no primary pattern can be determined,口瘡（心脾積熱）,0,balanced,0.5,0.0,False,,09155f5f-7aba-45ae-ba0d-bba07b5a61b1
+CASE_20251005211422_T512_41c98f5d,Agentic,2,壓力大或熬夜後易發，潰瘍疼痛影響飲食...,44.9389,心脾積熱（初步傾向）,口瘡（心脾積熱）,1,balanced,0.5,0.65,False,,09155f5f-7aba-45ae-ba0d-bba07b5a61b1
+CASE_20251005211422_T512_41c98f5d,Agentic,3,"舌象：紅 薄黃。脈象：左寸(心):數, 左關(肝膽):弦數,...",39.513,心脾積熱（初步傾向）,口瘡（心脾積熱）,1,balanced,0.55,0.65,False,,09155f5f-7aba-45ae-ba0d-bba07b5a61b1
+CASE_20251005211348_A512_d9abb483,Agentic,1,經前乳房脹痛三月...,37.2406,肝鬱氣滯,乳癖（肝氣鬱滯）,2,balanced,0.5,0.65,True,,3eec19aa-8275-490b-a7d7-1a4919089806
+CASE_20251005211348_A512_d9abb483,Agentic,2,近三月經前一週乳房脹痛明顯，經後緩解...,38.3615,肝氣鬱滯,乳癖（肝氣鬱滯）,1,balanced,0.6,0.72,True,,3eec19aa-8275-490b-a7d7-1a4919089806
+CASE_20251005211348_A512_d9abb483,Agentic,3,"舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦,...",40.9718,肝氣鬱滯,乳癖（肝氣鬱滯）,1,balanced,0.6,0.8,True,,3eec19aa-8275-490b-a7d7-1a4919089806
+CASE_20251005211456_V993_ae529307,Agentic,1,牙痛三天...,57.2635,toothache (牛疫) (insufficient information),牙痛（胃火上炎）,1,expand,0.5,0.35,False,,df154c74-67fc-4648-843b-493956f5317f
+CASE_20251005211456_V993_ae529307,Agentic,2,右下牙齦腫痛，遇熱痛增，口苦口臭...,37.7024,牙痛（胃火上炎）,牙痛（胃火上炎）,1,balanced,0.6,0.8,True,,df154c74-67fc-4648-843b-493956f5317f
+CASE_20251005211456_V993_ae529307,Agentic,3,"舌象：紅 黃燥。脈象：左寸(心):數, 左關(肝膽):弦, ...",40.1128,牙痛（胃火上炎）,牙痛（胃火上炎）,1,balanced,0.6,0.8,True,,df154c74-67fc-4648-843b-493956f5317f

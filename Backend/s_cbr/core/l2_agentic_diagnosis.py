@@ -212,19 +212,26 @@ class L2AgenticDiagnosis:
         
         🆕 這是一個適配器方法，將 four_layer_pipeline 的調用格式
         轉換為內部診斷邏輯的格式。
-        
-        Args:
-            l2_raw_result: 傳統 L2 診斷結果（來自 LLM）
-            l1_decision: L1 決策資訊（包含關鍵詞、置信度等）
-            retrieved_cases: L1 檢索到的案例列表
-        
-        Returns:
-            L2AgenticOutput: 增強後的診斷輸出
         """
         logger.info("[L2Agentic] 使用 enhance_diagnosis 適配方法")
         
+        # [MODIFIED] 虛擬案例防護網
+        # 萬一真的沒有案例 (retrieved_cases 為空)，創建一個虛擬案例以防崩潰
+        if not retrieved_cases:
+            logger.warning("⚠️ L2 收到 0 個案例，使用虛擬案例進行純理論診斷")
+            virtual_case = {
+                "case_id": "VIRTUAL_THEORY_CASE",
+                "diagnosis": "待定(依症狀推斷)",
+                "syndrome": "待定",
+                "chief_complaint": "資訊不足，啟動純理論推斷模式",
+                "treatment": "建議諮詢醫師",
+                "score": 0.0,
+                "full_text": "本案例為系統生成的虛擬案例，用於在缺乏檢索結果時維持推理流程。"
+            }
+            # 這裡必須使用 list 替換，不能 append，因為原變數可能是 None
+            retrieved_cases = [virtual_case]
+
         # 步驟 1：評估傳統 L2 診斷的品質
-        # [MODIFIED] 傳入 retrieved_cases 以便結合檢索分數進行評估
         case_completeness = self._evaluate_case_completeness_from_l2(l2_raw_result, retrieved_cases)
         diagnosis_confidence = self._evaluate_diagnosis_confidence_from_l2(
             l2_raw_result, l1_decision
@@ -236,12 +243,15 @@ class L2AgenticDiagnosis:
             f"  診斷置信度: {diagnosis_confidence:.2f}"
         )
         
-        # 步驟 2：使用錨定案例（如果有）或第一個檢索案例
-        anchored_case = retrieved_cases[0] if retrieved_cases else {}
+        # 步驟 2：使用錨定案例（現在保證至少有一個，即使是虛擬的）
+        anchored_case = retrieved_cases[0]
         
         # 步驟 3：從 l2_raw_result 提取診斷資訊
-        initial_diagnosis = self._extract_diagnosis_from_l2_result(l2_raw_result, 
-            retrieved_cases=retrieved_cases)
+        # [MODIFIED] 傳入 retrieved_cases 以供保底使用 (利用我們先前修改過的 _extract 方法)
+        initial_diagnosis = self._extract_diagnosis_from_l2_result(
+            l2_raw_result,
+            retrieved_cases=retrieved_cases
+        )
         
         # 步驟 4：決策是否需要工具調用
         tool_decision = self._decide_tool_calls(
@@ -283,7 +293,6 @@ class L2AgenticDiagnosis:
         )
         
         # 🆕 動態添加屬性供 four_layer_pipeline 使用
-        # 這些屬性不在 L2AgenticOutput 的原始定義中，但 four_layer_pipeline 需要訪問
         output.diagnosis_confidence = diagnosis_confidence
         output.case_completeness = case_completeness
         

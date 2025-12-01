@@ -1,9 +1,0 @@
-﻿CaseID,Mode,Round,Question,Latency,PredPattern,Expected,EvidenceCount,L1_Strategy,L1_Alpha,L1_Confidence,Converged,Error,SessionID
-CASE_20251005211351_C309_a4c59017,Agentic,1,失眠多夢半年...,6.2398,,不寐（心脾兩虛）,0,N/A,0.55,0.0,False,API_Error_500,f38c97da-0ae9-479c-af77-7ec9fe2a1c2f
-CASE_20251005211458_W215_d76fa52b,Agentic,1,下背酸痛三週...,6.1349,,腰痛（腎虛型）,0,N/A,0.55,0.0,False,API_Error_500,e9fa689d-fe87-44c2-b734-e03b15c34e07
-CASE_20251005212237_L789_0daf1384,Agentic,1,耳鳴兩月...,6.1479,,耳鳴（腎虛型）,0,N/A,0.55,0.0,False,API_Error_500,f6414fec-8c17-4681-bf34-3f39e0b0fceb
-CASE_20251005211508_X103_8e7dbc72,Agentic,1,慢性咳嗽三月...,6.1628,,咳嗽（肺脾兩虛痰濕）,0,N/A,0.55,0.0,False,API_Error_500,921a3f61-76e1-48cf-a9b2-ac66e24579d0
-CASE_20251005211503_W659_9186e102,Agentic,1,頸肩痠痛兩月...,6.1837,,頸痹（氣滯血瘀）,0,N/A,0.55,0.0,False,API_Error_500,42230a50-26a2-411a-a918-b75d8d6fd86f
-CASE_20251005211453_V771_280c5b60,Agentic,1,右脅脹悶兩月...,6.1716,,脅痛（肝鬱氣滯）,0,N/A,0.55,0.0,False,API_Error_500,fd165555-73d3-4b3a-9b25-9ca1c129e12f
-CASE_20251005211414_Q990_83a54bf8,Agentic,1,目乾澀三月...,6.1579,,乾眼（肝腎陰虧）,0,N/A,0.55,0.0,False,API_Error_500,a97e61f7-a178-46a6-a4d4-d8fbecf0aa51
-CASE_20251005212333_S012_e54179f7,Agentic,1,夜咳氣喘一月...,9.1939,,哮喘（寒痰內盛）,0,N/A,0.55,0.0,False,API_Error_500,c069d12d-6258-4b8a-9da9-2c5f3f8aa943
