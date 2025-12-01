@@ -222,7 +222,7 @@ class InputSanitizer:
 
     def _detect_anatomy_gender_inconsistency(self, text: str) -> Tuple[bool, List[str]]:
         """檢測性別與解剖詞彙不合理組合。"""
-        return False,
+        return False, []
         violations = []
         t = text
         has_male = any(k in t for k in self.male_terms)

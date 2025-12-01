@@ -240,7 +240,8 @@ class L2AgenticDiagnosis:
         anchored_case = retrieved_cases[0] if retrieved_cases else {}
         
         # 步驟 3：從 l2_raw_result 提取診斷資訊
-        initial_diagnosis = self._extract_diagnosis_from_l2_result(l2_raw_result)
+        initial_diagnosis = self._extract_diagnosis_from_l2_result(l2_raw_result, 
+            retrieved_cases=retrieved_cases)
         
         # 步驟 4：決策是否需要工具調用
         tool_decision = self._decide_tool_calls(
@@ -299,7 +300,7 @@ class L2AgenticDiagnosis:
 
     def _extract_diagnosis_from_l2_result(
         self,
-        l2_result: Dict[str, Any]
+        l2_result: Dict[str, Any], retrieved_cases: List[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
         從傳統 L2 診斷結果中提取診斷資訊 (修正嵌套結構讀取)
@@ -316,8 +317,32 @@ class L2AgenticDiagnosis:
             inference.get("primary_pattern") or 
             l2_result.get("primary_pattern") or 
             l2_result.get("primary_syndrome") or 
-            ""
+            "待定(資訊不足)"
         )
+
+        refusal_keywords = [
+            "無法形成", "無法判斷", "資訊不足", "not be determined", 
+            "no primary pattern", "n/a", "unknown", "none"
+        ]
+        
+        # 如果 primary 為空，或包含拒絕關鍵詞
+        if not primary or any(k in primary.lower() for k in refusal_keywords):
+            # 嘗試使用檢索到的第一個案例作為保底
+            if retrieved_cases and len(retrieved_cases) > 0:
+                top_case = retrieved_cases[0]
+                # 嘗試從案例中提取診斷
+                fallback_diag = (
+                    top_case.get("diagnosis") or 
+                    top_case.get("syndrome") or 
+                    top_case.get("primary_pattern")
+                )
+                if fallback_diag:
+                    primary = f"{fallback_diag} (系統強制錨定)"
+                    logger.warning(f"⚠️ LLM 拒絕診斷，已強制使用 Top-1 案例保底: {primary}")
+            
+            # 如果連案例都沒有，才給最終保底
+            if not primary or any(k in primary.lower() for k in refusal_keywords):
+                primary = "待定 (資訊極度缺乏)"
 
         return {
             "primary_syndrome": primary,

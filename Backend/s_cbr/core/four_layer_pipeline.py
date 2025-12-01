@@ -340,7 +340,7 @@ class FourLayerSCBR:
         if not cases:
             debug_notes.append("Retrieval returned zero cases.")
             result["debug_note"] = "; ".join(debug_notes)
-            return result 
+            # return result 
 
         
         # 3. L2: 生成層 (Diagnosis Layer)

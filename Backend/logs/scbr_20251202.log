@@ -1,0 +1,99 @@
+2025-12-02 00:14:55 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-02 00:14:55 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-02 00:14:55 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-02 00:14:55 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-02 00:14:55 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-02 00:14:55 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-02 00:14:55 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-02 00:14:55 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-02 00:14:56 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-02 00:14:56 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-02 00:14:56 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-02 00:14:56 - L2AgenticDiagnosis - INFO - [L2Agentic] 初始化完成 - 工具調用已啟用
+2025-12-02 00:14:56 - s_cbr.FourLayerPipeline - INFO - [L2Agentic] 初始化完成
+2025-12-02 00:14:56 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-02 00:14:56 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO - ============================================================
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO - 
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-02 00:14:56 - s_cbr.backend.main - INFO - ============================================================
+2025-12-02 00:14:58 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-02 00:14:58 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-02 00:14:58 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-02 00:14:58 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-02 00:14:58 - s_cbr.SCBR-API - INFO - 📥 收到診斷請求 [IP: 127.0.0.1]
+2025-12-02 00:14:58 - s_cbr.SCBR-API - INFO -    問題: 舌象：淡胖 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉, ...
+2025-12-02 00:14:58 - s_cbr.SCBR-API - INFO -    Session ID: 2f099c7e-aed2-4645-b49d-67ee78425114
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO - 🌀 啟動診斷 [SCBR-20251202-001458-729c61a2]
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO -    問題: 舌象：淡胖 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉, ...
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO -    session_id: 2f099c7e-aed2-4645-b49d-67ee78425114
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO -    continue_spiral: True
+2025-12-02 00:14:58 - s_cbr.DialogManager - INFO - 🆕 創建會話: 2f099c7e***
+2025-12-02 00:14:58 - s_cbr.DialogManager - INFO -    初始問題: ...
+2025-12-02 00:14:58 - s_cbr.DialogManager - INFO -    當前會話總數: 1
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO -    會話ID: 2f099c7e-aed2-4645-b49d-67ee78425114
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO -    當前輪次: 1
+2025-12-02 00:14:58 - s_cbr.SCBREngine - INFO -    累積問題: ...
+2025-12-02 00:14:58 - s_cbr.FourLayerPipeline - INFO - [L1] 使用 Agentic NLU 模式
+2025-12-02 00:15:03 - s_cbr.LLMClient - WARNING - ⚠️ 輸出過濾：檢測到 1 處敏感資訊
+2025-12-02 00:15:03 - s_cbr.FourLayerPipeline - INFO - [L1 FINAL RESULT] L1 狀態: ok
+2025-12-02 00:15:03 - s_cbr.FourLayerPipeline - INFO - [L1 AGENTIC DECISION]
+  Overall Confidence: 0.000
+  Decided Alpha: 0.5
+  Strategy Type: balanced
+  Expected Quality: low
+2025-12-02 00:15:03 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL RESULT] 成功找到 0 個案例. Top 3 範例: []
+2025-12-02 00:15:05 - s_cbr.FourLayerPipeline - INFO - [L2] 使用 Agentic 增強模式
+2025-12-02 00:15:05 - L2AgenticDiagnosis - INFO - [L2Agentic] 使用 enhance_diagnosis 適配方法
+2025-12-02 00:15:05 - L2AgenticDiagnosis - INFO - [L2Agentic] 評估結果
+  案例完整度: 1.00
+  診斷置信度: 0.49
+2025-12-02 00:15:05 - L2AgenticDiagnosis - INFO - [L2Agentic] 無需調用工具，條件未觸發
+2025-12-02 00:15:05 - L2AgenticDiagnosis - INFO - [L2Agentic] 增強完成
+  驗證狀態: unvalidated
+  工具調用數: 0
+  置信度提升: +0.00
+2025-12-02 00:15:05 - s_cbr.FourLayerPipeline - INFO - [L2 AGENTIC ENHANCEMENT]
+  驗證狀態: unvalidated
+  工具調用數: 0
+  置信度提升: +0.00
+  案例完整度: 1.00
+  診斷置信度: 0.49
+2025-12-02 00:15:05 - s_cbr.FourLayerPipeline - INFO - [L2 DIAGNOSIS SUMMARY] 錨定 ID: N/A, 證型: No primary pattern can be determined, 覆蓋度: 0.00
+2025-12-02 00:15:11 - s_cbr.FourLayerPipeline - INFO - [L3 REVIEW STATUS] 審核結果: rewritten
+2025-12-02 00:15:15 - s_cbr.DialogManager - INFO - 📊 記錄第 1 輪結果到會話 2f099c7e***
+2025-12-02 00:15:15 - s_cbr.SCBREngine - INFO - ✅ 診斷完成 [SCBR-20251202-001458-729c61a2] 耗時: 17.31s
+2025-12-02 00:15:15 - s_cbr.SCBREngine - INFO -    輪次: 1, 可繼續: True
+2025-12-02 00:15:15 - s_cbr.SCBR-API - INFO - ✅ 診斷完成 [IP: 127.0.0.1] 耗時: 17.31s
+2025-12-02 00:15:18 - s_cbr.SCBR-API - INFO - 📥 收到診斷請求 [IP: 127.0.0.1]
+2025-12-02 00:15:18 - s_cbr.SCBR-API - INFO -    問題: 胸口灼熱兩週...
+2025-12-02 00:15:18 - s_cbr.SCBR-API - INFO -    Session ID: 344b71b6-680d-4dc8-a30a-1499ad376391
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO - 🌀 啟動診斷 [SCBR-20251202-001518-40ec7858]
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO -    問題: 胸口灼熱兩週...
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO -    session_id: 344b71b6-680d-4dc8-a30a-1499ad376391
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO -    continue_spiral: True
+2025-12-02 00:15:18 - s_cbr.DialogManager - INFO - 🆕 創建會話: 344b71b6***
+2025-12-02 00:15:18 - s_cbr.DialogManager - INFO -    初始問題: ...
+2025-12-02 00:15:18 - s_cbr.DialogManager - INFO -    當前會話總數: 2
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO -    會話ID: 344b71b6-680d-4dc8-a30a-1499ad376391
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO -    當前輪次: 1
+2025-12-02 00:15:18 - s_cbr.SCBREngine - INFO -    累積問題: ...
+2025-12-02 00:15:18 - s_cbr.FourLayerPipeline - INFO - [L1] 使用 Agentic NLU 模式
+2025-12-02 00:15:23 - s_cbr.LLMClient - WARNING - ⚠️ 輸出過濾：檢測到 1 處敏感資訊
+2025-12-02 00:15:23 - s_cbr.FourLayerPipeline - INFO - [L1 FINAL RESULT] L1 狀態: ok
+2025-12-02 00:15:23 - s_cbr.FourLayerPipeline - INFO - [L1 AGENTIC DECISION]
+  Overall Confidence: 0.000
+  Decided Alpha: 0.5
+  Strategy Type: balanced
+  Expected Quality: low
+2025-12-02 00:15:23 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL RESULT] 成功找到 0 個案例. Top 3 範例: []
