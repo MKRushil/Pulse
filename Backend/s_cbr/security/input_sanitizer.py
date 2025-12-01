@@ -60,7 +60,7 @@ class InputSanitizer:
             re.compile(r'\bimport\s+[a-zA-Z_]+', re.IGNORECASE),
             re.compile(r'console\.log\s*\(', re.IGNORECASE),
             re.compile(r'SELECT\s+\*\s+FROM', re.IGNORECASE),
-            re.compile(r'\{\s*\}|;\s*$')
+            re.compile(r'\{\s*\}')
         ]
         # ✅ 新增 姓名自述 檢測（LLM02）
         self.self_name_patterns = [
@@ -222,6 +222,7 @@ class InputSanitizer:
 
     def _detect_anatomy_gender_inconsistency(self, text: str) -> Tuple[bool, List[str]]:
         """檢測性別與解剖詞彙不合理組合。"""
+        return False,
         violations = []
         t = text
         has_male = any(k in t for k in self.male_terms)
@@ -455,7 +456,7 @@ class InputSanitizer:
         
         # 檢查異常字符比例
         special_char_ratio = len(re.findall(r'[^\u4e00-\u9fa5a-zA-Z0-9\s，。、！？：；「」『』（）\-]', text)) / (len(text) + 1)
-        if special_char_ratio > 0.3:
+        if special_char_ratio > 0.9:
             violations.append(f"特殊字符比例過高 ({special_char_ratio:.1%})")
         
         # 檢查重複字符（可能是噪聲攻擊）

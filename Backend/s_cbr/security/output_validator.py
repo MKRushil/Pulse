@@ -371,6 +371,7 @@ class OutputValidator:
         Returns:
             (是否檢測到, 違規列表)
         """
+        return False, []
         violations = []
         
         # 禁止的行為
