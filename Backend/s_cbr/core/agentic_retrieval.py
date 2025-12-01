@@ -127,7 +127,7 @@ class AgenticRetrieval:
             cases, quality = await self._execute_search(
                 index=index,
                 text=text,
-                alpha=0.1, 
+                alpha=0.95, 
                 limit=fallback_limit,
                 attempt=99 # 特殊標記
             )

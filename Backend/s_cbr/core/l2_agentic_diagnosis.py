@@ -9,22 +9,13 @@ L2 Agentic 診斷層 - 工具整合模組（修正版）
 3. ✅ 添加 _evaluate_case_completeness_from_l2() 評估方法
 4. ✅ 添加 _evaluate_diagnosis_confidence_from_l2() 評估方法
 5. ✅ 動態添加 diagnosis_confidence 和 case_completeness 屬性到輸出
+6. 🚨 [NEW] 方案三實裝：檢索為 0 時的虛擬案例保底機制。
 
 職責：
 1. 接收 L1 檢索結果，進行案例錨定診斷
 2. 自主判斷是否需要調用外部工具
 3. 執行幻覺校驗、知識補充、權威背書
 4. 輸出經過驗證的診斷結果
-
-工具調用策略：
-- Tool A (ICD-11)：權威性背書，診斷輸出時調用
-- Tool B (A+百科)：知識補充，案例資訊不足時調用
-- Tool C (ETCM)：幻覺校驗，證型判斷需要科學驗證時調用
-
-設計原則：
-- 工具調用是「可選增強」，不是「必要步驟」
-- 優先使用案例知識，工具用於補充和驗證
-- 工具失敗不應阻斷診斷流程
 """
 
 from __future__ import annotations
@@ -99,20 +90,11 @@ class L2AgenticOutput:
 class L2AgenticDiagnosis:
     """
     L2 Agentic 診斷層
-    
-    核心能力：
-    1. 案例錨定與診斷推理（原有功能）
-    2. 自主決策是否需要工具輔助（新增）
-    3. 工具調用與結果整合（新增）
-    4. 診斷結果驗證與增強（新增）
     """
     
     def __init__(self, config: Any):
         """
         初始化 L2 Agentic 診斷層
-        
-        Args:
-            config: SCBRConfig 配置實例
         """
         self.config = config
         self.toolkit = TCMUnifiedToolkit()
@@ -143,14 +125,6 @@ class L2AgenticDiagnosis:
     ) -> L2AgenticOutput:
         """
         執行帶工具增強的診斷流程
-        
-        Args:
-            user_symptoms: 用戶症狀描述（累積後的完整描述）
-            retrieved_cases: L1 檢索到的案例列表
-            l1_decision: L1 的決策資訊（包含關鍵詞、置信度等）
-        
-        Returns:
-            L2AgenticOutput: 完整的診斷輸出
         """
         logger.info("[L2Agentic] 開始診斷流程")
         
@@ -209,9 +183,6 @@ class L2AgenticDiagnosis:
     ) -> L2AgenticOutput:
         """
         診斷增強方法 - 適配 four_layer_pipeline.py 的調用介面
-        
-        🆕 這是一個適配器方法，將 four_layer_pipeline 的調用格式
-        轉換為內部診斷邏輯的格式。
         """
         logger.info("[L2Agentic] 使用 enhance_diagnosis 適配方法")
         
@@ -219,16 +190,21 @@ class L2AgenticDiagnosis:
         # 萬一真的沒有案例 (retrieved_cases 為空)，創建一個虛擬案例以防崩潰
         if not retrieved_cases:
             logger.warning("⚠️ L2 收到 0 個案例，使用虛擬案例進行純理論診斷")
+            
+            # 嘗試從 L1 決策中找一個「暫定病名」，避免 "待定" 導致工具不啟動
+            kw = l1_decision.get("keyword_extraction", {})
+            candidates = kw.get("syndrome_signals", []) + kw.get("symptom_terms", [])
+            fallback_name = candidates[0] if candidates else "未名病症"
+            
             virtual_case = {
                 "case_id": "VIRTUAL_THEORY_CASE",
-                "diagnosis": "待定(依症狀推斷)",
-                "syndrome": "待定",
+                "diagnosis": f"{fallback_name}(虛擬)", # 給一個具體名字
+                "syndrome": fallback_name,
                 "chief_complaint": "資訊不足，啟動純理論推斷模式",
                 "treatment": "建議諮詢醫師",
                 "score": 0.0,
-                "full_text": "本案例為系統生成的虛擬案例，用於在缺乏檢索結果時維持推理流程。"
+                "pathogenesis": "", # 留白以觸發 Knowledge Gap
             }
-            # 這裡必須使用 list 替換，不能 append，因為原變數可能是 None
             retrieved_cases = [virtual_case]
 
         # 步驟 1：評估傳統 L2 診斷的品質
@@ -247,7 +223,7 @@ class L2AgenticDiagnosis:
         anchored_case = retrieved_cases[0]
         
         # 步驟 3：從 l2_raw_result 提取診斷資訊
-        # [MODIFIED] 傳入 retrieved_cases 以供保底使用 (利用我們先前修改過的 _extract 方法)
+        # [MODIFIED] 傳入 retrieved_cases 以供保底使用
         initial_diagnosis = self._extract_diagnosis_from_l2_result(
             l2_raw_result,
             retrieved_cases=retrieved_cases
@@ -309,37 +285,35 @@ class L2AgenticDiagnosis:
 
     def _extract_diagnosis_from_l2_result(
         self,
-        l2_result: Dict[str, Any], retrieved_cases: List[Dict[str, Any]] = None
+        l2_result: Dict[str, Any],
+        retrieved_cases: List[Dict[str, Any]] = None  # [MODIFIED] 新增參數
     ) -> Dict[str, Any]:
         """
-        從傳統 L2 診斷結果中提取診斷資訊 (修正嵌套結構讀取)
+        從傳統 L2 診斷結果中提取診斷資訊 (修正嵌套結構讀取 + 強制保底)
         """
         # 優先從 tcm_inference 提取，如果沒有則嘗試從根目錄提取 (兼容舊版)
         inference = l2_result.get("tcm_inference", {})
         
-        # 相容性處理：如果 LLM 沒輸出 tcm_inference 層，但直接輸出了欄位
         if not inference and "primary_pattern" in l2_result:
              inference = l2_result
 
-        # 注意：Prompt 中的欄位名是 primary_pattern，但這裡內部變數用 primary_syndrome，需映射
         primary = (
             inference.get("primary_pattern") or 
             l2_result.get("primary_pattern") or 
             l2_result.get("primary_syndrome") or 
-            "待定(資訊不足)"
-        )
+            ""
+        ).strip()
 
+        # [MODIFIED] 強制保底邏輯：檢測 LLM 是否拒絕診斷
         refusal_keywords = [
             "無法形成", "無法判斷", "資訊不足", "not be determined", 
             "no primary pattern", "n/a", "unknown", "none"
         ]
         
-        # 如果 primary 為空，或包含拒絕關鍵詞
         if not primary or any(k in primary.lower() for k in refusal_keywords):
             # 嘗試使用檢索到的第一個案例作為保底
             if retrieved_cases and len(retrieved_cases) > 0:
                 top_case = retrieved_cases[0]
-                # 嘗試從案例中提取診斷
                 fallback_diag = (
                     top_case.get("diagnosis") or 
                     top_case.get("syndrome") or 
@@ -358,85 +332,9 @@ class L2AgenticDiagnosis:
             "secondary_syndromes": [], 
             "pathogenesis": inference.get("pathogenesis", "") or l2_result.get("pathogenesis", ""),
             "treatment_principle": inference.get("treatment_principle", "") or l2_result.get("treatment_principle", ""),
-            
-            # status 也不在 inference 裡，而是在根目錄
             "confidence": 0.9 if l2_result.get("status") == "ok" else 0.6, 
-            
-            # reasoning 對應 syndrome_analysis
             "reasoning": inference.get("syndrome_analysis", "基於案例相似度推斷")
         }
-    
-    def _evaluate_case_completeness_from_l2(
-            self,
-            l2_result: Dict[str, Any],
-            retrieved_cases: List[Dict[str, Any]] = None
-        ) -> float:
-            """
-            從 L2 診斷結果評估案例完整度（引入檢索品質懲罰 & 修正路徑）
-            
-            檢查診斷結果中是否包含完整的辨證要素，並根據檢索分數進行加權。
-            如果檢索分數過低，代表 LLM 的內容可能是強行生成的，需降低完整度以觸發工具。
-            
-            Returns:
-                完整度分數 (0.0 - 1.0)
-            """
-            # 1. 計算基礎內容分數 (Based on Content)
-            content_score = 0.0
-            
-            # 提取推論層資料
-            inference = l2_result.get("tcm_inference", {})
-            
-            # 定義欄位映射 (權重名 -> JSON 欄位名)
-            # 因為 Prompt 輸出的是 primary_pattern, syndrome_analysis 等
-            field_mapping = {
-                "primary_syndrome": "primary_pattern",
-                "pathogenesis": "pathogenesis",
-                "treatment_principle": "treatment_principle",
-                "reasoning": "syndrome_analysis"
-            }
-            
-            weights = {
-                "primary_syndrome": 0.4,      # 主證 (權重調高)
-                "pathogenesis": 0.3,          # 病因病機
-                "treatment_principle": 0.2,   # 治法
-                "reasoning": 0.1              # 推理依據
-            }
-            
-            for weight_key, weight in weights.items():
-                # 取得正確的 JSON 鍵名
-                json_key = field_mapping.get(weight_key, weight_key)
-                
-                # 優先查 tcm_inference，沒有查 root (相容性)
-                value = inference.get(json_key) or l2_result.get(json_key)
-                
-                if value:
-                    # 檢查是否為有意義的內容
-                    # 簡單過濾：長度 > 5 且不包含明顯的「待定」字眼
-                    if isinstance(value, str) and len(value) > 5 and "待定" not in value:
-                        content_score += weight
-                    elif isinstance(value, (list, dict)) and len(value) > 0:
-                        content_score += weight
-            
-            # 2. 計算檢索懲罰因子 (Retrieval Penalty)
-            penalty_factor = 1.0
-            if retrieved_cases and len(retrieved_cases) > 0:
-                top_case = retrieved_cases[0]
-                # 兼容多種分數格式 (SearchEngine 的不同版本可能回傳不同結構)
-                max_score = float(
-                    top_case.get("score") or 
-                    top_case.get("_additional", {}).get("score") or 
-                    top_case.get("_final_score") or 
-                    0.0
-                )
-                
-                # 邏輯：如果最高分案例分數低於 0.75，說明知識庫支持不足
-                if max_score < 0.60:
-                    penalty_factor = 0.5  # 嚴重不足 -> 必觸發工具
-                elif max_score < 0.75:
-                    penalty_factor = 0.7  # 中度不足 -> 極可能觸發工具
-
-            final_score = content_score * penalty_factor
-            return min(1.0, final_score)
     
     def _evaluate_case_completeness_from_l2(
         self,
@@ -445,19 +343,11 @@ class L2AgenticDiagnosis:
     ) -> float:
         """
         從 L2 診斷結果評估案例完整度（引入檢索品質懲罰）
-        
-        檢查診斷結果中是否包含完整的辨證要素，並根據檢索分數進行加權。
-        如果檢索分數過低，代表 LLM 的內容可能是強行生成的，需降低完整度以觸發工具。
-        
-        Returns:
-            完整度分數 (0.0 - 1.0)
         """
-        # 1. 計算基礎內容分數 (Based on Content)
+        # 1. 計算基礎內容分數
         content_score = 0.0
-        # 提取推論層資料
         inference = l2_result.get("tcm_inference", {})
         
-        # 定義欄位映射 (權重名 -> JSON 欄位名)
         field_mapping = {
             "primary_syndrome": "primary_pattern",
             "pathogenesis": "pathogenesis",
@@ -466,26 +356,25 @@ class L2AgenticDiagnosis:
         }
         
         weights = {
-            "primary_syndrome": 0.4,      # 主證 (權重調高)
-            "pathogenesis": 0.3,          # 病因病機
-            "treatment_principle": 0.2,   # 治法
-            "reasoning": 0.1              # 推理依據
+            "primary_syndrome": 0.4,
+            "pathogenesis": 0.3,
+            "treatment_principle": 0.2,
+            "reasoning": 0.1
         }
         
         for weight_key, weight in weights.items():
             json_key = field_mapping.get(weight_key, weight_key)
-            # 優先查 tcm_inference，沒有查 root
             value = inference.get(json_key) or l2_result.get(json_key)
             
             if value:
-                # 檢查是否為有意義的內容
                 if isinstance(value, str) and len(value) > 5 and "待定" not in value:
                     content_score += weight
+                elif isinstance(value, (list, dict)) and len(value) > 0:
+                    content_score += weight
         
-        # 2. 計算檢索懲罰因子 (Retrieval Penalty)
+        # 2. 計算檢索懲罰因子
         penalty_factor = 1.0
         if retrieved_cases:
-            # 獲取最高分案例的分數 (兼容多種格式)
             top_case = retrieved_cases[0]
             max_score = float(
                 top_case.get("score") or 
@@ -494,12 +383,10 @@ class L2AgenticDiagnosis:
                 0.0
             )
             
-            # 邏輯：如果最高分案例分數低於 0.75，說明知識庫支持不足
-            # 強制打折以觸發 Tool B (Knowledge Gap)
             if max_score < 0.60:
-                penalty_factor = 0.5  # 嚴重不足，分數減半 -> 必觸發工具
+                penalty_factor = 0.5
             elif max_score < 0.75:
-                penalty_factor = 0.7  # 中度不足，打七折 -> 極可能觸發工具
+                penalty_factor = 0.7
                 
         final_score = content_score * penalty_factor
         return min(1.0, final_score)
@@ -511,30 +398,16 @@ class L2AgenticDiagnosis:
     ) -> float:
         """
         從 L2 診斷結果和 L1 決策評估診斷置信度
-        
-        綜合考慮：
-        - L2 診斷的明確性
-        - L1 檢索的置信度
-        - 診斷推理的完整性
-        
-        Returns:
-            置信度分數 (0.0 - 1.0)
         """
-        # 基礎置信度來自 L2 診斷本身
         base_confidence = l2_result.get("confidence", 0.7)
-        
-        # L1 的整體置信度影響
         l1_confidence = l1_decision.get("overall_confidence", 0.7)
         
-        # 綜合評估（加權平均）
         # L2 診斷置信度占 70%，L1 檢索置信度占 30%
         combined_confidence = base_confidence * 0.7 + l1_confidence * 0.3
         
-        # 如果診斷推理充分，給予獎勵
         if l2_result.get("reasoning") and len(str(l2_result["reasoning"])) > 50:
             combined_confidence += 0.05
         
-        # 如果有明確的病因病機，給予獎勵
         if l2_result.get("pathogenesis") and len(str(l2_result["pathogenesis"])) > 30:
             combined_confidence += 0.05
         
@@ -549,20 +422,12 @@ class L2AgenticDiagnosis:
     ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
         執行案例錨定與初步診斷（原有 L2 邏輯）
-        
-        Returns:
-            Tuple[錨定案例, 初步診斷結果]
         """
-        # 選擇最佳錨定案例
         if not retrieved_cases:
             return {}, {"error": "無可用案例"}
         
-        # 簡化版：選擇第一個案例作為錨定
-        # 實際應使用加權算法選擇
         anchored_case = retrieved_cases[0]
         
-        # 生成初步診斷（這裡應調用 LLM）
-        # 目前返回佔位結構
         initial_diagnosis = {
             "primary_syndrome": anchored_case.get("syndrome", "待分析"),
             "secondary_syndromes": [],
@@ -579,21 +444,10 @@ class L2AgenticDiagnosis:
     def _evaluate_case_completeness(self, case: Dict[str, Any]) -> float:
         """
         評估案例資訊完整度
-        
-        檢查項目：
-        - 症狀描述
-        - 舌脈資訊
-        - 病因病機
-        - 辨證分析
-        - 治療方案
-        
-        Returns:
-            完整度分數 (0.0 - 1.0)
         """
         if not case:
             return 0.0
         
-        # 定義必要欄位及其權重
         required_fields = {
             "symptoms": 0.25,
             "tongue_pulse": 0.20,
@@ -605,7 +459,6 @@ class L2AgenticDiagnosis:
         score = 0.0
         for field, weight in required_fields.items():
             if case.get(field):
-                # 簡單檢查：存在且非空
                 value = case[field]
                 if isinstance(value, str) and len(value) > 5:
                     score += weight
@@ -621,27 +474,15 @@ class L2AgenticDiagnosis:
     ) -> float:
         """
         評估診斷的置信度
-        
-        綜合考慮：
-        - L1 檢索的置信度
-        - 診斷的完整性
-        - 證型的明確性
-        
-        Returns:
-            置信度分數 (0.0 - 1.0)
         """
-        # 基礎置信度來自診斷本身
         base_confidence = diagnosis.get("confidence", 0.7)
         
-        # 如果有明確的主證，提升置信度
         if diagnosis.get("primary_syndrome") and diagnosis["primary_syndrome"] not in ["待分析", ""]:
             base_confidence += 0.05
         
-        # 如果有病因病機說明，提升置信度
         if diagnosis.get("pathogenesis") and len(diagnosis["pathogenesis"]) > 20:
             base_confidence += 0.05
         
-        # 綜合 L1 的置信度
         l1_confidence = l1_decision.get("overall_confidence", 0.7)
         final_confidence = (base_confidence + l1_confidence) / 2
         
@@ -649,34 +490,24 @@ class L2AgenticDiagnosis:
     
     # ==================== 工具調用決策 ====================
     
-    def _decide_tool_calls(
-        self,
-        anchored_case: Dict[str, Any],
-        initial_diagnosis: Dict[str, Any],
-        case_completeness: float,
-        diagnosis_confidence: float,
-        l1_decision: Dict[str, Any]
-    ) -> ToolCallDecision:
+    def _decide_tool_calls(self, anchored_case, initial_diagnosis, case_completeness, diagnosis_confidence, l1_decision):
+        decision = ToolCallDecision()
         """
         自主決策是否需要調用工具(深度整合決策樹)
-        
-        決策邏輯：
-        1. 案例完整度 < 0.6 → 調用 Tool B 補充知識
-        2. 診斷置信度 < 0.7 → 調用 Tool C 進行幻覺校驗
-        3. 有明確證型 → 調用 Tool A 獲取權威背書
-        
-        Returns:
-            工具調用決策
         """
-        decision = ToolCallDecision()
         target_syndrome = initial_diagnosis.get("primary_syndrome", "")
         
-        # 基礎檢查：如果沒有目標證型，工具也無法查詢，直接返回
-        if not target_syndrome or "待定" in target_syndrome:
+        # [FIX] 如果是虛擬案例 (case_id 為 VIRTUAL)，強制設定一個目標詞，不讓它 return
+        if anchored_case.get("case_id") == "VIRTUAL_THEORY_CASE":
+            # 嘗試用 L1 的輸入當作查詢詞
+            target_syndrome = l1_decision.get("input", {}).get("user_query", "")[:20] 
+            logger.info(f"[L2Agentic] 虛擬案例模式：強制設定工具查詢詞為 '{target_syndrome}'")
+
+        # 基礎檢查：如果是空的，且不是虛擬案例，才返回
+        if (not target_syndrome or "待定" in target_syndrome) and anchored_case.get("case_id") != "VIRTUAL_THEORY_CASE":
             return decision
 
         # --- 策略 A: 知識缺口 (Knowledge Gap) -> Tool B (A+百科) ---
-        # 觸發條件：完整度低，或「病因病機」欄位缺失/過短
         has_pathogenesis = len(initial_diagnosis.get("pathogenesis", "")) > 20
         if case_completeness < self.tool_config["knowledge_gap_threshold"] or not has_pathogenesis:
             if self.tool_config["enable_tool_b"]:
@@ -686,8 +517,6 @@ class L2AgenticDiagnosis:
                 logger.info(f"[L2Agentic] 觸發 Tool B (病機缺失/完整度不足: {case_completeness:.2f})")
 
         # --- 策略 B: 幻覺校驗 (Hallucination Check) -> Tool C (ETCM) ---
-        # 觸發條件：置信度低，或缺乏現代科學證據支持
-        # 這裡假設 LLM 輸出的 initial_diagnosis 可能包含空的 modern_evidence 欄位
         if diagnosis_confidence < self.tool_config["validation_confidence_threshold"]:
             if self.tool_config["enable_tool_c"]:
                 decision.should_call_tool_c = True
@@ -697,9 +526,7 @@ class L2AgenticDiagnosis:
                 logger.info(f"[L2Agentic] 觸發 Tool C (置信度不足: {diagnosis_confidence:.2f})")
 
         # --- 策略 C: 權威背書 (Authority Endorsement) -> Tool A (ICD-11) ---
-        # 觸發條件：只要有明確證型，就嘗試進行標準化驗證 (不再只看高置信度)
-        # 這是為了達成「缺乏標準病名 -> 調用 Tool A」的邏輯
-        if target_syndrome and len(target_syndrome) < 10: # 避免拿長句子去查
+        if target_syndrome and len(target_syndrome) < 10: 
             if self.tool_config["enable_tool_a"]:
                 decision.should_call_tool_a = True
                 decision.reasons.append(ToolCallReason.AUTHORITY_ENDORSEMENT)
@@ -726,17 +553,9 @@ class L2AgenticDiagnosis:
     ) -> List[ToolCallResult]:
         """
         並行執行所有需要的工具調用
-        
-        Args:
-            decision: 工具調用決策
-            primary_syndrome: 主要證型名稱
-        
-        Returns:
-            工具調用結果列表
         """
         tasks = []
         
-        # 準備工具調用任務
         if decision.should_call_tool_a:
             tasks.append(self._call_tool_a(primary_syndrome))
         
@@ -746,11 +565,9 @@ class L2AgenticDiagnosis:
         if decision.should_call_tool_c:
             tasks.append(self._call_tool_c(primary_syndrome))
         
-        # 並行執行，設置總超時
         results = []
         if tasks:
             try:
-                # 使用 wait_for 設置總體超時
                 completed = await asyncio.wait_for(
                     asyncio.gather(*tasks, return_exceptions=True),
                     timeout=self.tool_config["tool_timeout"]
@@ -780,7 +597,6 @@ class L2AgenticDiagnosis:
     async def _call_tool_a(self, term: str) -> ToolCallResult:
         """調用 Tool A - ICD-11 術語標準化"""
         try:
-            # 使用 asyncio 包裝同步調用
             loop = asyncio.get_event_loop()
             content = await asyncio.wait_for(
                 loop.run_in_executor(None, self.tools.tool_a_standardize_term, term),
@@ -871,17 +687,8 @@ class L2AgenticDiagnosis:
     ) -> Dict[str, Any]:
         """
         整合工具結果到診斷中(資訊融合)
-        
-        整合策略：
-        - Tool A 結果 → 添加到權威引用
-        - Tool B 結果 → 補充病因病機、辨證要點
-        - Tool C 結果 → 添加現代科學說明
-        
-        Returns:
-            增強後的診斷結果
         """
         enhanced = initial_diagnosis.copy()
-        # 初始化增強欄位
         for field in ["authority_references", "knowledge_supplements", "modern_evidence", "validation_notes"]:
             if field not in enhanced: enhanced[field] = []
         
@@ -890,33 +697,25 @@ class L2AgenticDiagnosis:
                 enhanced["validation_notes"].append(f"{result.tool_name} 調用失敗: {result.error}")
                 continue
 
-            # 自動學習新詞 (保留原本邏輯)
             target_term = initial_diagnosis.get("primary_syndrome", "")
             if target_term and len(target_term) > 1 and "待定" not in target_term:
                 if hasattr(self, 'term_manager'):
                     self.term_manager.add_term(target_term)
             
-            # --- 融合邏輯 ---
             if "Tool A" in result.tool_name:
-                # ICD-11 (權威性最高)
                 if "ICD-11" in result.content and "未找到" not in result.content:
                     enhanced["authority_references"].append(result.content)
-                    # 標記為標準化名稱參考 (雖然不直接覆蓋 primary_syndrome 以免破壞上下文，但給予最高權重標註)
                     enhanced["validation_notes"].insert(0, "★ 證型名稱已獲 WHO ICD-11 標準驗證")
             
             elif "Tool B" in result.tool_name:
-                # A+百科 (內容最豐富)
                 if "臨床表現" in result.content or "辨證" in result.content:
                     enhanced["knowledge_supplements"].append(result.content)
                     enhanced["validation_notes"].append("✓ 已補充辨證邏輯")
                     
-                    # [關鍵融合] 若原診斷缺乏病機，直接使用 Tool B 的內容填補
                     if not enhanced.get("pathogenesis") or len(enhanced.get("pathogenesis", "")) < 10:
-                        # 這裡做簡單提取，實際可用 Regex 提取 "病機" 段落
                         enhanced["pathogenesis"] = f"(由外部知識庫補充) 參考 A+百科：{result.content[:100]}..."
             
             elif "Tool C" in result.tool_name:
-                # ETCM (科學證據)
                 if "ETCM" in result.content and "未找到" not in result.content:
                     enhanced["modern_evidence"].append(result.content)
                     enhanced["validation_notes"].append("✓ 已獲取現代科學證據")
@@ -925,7 +724,6 @@ class L2AgenticDiagnosis:
     
     # ==================== 輸出構建-使用動態模型 ====================
     
-    # [修改 3] 輸出構建：使用動態模型
     def _build_output(
         self,
         anchored_case: Dict[str, Any],
@@ -937,7 +735,6 @@ class L2AgenticDiagnosis:
         """
         構建最終的 L2 輸出
         """
-        # 計算驗證狀態
         successful_tools = sum(1 for r in tool_results if r.success)
         total_tools = len(tool_results)
         
@@ -948,10 +745,8 @@ class L2AgenticDiagnosis:
         else:
             validation_status = "partially_validated"
         
-        # [修改點] 使用動態算法計算置信度增益
         confidence_boost = self._calculate_confidence_boost(enhanced_diagnosis)
         
-        # 生成追問問題（如果覆蓋度不足）
         follow_up_questions = []
         if case_completeness < 0.7:
             follow_up_questions = self._generate_follow_up_questions(
@@ -969,7 +764,7 @@ class L2AgenticDiagnosis:
             knowledge_supplements=enhanced_diagnosis.get("knowledge_supplements", []),
             modern_evidence=enhanced_diagnosis.get("modern_evidence", []),
             coverage_score=case_completeness,
-            confidence_boost=confidence_boost, # 這裡使用動態計算的值
+            confidence_boost=confidence_boost,
             follow_up_questions=follow_up_questions
         )
     
@@ -996,7 +791,6 @@ class L2AgenticDiagnosis:
         """生成追問問題"""
         questions = []
         
-        # 檢查缺失的資訊類型
         if not case.get("tongue_pulse"):
             questions.append("請問您的舌象如何？舌質顏色、舌苔厚薄？")
             questions.append("您的脈象有什麼特點？是否有醫師把過脈？")
@@ -1007,23 +801,17 @@ class L2AgenticDiagnosis:
         if not case.get("triggers"):
             questions.append("有什麼情況會加重或緩解這些症狀？")
         
-        return questions[:3]  # 最多返回 3 個追問
+        return questions[:3]
     
-    #  動態置信度增益算法
     def _calculate_confidence_boost(self, enhanced_diagnosis: Dict[str, Any]) -> float:
         """
         計算診斷置信度增益 (Confidence Gain Model)
-        公式: Boost = Σ (Tool_Relevance * Authority_Weight)
         """
         boost = 0.0
         
-        # 1. 權威背書 (權重最高 0.15)
-        # 邏輯：如果有 ICD-11 的結果，代表方向正確
         if enhanced_diagnosis.get("authority_references"):
             boost += 0.15
             
-        # 2. 知識補充 (權重 0.10)
-        # 邏輯：內容越長，代表知識填補越完整 (簡單的 heuristic)
         supplements = enhanced_diagnosis.get("knowledge_supplements", [])
         if supplements:
             content_len = sum(len(s) for s in supplements)
@@ -1032,10 +820,7 @@ class L2AgenticDiagnosis:
             elif content_len > 0:
                 boost += 0.05
                 
-        # 3. 科學驗證 (權重 0.05)
-        # 邏輯：這是加分項
         if enhanced_diagnosis.get("modern_evidence"):
             boost += 0.05
             
-        # 上限控制：工具最多提升 0.3 (30%) 的置信度，避免過度依賴
         return min(0.3, boost)

@@ -8,7 +8,7 @@
 核心修復：
 1. 確保 L1 Gate 的拒絕狀態能夠正確返回給 main.py 進行 422 處理。
 2. 將 L2, L3, L4 的 LLM 調用失敗改為拋出受控異常，讓主 Engine 處理為 500 Internal Server Error。
-3. 🚨 修正：將 L1, L3, L4 的模擬函式替換為實際的 LLM 呼叫，並設置溫度參數。
+3. 🚨 方案三實裝：L1 階段引入 TCMTools 進行真正的外部工具查詢增強。
 """
 
 from __future__ import annotations
@@ -28,6 +28,9 @@ from .search_engine import SearchEngine
 from .agentic_retrieval import AgenticRetrieval
 from .l2_agentic_diagnosis import L2AgenticDiagnosis
 from ..utils.terminology_manager import TerminologyManager
+
+# [MODIFIED] 引入工具庫 (方案三必要)
+from ..tools.tcm_tools import TCMTools
 
 logger = get_logger("FourLayerPipeline")
 
@@ -58,14 +61,9 @@ def _classify_domain(text: str) -> str:
 async def call_llm_with_prompt(llm: LLMClient, prompt_path: Path, payload: Dict[str, Any], temperature: float = 0.0) -> Dict[str, Any]:
     """
     載入對應 .txt prompt，形成 system 指示 + user payload，呼叫 LLM。
-    🚨 修正：將 temperature 作為額外參數傳入，但不直接傳遞給 llm.complete_json()
-             因為 complete_json() 預期不接受此參數 (除非它內部調用 chat_complete)。
     """
     system_prompt = _read_prompt(prompt_path)
     
-    # 🚨 修正點：只傳遞 LLMClient.complete_json 接受的參數
-    # 假設 LLMClient.complete_json 內部會處理 temperature/其它參數。
-    # 如果 LLMClient.complete_json 內部沒有處理，這會是下一個問題。
     resp = await llm.complete_json(system_prompt=system_prompt, user_prompt=payload, temperature=temperature) 
 
     if isinstance(resp, dict):
@@ -116,6 +114,10 @@ class FourLayerSCBR:
             )
         else:
             self.agentic_retrieval = None
+        
+        # [MODIFIED] 初始化 TCMTools 工具庫 (用於 L1 增強)
+        self.tools = TCMTools() 
+        logger.info("[FourLayerPipeline] TCMTools 工具庫已掛載")
         
         # 🆕 初始化 L2 Agentic 診斷器
         if self.agentic_enabled and self.cfg:
@@ -255,6 +257,64 @@ class FourLayerSCBR:
             result['security_checks']['l1_flags'] = l1.get('owasp_screening', {}).get('flags', [])
             return result # 返回給 main.py 拋出 422 HTTPException
 
+        # =================================================================
+        # 🆕 [方案三修正版] L1 外部工具介入 (Tool-Assisted Query Enrichment)
+        # =================================================================
+        # 核心邏輯：如果 L1 信心不足 (< 0.4)，先用 LLM 轉譯，再調用工具
+        l1_conf = l1.get("overall_confidence", 0.0)
+        user_query_text = user_query
+        
+        if self.agentic_enabled and l1_conf < 0.4:
+            logger.info(f"🔧 [L1 Enhancement] 檢測到直敘句/信心不足 ({l1_conf})，啟動外部工具增強模式...")
+            
+            try:
+                # [FIX] 步驟 1: 先讓 LLM 扮演「翻譯官」，將長句轉為 1-2 個核心搜尋詞
+                # 這解決了 "外部工具查詢無結果" 的問題
+                extraction_prompt = (
+                    f"請從以下患者描述中，提取最核心的一個「中醫病名」或「主症術語」用於檢索百科。\n"
+                    f"患者描述：{user_query}\n"
+                    f"要求：只輸出一個詞，不要其他文字。範例：「產後缺乳」、「失眠」。"
+                )
+                search_term = await self.llm.chat_complete(
+                    system_prompt="你是一個精準的中醫關鍵詞提取器。",
+                    user_prompt=extraction_prompt
+                )
+                search_term = search_term.strip().replace("。", "")
+                logger.info(f"🔧 [L1 Translation] 長句轉譯 -> 搜尋詞: {search_term}")
+
+                # [FIX] 步驟 2: 使用轉譯後的關鍵詞去查工具 (A+百科)
+                loop = asyncio.get_event_loop()
+                tool_content = await loop.run_in_executor(
+                    None, 
+                    self.tools.tool_b_syndrome_logic, 
+                    search_term # 這裡傳入短詞，工具就能找到了！
+                )
+                
+                # 步驟 3: 從工具回傳的豐富知識中，提取更多擴充關鍵字
+                if tool_content and "未找到" not in tool_content:
+                    enrichment_prompt = (
+                        f"參考以下中醫知識，為症狀 '{search_term}' 提取 3-5 個相關的中醫辨證關鍵字(如證型、病機)。"
+                        f"只輸出關鍵字，用空格分隔。\n\n知識內容：{tool_content[:500]}"
+                    )
+                    enriched_terms = await self.llm.chat_complete(
+                        system_prompt="你是一個中醫術語擴充器。",
+                        user_prompt=enrichment_prompt
+                    )
+                    
+                    logger.info(f"🔧 [Tool Result] 知識庫擴充成功 -> 增強術語: {enriched_terms}")
+                    user_query_text = f"{user_query} {enriched_terms}"
+                    
+                    # 標記增強
+                    if "retrieval_strategy" in l1:
+                        l1["retrieval_strategy"]["reasoning"] += " (已由 A+百科工具增強術語)"
+                else:
+                    logger.warning(f"🔧 [Tool Result] 外部工具查無 '{search_term}' 相關資料")
+                    # 即使工具沒查到，至少我們有了 search_term，把它加進去也比原本好
+                    user_query_text = f"{user_query} {search_term}"
+                    
+            except Exception as e:
+                logger.warning(f"⚠️ 工具增強執行失敗 (不影響主流程): {e}")
+
         # ------------------- 正常流程 -------------------
         
         # 2. 檢索層 (Retrieval Layer)
@@ -266,7 +326,8 @@ class FourLayerSCBR:
                 logger.error("❌ SearchEngine 或 EmbedClient 未初始化，無法進行檢索。")
                 return result 
             
-            text_query = user_query 
+            # [MODIFIED] 使用經過工具增強的 user_query_text
+            text_query = user_query_text
             
             # 🆕 根據模式選擇檢索方式
             if self.agentic_enabled and self.agentic_retrieval:
