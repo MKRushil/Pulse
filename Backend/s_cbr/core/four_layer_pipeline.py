@@ -449,15 +449,8 @@ class FourLayerSCBR:
         # 檢查收斂 (依據 SCBR 文件 [10.2] 的收斂條件)
         coverage_ratio = l2_raw_result.get('coverage_evaluation', {}).get('coverage_ratio', 0.0)
         # 修正收斂判斷邏輯，納入最大輪次檢查 (強制收斂)
-        is_coverage_ok = coverage_ratio >= 0.8
-        is_max_round_reached = round_count >= max_rounds
+        is_coverage_ok = coverage_ratio >= 0.95
         # 這裡的邏輯必須和 main.py 內部的 should_converge 邏輯保持一致
-        result['converged'] = is_coverage_ok or is_max_round_reached 
+        result['converged'] = is_coverage_ok 
 
-        # 🚨 [新增] 檢查是否為「低覆蓋度的強制收斂」 (用於 output_validator 強化警告)
-        if is_max_round_reached and coverage_ratio < 0.75:
-            result['is_forced_convergence'] = True
-            logger.warning(
-                f"⚠️ 觸發低覆蓋度強制收斂 (Round: {round_count}, Coverage: {coverage_ratio:.2f})")
-        
         return result

@@ -227,13 +227,6 @@ class DialogManager:
                 logger.warning(f"🚨 會話 {session_id[:8]}*** 被標記為可疑，不予繼續。")
                 raise PermissionError("會話因安全問題被拒絕。")
             else:
-                if session.round_count >= self.max_rounds:
-                    logger.warning(
-                        f"⚠️ 會話 {session_id[:8]}*** 已達到最大輪次 ({self.max_rounds})，"
-                        f"強制進入保底輸出階段，不累積新問題。"
-                    )
-                    return session
-                
                 # 2. 延續現有會話
                 session.round_count += 1
                 session.add_question(text_question) # 使用純字串

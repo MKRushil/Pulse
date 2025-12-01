@@ -33,7 +33,7 @@ class LLMConfig:
     api_url: str = os.getenv("LLM_API_URL", "https://integrate.api.nvidia.com/v1")
     api_key: str = os.getenv("LLM_API_KEY", "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")
     model: str = os.getenv("LLM_MODEL", "meta/llama-3.3-70b-instruct")
-    max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "2000"))
+    max_tokens: int = int(os.getenv("LLM_MAX_TOKENS", "8000"))
     temperature: float = float(os.getenv("LLM_TEMPERATURE", "0.1"))
     timeout: float = float(os.getenv("LLM_TIMEOUT", "30"))
     retry: int = int(os.getenv("LLM_RETRY", "2"))
@@ -93,7 +93,7 @@ class AgenticNLUConfig:
     用於控制 Agentic NLU 的自主決策行為
     """
     # 功能開關
-    enabled: bool = False  # 啟用 Agentic NLU（False 則使用傳統 L1）
+    enabled: bool = True  # 啟用 Agentic NLU（False 則使用傳統 L1）
     
     # Alpha 值範圍
     alpha_min: float = 0.2  # 最小 alpha（BM25 為主）
@@ -125,8 +125,8 @@ class SpiralConfig:
     
     控制螺旋推理的輪次和收斂條件
     """
-    max_rounds: int = 7             # 最大推理輪次
-    min_rounds: int = 2              # 最小推理輪次
+    max_rounds: int = 999             # 最大推理輪次
+    min_rounds: int = 1              # 最小推理輪次
     convergence_threshold: float = 0.85  # 收斂閾值
     min_confidence: float = 0.7      # 最小信心度
     
@@ -151,8 +151,8 @@ class ConvergenceConfig:
     
     # 停止條件
     convergence_threshold: float = 0.85  # 收斂閾值（0-1）
-    min_rounds: int = 2                  # 最小輪次
-    max_rounds: int = 7                 # 最大輪次
+    min_rounds: int = 1                  # 最小輪次
+    max_rounds: int = 999                 # 最大輪次
 
 
 # ==================== 安全配置 ====================
