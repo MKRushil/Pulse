@@ -596,30 +596,48 @@ class LLMClient:
             try:
                 return json.loads(seg)
             except json.JSONDecodeError as e:
-                # [新增] 針對 "Unterminated string" 的修復
-                if "Unterminated string" in str(e):
-                    logger.warning("⚠️ 檢測到 JSON 字串未閉合 (可能是 Token 截斷)，嘗試修復...")
-                    # 嘗試找到最後一個未閉合的雙引號，並補上 "
-                    # 簡單策略：如果最後一個非空字符不是 " 或 } 或 ]，嘗試補上 "
-                    trimmed = seg.rstrip()
-                    if trimmed and trimmed[-1] not in ['"', '}', ']']:
-                        # 嘗試補上雙引號和閉合括號
-                        fixed = trimmed + '"}' * 5 # 暴力嘗試
-                        # 這裡比較難完美修復，建議直接回傳一個錯誤結構讓上層重試或降級
-                        # 或者：砍掉最後一個欄位
-                        last_comma = seg.rfind(',')
-                        if last_comma != -1:
-                            seg = seg[:last_comma] + "}" * 5 # 砍掉最後一個爛掉的欄位，並嘗試閉合
-                            seg = _balance_brackets(seg)
+                # [MODIFIED] 針對 "Unterminated string" 的增強型截斷修復
+                # 判斷是否為字串未閉合 (截斷) 或 預期值錯誤
+                if "Unterminated string" in str(e) or "Expecting value" in str(e):
+                    logger.warning("⚠️ 檢測到 JSON 字串未閉合 (可能是 Token 截斷)，啟動截斷修復模式...")
+                    
+                    # 策略：因為截斷通常發生在最後一個欄位的 value 寫到一半
+                    # 我們嘗試找到最後一個 "key": value 結構的結束點，或者直接砍到最後一個逗號前
+                    
+                    cleaned_seg = seg.strip()
+                    
+                    # 如果結尾不是閉合符號 (} 或 ])，大概率是被截斷了
+                    if not cleaned_seg.endswith(('}', ']')):
+                        # 尋找最後一個逗號 (假設它是分隔欄位的)
+                        last_comma_index = cleaned_seg.rfind(',')
+                        
+                        if last_comma_index != -1:
+                            # ✂️ 砍掉最後一個逗號之後的所有內容 (即捨棄最後一個被截斷的欄位)
+                            truncated_seg = cleaned_seg[:last_comma_index]
+                            
+                            # 🔧 重新平衡括號 (利用上文定義的 _balance_brackets 補上缺少的 } 或 ])
+                            fixed_seg = _balance_brackets(truncated_seg)
+                            
+                            logger.info(f"🔧 截斷修復：捨棄尾部並重組 -> ...{fixed_seg[-50:]}")
                             try:
-                                return json.loads(seg)
+                                return json.loads(fixed_seg)
+                            except Exception as e2:
+                                logger.warning(f"❌ 截斷修復失敗 (捨棄策略): {e2}")
+                        
+                        # 備用策略：如果找不到逗號（可能只有一個欄位就爆了），嘗試直接補引號
+                        else:
+                            # 嘗試補全引號和括號
+                            try_fix = cleaned_seg + '"}' 
+                            try_fix = _balance_brackets(try_fix)
+                            try:
+                                return json.loads(try_fix)
                             except:
                                 pass
-                
+
                 # 如果還是失敗，記錄日誌並拋出
                 try:
                     logger.error("❌ LLM JSON 解析失敗（修復前片段）：\n%s", original_seg)
-                    logger.error("❌ LLM JSON 解析失敗（修復後片段）：\n%s", seg)
+                    # logger.error("❌ LLM JSON 解析失敗（修復後片段）：\n%s", seg) # 註解掉以免 Log 太長
                 except Exception:
                     pass
-                raise
+                raise # 拋出異常讓上層處理

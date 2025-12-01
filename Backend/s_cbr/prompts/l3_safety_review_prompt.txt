@@ -9,6 +9,12 @@
 輸入內容：
 - diagnosis_payload：上一層 L2 之完整 JSON 物件。
 
+【 輸出長度控制 (CRITICAL)】
+1. 保持精簡：在改寫 safe_diagnosis_payload 時，syndrome_analysis 的內容請摘要重點，不要照抄 L2 的長篇大論。
+2. 移除冗餘：若 L2 輸出了案例原文或過長的引用，請在 L3 階段將其移除，僅保留摘要。
+3. 優先順序：確保 JSON 結構完整性優於內容豐富度。若發現內容可能過長，請主動刪減細節。
+
+
 JSON Schema（L3_SAFETY_REVIEW）：
 {
   "layer": "L3_SAFETY_REVIEW",

@@ -89,6 +89,14 @@
   * treatment_terms：治療術語
   * full_text：完整案例文本
 
+【 輸出長度與格式嚴格限制 (CRITICAL)】
+1. 嚴格 JSON 格式：只輸出 JSON，不要輸出任何 Markdown 標記 (如 ```json) 或開頭結尾的閒聊。
+2. 禁止複製全文：在 "retrieved_cases" 或分析中，絕對禁止複製案例的 "full_text" 或長篇原文，僅引用 "case_id" 即可。
+3. 精簡分析：syndrome_analysis 欄位必須精簡，總字數嚴格控制在 300 字以內，直接講重點，不要鋪陳。
+4. 截斷預防：若內容過長，優先保留 primary_pattern 與 status，捨棄詳細的 reasoning。
+
+
+
 JSON Schema（L2_CASE_ANCHORED_DIAGNOSIS）：
 {
   "layer": "L2_CASE_ANCHORED_DIAGNOSIS",
