@@ -181,16 +181,12 @@ class L2AgenticDiagnosis:
     async def _query_internal_knowledge(self, query_text: str, vector_search_only: bool = False) -> Dict[str, Any]:
         """
         從 Weaviate TCM Class 查詢標準證型知識
-        
-        Args:
-            query_text: 查詢文本（使用者的原始症狀描述 或 證型名稱）
-            vector_search_only: 是否強制依賴向量相似度（當輸入為長症狀時建議 True）
         """
         if not self.se or not query_text:
             return None
             
         try:
-            # 1. 生成向量 (如果有 embed client)
+            # 1. 生成向量
             vector = None
             if self.embed:
                 try:
@@ -199,45 +195,56 @@ class L2AgenticDiagnosis:
                     logger.warning(f"向量生成失敗: {e}")
 
             # 2. 設定檢索參數
-            # [FIX] 修正思維：不能只靠向量(0.9)，必須強制保留 BM25 關鍵字權重(0.5)
-            # 這樣如果用戶說"胃"，BM25 會懲罰那些沒有"胃"字的"腰痛"結果，即使它們向量很像
-            alpha_val = 0.5 
+            # [FIX] 大幅調降 Alpha 至 0.2，強力依賴 BM25 關鍵字匹配
+            # 這是為了確保"胃"痛不會匹配到"腰"痛 (向量模糊匹配的副作用)
+            alpha_val = 0.2 
             
-            # 記錄日誌以便除錯
-            log_text = query_text[:20] + "..." if len(query_text) > 20 else query_text
-            logger.info(f"[L2Agentic] 內部知識庫查詢: '{log_text}' (Alpha={alpha_val}, Vector={'Yes' if vector else 'No'})")
+            logger.info(f"[L2Agentic] 內部知識庫查詢: '{query_text[:20]}...' (Alpha={alpha_val}, Vector={'Yes' if vector else 'No'})")
 
-            # 3. 使用混合檢索查 TCM Class
-            # [FIX] 搜尋欄位權重優化：大幅提升 name_zh (病名) 和 category (科別) 的權重
-            # 讓包含關鍵字的病名優先浮現
+            # 3. 使用混合檢索
+            # [FIX] 移除 ^2 語法，確保欄位名稱正確。加入 definition 以增加匹配機會。
             results = await self.se.hybrid_search(
                 index="TCM",
                 text=query_text,
                 vector=vector,
                 alpha=alpha_val, 
-                limit=3, # 取前3名來做過濾
-                search_fields=["vector_text", "name_zh^2", "clinical_manifestations"] 
+                limit=3, 
+                search_fields=["name_zh", "definition", "clinical_manifestations", "vector_text"] 
             )
             
-            # 4. [NEW] 中醫思維過濾 (Scope Guard)
-            # 檢查結果是否真的跟用戶描述的「病位」有關
+            # 4. [NEW] 關鍵字驗證 (Scope Guard)
+            # 簡單的中醫病位檢查：如果查詢包含明確部位，結果最好也要包含
+            key_organs = ["胃", "心", "肝", "脾", "肺", "腎", "膽", "腸", "腰", "膝", "頭"]
+            query_organs = [k for k in key_organs if k in query_text]
+            
             valid_result = None
             
             if results:
+                # 記錄前三名以便除錯
+                top3_names = [r.get('name_zh') for r in results]
+                logger.info(f"[L2Agentic] 內部檢索候選: {top3_names}")
+
                 for res in results:
                     score = res.get("score", 0)
                     name = res.get("name_zh", "")
-                    definition = res.get("definition", "")
+                    content_str = str(res.get("definition", "")) + str(res.get("clinical_manifestations", ""))
                     
-                    # 簡單過濾：如果分數太低直接跳過
-                    if score < 0.60: continue
+                    # [FIX] 放寬分數門檻，因為 Alpha 0.2 會拉低整體分數
+                    if score < 0.40: continue
 
-                    # [思維檢核] 如果用戶輸入有明確臟腑/部位，結果必須包含相關詞
-                    # 這裡做一個簡單的關鍵詞交集檢查 (User Query <-> Result Content)
-                    # 為了避免 "腰痛" 匹配 "胃痛"，我們檢查某些關鍵實詞
-                    
-                    # 這裡簡化處理：如果分數極高(>0.85)且是混合檢索，通常可信
-                    # 但為了保險，我們選擇分數最高且「看起來合理」的
+                    # [思維檢核] 關鍵字驗證
+                    # 如果查詢中有明確臟腑，檢查結果內容是否包含該臟腑關鍵字
+                    if query_organs:
+                        is_relevant = False
+                        for organ in query_organs:
+                            if organ in name or organ in content_str:
+                                is_relevant = True
+                                break
+                        
+                        if not is_relevant:
+                            logger.info(f"[L2Agentic] 過濾不相關結果: {name} (缺關鍵字: {query_organs})")
+                            continue
+
                     valid_result = res
                     break
             
@@ -246,11 +253,12 @@ class L2AgenticDiagnosis:
                 return valid_result
             else:
                 if results:
-                    logger.info(f"[L2Agentic] 內部知識庫無匹配 (Top: {results[0].get('name_zh')}, Score: {results[0].get('score', 0):.3f} - 已被過濾或分數不足)")
+                    top_score = results[0].get('score', 0)
+                    logger.info(f"[L2Agentic] 內部知識庫無匹配 (Top: {results[0].get('name_zh')}, Score: {top_score:.3f} - 過濾或分數過低)")
             
             return None
         except Exception as e:
-            logger.warning(f"[L2Agentic] 內部知識庫查詢失敗: {e}")
+            logger.warning(f"[L2Agentic] 內部知識庫查詢失敗: {e}", exc_info=True)
             return None
     
     # ==================== 適配方法（用於 four_layer_pipeline 調用）====================
