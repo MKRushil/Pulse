@@ -48,6 +48,11 @@ class Session:
         self.history: List[Dict[str, Any]] = []
         self.last_case_id = None
         self.convergence_history = []
+        # [NEW] 中醫思維：結構化狀態槽 (Structured State Slots)
+        # 用於追蹤"已確認"與"已排除"的症狀，模擬醫生的心智模型
+        self.confirmed_symptoms: List[str] = []  # 如: ["胃痛", "拒按"]
+        self.ruled_out_symptoms: List[str] = []  # 如: ["口苦", "發熱"]
+        self.suspected_pattern: str = ""
         
         # 安全相關屬性
         self.security_flags = {
@@ -294,6 +299,49 @@ class DialogManager:
         
         logger.info(f"📊 記錄第 {session.round_count} 輪結果到會話 {session_id[:8]}***")
 
+    
+    # [NEW] 實作螺旋對話更新與狀態追蹤
+    def update_session(self, session_id: str, user_input: str, assistant_response: str) -> None:
+        """
+        更新會話歷史並執行簡單的狀態追蹤。
+        這模擬了老中醫在每一輪問診後更新病歷的過程。
+        """
+        session = self.sessions.get(session_id)
+        if not session:
+            logger.warning(f"⚠️ 會話 {session_id[:8]}*** 不存在，無法更新")
+            return
+            
+        # 1. 寫入對話歷史 (Memory)
+        timestamp = datetime.now().isoformat()
+        session.history.append({
+            "role": "user",
+            "content": user_input,
+            "timestamp": timestamp
+        })
+        session.history.append({
+            "role": "assistant",
+            "content": assistant_response,
+            "timestamp": timestamp
+        })
+        
+        # 2. 結構化病歷累積 (Accumulation)
+        # 將新的追問與回答記錄到累積問題中，加上時間標記，形成"病程記錄"
+        # 避免重複添加 (如果 get_or_create 已經加過 user_input，這裡主要負責上下文連貫)
+        time_tag = datetime.now().strftime("%H:%M")
+        if user_input not in session.accumulated_question:
+            session.accumulated_question += f"；【追問回覆 {time_tag}】{user_input}"
+            
+        # 3. [中醫思維] 簡單的症狀確認 (Symptom Confirmation)
+        # 如果用戶的回答非常肯定（是/對/有），我們假設他確認了上一輪醫生詢問的症狀
+        # (這是一個啟發式規則，完整版需配合 NLU)
+        if len(user_input) < 10 and any(w in user_input for w in ["是", "對", "有", "沒錯"]):
+             # 標記一個狀態更新，供後續檢索使用
+             logger.info(f"[DialogManager] 用戶可能確認了症狀 (Round {session.round_count})")
+             # 在真實實作中，這裡會解析上一輪的 assistant_response 提取症狀名並加入 session.confirmed_symptoms
+
+        logger.info(f"📝 會話 {session_id[:8]}*** 歷史已更新 (Round {session.round_count})")
+    
+    
     def reset_session(self, session_id: str):
         if session_id in self.sessions:
             del self.sessions[session_id]

@@ -180,47 +180,108 @@ class L2AgenticDiagnosis:
     # [NEW] 內部知識庫查詢方法
     async def _query_internal_knowledge(self, query_text: str, vector_search_only: bool = False) -> Dict[str, Any]:
         """
-        從 Weaviate TCM Class 查詢標準證型知識
+        從 Weaviate TCM Class 查詢標準證型知識，具備否定排除與病位鎖定功能。
         """
         if not self.se or not query_text:
             return None
             
         try:
+            # [中醫思維 1] 否定詞預處理 (Negative Filter)
+            # 避免搜到病人說"沒有"的症狀
+            import re
+            negative_markers = ["沒有", "無", "未見", "非"] 
+            must_not_terms = []
+            
+            # 簡單切句分析
+            clauses = re.split(r'[，,。.;；]', query_text)
+            positive_clauses = []
+            
+            for clause in clauses:
+                clause = clause.strip()
+                if not clause: continue
+                
+                # 檢查是否包含否定詞
+                is_negative = False
+                for m in negative_markers:
+                    if m in clause:
+                        if clause.index(m) < 2: 
+                            is_negative = True
+                            term = clause.split(m)[-1].strip()
+                            if len(term) > 1: must_not_terms.append(term)
+                            break
+                
+                if not is_negative:
+                    positive_clauses.append(clause)
+            
+            clean_query = " ".join(positive_clauses) if positive_clauses else query_text
+
+            # [中醫思維 1.5] 術語擴展 (Term Expansion) [關鍵修復]
+            # 將口語病位映射到資料庫的專業術語，大幅提升 BM25 命中率
+            term_mapping = {
+                "胃": "胃脘 脾胃 中焦",
+                "肚子": "腹部 大腹 小腹",
+                "拉肚子": "泄瀉 下利",
+                "想吐": "嘔吐 噁心",
+                "睡不著": "不寐 失眠",
+                "痛": "疼痛"
+            }
+            
+            expansion_terms = []
+            for colloquial, formal in term_mapping.items():
+                if colloquial in clean_query:
+                    expansion_terms.append(formal)
+            
+            # 將擴展詞加到查詢字串後方，增強權重
+            if expansion_terms:
+                expanded_query = f"{clean_query} {' '.join(expansion_terms)}"
+                logger.info(f"[L2Agentic] 術語擴展: '{clean_query}' -> '{expanded_query}'")
+                clean_query = expanded_query
+            
             # 1. 生成向量
             vector = None
             if self.embed:
                 try:
-                    vector = await self.embed.embed(query_text)
+                    vector = await self.embed.embed(clean_query)
                 except Exception as e:
                     logger.warning(f"向量生成失敗: {e}")
 
-            # 2. 設定檢索參數
-            # [FIX] 大幅調降 Alpha 至 0.2，強力依賴 BM25 關鍵字匹配
-            # 這是為了確保"胃"痛不會匹配到"腰"痛 (向量模糊匹配的副作用)
+            # 2. 設定檢索參數 (Alpha=0.2, 強調關鍵字匹配)
             alpha_val = 0.2 
             
-            logger.info(f"[L2Agentic] 內部知識庫查詢: '{query_text[:20]}...' (Alpha={alpha_val}, Vector={'Yes' if vector else 'No'})")
+            logger.info(f"[L2Agentic] 內部知識庫查詢: '{clean_query[:20]}...' (Alpha={alpha_val}, 排除={must_not_terms})")
 
             # 3. 使用混合檢索
-            # [FIX] 移除 ^2 語法，確保欄位名稱正確。加入 definition 以增加匹配機會。
             results = await self.se.hybrid_search(
                 index="TCM",
-                text=query_text,
+                text=clean_query,
                 vector=vector,
                 alpha=alpha_val, 
-                limit=3, 
+                limit=10, 
                 search_fields=["name_zh", "definition", "clinical_manifestations", "vector_text"] 
             )
             
-            # 4. [NEW] 關鍵字驗證 (Scope Guard)
-            # 簡單的中醫病位檢查：如果查詢包含明確部位，結果最好也要包含
-            key_organs = ["胃", "心", "肝", "脾", "肺", "腎", "膽", "腸", "腰", "膝", "頭"]
-            query_organs = [k for k in key_organs if k in query_text]
+            # 4. [中醫思維 2] 病位與症狀檢核 (Scope Guard)
+            key_locations = [
+                # 五臟六腑
+                "胃", "心", "肝", "脾", "肺", "腎", "膽", "腸", "膀胱", "三焦", "心包",
+                # 頭面五官
+                "頭", "面", "目", "眼", "耳", "鼻", "口", "齒", "牙", "咽", "喉", "嗓", "舌",
+                # 軀幹
+                "腹", "肚", "臍", "胸", "脅", "背", "腰", "肩", "頸", "項", "膈", "乳",
+                # 四肢經絡
+                "手", "足", "四肢", "肢", "腿", "臂", "膝", "腳", "骨", "節", "筋", "脈",
+                # 下焦生殖
+                "胞宮", "子宮", "精室", "少腹", "小腹", "陰器", "前陰", "肛", "二便",
+                # 皮膚肌表
+                "皮", "膚", "肌", "肉", "表"
+            ]
+            
+            # 提取使用者查詢中的病位
+            query_locations = [k for k in key_locations if k in query_text]
             
             valid_result = None
             
             if results:
-                # 記錄前三名以便除錯
                 top3_names = [r.get('name_zh') for r in results]
                 logger.info(f"[L2Agentic] 內部檢索候選: {top3_names}")
 
@@ -229,20 +290,39 @@ class L2AgenticDiagnosis:
                     name = res.get("name_zh", "")
                     content_str = str(res.get("definition", "")) + str(res.get("clinical_manifestations", ""))
                     
-                    # [FIX] 放寬分數門檻，因為 Alpha 0.2 會拉低整體分數
                     if score < 0.40: continue
 
-                    # [思維檢核] 關鍵字驗證
-                    # 如果查詢中有明確臟腑，檢查結果內容是否包含該臟腑關鍵字
-                    if query_organs:
+                    # A. 排除否定詞 (如果有明確衝突)
+                    if any(term in content_str for term in must_not_terms):
+                         logger.info(f"[L2Agentic] 排除否定項衝突: {name}")
+                         continue
+
+                    # B. 病位檢查 (Scope Guard)
+                    # 如果使用者提到了特定部位，結果中最好也要包含相關描述
+                    if query_locations:
                         is_relevant = False
-                        for organ in query_organs:
-                            if organ in name or organ in content_str:
+                        for loc in query_locations:
+                            # 檢查該部位是否出現在「病名」或「症狀內容」中
+                            if loc in name or loc in content_str:
                                 is_relevant = True
                                 break
-                        
+                            
+                            # [智能映射規則] 處理常見的部位關聯
+                            # 規則 1: "腹" 包含 "胃", "腸", "胞宮", "肝"(少腹)
+                            if loc in ["腹", "肚"] and any(x in content_str for x in ["胃", "腸", "胞宮", "肝", "脾"]):
+                                is_relevant = True
+                                break
+                            # 規則 2: "頭" 包含 五官
+                            if loc == "頭" and any(x in content_str for x in ["目", "眼", "耳", "鼻", "眩暈"]):
+                                is_relevant = True
+                                break
+                            # 規則 3: "四肢" 包含 手足膝
+                            if loc in ["肢", "四肢"] and any(x in content_str for x in ["手", "足", "膝", "腿", "臂"]):
+                                is_relevant = True
+                                break
+
                         if not is_relevant:
-                            logger.info(f"[L2Agentic] 過濾不相關結果: {name} (缺關鍵字: {query_organs})")
+                            logger.info(f"[L2Agentic] 過濾病位不符: {name} (查詢部位: {query_locations})")
                             continue
 
                     valid_result = res
@@ -253,8 +333,7 @@ class L2AgenticDiagnosis:
                 return valid_result
             else:
                 if results:
-                    top_score = results[0].get('score', 0)
-                    logger.info(f"[L2Agentic] 內部知識庫無匹配 (Top: {results[0].get('name_zh')}, Score: {top_score:.3f} - 過濾或分數過低)")
+                    logger.info(f"[L2Agentic] 內部知識庫無匹配 (Top: {results[0].get('name_zh')} - 已被過濾)")
             
             return None
         except Exception as e:
@@ -310,11 +389,19 @@ class L2AgenticDiagnosis:
         # 步驟 2：使用錨定案例（現在保證至少有一個，即使是虛擬的）
         anchored_case = retrieved_cases[0]
         
+        # [中醫思維 0] 強制鎖定最佳錨定 (Force Top-1 Anchor)
+        # 解決 LLM 在分數接近時隨機選擇導致的不穩定問題
+        # 我們直接覆蓋 prompt 中的 implicitly chosen anchor，強制使用 Search Engine 的 No.1
+        best_anchor = None
+        if retrieved_cases and len(retrieved_cases) > 0:
+            best_anchor = retrieved_cases[0] # 取分數最高的
+            logger.info(f"[L2Agentic] 強制鎖定最佳錨定案例: {best_anchor.get('case_id')} (Score: {best_anchor.get('score')})")
+
         # 步驟 3：從 l2_raw_result 提取診斷資訊
-        # [MODIFIED] 傳入 retrieved_cases 以供保底使用
+        # 這裡我們傳入強制鎖定的錨定，確保後續處理一致
         initial_diagnosis = self._extract_diagnosis_from_l2_result(
             l2_raw_result,
-            retrieved_cases=retrieved_cases
+            retrieved_cases=[best_anchor] if best_anchor else retrieved_cases
         )
 
         # 🚨 [Step 3.5] 內部知識庫增強 (Internal Knowledge Enrichment)
@@ -346,37 +433,57 @@ class L2AgenticDiagnosis:
             manifest = internal_knowledge.get("clinical_manifestations", [])
             manifest_str = "、".join(manifest) if isinstance(manifest, list) else str(manifest)
             
-            # [FIX] 思維比對：L2 的初步判斷 vs 內部標準庫檢索結果
+            # [中醫思維 3] 衝突檢測 (Conflict Detection)
+            # 比較「錨定案例診斷」與「內部知識庫檢索結果」
             l2_primary = initial_diagnosis.get("primary_syndrome", "未定")
+            conflict_detected = False
             
-            # 注入補充資訊
+            # 比對邏輯：如果標準庫結果不在 L2 初步診斷中，且標準庫結果分數夠高 (>0.75)
+            # 則視為重大衝突，需要強制引導
+            internal_score = internal_knowledge.get("score", 0)
+            
+            if tcm_name not in l2_primary and l2_primary not in tcm_name:
+                conflict_detected = True
+                logger.warning(f"[L2Agentic] ⚠️ 發現診斷衝突: 錨定推斷='{l2_primary}' vs 標準庫='{tcm_name}' (Score: {internal_score:.2f})")
+
+            # 注入補充資訊，使用更強烈的語氣
             supplement_text = (
-                f"【內部知識庫檢索結果】\n"
-                f"系統依據您的症狀描述，檢索到最相似的標準證型為：{tcm_name}\n"
+                f"【內部標準知識庫對照】\n"
+                f"系統依據症狀檢索出的最佳匹配證型為：{tcm_name} (匹配度: {internal_score:.2f})\n"
                 f"定義：{def_text}\n"
                 f"典型表現：{manifest_str}\n"
             )
+            
+            if conflict_detected:
+                # [FIX] 如果內部知識分數很高，強制要求 LLM 考慮修正方向
+                if internal_score > 0.8:
+                    priority_instruction = "請優先考慮標準庫的建議，因為其症狀匹配度極高。"
+                else:
+                    priority_instruction = "請仔細鑑別兩者差異。"
+
+                supplement_text += (
+                    f"\n🚨 **系統發現關鍵疑點**：\n"
+                    f"錨定案例指向「{l2_primary}」，但症狀特徵與標準庫的「{tcm_name}」更為吻合。\n"
+                    f"{priority_instruction}\n"
+                    f"請在【辨證分析】中明確執行鑑別：為何放棄 A 而選擇 B (或兼證)？"
+                )
+                
+                # 寫入 reasoning 欄位，強迫 LLM 在思考過程中看到
+                current_reasoning = initial_diagnosis.get("reasoning", "")
+                initial_diagnosis["reasoning"] = f"【系統警示】{l2_primary} 與 {tcm_name} 存在衝突，需進行鑑別。{current_reasoning}"
+                
+                initial_diagnosis["conflict_needs_resolution"] = True
             
             if "knowledge_supplements" not in initial_diagnosis:
                 initial_diagnosis["knowledge_supplements"] = []
             initial_diagnosis["knowledge_supplements"].append(supplement_text)
             
-            # [FIX] 如果 L2 判斷與內部庫差異過大，強制修正或標記疑點
-            # 例如 L2 說是"脾虛"，但內部庫說是"胃熱"，這是一個值得注意的衝突
-            if tcm_name not in l2_primary and len(l2_primary) > 1:
-                conflict_note = f"發現疑點：初步推斷為'{l2_primary}'，但症狀特徵更接近標準庫中的'{tcm_name}'。"
-                
-                # 將此疑點注入到病機分析中，強迫後續流程面對這個衝突
-                current_reasoning = initial_diagnosis.get("reasoning", "")
-                initial_diagnosis["reasoning"] = f"{conflict_note} {current_reasoning}"
-                
-                # 標記為需要工具進一步核實
-                initial_diagnosis["internal_conflict_detected"] = True
-            
-            # 標記已獲得內部檢索（無論是否衝突，都算查過了）
             initial_diagnosis["internal_validated"] = True
             
-            logger.info(f"[L2Agentic] 已注入內部知識: {tcm_name} (與 L2 '{l2_primary}' 比對)")
+            # 若 L2 診斷名稱不明確，直接採用內部結果
+            if not l2_primary or "待定" in l2_primary:
+                initial_diagnosis["primary_syndrome"] = f"{tcm_name} (基於症狀檢索推斷)"
+                logger.info(f"[L2Agentic] 填補空白診斷: {tcm_name}")
             
 
         # 步驟 4：決策是否需要工具調用
