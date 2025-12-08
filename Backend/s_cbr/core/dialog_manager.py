@@ -304,7 +304,6 @@ class DialogManager:
     def update_session(self, session_id: str, user_input: str, assistant_response: str) -> None:
         """
         更新會話歷史並執行簡單的狀態追蹤。
-        這模擬了老中醫在每一輪問診後更新病歷的過程。
         """
         session = self.sessions.get(session_id)
         if not session:
@@ -325,20 +324,11 @@ class DialogManager:
         })
         
         # 2. 結構化病歷累積 (Accumulation)
-        # 將新的追問與回答記錄到累積問題中，加上時間標記，形成"病程記錄"
-        # 避免重複添加 (如果 get_or_create 已經加過 user_input，這裡主要負責上下文連貫)
-        time_tag = datetime.now().strftime("%H:%M")
+        # 避免重複添加，並加上輪次標記，模擬醫生寫病歷
         if user_input not in session.accumulated_question:
-            session.accumulated_question += f"；【追問回覆 {time_tag}】{user_input}"
+            time_tag = datetime.now().strftime("%H:%M")
+            session.accumulated_question += f"；【Round {session.round_count} 補充】{user_input}"
             
-        # 3. [中醫思維] 簡單的症狀確認 (Symptom Confirmation)
-        # 如果用戶的回答非常肯定（是/對/有），我們假設他確認了上一輪醫生詢問的症狀
-        # (這是一個啟發式規則，完整版需配合 NLU)
-        if len(user_input) < 10 and any(w in user_input for w in ["是", "對", "有", "沒錯"]):
-             # 標記一個狀態更新，供後續檢索使用
-             logger.info(f"[DialogManager] 用戶可能確認了症狀 (Round {session.round_count})")
-             # 在真實實作中，這裡會解析上一輪的 assistant_response 提取症狀名並加入 session.confirmed_symptoms
-
         logger.info(f"📝 會話 {session_id[:8]}*** 歷史已更新 (Round {session.round_count})")
     
     

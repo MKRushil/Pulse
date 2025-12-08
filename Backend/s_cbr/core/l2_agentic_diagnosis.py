@@ -180,19 +180,18 @@ class L2AgenticDiagnosis:
     # [NEW] 內部知識庫查詢方法
     async def _query_internal_knowledge(self, query_text: str, vector_search_only: bool = False) -> Dict[str, Any]:
         """
-        從 Weaviate TCM Class 查詢標準證型知識，具備否定排除與病位鎖定功能。
+        從 Weaviate TCM Class 查詢標準證型知識，具備完整術語映射與病位過濾。
         """
         if not self.se or not query_text:
             return None
             
         try:
-            # [中醫思維 1] 否定詞預處理 (Negative Filter)
-            # 避免搜到病人說"沒有"的症狀
+            # --- 1. 否定詞預處理 (Negative Filter) ---
+            # 僅移除明確的否定句，保留 "不舒服" 等描述
             import re
-            negative_markers = ["沒有", "無", "未見", "非"] 
+            negative_markers = ["沒有", "無", "未見", "非"] # 移除 "不"，避免誤殺
             must_not_terms = []
             
-            # 簡單切句分析
             clauses = re.split(r'[，,。.;；]', query_text)
             positive_clauses = []
             
@@ -200,30 +199,43 @@ class L2AgenticDiagnosis:
                 clause = clause.strip()
                 if not clause: continue
                 
-                # 檢查是否包含否定詞
                 is_negative = False
                 for m in negative_markers:
-                    if m in clause:
-                        if clause.index(m) < 2: 
-                            is_negative = True
-                            term = clause.split(m)[-1].strip()
-                            if len(term) > 1: must_not_terms.append(term)
-                            break
+                    # 只有當否定詞位於句首附近時才視為否定 (e.g. "無口苦")
+                    if m in clause and clause.index(m) < 2:
+                        is_negative = True
+                        term = clause.split(m)[-1].strip()
+                        if len(term) > 1: must_not_terms.append(term)
+                        break
                 
                 if not is_negative:
                     positive_clauses.append(clause)
             
             clean_query = " ".join(positive_clauses) if positive_clauses else query_text
 
-            # [中醫思維 1.5] 術語擴展 (Term Expansion) [關鍵修復]
-            # 將口語病位映射到資料庫的專業術語，大幅提升 BM25 命中率
+            # --- 2. 全方位術語映射 (Comprehensive Term Mapping) ---
+            # 將口語轉譯為 TCM 標準庫 (scbr_syndromes_cleaned_verified.json) 中的詞彙
             term_mapping = {
-                "胃": "胃脘 脾胃 中焦",
-                "肚子": "腹部 大腹 小腹",
-                "拉肚子": "泄瀉 下利",
-                "想吐": "嘔吐 噁心",
-                "睡不著": "不寐 失眠",
-                "痛": "疼痛"
+                # [核心部位]
+                "胃": "胃脘 脾胃 中焦", "肚子": "腹部 大腹 小腹 脘腹",
+                "胸": "胸膈 心胸", "脅": "脅肋", "腰": "腰府 腎府", "頭": "巔頂",
+                "背": "背俞", "肋": "脅肋", "喉": "咽喉", "眼": "目",
+                
+                # [消化系統]
+                "拉肚子": "泄瀉 下利 便溏", "大便稀": "便溏 完穀不化", "便秘": "大便秘結 大便乾結",
+                "想吐": "嘔吐 噁心 嘔逆 乾嘔", "吃不下": "納呆 食少 納差 厭食",
+                "脹": "痞滿 脹滿", "打嗝": "噯氣 呃逆", "口苦": "膽火", "口乾": "口燥 咽乾 津傷",
+                "痛": "疼痛", "刺痛": "瘀血", "脹痛": "氣滯", "冷痛": "寒凝", "灼痛": "火熱",
+                
+                # [全身與精神]
+                "睡不著": "不寐 失眠 入睡困難", "多夢": "夢擾",
+                "很累": "神疲 乏力 倦怠 少氣懶言", "沒力氣": "肢倦 無力",
+                "煩": "心煩 煩躁 五心煩熱", "怕冷": "畏寒 惡風 肢冷", "怕熱": "惡熱 壯熱",
+                "出汗": "自汗 盜汗", "頭暈": "眩暈", "手腳冰冷": "手足厥冷",
+                
+                # [五官與其他]
+                "心跳": "心悸 怔忡", "喘": "氣喘 短氣", "咳": "咳嗽 咯痰",
+                "痰": "痰濁 痰飲", "月經": "經行 經期", "白帶": "帶下"
             }
             
             expansion_terms = []
@@ -231,58 +243,46 @@ class L2AgenticDiagnosis:
                 if colloquial in clean_query:
                     expansion_terms.append(formal)
             
-            # 將擴展詞加到查詢字串後方，增強權重
             if expansion_terms:
                 expanded_query = f"{clean_query} {' '.join(expansion_terms)}"
                 logger.info(f"[L2Agentic] 術語擴展: '{clean_query}' -> '{expanded_query}'")
-                clean_query = expanded_query
-            
-            # 1. 生成向量
+                search_text = expanded_query
+            else:
+                search_text = clean_query
+
+            # --- 3. 生成向量與檢索 ---
             vector = None
             if self.embed:
                 try:
-                    vector = await self.embed.embed(clean_query)
+                    vector = await self.embed.embed(search_text)
                 except Exception as e:
                     logger.warning(f"向量生成失敗: {e}")
 
-            # 2. 設定檢索參數 (Alpha=0.2, 強調關鍵字匹配)
-            alpha_val = 0.2 
-            
-            logger.info(f"[L2Agentic] 內部知識庫查詢: '{clean_query[:20]}...' (Alpha={alpha_val}, 排除={must_not_terms})")
-
-            # 3. 使用混合檢索
+            # 設定 Alpha=0.2 (關鍵字優先)，Limit=10 (擴大召回)
             results = await self.se.hybrid_search(
                 index="TCM",
-                text=clean_query,
+                text=search_text,
                 vector=vector,
-                alpha=alpha_val, 
+                alpha=0.2, 
                 limit=10, 
                 search_fields=["name_zh", "definition", "clinical_manifestations", "vector_text"] 
             )
             
-            # 4. [中醫思維 2] 病位與症狀檢核 (Scope Guard)
+            # --- 4. 中醫病位過濾 (Full Scope Guard) ---
+            # 確保搜尋結果包含主訴的核心部位
             key_locations = [
-                # 五臟六腑
-                "胃", "心", "肝", "脾", "肺", "腎", "膽", "腸", "膀胱", "三焦", "心包",
-                # 頭面五官
-                "頭", "面", "目", "眼", "耳", "鼻", "口", "齒", "牙", "咽", "喉", "嗓", "舌",
-                # 軀幹
-                "腹", "肚", "臍", "胸", "脅", "背", "腰", "肩", "頸", "項", "膈", "乳",
-                # 四肢經絡
-                "手", "足", "四肢", "肢", "腿", "臂", "膝", "腳", "骨", "節", "筋", "脈",
-                # 下焦生殖
-                "胞宮", "子宮", "精室", "少腹", "小腹", "陰器", "前陰", "肛", "二便",
-                # 皮膚肌表
-                "皮", "膚", "肌", "肉", "表"
+                "胃", "心", "肝", "脾", "肺", "腎", "膽", "腸", "膀胱", "三焦", 
+                "頭", "面", "目", "眼", "耳", "鼻", "口", "齒", "咽", "喉", 
+                "腹", "肚", "臍", "胸", "脅", "背", "腰", "肩", "頸", 
+                "手", "足", "四肢", "肢", "腿", "膝", "骨", "節", "筋", "脈",
+                "胞宮", "子宮", "少腹", "陰器", "二便", "皮", "膚", "肌"
             ]
-            
-            # 提取使用者查詢中的病位
             query_locations = [k for k in key_locations if k in query_text]
             
             valid_result = None
             
             if results:
-                top3_names = [r.get('name_zh') for r in results]
+                top3_names = [r.get('name_zh') for r in results[:3]]
                 logger.info(f"[L2Agentic] 內部檢索候選: {top3_names}")
 
                 for res in results:
@@ -292,37 +292,24 @@ class L2AgenticDiagnosis:
                     
                     if score < 0.40: continue
 
-                    # A. 排除否定詞 (如果有明確衝突)
+                    # A. 排除否定詞衝突
                     if any(term in content_str for term in must_not_terms):
-                         logger.info(f"[L2Agentic] 排除否定項衝突: {name}")
                          continue
 
                     # B. 病位檢查 (Scope Guard)
-                    # 如果使用者提到了特定部位，結果中最好也要包含相關描述
                     if query_locations:
                         is_relevant = False
                         for loc in query_locations:
-                            # 檢查該部位是否出現在「病名」或「症狀內容」中
                             if loc in name or loc in content_str:
                                 is_relevant = True
                                 break
+                            # 智能映射：腹包含胃腸脾
+                            if loc in ["腹", "肚"] and any(x in content_str for x in ["胃", "腸", "胞宮", "脾"]):
+                                is_relevant = True
+                                break
                             
-                            # [智能映射規則] 處理常見的部位關聯
-                            # 規則 1: "腹" 包含 "胃", "腸", "胞宮", "肝"(少腹)
-                            if loc in ["腹", "肚"] and any(x in content_str for x in ["胃", "腸", "胞宮", "肝", "脾"]):
-                                is_relevant = True
-                                break
-                            # 規則 2: "頭" 包含 五官
-                            if loc == "頭" and any(x in content_str for x in ["目", "眼", "耳", "鼻", "眩暈"]):
-                                is_relevant = True
-                                break
-                            # 規則 3: "四肢" 包含 手足膝
-                            if loc in ["肢", "四肢"] and any(x in content_str for x in ["手", "足", "膝", "腿", "臂"]):
-                                is_relevant = True
-                                break
-
                         if not is_relevant:
-                            logger.info(f"[L2Agentic] 過濾病位不符: {name} (查詢部位: {query_locations})")
+                            # logger.info(f"過濾: {name}") # 減少日誌雜訊
                             continue
 
                     valid_result = res
@@ -331,9 +318,6 @@ class L2AgenticDiagnosis:
             if valid_result:
                 logger.info(f"[L2Agentic] 內部知識庫命中: {valid_result.get('name_zh')} (Score: {valid_result.get('score', 0):.3f})")
                 return valid_result
-            else:
-                if results:
-                    logger.info(f"[L2Agentic] 內部知識庫無匹配 (Top: {results[0].get('name_zh')} - 已被過濾)")
             
             return None
         except Exception as e:
