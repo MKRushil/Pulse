@@ -93,7 +93,7 @@ class AgenticNLUConfig:
     用於控制 Agentic NLU 的自主決策行為
     """
     # 功能開關
-    enabled: bool = False  # 啟用 Agentic NLU（False 則使用傳統 L1）
+    enabled: bool = True  # 啟用 Agentic NLU（False 則使用傳統 L1）
     
     # Alpha 值範圍
     alpha_min: float = 0.2  # 最小 alpha（BM25 為主）
