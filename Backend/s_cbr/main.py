@@ -167,9 +167,10 @@ class SCBREngine:
         logger.info(f"   continue_spiral: {continue_spiral}")
         
         cleaned_question = question
-        if self.input_sanitizer:
-        # 執行清洗與脫敏
-            cleaned_question = self.input_sanitizer.sanitize(question)
+        # if self.input_sanitizer:
+        # # 執行清洗與脫敏
+        #     cleaned_question = self.input_sanitizer.sanitize(question)
+        cleaned_question = question
         
         # ==================== STEP 1: 會話管理 (統一入口) ====================
         

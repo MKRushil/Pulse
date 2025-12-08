@@ -1,0 +1,288 @@
+2025-12-06 00:00:59 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 00:00:59 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 00:00:59 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 00:00:59 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 00:00:59 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 00:00:59 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 00:00:59 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO - 
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 00:01:00 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:01:01 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 00:01:02 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 00:01:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 00:01:02 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 00:02:00 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 00:02:00 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 00:02:00 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 00:02:00 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 00:02:00 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 00:02:00 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 00:02:00 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO - 
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 00:02:01 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:02:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 00:02:02 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 00:02:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 00:02:02 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 00:08:34 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 00:08:34 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 00:08:34 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 00:08:34 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 00:08:34 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 00:08:34 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 00:08:34 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO - 
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 00:08:35 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:08:36 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 00:08:36 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 00:08:37 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 00:08:37 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 00:09:26 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 00:09:26 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 00:09:26 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 00:09:26 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 00:09:26 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 00:09:26 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 00:09:26 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO - 
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 00:09:27 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:09:28 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 00:09:28 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 00:09:28 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 00:09:28 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 00:11:00 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 00:11:00 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 00:11:00 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 00:11:00 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 00:11:00 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 00:11:00 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 00:11:00 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO - 
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 00:11:01 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:11:02 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 00:11:03 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 00:11:03 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 00:11:03 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 00:36:23 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 00:36:23 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 00:36:23 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 00:36:23 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 00:36:23 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 00:36:23 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 00:36:23 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 00:36:23 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 00:36:24 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 00:36:24 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 00:36:24 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 00:36:24 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 00:36:24 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 00:36:24 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO - 
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 00:36:24 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 00:36:26 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 00:36:26 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 00:36:26 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 00:36:26 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 01:19:50 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 01:19:50 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 01:19:50 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 01:19:50 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 01:19:50 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 01:19:50 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 01:19:50 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO - 
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 01:19:51 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 01:19:52 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 01:19:53 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 01:19:53 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 01:19:53 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 01:19:56 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 01:19:56 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 01:19:56 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 01:19:56 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 01:19:56 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 01:19:56 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 01:19:56 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO - 
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 01:19:57 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 01:19:58 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 01:19:59 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 01:19:59 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 01:19:59 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-06 01:20:02 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-06 01:20:02 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-06 01:20:02 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-06 01:20:02 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-06 01:20:02 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-06 01:20:02 - s_cbr.FourLayerPipeline - INFO - [L2] Agentic 模式未啟用，使用傳統 L2 模式
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-06 01:20:02 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO - 
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-06 01:20:03 - s_cbr.backend.main - INFO - ============================================================
+2025-12-06 01:20:05 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-06 01:20:05 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-06 01:20:05 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-06 01:20:05 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功

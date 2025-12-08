@@ -1,801 +1,801 @@
 test_cases:
-- id: CASE_20251005211351_C309_a4c59017
-  name: 螺旋測試 - 不寐（心脾兩虛）
+- id: CASE_001
+  name: 真實醫案 - 不寐（心脾兩虛）
   type: benchmark_spiral
-  expected_diagnosis: 不寐（心脾兩虛）
+  expected_diagnosis: 心脾兩虛
   rounds:
-  - question: 失眠多夢半年
-  - question: 半年入睡困難、易醒多夢，日間乏力健忘
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細數, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):細, 右關(脾胃):細弱, 右尺(命門):細
-- id: CASE_20251005211458_W215_d76fa52b
-  name: 螺旋測試 - 腰痛（腎虛型）
+  - question: 不寐一週。困擾我好久了，就是面色萎黃，心悸健忘。
+  - question: 還有就是神疲食少，多夢易醒。容易流汗。
+  - question: 舌象：舌淡苔薄白。脈象：脈細弱。
+- id: CASE_002
+  name: 真實醫案 - 不寐（陰虛火旺）
   type: benchmark_spiral
-  expected_diagnosis: 腰痛（腎虛型）
+  expected_diagnosis: 陰虛火旺
   rounds:
-  - question: 下背酸痛三週
-  - question: 久坐電腦後腰背痠痛，休息可緩，天冷更明顯
-  - question: 舌象：淡 白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212237_L789_0daf1384
-  name: 螺旋測試 - 耳鳴（腎虛型）
+  - question: 不寐一週。主要是不舒服，腰痠耳鳴，心煩不寐。
+  - question: 還有就是口燥咽乾，五心煩熱。怕冷。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_003
+  name: 真實醫案 - 心悸（心膽氣虛）
   type: benchmark_spiral
-  expected_diagnosis: 耳鳴（腎虛型）
+  expected_diagnosis: 心膽氣虛
   rounds:
-  - question: 耳鳴兩月
-  - question: 雙耳鳴聲如蟬鳴，夜間明顯，伴腰膝痠軟。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211508_X103_8e7dbc72
-  name: 螺旋測試 - 咳嗽（肺脾兩虛痰濕）
+  - question: 心悸兩年。困擾我好久了，就是善驚易恐，少寐多夢。
+  - question: 還有就是觸事易驚，坐臥不安。容易流汗。
+  - question: 舌象：舌淡苔白。脈象：脈弦細。
+- id: CASE_004
+  name: 真實醫案 - 胸痺（心血瘀阻）
   type: benchmark_spiral
-  expected_diagnosis: 咳嗽（肺脾兩虛痰濕）
+  expected_diagnosis: 心血瘀阻
   rounds:
-  - question: 慢性咳嗽三月
-  - question: 晨起咳嗽有白痰，天冷明顯，久咳氣短
-  - question: 舌象：淡 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉弱, 右關(脾胃):沉弱, 右尺(命門):沉弱
-- id: CASE_20251005211503_W659_9186e102
-  name: 螺旋測試 - 頸痹（氣滯血瘀）
+  - question: 胸痺三天。最近固定不移，心悸不寧。
+  - question: 還有就是入夜更甚，胸部刺痛。容易覺得累。
+  - question: 舌象：舌紫暗有瘀斑。脈象：脈澀。
+- id: CASE_005
+  name: 真實醫案 - 癲狂（痰火擾神）
   type: benchmark_spiral
-  expected_diagnosis: 頸痹（氣滯血瘀）
+  expected_diagnosis: 痰火擾神
   rounds:
-  - question: 頸肩痠痛兩月
-  - question: 長期低頭工作後頸部僵硬痠痛，偶頭暈
-  - question: 舌象：淡 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211453_V771_280c5b60
-  name: 螺旋測試 - 脅痛（肝鬱氣滯）
+  - question: 癲狂兩年。這幾天大便秘結，面紅目赤。
+  - question: 還有就是性情急躁，頭痛失眠。胃口也不是很好。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_006
+  name: 真實醫案 - 鬱證（肝氣鬱結）
   type: benchmark_spiral
-  expected_diagnosis: 脅痛（肝鬱氣滯）
+  expected_diagnosis: 肝氣鬱結
   rounds:
-  - question: 右脅脹悶兩月
-  - question: 情緒波動後脅肋脹悶，嗳氣頻作，納差
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005211414_Q990_83a54bf8
-  name: 螺旋測試 - 乾眼（肝腎陰虧）
+  - question: 鬱證一個月。這陣子一直善太息，胸悶脅痛。
+  - question: 還有就是精神抑鬱，梅核氣。平常工作壓力挺大的。
+  - question: 舌象：舌苔薄白。脈象：脈弦。
+- id: CASE_007
+  name: 真實醫案 - 頭痛（肝陽上亢）
   type: benchmark_spiral
-  expected_diagnosis: 乾眼（肝腎陰虧）
+  expected_diagnosis: 肝陽上亢
   rounds:
-  - question: 目乾澀三月
-  - question: 長時間電腦工作後雙目乾澀疼痛，眨眼減輕
-  - question: 舌象：淡紅 少苔。脈象：左寸(心):細, 左關(肝膽):細, 左尺(腎):細弱, 右寸(肺):細, 右關(脾胃):細, 右尺(命門):細弱
-- id: CASE_20251005212333_S012_e54179f7
-  name: 螺旋測試 - 哮喘（寒痰內盛）
+  - question: 頭痛兩年。醫生，我最近頭痛脹痛，急躁易怒。
+  - question: 還有就是面紅目赤，眩暈耳鳴。最近睡得不太好。
+  - question: 舌象：舌紅苔黃。脈象：脈弦有力。
+- id: CASE_008
+  name: 真實醫案 - 脅痛（肝膽濕熱）
   type: benchmark_spiral
-  expected_diagnosis: 哮喘（寒痰內盛）
+  expected_diagnosis: 肝膽濕熱
   rounds:
-  - question: 夜咳氣喘一月
-  - question: 夜間咳嗽氣喘，痰多色白，遇寒加重。
-  - question: 舌象：淡 白滑。脈象：左寸(心):沉, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):浮緊, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212254_D567_d31d0467
-  name: 螺旋測試 - 失眠（心脾兩虛）
+  - question: 脅痛三個月。這陣子一直脅肋脹痛，噁心厭油。
+  - question: 還有就是小便黃赤，口苦口乾。胃口也不是很好。
+  - question: 舌象：舌紅苔黃膩。脈象：脈弦數。
+- id: CASE_009
+  name: 真實醫案 - 中風（風痰入絡）
   type: benchmark_spiral
-  expected_diagnosis: 失眠（心脾兩虛）
+  expected_diagnosis: 風痰入絡
   rounds:
-  - question: 失眠多夢半年
-  - question: 半年來難入睡，多夢，心悸易驚，記憶力下降。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):細弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211425_U005_7fbf64b0
-  name: 螺旋測試 - 胃脹（肝氣鬱滯）
+  - question: 中風半年。這幾天語言不利，手足麻木。
+  - question: 還有就是肌膚不仁，口眼歪斜。容易覺得累。
+  - question: 舌象：舌強苔白膩。脈象：脈弦滑。
+- id: CASE_010
+  name: 真實醫案 - 眩暈（肝腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 胃脹（肝氣鬱滯）
+  expected_diagnosis: 肝腎陰虛
   rounds:
-  - question: 胃脹氣三週
-  - question: 進食後胃脹不適，易打嗝，情緒緊張後加重
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005211509_X214_7e0a8552
-  name: 螺旋測試 - 肩痹（風寒濕痺）
+  - question: 眩暈一週。困擾我好久了，就是腰膝痠軟，頭暈目眩。
+  - question: 還有就是雙目乾澀，失眠多夢。胃口也不是很好。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_011
+  name: 真實醫案 - 胃痛（脾胃虛寒）
   type: benchmark_spiral
-  expected_diagnosis: 肩痹（風寒濕痺）
+  expected_diagnosis: 脾胃虛寒
   rounds:
-  - question: 肩周活動受限四月
-  - question: 右肩逐漸疼痛僵硬，夜間痛重，梳頭穿衣困難
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005212223_B789_ba5c9599
-  name: 螺旋測試 - 月經不調
+  - question: 胃痛半年。最近喜溫喜按，空腹痛甚。
+  - question: 還有就是泛吐清水，胃痛隱隱。最近睡得不太好。
+  - question: 舌象：舌淡胖苔白。脈象：脈虛弱。
+- id: CASE_012
+  name: 真實醫案 - 胃痛（肝氣犯胃）
   type: benchmark_spiral
-  expected_diagnosis: 月經不調
+  expected_diagnosis: 肝氣犯胃
   rounds:
-  - question: 月經推遲兩月
-  - question: 患者近兩月月經延後，經量少色淡，伴小腹隱痛及胸脹。近期加班熬夜，情緒緊張。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):細弱, 右尺(命門):沉
-- id: CASE_20251005211502_W548_6988d3dc
-  name: 螺旋測試 - 遺尿（腎虛型）
+  - question: 胃痛三天。我感覺噯氣頻頻，連及兩脅。
+  - question: 還有就是情志不暢則痛，胃脘脹痛。最近睡得不太好。
+  - question: 舌象：舌苔薄白。脈象：脈弦。
+- id: CASE_013
+  name: 真實醫案 - 泄瀉（脾虛濕盛）
   type: benchmark_spiral
-  expected_diagnosis: 遺尿（腎虛型）
+  expected_diagnosis: 脾虛濕盛
   rounds:
-  - question: 夜尿頻三月
-  - question: 夜間需起床小便3–4次，伴腰酸乏力
-  - question: 舌象：淡 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005043638_8905_6cf021c3
-  name: 螺旋測試 - 胎動不安,腎虛沖任不固
+  - question: 泄瀉三個月。困擾我好久了，就是肢體倦怠，大便溏薄。
+  - question: 還有就是完穀不化，食後腹脹。最近睡得不太好。
+  - question: 舌象：舌淡胖有齒痕。脈象：脈緩弱。
+- id: CASE_014
+  name: 真實醫案 - 便秘（腸道實熱）
   type: benchmark_spiral
-  expected_diagnosis: 胎動不安,腎虛沖任不固
+  expected_diagnosis: 腸道實熱
   rounds:
-  - question: 習慣性流產兩次
-  - question: 患者兩年內兩次懷孕均於8-10週自然流產,現懷孕6週,少量陰道出血,腰酸腹墜。既往月經規律。
-  - question: 舌象：淡 薄白。脈象：左寸(心):細弱, 左關(肝膽):細, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):細弱, 右尺(命門):沉弱無力
-- id: CASE_20251005211404_K993_c1156660
-  name: 螺旋測試 - 癮疹（風濕熱邪）
+  - question: 便秘一週。這陣子一直腹脹腹痛，口臭。
+  - question: 還有就是大便乾結，面紅身熱。容易流汗。
+  - question: 舌象：舌紅苔黃燥。脈象：脈滑實。
+- id: CASE_015
+  name: 真實醫案 - 嘔吐（食滯胃脘）
   type: benchmark_spiral
-  expected_diagnosis: 癮疹（風濕熱邪）
+  expected_diagnosis: 食滯胃脘
   rounds:
-  - question: 皮膚瘙癢兩週
-  - question: 夜間瘙癢加重，抓後見紅疹，近期嗜食海鮮辛辣
-  - question: 舌象：紅 薄黃。脈象：左寸(心):滑, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑數, 右關(脾胃):滑, 右尺(命門):滑
-- id: CASE_20251005212322_J123_7c53d38d
-  name: 螺旋測試 - 痺證（寒濕阻絡）
+  - question: 嘔吐兩年。醫生，我最近脘腹脹滿，吐後反快。
+  - question: 還有就是噯氣厭食，嘔吐酸腐。平常工作壓力挺大的。
+  - question: 舌象：舌苔厚膩。脈象：脈滑實。
+- id: CASE_016
+  name: 真實醫案 - 感冒（風寒束肺）
   type: benchmark_spiral
-  expected_diagnosis: 痺證（寒濕阻絡）
+  expected_diagnosis: 風寒束肺
   rounds:
-  - question: 關節腫痛半年
-  - question: 膝關節腫痛反覆，遇冷加重，活動後緩解。
-  - question: 舌象：淡紅 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉, 右關(脾胃):沉, 右尺(命門):沉弱
-- id: CASE_20251005212249_V789_51d097e5
-  name: 螺旋測試 - 經前腹脹
+  - question: 感冒一年。這幾天鼻塞流清涕，惡寒重發熱輕。
+  - question: 還有就是肢節痠痛，無汗頭痛。怕冷。
+  - question: 舌象：舌苔薄白。脈象：脈浮緊。
+- id: CASE_017
+  name: 真實醫案 - 咳嗽（痰熱鬱肺）
   type: benchmark_spiral
-  expected_diagnosis: 經前腹脹
+  expected_diagnosis: 痰熱鬱肺
   rounds:
-  - question: 經前腹脹兩月
-  - question: 月經前出現小腹脹痛，乳房脹痛，情緒煩躁。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005212328_O678_418c65b9
-  name: 螺旋測試 - 脾胃氣滯
+  - question: 咳嗽三個月。困擾我好久了，就是咳嗽氣粗，便秘尿赤。
+  - question: 還有就是胸悶口渴，痰多黃稠。平常工作壓力挺大的。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_018
+  name: 真實醫案 - 哮病（寒痰阻肺）
   type: benchmark_spiral
-  expected_diagnosis: 脾胃氣滯
+  expected_diagnosis: 寒痰阻肺
   rounds:
-  - question: 胃脹食少兩月
-  - question: 餐後腹脹不舒，食慾減退，偶有噯氣。
-  - question: 舌象：淡紅 白膩。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212324_L345_f148d28c
-  name: 螺旋測試 - 肝鬱化火
+  - question: 哮病半個月。這幾天胸膈滿悶，喉中哮鳴。
+  - question: 還有就是呼吸急促，痰白稀薄。容易覺得累。
+  - question: 舌象：舌苔白滑。脈象：脈弦緊。
+- id: CASE_019
+  name: 真實醫案 - 喘證（肺氣虛耗）
   type: benchmark_spiral
-  expected_diagnosis: 肝鬱化火
+  expected_diagnosis: 肺氣虛耗
   rounds:
-  - question: 口苦胸悶三月
-  - question: 三月來口苦胸悶，情緒急躁，偶有頭暈。
-  - question: 舌象：紅 薄黃。脈象：左寸(心):弦數, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005211422_T512_41c98f5d
-  name: 螺旋測試 - 口瘡（心脾積熱）
+  - question: 喘證三個月。我感覺自汗畏風，面色白。
+  - question: 還有就是語聲低微，喘促短氣。胃口也不是很好。
+  - question: 舌象：舌淡紅苔薄白。脈象：脈虛無力。
+- id: CASE_020
+  name: 真實醫案 - 肺癆（肺陰虧損）
   type: benchmark_spiral
-  expected_diagnosis: 口瘡（心脾積熱）
+  expected_diagnosis: 肺陰虧損
   rounds:
-  - question: 口腔潰瘍反覆兩年
-  - question: 壓力大或熬夜後易發，潰瘍疼痛影響飲食
-  - question: 舌象：紅 薄黃。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):數, 右關(脾胃):滑數, 右尺(命門):細
-- id: CASE_20251005211348_A512_d9abb483
-  name: 螺旋測試 - 乳癖（肝氣鬱滯）
+  - question: 肺癆半年。主要是不舒服，顴紅，潮熱盜汗。
+  - question: 還有就是痰中帶血，乾咳少痰。容易覺得累。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_021
+  name: 真實醫案 - 水腫（腎陽衰微）
   type: benchmark_spiral
-  expected_diagnosis: 乳癖（肝氣鬱滯）
+  expected_diagnosis: 腎陽衰微
   rounds:
-  - question: 經前乳房脹痛三月
-  - question: 近三月經前一週乳房脹痛明顯，經後緩解
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):弦, 右尺(命門):沉
-- id: CASE_20251005211456_V993_ae529307
-  name: 螺旋測試 - 牙痛（胃火上炎）
+  - question: 水腫一年。這陣子一直腰部冷痛，腰以下甚。
+  - question: 還有就是全身水腫，按之凹陷。容易流汗。
+  - question: 舌象：舌淡胖苔白滑。脈象：脈沉細。
+- id: CASE_022
+  name: 真實醫案 - 淋證（膀胱濕熱）
   type: benchmark_spiral
-  expected_diagnosis: 牙痛（胃火上炎）
+  expected_diagnosis: 膀胱濕熱
   rounds:
-  - question: 牙痛三天
-  - question: 右下牙齦腫痛，遇熱痛增，口苦口臭
-  - question: 舌象：紅 黃燥。脈象：左寸(心):數, 左關(肝膽):弦, 左尺(腎):數, 右寸(肺):數, 右關(脾胃):滑數, 右尺(命門):數
-- id: CASE_20251005211402_J907_4868daae
-  name: 螺旋測試 - 風寒咳嗽（痰濕蘊肺）
+  - question: 淋證兩年。最近小便頻數，灼熱刺痛。
+  - question: 還有就是小腹拘急，尿色黃赤。容易流汗。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_023
+  name: 真實醫案 - 陽痿（命門火衰）
   type: benchmark_spiral
-  expected_diagnosis: 風寒咳嗽（痰濕蘊肺）
+  expected_diagnosis: 命門火衰
   rounds:
-  - question: 咳嗽痰多十日
-  - question: 受涼後咳嗽，痰白而稀易咯，無明顯發熱
-  - question: 舌象：淡白 白膩。脈象：左寸(心):浮, 左關(肝膽):浮, 左尺(腎):沉, 右寸(肺):浮緊, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005034400_A123_d6da4569
-  name: 螺旋測試 - 肝鬱脾虛，月經不調
+  - question: 陽痿半年。主要是不舒服，精薄清冷，頭暈耳鳴。
+  - question: 還有就是畏寒肢冷，陽事不舉。怕冷。
+  - question: 舌象：舌淡苔白。脈象：脈沉細。
+- id: CASE_024
+  name: 真實醫案 - 腰痛（腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 肝鬱脾虛，月經不調
+  expected_diagnosis: 腎陰虛
   rounds:
-  - question: 月經不調兩月
-  - question: 患者近兩月月經週期紊亂，經期延後10-15天，經量偏少，色暗有血塊，伴有小腹隱痛。平素工作壓力大，情緒易煩躁。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):細弱, 右尺(命門):沉
-- id: CASE_20251005211427_V229_91d2757e
-  name: 螺旋測試 - 濕疹（濕熱蘊膚）
+  - question: 腰痛兩年。最近心煩少寐，腰部隱痛。
+  - question: 還有就是痠軟無力，纏綿不癒。平常工作壓力挺大的。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_025
+  name: 真實醫案 - 遺精（君相火旺）
   type: benchmark_spiral
-  expected_diagnosis: 濕疹（濕熱蘊膚）
+  expected_diagnosis: 君相火旺
   rounds:
-  - question: 濕疹反覆半年
-  - question: 小腿與肘窩反覆紅斑瘙癢，滲液，抓後加重；嗜甜膩
-  - question: 舌象：紅 黃膩。脈象：左寸(心):滑, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑數, 右關(脾胃):滑, 右尺(命門):滑
-- id: CASE_20251005212323_K234_02f4e142
-  name: 螺旋測試 - 更年期綜合徵（陰虛火旺）
+  - question: 遺精兩年。這幾天夢則遺精，尿黃。
+  - question: 還有就是少寐多夢，心中煩熱。最近睡得不太好。
+  - question: 舌象：舌紅苔少。脈象：脈細數。
+- id: CASE_026
+  name: 真實醫案 - 月經先期（血熱內擾）
   type: benchmark_spiral
-  expected_diagnosis: 更年期綜合徵（陰虛火旺）
+  expected_diagnosis: 血熱內擾
   rounds:
-  - question: 潮熱盜汗半年
-  - question: 更年期半年出現潮熱盜汗，心煩易怒，口乾。
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):弦細, 左尺(腎):細數, 右寸(肺):細數, 右關(脾胃):細, 右尺(命門):細數
-- id: CASE_20251005211449_V337_948adf6f
-  name: 螺旋測試 - 帶下病（濕熱下注）
+  - question: 月經先期三個月。我感覺經期提前，心煩口渴。
+  - question: 還有就是量多色紅，小便短黃。怕冷。
+  - question: 舌象：舌紅苔黃。脈象：脈滑數。
+- id: CASE_027
+  name: 真實醫案 - 痛經（氣滯血瘀）
   type: benchmark_spiral
-  expected_diagnosis: 帶下病（濕熱下注）
+  expected_diagnosis: 氣滯血瘀
   rounds:
-  - question: 帶下量多兩月
-  - question: 白帶量多質稠，陰癢，腰酸，小腹墜脹
-  - question: 舌象：紅 黃膩。脈象：左寸(心):滑, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑, 右關(脾胃):滑, 右尺(命門):滑
-- id: CASE_20251005211411_P773_ac7de918
-  name: 螺旋測試 - 經行頭痛（肝鬱氣滯）
+  - question: 痛經三個月。這陣子一直經前腹痛，經血色暗。
+  - question: 還有就是有血塊，脹痛拒按。容易覺得累。
+  - question: 舌象：舌紫暗有瘀點。脈象：脈沉澀。
+- id: CASE_028
+  name: 真實醫案 - 帶下病（脾虛濕注）
   type: benchmark_spiral
-  expected_diagnosis: 經行頭痛（肝鬱氣滯）
+  expected_diagnosis: 脾虛濕注
   rounds:
-  - question: 經行頭痛一年
-  - question: 每逢經前或經期前兩日頭痛，經後緩解
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005211353_D044_8edb34b4
-  name: 螺旋測試 - 胸痺（痰瘀互結）
+  - question: 帶下病一個月。困擾我好久了，就是無腥臭，帶下量多。
+  - question: 還有就是色白質稀，面色萎黃。容易覺得累。
+  - question: 舌象：舌淡苔白膩。脈象：脈緩弱。
+- id: CASE_029
+  name: 真實醫案 - 崩漏（腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 胸痺（痰瘀互結）
+  expected_diagnosis: 腎陰虛
   rounds:
-  - question: 胸悶氣短兩週
-  - question: 兩週活動後胸悶氣短，偶有心悸，加班後加重
-  - question: 舌象：暗紅 黃膩。脈象：左寸(心):結代, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):滑, 右關(脾胃):滑, 右尺(命門):沉
-- id: CASE_20251005043629_2350_149ee6c0
-  name: 螺旋測試 - 腎陰虛,陰虛火旺
+  - question: 崩漏一年。醫生，我最近色鮮紅，頭暈耳鳴。
+  - question: 還有就是量少淋漓，經血非時而下。容易流汗。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_030
+  name: 真實醫案 - 絕經前後諸證（腎陰陽兩虛）
   type: benchmark_spiral
-  expected_diagnosis: 腎陰虛,陰虛火旺
+  expected_diagnosis: 腎陰陽兩虛
   rounds:
-  - question: 手足心熱盜汗三月
-  - question: 患者三月來手足心熱,夜間盜汗,醒後汗止,伴有腰膝酸軟,口乾咽燥。工作勞累,睡眠不足。
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):細數, 左尺(腎):細數, 右寸(肺):細數, 右關(脾胃):細, 右尺(命門):細數無力
-- id: CASE_20251005212234_I456_e16df6d7
-  name: 螺旋測試 - 膝痹（風寒濕痹）
+  - question: 絕經前後諸證三個月。醫生，我最近時而烘熱，頭暈腰痠。
+  - question: 還有就是時而畏寒，浮腫便溏。怕冷。
+  - question: 舌象：舌淡苔薄。脈象：脈沉弱。
+- id: CASE_031
+  name: 真實醫案 - 厭食（脾運失健）
   type: benchmark_spiral
-  expected_diagnosis: 膝痹（風寒濕痹）
+  expected_diagnosis: 脾運失健
   rounds:
-  - question: 膝關節腫痛三月
-  - question: 患者三月前因登山後出現膝痛，陰雨天加重，伴關節腫脹僵硬。
-  - question: 舌象：淡 白膩。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211451_V559_bf9b08cc
-  name: 螺旋測試 - 泄瀉（脾陽不足）
+  - question: 厭食兩年。主要是不舒服，不思飲食，食而不化。
+  - question: 還有就是脘腹脹滿，大便溏薄。平常工作壓力挺大的。
+  - question: 舌象：舌苔白膩。脈象：脈尚有力。
+- id: CASE_032
+  name: 真實醫案 - 積滯（乳食內積）
   type: benchmark_spiral
-  expected_diagnosis: 泄瀉（脾陽不足）
+  expected_diagnosis: 乳食內積
   rounds:
-  - question: 腹痛腹瀉一週
-  - question: 受涼後腹痛腹瀉，便稀有未消化食物，食後加劇
-  - question: 舌象：淡 白膩。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩弱, 右尺(命門):沉弱
-- id: CASE_20251005212259_H901_04b193e3
-  name: 螺旋測試 - 腰痠（腎陽虛）
+  - question: 積滯一個月。這幾天脘腹脹痛，嘔吐酸餿。
+  - question: 還有就是大便酸臭，不思乳食。大便有點不順。
+  - question: 舌象：舌紅苔厚膩。脈象：脈滑實。
+- id: CASE_033
+  name: 真實醫案 - 遺尿（腎氣不足）
   type: benchmark_spiral
-  expected_diagnosis: 腰痠（腎陽虛）
+  expected_diagnosis: 腎氣不足
   rounds:
-  - question: 腰膝酸軟三月
-  - question: 三月來腰膝酸軟，畏寒肢冷，夜尿頻多。
-  - question: 舌象：淡胖 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉, 右關(脾胃):沉弱, 右尺(命門):沉弱
-- id: CASE_20251005212246_S456_cdcb3c0b
-  name: 螺旋測試 - 胃灼熱
+  - question: 遺尿一個月。醫生，我最近睡中遺尿，小便頻數。
+  - question: 還有就是神疲乏力，肢冷畏寒。容易覺得累。
+  - question: 舌象：舌淡苔白。脈象：脈沉無力。
+- id: CASE_034
+  name: 真實醫案 - 濕疹（濕熱浸淫）
   type: benchmark_spiral
-  expected_diagnosis: 胃灼熱
+  expected_diagnosis: 濕熱浸淫
   rounds:
-  - question: 胸口灼熱兩週
-  - question: 餐後胸口灼熱，泛酸，夜間平躺時加劇。
-  - question: 舌象：紅 黃。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):滑數, 右關(脾胃):滑數, 右尺(命門):細弱
-- id: CASE_20251005212241_O012_3e063d1f
-  name: 螺旋測試 - 更年期綜合症
+  - question: 濕疹半年。最近滲液瘙癢，發病急驟。
+  - question: 還有就是身熱心煩，皮膚潮紅灼熱。怕冷。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_035
+  name: 真實醫案 - 癮疹（風寒束表）
   type: benchmark_spiral
-  expected_diagnosis: 更年期綜合症
+  expected_diagnosis: 風寒束表
   rounds:
-  - question: 更年期潮熱半年
-  - question: 半年來出現潮熱盜汗，心煩易怒，夜眠不安。
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):細弱
-- id: CASE_20251005212335_U234_60696baf
-  name: 螺旋測試 - 肩頸痹痛
+  - question: 癮疹一個月。這幾天皮疹色白，遇寒加重。
+  - question: 還有就是得熱則緩，惡寒畏風。怕冷。
+  - question: 舌象：舌淡苔白。脈象：脈浮緊。
+- id: CASE_036
+  name: 真實醫案 - 粉刺（肺經風熱）
   type: benchmark_spiral
-  expected_diagnosis: 肩頸痹痛
+  expected_diagnosis: 肺經風熱
   rounds:
-  - question: 肩背僵硬酸痛兩月
-  - question: 長時間電腦工作後肩頸僵硬酸痛，偶有頭暈。
-  - question: 舌象：淡紅 白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212327_N567_ba333b12
-  name: 螺旋測試 - 遺尿頻數
+  - question: 粉刺半個月。最近大便秘結，色紅疼痛。
+  - question: 還有就是顏面丘疹，口乾渴。怕冷。
+  - question: 舌象：舌紅苔黃。脈象：脈浮數。
+- id: CASE_037
+  name: 真實醫案 - 耳鳴（肝火上擾）
   type: benchmark_spiral
-  expected_diagnosis: 遺尿頻數
+  expected_diagnosis: 肝火上擾
   rounds:
-  - question: 夜尿頻多半年
-  - question: 夜尿4-5次，伴排尿無力，小腹脹滿。
-  - question: 舌象：淡 白膩。脈象：左寸(心):沉弱, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005043627_1234_1fb14454
-  name: 螺旋測試 - 肺腎陽虛,腎不納氣
+  - question: 耳鳴一年。主要是不舒服，耳鳴如潮，口苦咽乾。
+  - question: 還有就是惱怒加重，頭痛面紅。平常工作壓力挺大的。
+  - question: 舌象：舌紅苔黃。脈象：脈弦數。
+- id: CASE_038
+  name: 真實醫案 - 鼻淵（膽府鬱熱）
   type: benchmark_spiral
-  expected_diagnosis: 肺腎陽虛,腎不納氣
+  expected_diagnosis: 膽府鬱熱
   rounds:
-  - question: 咳嗽痰多兩週
-  - question: 患者兩週前受涼後出現咳嗽,痰多色白質稀,晨起咳嗽加重,伴有胸悶氣短。平素體弱易感冒。
-  - question: 舌象：淡 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉弱, 右關(脾胃):沉弱, 右尺(命門):沉弱無力
-- id: CASE_20251005211450_V448_d0beb3be
-  name: 螺旋測試 - 喉痺（風熱犯肺）
+  - question: 鼻淵三天。這幾天鼻流黃濁涕，發熱口苦。
+  - question: 還有就是頭痛劇烈，量多腥臭。最近睡得不太好。
+  - question: 舌象：舌紅苔黃。脈象：脈弦數。
+- id: CASE_039
+  name: 真實醫案 - 口瘡（脾胃積熱）
   type: benchmark_spiral
-  expected_diagnosis: 喉痺（風熱犯肺）
+  expected_diagnosis: 脾胃積熱
   rounds:
-  - question: 咽痛咳嗽五天
-  - question: 受風熱後咽喉疼痛，乾咳少痰，微熱
-  - question: 舌象：紅 薄黃。脈象：左寸(心):浮數, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):浮數, 右關(脾胃):滑, 右尺(命門):細
-- id: CASE_20251005212221_A678_eac69714
-  name: 螺旋測試 - 心悸
+  - question: 口瘡一年。主要是不舒服，口臭便秘，口舌多處潰瘍。
+  - question: 還有就是周圍紅腫，疼痛拒食。容易流汗。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_040
+  name: 真實醫案 - 痹證（風寒濕痹）
   type: benchmark_spiral
-  expected_diagnosis: 心悸
+  expected_diagnosis: 風寒濕痹
   rounds:
-  - question: 胸悶心悸三週
-  - question: 患者三週前開始出現胸悶心悸，夜間尤甚，伴有失眠多夢。情緒緊張時加重，休息後稍緩。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細數, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211504_W770_4b40c2cb
-  name: 螺旋測試 - 心悸（氣虛血少）
+  - question: 痹證一個月。這陣子一直痛處固定，遇寒加重。
+  - question: 還有就是關節疼痛，得熱痛減。最近睡得不太好。
+  - question: 舌象：舌苔薄白。脈象：脈弦緊。
+- id: CASE_041
+  name: 真實醫案 - 腰痛（寒濕腰痛）
   type: benchmark_spiral
-  expected_diagnosis: 心悸（氣虛血少）
+  expected_diagnosis: 寒濕腰痛
   rounds:
-  - question: 胸悶心悸一週
-  - question: 活動後胸悶，心跳加快，伴氣短出汗
-  - question: 舌象：淡 白。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005043631_6793_50800f29
-  name: 螺旋測試 - 腎氣不固,心腎不交
+  - question: 腰痛半個月。這陣子一直轉側不利，腰部冷痛重著。
+  - question: 還有就是陰雨天加重，靜臥不減。容易覺得累。
+  - question: 舌象：舌苔白膩。脈象：脈沉緊。
+- id: CASE_042
+  name: 真實醫案 - 項痹（氣滯血瘀）
   type: benchmark_spiral
-  expected_diagnosis: 腎氣不固,心腎不交
+  expected_diagnosis: 氣滯血瘀
   rounds:
-  - question: 遺精頻繁兩月
-  - question: 患者兩月來遺精頻繁,每週3-4次,伴有腰膝酸軟,頭暈耳鳴,精神疲憊。工作壓力大,常熬夜。
-  - question: 舌象：淡 薄白。脈象：左寸(心):細, 左關(肝膽):細, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):細弱, 右尺(命門):沉弱無力
-- id: CASE_20251005212255_E678_5388e04c
-  name: 螺旋測試 - 腰痹（寒濕痹）
+  - question: 項痹半年。這陣子一直肩背痠痛，手臂麻木。
+  - question: 還有就是痛有定處，頸項強痛。容易覺得累。
+  - question: 舌象：舌暗紅。脈象：脈澀。
+- id: CASE_043
+  name: 真實醫案 - 崩漏（腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 腰痹（寒濕痹）
+  expected_diagnosis: 腎陰虛
   rounds:
-  - question: 腰痛伴下肢麻兩月
-  - question: 腰部痠痛，長時間站立後加重，伴右腿麻木。
-  - question: 舌象：淡 白膩。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212329_P789_3c5f0057
-  name: 螺旋測試 - 乾咳（燥熱傷肺）
+  - question: 崩漏半個月。醫生，我最近色鮮紅，頭暈耳鳴。
+  - question: 還有就是量少淋漓，經血非時而下。平常工作壓力挺大的。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_044
+  name: 真實醫案 - 胃痛（肝氣犯胃）
   type: benchmark_spiral
-  expected_diagnosis: 乾咳（燥熱傷肺）
+  expected_diagnosis: 肝氣犯胃
   rounds:
-  - question: 咽癢乾咳兩週
-  - question: 兩週以來乾咳無痰，喉嚨癢，夜間較重。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):浮, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211405_L105_86fd95ee
-  name: 螺旋測試 - 鼻淵（濕熱鬱肺）
+  - question: 胃痛一個月。醫生，我最近噯氣頻頻，連及兩脅。
+  - question: 還有就是情志不暢則痛，胃脘脹痛。容易覺得累。
+  - question: 舌象：舌苔薄白。脈象：脈弦。
+- id: CASE_045
+  name: 真實醫案 - 鼻淵（膽府鬱熱）
   type: benchmark_spiral
-  expected_diagnosis: 鼻淵（濕熱鬱肺）
+  expected_diagnosis: 膽府鬱熱
   rounds:
-  - question: 鼻塞頭痛一月
-  - question: 晨起鼻塞流黃涕，前額頭痛，低頭加重
-  - question: 舌象：暗紅 黃膩。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):滑, 右關(脾胃):滑, 右尺(命門):沉
-- id: CASE_20251005212231_G234_73bec351
-  name: 螺旋測試 - 消渴
+  - question: 鼻淵一週。這陣子一直鼻流黃濁涕，發熱口苦。
+  - question: 還有就是量多腥臭，頭痛劇烈。最近睡得不太好。
+  - question: 舌象：舌紅苔黃。脈象：脈弦數。
+- id: CASE_046
+  name: 真實醫案 - 肺癆（肺陰虧損）
   type: benchmark_spiral
-  expected_diagnosis: 消渴
+  expected_diagnosis: 肺陰虧損
   rounds:
-  - question: 口乾多飲三月
-  - question: 患者三月來口乾多飲，夜間尤甚，伴體重下降3公斤。
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):弦細, 左尺(腎):細數, 右寸(肺):細數, 右關(脾胃):滑, 右尺(命門):細數
-- id: CASE_20251005211457_W104_99242ede
-  name: 螺旋測試 - 中風後遺（氣虛血瘀）
+  - question: 肺癆一週。主要是不舒服，潮熱盜汗，顴紅。
+  - question: 還有就是乾咳少痰，痰中帶血。平常工作壓力挺大的。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_047
+  name: 真實醫案 - 項痹（氣滯血瘀）
   type: benchmark_spiral
-  expected_diagnosis: 中風後遺（氣虛血瘀）
+  expected_diagnosis: 氣滯血瘀
   rounds:
-  - question: 中風後口角歪斜一年
-  - question: 語音含糊，左側肢體乏力，步態不穩，近月功能改善緩慢
-  - question: 舌象：暗紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):弦, 右關(脾胃):弦, 右尺(命門):沉弱
-- id: CASE_20251005211426_V118_8fec7abc
-  name: 螺旋測試 - 心悸（心虛膽怯）
+  - question: 項痹一年。這幾天手臂麻木，痛有定處。
+  - question: 還有就是頸項強痛，肩背痠痛。胃口也不是很好。
+  - question: 舌象：舌暗紅。脈象：脈澀。
+- id: CASE_048
+  name: 真實醫案 - 崩漏（腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 心悸（心虛膽怯）
+  expected_diagnosis: 腎陰虛
   rounds:
-  - question: 胸悶焦慮一月
-  - question: 工作壓力大後出現胸悶、心悸、易緊張，夜間明顯，活動後稍緩
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細數, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212239_M890_ebf84a5e
-  name: 螺旋測試 - 失眠（心腎不交）
+  - question: 崩漏一年。這陣子一直量少淋漓，頭暈耳鳴。
+  - question: 還有就是經血非時而下，色鮮紅。容易覺得累。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_049
+  name: 真實醫案 - 肺癆（肺陰虧損）
   type: benchmark_spiral
-  expected_diagnosis: 失眠（心腎不交）
+  expected_diagnosis: 肺陰虧損
   rounds:
-  - question: 焦慮失眠一月
-  - question: 因工作壓力大導致焦慮緊張，入睡困難，多夢易醒。
-  - question: 舌象：紅 薄黃。脈象：左寸(心):細數, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):細弱
-- id: CASE_20251005211355_E930_d76bfd92
-  name: 螺旋測試 - 痛經（寒凝血瘀）
+  - question: 肺癆半個月。醫生，我最近顴紅，潮熱盜汗。
+  - question: 還有就是痰中帶血，乾咳少痰。容易覺得累。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_050
+  name: 真實醫案 - 腰痛（寒濕腰痛）
   type: benchmark_spiral
-  expected_diagnosis: 痛經（寒凝血瘀）
+  expected_diagnosis: 寒濕腰痛
   rounds:
-  - question: 痛經四年
-  - question: 經期首日小腹絞痛，得熱緩解，經量偏少色暗有塊
-  - question: 舌象：淡白 薄白。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉, 右關(脾胃):沉, 右尺(命門):沉弱
-- id: CASE_20251005212330_Q890_569da485
-  name: 螺旋測試 - 耳鳴（腎虛型）
+  - question: 腰痛三個月。這幾天轉側不利，陰雨天加重。
+  - question: 還有就是腰部冷痛重著，靜臥不減。容易覺得累。
+  - question: 舌象：舌苔白膩。脈象：脈沉緊。
+- id: CASE_051
+  name: 真實醫案 - 月經先期（血熱內擾）
   type: benchmark_spiral
-  expected_diagnosis: 耳鳴（腎虛型）
+  expected_diagnosis: 血熱內擾
   rounds:
-  - question: 頭暈耳鳴半年
-  - question: 頭暈耳鳴，聽力下降，伴腰膝酸軟。
-  - question: 舌象：淡紅 白。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212240_N901_8049659a
-  name: 螺旋測試 - 遺尿（腎氣虛）
+  - question: 月經先期一年。困擾我好久了，就是經期提前，心煩口渴。
+  - question: 還有就是小便短黃，量多色紅。容易流汗。
+  - question: 舌象：舌紅苔黃。脈象：脈滑數。
+- id: CASE_052
+  name: 真實醫案 - 脅痛（肝膽濕熱）
   type: benchmark_spiral
-  expected_diagnosis: 遺尿（腎氣虛）
+  expected_diagnosis: 肝膽濕熱
   rounds:
-  - question: 小便頻急半年
-  - question: 半年來出現小便頻數、夜尿多，排尿無力，伴腰酸乏力。
-  - question: 舌象：淡 白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212247_T567_7dbd6ed8
-  name: 螺旋測試 - 貧血性眩暈
+  - question: 脅痛一個月。困擾我好久了，就是噁心厭油，口苦口乾。
+  - question: 還有就是小便黃赤，脅肋脹痛。容易覺得累。
+  - question: 舌象：舌紅苔黃膩。脈象：脈弦數。
+- id: CASE_053
+  name: 真實醫案 - 遺尿（腎氣不足）
   type: benchmark_spiral
-  expected_diagnosis: 貧血性眩暈
+  expected_diagnosis: 腎氣不足
   rounds:
-  - question: 頭暈眼花一月
-  - question: 頭暈目眩，站起時明顯，伴心悸氣短，臉色蒼白。
-  - question: 舌象：淡 薄白。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211409_N661_7c5be658
-  name: 螺旋測試 - 燥咳（肺陰不足）
+  - question: 遺尿兩年。醫生，我最近睡中遺尿，神疲乏力。
+  - question: 還有就是小便頻數，肢冷畏寒。容易覺得累。
+  - question: 舌象：舌淡苔白。脈象：脈沉無力。
+- id: CASE_054
+  name: 真實醫案 - 水腫（腎陽衰微）
   type: benchmark_spiral
-  expected_diagnosis: 燥咳（肺陰不足）
+  expected_diagnosis: 腎陽衰微
   rounds:
-  - question: 乾咳口乾兩週
-  - question: 秋燥後反覆乾咳無痰或少痰，聲音沙啞
-  - question: 舌象：紅 少苔。脈象：左寸(心):數, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):數, 右關(脾胃):滑, 右尺(命門):細弱
-- id: CASE_20251005212225_C890_0e6e46e5
-  name: 螺旋測試 - 腰膝痠軟
+  - question: 水腫一年。這陣子一直腰部冷痛，按之凹陷。
+  - question: 還有就是腰以下甚，全身水腫。怕冷。
+  - question: 舌象：舌淡胖苔白滑。脈象：脈沉細。
+- id: CASE_055
+  name: 真實醫案 - 口瘡（脾胃積熱）
   type: benchmark_spiral
-  expected_diagnosis: 腰膝痠軟
+  expected_diagnosis: 脾胃積熱
   rounds:
-  - question: 腰膝酸軟半年
-  - question: 患者半年來感腰膝酸軟無力，夜尿增多，每夜3次。伴畏寒肢冷。
-  - question: 舌象：淡胖 白膩。脈象：左寸(心):沉, 左關(肝膽):沉, 左尺(腎):沉弱, 右寸(肺):沉, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212242_P123_5149320b
-  name: 螺旋測試 - 肩痹（氣滯血瘀）
+  - question: 口瘡三天。主要是不舒服，口舌多處潰瘍，口臭便秘。
+  - question: 還有就是周圍紅腫，疼痛拒食。容易流汗。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_056
+  name: 真實醫案 - 腰痛（寒濕腰痛）
   type: benchmark_spiral
-  expected_diagnosis: 肩痹（氣滯血瘀）
+  expected_diagnosis: 寒濕腰痛
   rounds:
-  - question: 肩膀僵硬兩月
-  - question: 長期使用電腦後出現肩頸僵硬，轉動困難，晨起更重。
-  - question: 舌象：淡 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211358_G619_dcec38d9
-  name: 螺旋測試 - 帶下病（濕熱下注）
+  - question: 腰痛三天。這陣子一直腰部冷痛重著，靜臥不減。
+  - question: 還有就是陰雨天加重，轉側不利。最近睡得不太好。
+  - question: 舌象：舌苔白膩。脈象：脈沉緊。
+- id: CASE_057
+  name: 真實醫案 - 項痹（氣滯血瘀）
   type: benchmark_spiral
-  expected_diagnosis: 帶下病（濕熱下注）
+  expected_diagnosis: 氣滯血瘀
   rounds:
-  - question: 帶下量多一月
-  - question: 帶下量多色黃質稠有異味，小腹墜脹
-  - question: 舌象：紅 黃膩。脈象：左寸(心):滑數, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑數, 右關(脾胃):滑, 右尺(命門):滑
-- id: CASE_20251005211459_W326_1c22824c
-  name: 螺旋測試 - 痤瘡（濕熱蘊膚）
+  - question: 項痹一週。醫生，我最近肩背痠痛，手臂麻木。
+  - question: 還有就是痛有定處，頸項強痛。容易流汗。
+  - question: 舌象：舌暗紅。脈象：脈澀。
+- id: CASE_058
+  name: 真實醫案 - 胸痺（心血瘀阻）
   type: benchmark_spiral
-  expected_diagnosis: 痤瘡（濕熱蘊膚）
+  expected_diagnosis: 心血瘀阻
   rounds:
-  - question: 面部痤瘡半年
-  - question: 兩頰與下巴反覆粉刺膿皰，經期前加重
-  - question: 舌象：紅 黃膩。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):數, 右關(脾胃):滑數, 右尺(命門):細
-- id: CASE_20251005211350_B771_66765ec9
-  name: 螺旋測試 - 胃痛（胃熱熾盛）
+  - question: 胸痺一週。這陣子一直固定不移，入夜更甚。
+  - question: 還有就是胸部刺痛，心悸不寧。容易覺得累。
+  - question: 舌象：舌紫暗有瘀斑。脈象：脈澀。
+- id: CASE_059
+  name: 真實醫案 - 耳鳴（肝火上擾）
   type: benchmark_spiral
-  expected_diagnosis: 胃痛（胃熱熾盛）
+  expected_diagnosis: 肝火上擾
   rounds:
-  - question: 胃脘灼痛一月
-  - question: 一月來胃脘灼熱痛，空腹明顯，進食後稍緩，伴反酸噯氣
-  - question: 舌象：紅 黃膩。脈象：左寸(心):數, 左關(肝膽):弦, 左尺(腎):數, 右寸(肺):數, 右關(脾胃):滑數, 右尺(命門):數
-- id: CASE_20251005212336_V345_78cb2fb4
-  name: 螺旋測試 - 經間期出血（氣虛不攝）
+  - question: 耳鳴一個月。這幾天口苦咽乾，耳鳴如潮。
+  - question: 還有就是惱怒加重，頭痛面紅。最近睡得不太好。
+  - question: 舌象：舌紅苔黃。脈象：脈弦數。
+- id: CASE_060
+  name: 真實醫案 - 月經先期（血熱內擾）
   type: benchmark_spiral
-  expected_diagnosis: 經間期出血（氣虛不攝）
+  expected_diagnosis: 血熱內擾
   rounds:
-  - question: 經間期出血兩週
-  - question: 月經剛結束一週後再出血，色淡量少，伴腰酸。
-  - question: 舌象：淡 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211407_L776_702b4090
-  name: 螺旋測試 - 眩暈頭痛（肝陽上亢）
+  - question: 月經先期半個月。醫生，我最近小便短黃，量多色紅。
+  - question: 還有就是心煩口渴，經期提前。大便有點不順。
+  - question: 舌象：舌紅苔黃。脈象：脈滑數。
+- id: CASE_061
+  name: 真實醫案 - 癮疹（風寒束表）
   type: benchmark_spiral
-  expected_diagnosis: 眩暈頭痛（肝陽上亢）
+  expected_diagnosis: 風寒束表
   rounds:
-  - question: 偏頭痛三年
-  - question: 情緒波動、經前或熬夜後誘發，伴噁心畏光
-  - question: 舌象：紅 薄黃。脈象：左寸(心):弦, 左關(肝膽):弦數, 左尺(腎):弦, 右寸(肺):數, 右關(脾胃):弦, 右尺(命門):弦
-- id: CASE_20251005212325_M456_ea0fddb3
-  name: 螺旋測試 - 泄瀉（脾虛）
+  - question: 癮疹半個月。醫生，我最近得熱則緩，遇寒加重。
+  - question: 還有就是惡寒畏風，皮疹色白。平常工作壓力挺大的。
+  - question: 舌象：舌淡苔白。脈象：脈浮緊。
+- id: CASE_062
+  name: 真實醫案 - 便秘（腸道實熱）
   type: benchmark_spiral
-  expected_diagnosis: 泄瀉（脾虛）
+  expected_diagnosis: 腸道實熱
   rounds:
-  - question: 腹瀉三天
-  - question: 三天來大便稀溏，每日5次，進食後加劇。
-  - question: 舌象：淡紅 白膩。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211421_T110_c051b397
-  name: 螺旋測試 - 痺證（氣血兩虛）
+  - question: 便秘半個月。這陣子一直腹脹腹痛，面紅身熱。
+  - question: 還有就是大便乾結，口臭。容易覺得累。
+  - question: 舌象：舌紅苔黃燥。脈象：脈滑實。
+- id: CASE_063
+  name: 真實醫案 - 帶下病（脾虛濕注）
   type: benchmark_spiral
-  expected_diagnosis: 痺證（氣血兩虛）
+  expected_diagnosis: 脾虛濕注
   rounds:
-  - question: 小腿抽筋半年
-  - question: 夜間或久坐後小腿抽筋疼痛
-  - question: 舌象：淡紫 白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211408_M508_dfea1255
-  name: 螺旋測試 - 腰痛（氣滯血瘀）
+  - question: 帶下病三天。困擾我好久了，就是色白質稀，帶下量多。
+  - question: 還有就是無腥臭，面色萎黃。容易覺得累。
+  - question: 舌象：舌淡苔白膩。脈象：脈緩弱。
+- id: CASE_064
+  name: 真實醫案 - 泄瀉（脾虛濕盛）
   type: benchmark_spiral
-  expected_diagnosis: 腰痛（氣滯血瘀）
+  expected_diagnosis: 脾虛濕盛
   rounds:
-  - question: 急性腰扭傷三天
-  - question: 搬重物後腰部劇痛，轉身困難，咳嗽打噴嚏疼痛加劇
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):弦, 右尺(命門):沉
-- id: CASE_20251005212228_E012_583376bd
-  name: 螺旋測試 - 風寒咳嗽
+  - question: 泄瀉三個月。困擾我好久了，就是食後腹脹，完穀不化。
+  - question: 還有就是肢體倦怠，大便溏薄。最近睡得不太好。
+  - question: 舌象：舌淡胖有齒痕。脈象：脈緩弱。
+- id: CASE_065
+  name: 真實醫案 - 項痹（氣滯血瘀）
   type: benchmark_spiral
-  expected_diagnosis: 風寒咳嗽
+  expected_diagnosis: 氣滯血瘀
   rounds:
-  - question: 咳嗽一週
-  - question: 患者一週前感冒後出現咳嗽，痰多色白，伴惡寒無汗。
-  - question: 舌象：淡 白膩。脈象：左寸(心):浮, 左關(肝膽):浮, 左尺(腎):沉, 右寸(肺):浮緊, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005043635_4571_d05e41c8
-  name: 螺旋測試 - 痹證,肝腎虧虛,寒濕痹阻
+  - question: 項痹一個月。主要是不舒服，肩背痠痛，頸項強痛。
+  - question: 還有就是手臂麻木，痛有定處。大便有點不順。
+  - question: 舌象：舌暗紅。脈象：脈澀。
+- id: CASE_066
+  name: 真實醫案 - 心悸（心膽氣虛）
   type: benchmark_spiral
-  expected_diagnosis: 痹證,肝腎虧虛,寒濕痹阻
+  expected_diagnosis: 心膽氣虛
   rounds:
-  - question: 手指關節疼痛變形一年
-  - question: 患者一年來手指關節疼痛,晨起僵硬,手指關節逐漸變形,活動受限。陰雨天症狀加重。
-  - question: 舌象：淡 白。脈象：左寸(心):沉, 左關(肝膽):沉細, 左尺(腎):沉弱, 右寸(肺):沉, 右關(脾胃):沉弱, 右尺(命門):沉弱
-- id: CASE_20251005043639_2351_64088f1a
-  name: 螺旋測試 - 中風後遺症,氣虛血瘀,痰濁阻絡
+  - question: 心悸一週。醫生，我最近坐臥不安，善驚易恐。
+  - question: 還有就是觸事易驚，少寐多夢。怕冷。
+  - question: 舌象：舌淡苔白。脈象：脈弦細。
+- id: CASE_067
+  name: 真實醫案 - 不寐（心脾兩虛）
   type: benchmark_spiral
-  expected_diagnosis: 中風後遺症,氣虛血瘀,痰濁阻絡
+  expected_diagnosis: 心脾兩虛
   rounds:
-  - question: 中風後遺症半年
-  - question: 患者半年前腦梗塞,現左側肢體偏癱,活動不利,言語不清,伴有頭暈,流涎。
-  - question: 舌象：暗紅 白膩。脈象：左寸(心):弦, 左關(肝膽):弦滑, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):滑, 右尺(命門):沉
-- id: CASE_20251005211413_Q226_94bd9524
-  name: 螺旋測試 - 腸易激綜合徵（肝鬱脾虛）
+  - question: 不寐一年。我感覺心悸健忘，面色萎黃。
+  - question: 還有就是多夢易醒，神疲食少。平常工作壓力挺大的。
+  - question: 舌象：舌淡苔薄白。脈象：脈細弱。
+- id: CASE_068
+  name: 真實醫案 - 腰痛（寒濕腰痛）
   type: benchmark_spiral
-  expected_diagnosis: 腸易激綜合徵（肝鬱脾虛）
+  expected_diagnosis: 寒濕腰痛
   rounds:
-  - question: 腹痛腹瀉反覆三月
-  - question: 壓力大時易腹瀉，便前腹痛，排後緩解
-  - question: 舌象：淡 白膩。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩弱, 右尺(命門):沉弱
-- id: CASE_20251005043633_0127_5fe3850d
-  name: 螺旋測試 - 口瘡,心火上炎,陰虛火旺
+  - question: 腰痛兩年。這幾天靜臥不減，腰部冷痛重著。
+  - question: 還有就是轉側不利，陰雨天加重。容易覺得累。
+  - question: 舌象：舌苔白膩。脈象：脈沉緊。
+- id: CASE_069
+  name: 真實醫案 - 腰痛（腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 口瘡,心火上炎,陰虛火旺
+  expected_diagnosis: 腎陰虛
   rounds:
-  - question: 口腔潰瘍反復發作兩月
-  - question: 患者兩月來口腔潰瘍反復發作,潰瘍疼痛,影響進食,伴有口乾口苦,心煩易怒。工作壓力大,常熬夜。
-  - question: 舌象：紅 黃。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細數, 右寸(肺):數, 右關(脾胃):數, 右尺(命門):細數
-- id: CASE_20251005043641_6794_26076032
-  name: 螺旋測試 - 癭病,肝腎陰虛,肝火亢盛
+  - question: 腰痛三天。最近心煩少寐，纏綿不癒。
+  - question: 還有就是痠軟無力，腰部隱痛。最近睡得不太好。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_070
+  name: 真實醫案 - 積滯（乳食內積）
   type: benchmark_spiral
-  expected_diagnosis: 癭病,肝腎陰虛,肝火亢盛
+  expected_diagnosis: 乳食內積
   rounds:
-  - question: 甲狀腺功能亢進心悸一月
-  - question: 患者一月前確診甲亢,心悸,手抖,怕熱多汗,消瘦,急躁易怒。
-  - question: 舌象：紅 黃。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細數, 右寸(肺):數, 右關(脾胃):數, 右尺(命門):細數
-- id: CASE_20251005212253_C456_12a036a4
-  name: 螺旋測試 - 偏頭痛（肝陽上亢）
+  - question: 積滯兩年。我感覺大便酸臭，不思乳食。
+  - question: 還有就是脘腹脹痛，嘔吐酸餿。怕冷。
+  - question: 舌象：舌紅苔厚膩。脈象：脈滑實。
+- id: CASE_071
+  name: 真實醫案 - 癲狂（痰火擾神）
   type: benchmark_spiral
-  expected_diagnosis: 偏頭痛（肝陽上亢）
+  expected_diagnosis: 痰火擾神
   rounds:
-  - question: 頭痛目脹三週
-  - question: 近期頭痛目脹，伴情緒緊張及易怒，工作壓力大。
-  - question: 舌象：紅 薄黃。脈象：左寸(心):弦, 左關(肝膽):弦數, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211423_T881_edf330b8
-  name: 螺旋測試 - 勞損腰痛（腎虛型）
+  - question: 癲狂半個月。這幾天面紅目赤，性情急躁。
+  - question: 還有就是頭痛失眠，大便秘結。容易覺得累。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_072
+  name: 真實醫案 - 不寐（心脾兩虛）
   type: benchmark_spiral
-  expected_diagnosis: 勞損腰痛（腎虛型）
+  expected_diagnosis: 心脾兩虛
   rounds:
-  - question: 腰酸疲倦一年
-  - question: 工作久坐，腰部酸痛，午後明顯
-  - question: 舌象：淡 白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212245_R345_c3592a40
-  name: 螺旋測試 - 濕疹（濕熱蘊膚）
+  - question: 不寐一週。主要是不舒服，心悸健忘，神疲食少。
+  - question: 還有就是多夢易醒，面色萎黃。胃口也不是很好。
+  - question: 舌象：舌淡苔薄白。脈象：脈細弱。
+- id: CASE_073
+  name: 真實醫案 - 中風（風痰入絡）
   type: benchmark_spiral
-  expected_diagnosis: 濕疹（濕熱蘊膚）
+  expected_diagnosis: 風痰入絡
   rounds:
-  - question: 皮膚癢疹兩週
-  - question: 兩週前出現皮膚紅疹瘙癢，夜間加劇，搔抓後紅腫。
-  - question: 舌象：紅 黃膩。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):滑數, 右關(脾胃):滑數, 右尺(命門):細弱
-- id: CASE_20251005212248_U678_17f9e6cd
-  name: 螺旋測試 - 失眠（心脾兩虛）
+  - question: 中風兩年。我感覺語言不利，手足麻木。
+  - question: 還有就是口眼歪斜，肌膚不仁。容易流汗。
+  - question: 舌象：舌強苔白膩。脈象：脈弦滑。
+- id: CASE_074
+  name: 真實醫案 - 痹證（風寒濕痹）
   type: benchmark_spiral
-  expected_diagnosis: 失眠（心脾兩虛）
+  expected_diagnosis: 風寒濕痹
   rounds:
-  - question: 失眠焦慮兩月
-  - question: 夜難入眠，思緒多，易驚醒，白天倦怠心煩。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):細弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211401_I288_f03c64aa
-  name: 螺旋測試 - 缺乳（氣血虧虛）
+  - question: 痹證一週。最近關節疼痛，得熱痛減。
+  - question: 還有就是痛處固定，遇寒加重。大便有點不順。
+  - question: 舌象：舌苔薄白。脈象：脈弦緊。
+- id: CASE_075
+  name: 真實醫案 - 不寐（心脾兩虛）
   type: benchmark_spiral
-  expected_diagnosis: 缺乳（氣血虧虛）
+  expected_diagnosis: 心脾兩虛
   rounds:
-  - question: 乳汁不足十日
-  - question: 產後十日乳汁分泌不足，嬰兒吸吮後仍饑餓啼哭
-  - question: 舌象：淡白 薄白。脈象：左寸(心):細, 左關(肝膽):細, 左尺(腎):細弱, 右寸(肺):細, 右關(脾胃):細弱, 右尺(命門):細弱
-- id: CASE_20251005211416_R333_25595188
-  name: 螺旋測試 - 月經後期（氣血不足）
+  - question: 不寐三天。最近心悸健忘，面色萎黃。
+  - question: 還有就是多夢易醒，神疲食少。大便有點不順。
+  - question: 舌象：舌淡苔薄白。脈象：脈細弱。
+- id: CASE_076
+  name: 真實醫案 - 積滯（乳食內積）
   type: benchmark_spiral
-  expected_diagnosis: 月經後期（氣血不足）
+  expected_diagnosis: 乳食內積
   rounds:
-  - question: 月經不調半年
-  - question: 經期延後10日以上，色淡量少，伴倦怠腰酸
-  - question: 舌象：淡 薄白。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212236_K678_cf899195
-  name: 螺旋測試 - 氣血兩虛
+  - question: 積滯一個月。主要是不舒服，大便酸臭，不思乳食。
+  - question: 還有就是嘔吐酸餿，脘腹脹痛。容易覺得累。
+  - question: 舌象：舌紅苔厚膩。脈象：脈滑實。
+- id: CASE_077
+  name: 真實醫案 - 眩暈（肝腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 氣血兩虛
+  expected_diagnosis: 肝腎陰虛
   rounds:
-  - question: 疲倦乏力三月
-  - question: 近三月來覺得疲倦無力，氣短懶言，活動後易心悸。
-  - question: 舌象：淡 薄白。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212258_G890_85162320
-  name: 螺旋測試 - 帶下病（濕熱下注）
+  - question: 眩暈三個月。主要是不舒服，腰膝痠軟，頭暈目眩。
+  - question: 還有就是雙目乾澀，失眠多夢。最近睡得不太好。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_078
+  name: 真實醫案 - 遺尿（腎氣不足）
   type: benchmark_spiral
-  expected_diagnosis: 帶下病（濕熱下注）
+  expected_diagnosis: 腎氣不足
   rounds:
-  - question: 白帶量多色黃一月
-  - question: 帶下量多色黃，伴下腹悶脹，偶有瘙癢。
-  - question: 舌象：紅 黃膩。脈象：左寸(心):滑, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑, 右關(脾胃):滑, 右尺(命門):滑
-- id: CASE_20251005211403_K882_d9b9e957
-  name: 螺旋測試 - 泄瀉（濕熱內蘊）
+  - question: 遺尿三天。最近神疲乏力，小便頻數。
+  - question: 還有就是睡中遺尿，肢冷畏寒。平常工作壓力挺大的。
+  - question: 舌象：舌淡苔白。脈象：脈沉無力。
+- id: CASE_079
+  name: 真實醫案 - 痛經（氣滯血瘀）
   type: benchmark_spiral
-  expected_diagnosis: 泄瀉（濕熱內蘊）
+  expected_diagnosis: 氣滯血瘀
   rounds:
-  - question: 腹瀉四天
-  - question: 進食路邊攤後出現腹瀉每日4-5次，夾腹痛，食後加劇
-  - question: 舌象：淡紅 白膩。脈象：左寸(心):滑, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):滑, 右關(脾胃):滑數, 右尺(命門):沉
-- id: CASE_20251005211419_S255_f4f155ab
-  name: 螺旋測試 - 眩暈（腎虛精虧）
+  - question: 痛經一個月。我感覺經前腹痛，有血塊。
+  - question: 還有就是脹痛拒按，經血色暗。怕冷。
+  - question: 舌象：舌紫暗有瘀點。脈象：脈沉澀。
+- id: CASE_080
+  name: 真實醫案 - 胃痛（肝氣犯胃）
   type: benchmark_spiral
-  expected_diagnosis: 眩暈（腎虛精虧）
+  expected_diagnosis: 肝氣犯胃
   rounds:
-  - question: 頭暈耳鳴三月
-  - question: 頭暈耳鳴，伴腰痠倦怠，勞累後加劇
-  - question: 舌象：淡 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩弱, 右尺(命門):沉弱
-- id: CASE_20251005212226_D901_ab1435ad
-  name: 螺旋測試 - 眩暈頭痛
+  - question: 胃痛兩年。我感覺情志不暢則痛，噯氣頻頻。
+  - question: 還有就是胃脘脹痛，連及兩脅。大便有點不順。
+  - question: 舌象：舌苔薄白。脈象：脈弦。
+- id: CASE_081
+  name: 真實醫案 - 脅痛（肝膽濕熱）
   type: benchmark_spiral
-  expected_diagnosis: 眩暈頭痛
+  expected_diagnosis: 肝膽濕熱
   rounds:
-  - question: 頭痛兩週
-  - question: 患者兩週前開始出現頭頂及太陽穴疼痛，伴有煩躁易怒及目赤口苦。
-  - question: 舌象：紅 薄黃。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):弦, 右寸(肺):數, 右關(脾胃):弦, 右尺(命門):弦
-- id: CASE_20251005212334_T123_3aa7d828
-  name: 螺旋測試 - 心悸（氣血不足）
+  - question: 脅痛一年。我感覺口苦口乾，脅肋脹痛。
+  - question: 還有就是噁心厭油，小便黃赤。大便有點不順。
+  - question: 舌象：舌紅苔黃膩。脈象：脈弦數。
+- id: CASE_082
+  name: 真實醫案 - 積滯（乳食內積）
   type: benchmark_spiral
-  expected_diagnosis: 心悸（氣血不足）
+  expected_diagnosis: 乳食內積
   rounds:
-  - question: 心悸失眠兩月
-  - question: 夜間易醒，心悸不安，伴健忘。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212257_F789_3ddb9a5e
-  name: 螺旋測試 - 胸痺（氣虛痰阻）
+  - question: 積滯一年。最近大便酸臭，不思乳食。
+  - question: 還有就是脘腹脹痛，嘔吐酸餿。平常工作壓力挺大的。
+  - question: 舌象：舌紅苔厚膩。脈象：脈滑實。
+- id: CASE_083
+  name: 真實醫案 - 嘔吐（食滯胃脘）
   type: benchmark_spiral
-  expected_diagnosis: 胸痺（氣虛痰阻）
+  expected_diagnosis: 食滯胃脘
   rounds:
-  - question: 胸悶氣短兩週
-  - question: 兩週來感覺胸悶氣短，活動後明顯，伴有心悸。
-  - question: 舌象：暗紅 白膩。脈象：左寸(心):細弱, 左關(肝膽):弦, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212338_W456_f277cf5c
-  name: 螺旋測試 - 煩躁（肝鬱化火）
+  - question: 嘔吐半個月。最近噯氣厭食，脘腹脹滿。
+  - question: 還有就是吐後反快，嘔吐酸腐。怕冷。
+  - question: 舌象：舌苔厚膩。脈象：脈滑實。
+- id: CASE_084
+  name: 真實醫案 - 哮病（寒痰阻肺）
   type: benchmark_spiral
-  expected_diagnosis: 煩躁（肝鬱化火）
+  expected_diagnosis: 寒痰阻肺
   rounds:
-  - question: 胸悶煩躁一月
-  - question: 胸悶煩躁，心煩口苦，伴易怒與多夢。
-  - question: 舌象：紅 薄黃。脈象：左寸(心):弦數, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211420_S718_98f9c3c8
-  name: 螺旋測試 - 更年期綜合症（陰虛內熱）
+  - question: 哮病一年。最近痰白稀薄，胸膈滿悶。
+  - question: 還有就是喉中哮鳴，呼吸急促。胃口也不是很好。
+  - question: 舌象：舌苔白滑。脈象：脈弦緊。
+- id: CASE_085
+  name: 真實醫案 - 哮病（寒痰阻肺）
   type: benchmark_spiral
-  expected_diagnosis: 更年期綜合症（陰虛內熱）
+  expected_diagnosis: 寒痰阻肺
   rounds:
-  - question: 更年期煩躁失眠兩月
-  - question: 夜間心煩潮熱，睡眠不安，伴盜汗
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):數, 右關(脾胃):細弱, 右尺(命門):細
-- id: CASE_20251005212252_B345_546a01a7
-  name: 螺旋測試 - 咽喉乾痛
+  - question: 哮病半個月。主要是不舒服，痰白稀薄，胸膈滿悶。
+  - question: 還有就是呼吸急促，喉中哮鳴。怕冷。
+  - question: 舌象：舌苔白滑。脈象：脈弦緊。
+- id: CASE_086
+  name: 真實醫案 - 感冒（風寒束肺）
   type: benchmark_spiral
-  expected_diagnosis: 咽喉乾痛
+  expected_diagnosis: 風寒束肺
   rounds:
-  - question: 咽乾口苦三月
-  - question: 三月來咽喉乾澀，口苦，午後潮熱，伴失眠盜汗。
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):細弱
-- id: CASE_20251005211507_W992_93d7e55e
-  name: 螺旋測試 - 失眠（心脾兩虛）
+  - question: 感冒三個月。主要是不舒服，無汗頭痛，肢節痠痛。
+  - question: 還有就是惡寒重發熱輕，鼻塞流清涕。容易覺得累。
+  - question: 舌象：舌苔薄白。脈象：脈浮緊。
+- id: CASE_087
+  name: 真實醫案 - 帶下病（脾虛濕注）
   type: benchmark_spiral
-  expected_diagnosis: 失眠（心脾兩虛）
+  expected_diagnosis: 脾虛濕注
   rounds:
-  - question: 失眠焦慮兩月
-  - question: 入睡困難，多夢易醒，伴心悸健忘
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):細弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212332_R901_50e6c2d5
-  name: 螺旋測試 - 痛經（寒凝血瘀）
+  - question: 帶下病三個月。我感覺色白質稀，無腥臭。
+  - question: 還有就是帶下量多，面色萎黃。大便有點不順。
+  - question: 舌象：舌淡苔白膩。脈象：脈緩弱。
+- id: CASE_088
+  name: 真實醫案 - 崩漏（腎陰虛）
   type: benchmark_spiral
-  expected_diagnosis: 痛經（寒凝血瘀）
+  expected_diagnosis: 腎陰虛
   rounds:
-  - question: 經行腹痛三月
-  - question: 經期第一天腹痛明顯，經量少色暗，有血塊。
-  - question: 舌象：淡紫 白膩。脈象：左寸(心):弦, 左關(肝膽):弦澀, 左尺(腎):沉弱, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211359_H432_a893fc9c
-  name: 螺旋測試 - 鼻鼽（肺氣虛寒）
+  - question: 崩漏三個月。我感覺頭暈耳鳴，量少淋漓。
+  - question: 還有就是色鮮紅，經血非時而下。最近睡得不太好。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_089
+  name: 真實醫案 - 粉刺（肺經風熱）
   type: benchmark_spiral
-  expected_diagnosis: 鼻鼽（肺氣虛寒）
+  expected_diagnosis: 肺經風熱
   rounds:
-  - question: 鼻塞噴嚏兩週
-  - question: 晨起鼻塞流清涕，噴嚏頻作，天冷加重
-  - question: 舌象：淡白 薄白。脈象：左寸(心):浮, 左關(肝膽):浮, 左尺(腎):沉弱, 右寸(肺):浮, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211452_V660_e85bde57
-  name: 螺旋測試 - 消渴（陰虛燥熱）
+  - question: 粉刺三天。這幾天色紅疼痛，顏面丘疹。
+  - question: 還有就是大便秘結，口乾渴。平常工作壓力挺大的。
+  - question: 舌象：舌紅苔黃。脈象：脈浮數。
+- id: CASE_090
+  name: 真實醫案 - 水腫（腎陽衰微）
   type: benchmark_spiral
-  expected_diagnosis: 消渴（陰虛燥熱）
+  expected_diagnosis: 腎陽衰微
   rounds:
-  - question: 多飲多尿三月
-  - question: 口渴喜冷飲，食量大易餓，尿頻量多，體重下降3kg
-  - question: 舌象：紅 少苔。脈象：左寸(心):細數, 左關(肝膽):弦, 左尺(腎):細數, 右寸(肺):細數, 右關(脾胃):滑, 右尺(命門):細數
-- id: CASE_20251005211415_R102_7792d022
-  name: 螺旋測試 - 咳喘（肺脾兩虛）
+  - question: 水腫一年。主要是不舒服，按之凹陷，腰以下甚。
+  - question: 還有就是腰部冷痛，全身水腫。容易流汗。
+  - question: 舌象：舌淡胖苔白滑。脈象：脈沉細。
+- id: CASE_091
+  name: 真實醫案 - 絕經前後諸證（腎陰陽兩虛）
   type: benchmark_spiral
-  expected_diagnosis: 咳喘（肺脾兩虛）
+  expected_diagnosis: 腎陰陽兩虛
   rounds:
-  - question: 胸悶易喘兩月
-  - question: 活動後胸悶氣短，伴咳白痰，天冷時加重
-  - question: 舌象：淡 白膩。脈象：左寸(心):弱, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弱, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005212243_Q234_7bfa3083
-  name: 螺旋測試 - 腹瀉（脾腎陽虛）
+  - question: 絕經前後諸證三天。困擾我好久了，就是時而烘熱，浮腫便溏。
+  - question: 還有就是頭暈腰痠，時而畏寒。大便有點不順。
+  - question: 舌象：舌淡苔薄。脈象：脈沉弱。
+- id: CASE_092
+  name: 真實醫案 - 感冒（風寒束肺）
   type: benchmark_spiral
-  expected_diagnosis: 腹瀉（脾腎陽虛）
+  expected_diagnosis: 風寒束肺
   rounds:
-  - question: 腹瀉兩週
-  - question: 近兩週食後腹瀉，便溏無臭，伴腹鳴脹滿。
-  - question: 舌象：淡 白膩。脈象：左寸(心):細, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211501_W437_8fe4259d
-  name: 螺旋測試 - 便秘（胃熱腸燥）
+  - question: 感冒一個月。困擾我好久了，就是無汗頭痛，惡寒重發熱輕。
+  - question: 還有就是鼻塞流清涕，肢節痠痛。怕冷。
+  - question: 舌象：舌苔薄白。脈象：脈浮緊。
+- id: CASE_093
+  name: 真實醫案 - 癲狂（痰火擾神）
   type: benchmark_spiral
-  expected_diagnosis: 便秘（胃熱腸燥）
+  expected_diagnosis: 痰火擾神
   rounds:
-  - question: 便秘一月
-  - question: 大便乾結，2–3日一行，腹脹口乾
-  - question: 舌象：紅 黃燥。脈象：左寸(心):數, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):數, 右關(脾胃):滑數, 右尺(命門):細
-- id: CASE_20251005211417_S015_f333e2ea
-  name: 螺旋測試 - 久咳（陰虛燥熱）
+  - question: 癲狂一週。最近大便秘結，性情急躁。
+  - question: 還有就是面紅目赤，頭痛失眠。容易流汗。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_094
+  name: 真實醫案 - 厭食（脾運失健）
   type: benchmark_spiral
-  expected_diagnosis: 久咳（陰虛燥熱）
+  expected_diagnosis: 脾運失健
   rounds:
-  - question: 夜咳兩週
-  - question: 夜間乾咳不止，少痰，伴咽癢胸悶
-  - question: 舌象：紅 少苔。脈象：左寸(心):數, 左關(肝膽):弦, 左尺(腎):細, 右寸(肺):數, 右關(脾胃):滑, 右尺(命門):細弱
-- id: CASE_20251005212233_H345_1c2d7136
-  name: 螺旋測試 - 帶下病
+  - question: 厭食一年。主要是不舒服，大便溏薄，脘腹脹滿。
+  - question: 還有就是不思飲食，食而不化。胃口也不是很好。
+  - question: 舌象：舌苔白膩。脈象：脈尚有力。
+- id: CASE_095
+  name: 真實醫案 - 肺癆（肺陰虧損）
   type: benchmark_spiral
-  expected_diagnosis: 帶下病
+  expected_diagnosis: 肺陰虧損
   rounds:
-  - question: 帶下量多一月
-  - question: 患者近一月帶下量多，色黃質稠，有異味，伴小腹脹痛。
-  - question: 舌象：紅 黃膩。脈象：左寸(心):滑數, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑數, 右關(脾胃):滑, 右尺(命門):滑
-- id: CASE_20251005211505_W881_eccc5d27
-  name: 螺旋測試 - 痛經（氣滯血瘀）
+  - question: 肺癆兩年。最近顴紅，乾咳少痰。
+  - question: 還有就是潮熱盜汗，痰中帶血。怕冷。
+  - question: 舌象：舌紅少苔。脈象：脈細數。
+- id: CASE_096
+  name: 真實醫案 - 帶下病（脾虛濕注）
   type: benchmark_spiral
-  expected_diagnosis: 痛經（氣滯血瘀）
+  expected_diagnosis: 脾虛濕注
   rounds:
-  - question: 經痛三年
-  - question: 經前腹痛劇烈，經色暗有塊，伴乳脹
-  - question: 舌象：暗紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
-- id: CASE_20251005212235_J567_6feebd6a
-  name: 螺旋測試 - 胃脹痛
+  - question: 帶下病三天。最近帶下量多，無腥臭。
+  - question: 還有就是面色萎黃，色白質稀。容易覺得累。
+  - question: 舌象：舌淡苔白膩。脈象：脈緩弱。
+- id: CASE_097
+  name: 真實醫案 - 濕疹（濕熱浸淫）
   type: benchmark_spiral
-  expected_diagnosis: 胃脹痛
+  expected_diagnosis: 濕熱浸淫
   rounds:
-  - question: 胃脹痛兩週
-  - question: 兩週前開始出現胃部脹痛，餐後加重，嗳氣頻繁。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):細, 右關(脾胃):緩, 右尺(命門):沉弱
-- id: CASE_20251005211410_P044_2a6262a3
-  name: 螺旋測試 - 痺證（濕熱痺阻）
+  - question: 濕疹三個月。我感覺滲液瘙癢，發病急驟。
+  - question: 還有就是身熱心煩，皮膚潮紅灼熱。容易覺得累。
+  - question: 舌象：舌紅苔黃膩。脈象：脈滑數。
+- id: CASE_098
+  name: 真實醫案 - 嘔吐（食滯胃脘）
   type: benchmark_spiral
-  expected_diagnosis: 痺證（濕熱痺阻）
+  expected_diagnosis: 食滯胃脘
   rounds:
-  - question: 腳趾紅腫痛三天
-  - question: 夜間痛劇，觸痛明顯，近日攝入海鮮與酒
-  - question: 舌象：紅 黃膩。脈象：左寸(心):滑數, 左關(肝膽):弦, 左尺(腎):滑, 右寸(肺):滑數, 右關(脾胃):滑數, 右尺(命門):滑
-- id: CASE_20251005212251_A234_d822a0c6
-  name: 螺旋測試 - 口瘡（心火旺）
+  - question: 嘔吐一年。這陣子一直吐後反快，噯氣厭食。
+  - question: 還有就是脘腹脹滿，嘔吐酸腐。容易流汗。
+  - question: 舌象：舌苔厚膩。脈象：脈滑實。
+- id: CASE_099
+  name: 真實醫案 - 水腫（腎陽衰微）
   type: benchmark_spiral
-  expected_diagnosis: 口瘡（心火旺）
+  expected_diagnosis: 腎陽衰微
   rounds:
-  - question: 口腔潰瘍反覆兩月
-  - question: 反覆口腔潰瘍，疼痛影響飲食，伴口乾咽痛。
-  - question: 舌象：紅 黃薄。脈象：左寸(心):數, 左關(肝膽):弦數, 左尺(腎):細, 右寸(肺):滑數, 右關(脾胃):滑, 右尺(命門):細弱
-- id: CASE_20251005212230_F123_243d8f68
-  name: 螺旋測試 - 乳癖
+  - question: 水腫半個月。我感覺腰以下甚，腰部冷痛。
+  - question: 還有就是按之凹陷，全身水腫。大便有點不順。
+  - question: 舌象：舌淡胖苔白滑。脈象：脈沉細。
+- id: CASE_100
+  name: 真實醫案 - 厭食（脾運失健）
   type: benchmark_spiral
-  expected_diagnosis: 乳癖
+  expected_diagnosis: 脾運失健
   rounds:
-  - question: 經前乳房脹痛兩月
-  - question: 患者每逢月經前兩三天乳房明顯脹痛，經後緩解，伴情緒煩躁。
-  - question: 舌象：淡紅 薄白。脈象：左寸(心):弦, 左關(肝膽):弦, 左尺(腎):沉, 右寸(肺):弦, 右關(脾胃):緩, 右尺(命門):沉
+  - question: 厭食三個月。這陣子一直不思飲食，大便溏薄。
+  - question: 還有就是脘腹脹滿，食而不化。最近睡得不太好。
+  - question: 舌象：舌苔白膩。脈象：脈尚有力。

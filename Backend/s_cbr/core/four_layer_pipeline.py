@@ -122,8 +122,8 @@ class FourLayerSCBR:
         # 🆕 初始化 L2 Agentic 診斷器
         if self.agentic_enabled and self.cfg:
             try:
-                self.l2_agentic = L2AgenticDiagnosis(config=self.cfg)
-                logger.info("[L2Agentic] 初始化完成")
+                self.l2_agentic = L2AgenticDiagnosis(config=self.cfg, search_engine=self.SE)
+                logger.info("[L2Agentic] 初始化完成 (含內部知識庫連線)")
             except Exception as e:
                 logger.warning(f"[L2Agentic] 初始化失敗: {e}，將降級為傳統 L2 模式")
                 self.l2_agentic = None
@@ -307,11 +307,14 @@ class FourLayerSCBR:
                     # 標記增強
                     if "retrieval_strategy" in l1:
                         l1["retrieval_strategy"]["reasoning"] += " (已由 A+百科工具增強術語)"
-                else:
-                    logger.warning(f"🔧 [Tool Result] 外部工具查無 '{search_term}' 相關資料")
-                    # 即使工具沒查到，至少我們有了 search_term，把它加進去也比原本好
-                    user_query_text = f"{user_query} {search_term}"
-                    
+                    # =====================================================
+                    # 🚨 [CRITICAL FIX] 強制覆蓋 L1 的下一步決策
+                    # =====================================================
+                    # 原本 L1 因為信心低可能回傳 "ask_more"，導致後面檢索區塊被跳過。
+                    # 現在既然已經增強了關鍵字，我們就強制系統進行向量檢索。
+                    l1["next_action"] = "vector_search" 
+                    logger.info("🔧 [L1 Override] 已強制將 next_action 修改為 'vector_search'")
+                                    
             except Exception as e:
                 logger.warning(f"⚠️ 工具增強執行失敗 (不影響主流程): {e}")
 

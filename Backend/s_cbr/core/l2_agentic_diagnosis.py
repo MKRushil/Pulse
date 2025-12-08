@@ -28,6 +28,7 @@ import asyncio
 # 導入您已開發的工具庫
 from ..tools.tcm_tools import TCMTools, TCMUnifiedToolkit
 from ..utils.terminology_manager import TerminologyManager
+# from .search_engine import SearchEngine 
 
 logger = logging.getLogger("L2AgenticDiagnosis")
 
@@ -92,11 +93,12 @@ class L2AgenticDiagnosis:
     L2 Agentic 診斷層
     """
     
-    def __init__(self, config: Any):
+    def __init__(self, config: Any, search_engine: Any = None):
         """
         初始化 L2 Agentic 診斷層
         """
         self.config = config
+        self.se = search_engine
         self.toolkit = TCMUnifiedToolkit()
         self.tools = TCMTools()
         self.term_manager = TerminologyManager()
@@ -173,6 +175,33 @@ class L2AgenticDiagnosis:
         logger.info(f"[L2Agentic] 診斷完成 - 驗證狀態: {output.validation_status}")
         return output
     
+    # [NEW] 內部知識庫查詢方法
+    async def _query_internal_knowledge(self, syndrome_name: str) -> Dict[str, Any]:
+        """從 Weaviate TCM Class 查詢標準證型知識"""
+        if not self.se or not syndrome_name:
+            return None
+            
+        try:
+            # 使用混合檢索查 TCM Class
+            results = await self.se.hybrid_search(
+                index="TCM",
+                text=syndrome_name,
+                alpha=0.7, # 偏重向量相似度，因為證型名稱可能有變體
+                limit=1
+            )
+            
+            if results and len(results) > 0:
+                top_result = results[0]
+                # 簡單驗證相似度 (例如 score > 0.7)
+                if top_result.get("score", 0) > 0.7:
+                    logger.info(f"[L2Agentic] 內部知識庫命中: {top_result.get('name_zh')}")
+                    return top_result
+            
+            return None
+        except Exception as e:
+            logger.warning(f"[L2Agentic] 內部知識庫查詢失敗: {e}")
+            return None
+    
     # ==================== 適配方法（用於 four_layer_pipeline 調用）====================
     
     async def enhance_diagnosis(
@@ -228,11 +257,34 @@ class L2AgenticDiagnosis:
             l2_raw_result,
             retrieved_cases=retrieved_cases
         )
+
+        # 🚨 [Step 3.5] 內部知識庫增強 (Internal Knowledge Enrichment)
+        primary_syndrome = initial_diagnosis.get("primary_syndrome", "")
+        internal_knowledge = await self._query_internal_knowledge(primary_syndrome)
         
+        if internal_knowledge:
+            # 將內部知識注入診斷資訊
+            def_text = internal_knowledge.get("definition", "")
+            manifest = internal_knowledge.get("clinical_manifestations", [])
+            manifest_str = "、".join(manifest) if isinstance(manifest, list) else str(manifest)
+            
+            # 補充到 knowledge_supplements (模擬 Tool B 的效果)
+            supplement_text = f"【標準定義】{def_text}\n【臨床表現】{manifest_str}"
+            if "knowledge_supplements" not in initial_diagnosis:
+                initial_diagnosis["knowledge_supplements"] = []
+            initial_diagnosis["knowledge_supplements"].append(supplement_text)
+            
+            # 標記已獲得內部驗證
+            initial_diagnosis["internal_validated"] = True
+            
+            # 若原病機分析不足，可用定義補充
+            if len(initial_diagnosis.get("pathogenesis", "")) < 10:
+                initial_diagnosis["pathogenesis"] = f"(基於標準庫補充) {def_text}"
+
         # 步驟 4：決策是否需要工具調用
         tool_decision = self._decide_tool_calls(
             anchored_case=anchored_case,
-            initial_diagnosis=initial_diagnosis,
+            initial_diagnosis=initial_diagnosis, # 這裡已經包含內部知識了
             case_completeness=case_completeness,
             diagnosis_confidence=diagnosis_confidence,
             l1_decision=l1_decision
@@ -509,12 +561,18 @@ class L2AgenticDiagnosis:
 
         # --- 策略 A: 知識缺口 (Knowledge Gap) -> Tool B (A+百科) ---
         has_pathogenesis = len(initial_diagnosis.get("pathogenesis", "")) > 20
-        if case_completeness < self.tool_config["knowledge_gap_threshold"] or not has_pathogenesis:
+        # [MODIFIED] 檢查是否已經有內部知識驗證
+        has_internal_knowledge = initial_diagnosis.get("internal_validated", False)
+        
+        # 如果完整度低，且沒有內部知識支撐，才調用外部百科
+        if (case_completeness < self.tool_config["knowledge_gap_threshold"] or not has_pathogenesis) and not has_internal_knowledge:
             if self.tool_config["enable_tool_b"]:
                 decision.should_call_tool_b = True
                 decision.reasons.append(ToolCallReason.KNOWLEDGE_GAP)
                 decision.target_terms.append(target_syndrome)
-                logger.info(f"[L2Agentic] 觸發 Tool B (病機缺失/完整度不足: {case_completeness:.2f})")
+                logger.info(f"[L2Agentic] 觸發 Tool B (病機缺失且無內部庫存: {case_completeness:.2f})")
+        elif has_internal_knowledge:
+            logger.info(f"[L2Agentic] 內部知識庫已滿足知識缺口，跳過 Tool B")
 
         # --- 策略 B: 幻覺校驗 (Hallucination Check) -> Tool C (ETCM) ---
         if diagnosis_confidence < self.tool_config["validation_confidence_threshold"]:

@@ -252,6 +252,6 @@ class ExperimentRunner:
 
 if __name__ == "__main__":
     # 使用方式: python thesis_experiment_runner_v5.py [Agentic|Baseline]
-    target_mode = sys.argv[1] if len(sys.argv) > 1 else "Agentic"
+    target_mode = sys.argv[1] if len(sys.argv) > 1 else "Baseline"
     runner = ExperimentRunner(Config.YAML_FILE)
     runner.run_experiment(target_mode)

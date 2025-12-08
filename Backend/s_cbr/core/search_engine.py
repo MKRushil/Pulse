@@ -37,6 +37,12 @@ class SearchEngine:
             # 原始資料
             "raw_data", "created_at", "updated_at"
         ],
+        "TCM": [ # [NEW] 新增標準證型知識庫 Schema
+            "tcm_id", "name_zh", "name_en", 
+            "definition", "clinical_manifestations", 
+            "category", "subcategory", "gbt_code",
+            "associated_western_diseases", "vector_text"
+        ]
         # RPCase 與其他來源已不使用於整改版
     }
 
