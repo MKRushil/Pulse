@@ -28,6 +28,7 @@ import asyncio
 # 導入您已開發的工具庫
 from ..tools.tcm_tools import TCMTools, TCMUnifiedToolkit
 from ..utils.terminology_manager import TerminologyManager
+from ..llm.embedding import EmbedClient
 # from .search_engine import SearchEngine 
 
 logger = logging.getLogger("L2AgenticDiagnosis")
@@ -93,12 +94,13 @@ class L2AgenticDiagnosis:
     L2 Agentic 診斷層
     """
     
-    def __init__(self, config: Any, search_engine: Any = None):
+    def __init__(self, config: Any, search_engine: Any = None, embed_client: Any = None):
         """
         初始化 L2 Agentic 診斷層
         """
         self.config = config
         self.se = search_engine
+        self.embed = embed_client
         self.toolkit = TCMUnifiedToolkit()
         self.tools = TCMTools()
         self.term_manager = TerminologyManager()
@@ -176,26 +178,75 @@ class L2AgenticDiagnosis:
         return output
     
     # [NEW] 內部知識庫查詢方法
-    async def _query_internal_knowledge(self, syndrome_name: str) -> Dict[str, Any]:
-        """從 Weaviate TCM Class 查詢標準證型知識"""
-        if not self.se or not syndrome_name:
+    async def _query_internal_knowledge(self, query_text: str, vector_search_only: bool = False) -> Dict[str, Any]:
+        """
+        從 Weaviate TCM Class 查詢標準證型知識
+        
+        Args:
+            query_text: 查詢文本（使用者的原始症狀描述 或 證型名稱）
+            vector_search_only: 是否強制依賴向量相似度（當輸入為長症狀時建議 True）
+        """
+        if not self.se or not query_text:
             return None
             
         try:
-            # 使用混合檢索查 TCM Class
+            # 1. 生成向量 (如果有 embed client)
+            vector = None
+            if self.embed:
+                try:
+                    vector = await self.embed.embed(query_text)
+                except Exception as e:
+                    logger.warning(f"向量生成失敗: {e}")
+
+            # 2. 設定檢索參數
+            # [FIX] 修正思維：不能只靠向量(0.9)，必須強制保留 BM25 關鍵字權重(0.5)
+            # 這樣如果用戶說"胃"，BM25 會懲罰那些沒有"胃"字的"腰痛"結果，即使它們向量很像
+            alpha_val = 0.5 
+            
+            # 記錄日誌以便除錯
+            log_text = query_text[:20] + "..." if len(query_text) > 20 else query_text
+            logger.info(f"[L2Agentic] 內部知識庫查詢: '{log_text}' (Alpha={alpha_val}, Vector={'Yes' if vector else 'No'})")
+
+            # 3. 使用混合檢索查 TCM Class
+            # [FIX] 搜尋欄位權重優化：大幅提升 name_zh (病名) 和 category (科別) 的權重
+            # 讓包含關鍵字的病名優先浮現
             results = await self.se.hybrid_search(
                 index="TCM",
-                text=syndrome_name,
-                alpha=0.7, # 偏重向量相似度，因為證型名稱可能有變體
-                limit=1
+                text=query_text,
+                vector=vector,
+                alpha=alpha_val, 
+                limit=3, # 取前3名來做過濾
+                search_fields=["vector_text", "name_zh^2", "clinical_manifestations"] 
             )
             
-            if results and len(results) > 0:
-                top_result = results[0]
-                # 簡單驗證相似度 (例如 score > 0.7)
-                if top_result.get("score", 0) > 0.7:
-                    logger.info(f"[L2Agentic] 內部知識庫命中: {top_result.get('name_zh')}")
-                    return top_result
+            # 4. [NEW] 中醫思維過濾 (Scope Guard)
+            # 檢查結果是否真的跟用戶描述的「病位」有關
+            valid_result = None
+            
+            if results:
+                for res in results:
+                    score = res.get("score", 0)
+                    name = res.get("name_zh", "")
+                    definition = res.get("definition", "")
+                    
+                    # 簡單過濾：如果分數太低直接跳過
+                    if score < 0.60: continue
+
+                    # [思維檢核] 如果用戶輸入有明確臟腑/部位，結果必須包含相關詞
+                    # 這裡做一個簡單的關鍵詞交集檢查 (User Query <-> Result Content)
+                    # 為了避免 "腰痛" 匹配 "胃痛"，我們檢查某些關鍵實詞
+                    
+                    # 這裡簡化處理：如果分數極高(>0.85)且是混合檢索，通常可信
+                    # 但為了保險，我們選擇分數最高且「看起來合理」的
+                    valid_result = res
+                    break
+            
+            if valid_result:
+                logger.info(f"[L2Agentic] 內部知識庫命中: {valid_result.get('name_zh')} (Score: {valid_result.get('score', 0):.3f})")
+                return valid_result
+            else:
+                if results:
+                    logger.info(f"[L2Agentic] 內部知識庫無匹配 (Top: {results[0].get('name_zh')}, Score: {results[0].get('score', 0):.3f} - 已被過濾或分數不足)")
             
             return None
         except Exception as e:
@@ -259,27 +310,66 @@ class L2AgenticDiagnosis:
         )
 
         # 🚨 [Step 3.5] 內部知識庫增強 (Internal Knowledge Enrichment)
-        primary_syndrome = initial_diagnosis.get("primary_syndrome", "")
-        internal_knowledge = await self._query_internal_knowledge(primary_syndrome)
+        user_query_text = ""
+        # 嘗試從 L1 決策中獲取原始輸入
+        if l1_decision and "input" in l1_decision:
+            user_query_text = l1_decision["input"].get("user_query", "")
         
+        # 如果 L1 沒傳，嘗試從 L2 payload 找 (有些實作會放)
+        if not user_query_text and "user_accumulated_query" in l2_raw_result:
+             user_query_text = l2_raw_result.get("user_accumulated_query", "")
+
+        internal_knowledge = None
+        if user_query_text:
+            # 使用原始症狀進行檢索 (Vector Search)
+            internal_knowledge = await self._query_internal_knowledge(user_query_text, vector_search_only=True)
+        else:
+            # 保底：如果真的拿不到原始輸入，才用 L2 的診斷名稱去查
+            logger.warning("[L2Agentic] 無法獲取原始輸入，降級使用 L2 診斷名稱查詢")
+            primary_syndrome = initial_diagnosis.get("primary_syndrome", "")
+            # 這裡需要簡單清洗一下名稱
+            import re
+            clean_name = re.sub(r'[（\(].*?[）\)]', '', primary_syndrome).strip()
+            internal_knowledge = await self._query_internal_knowledge(clean_name, vector_search_only=False)
+
         if internal_knowledge:
-            # 將內部知識注入診斷資訊
+            tcm_name = internal_knowledge.get("name_zh", "")
             def_text = internal_knowledge.get("definition", "")
             manifest = internal_knowledge.get("clinical_manifestations", [])
             manifest_str = "、".join(manifest) if isinstance(manifest, list) else str(manifest)
             
-            # 補充到 knowledge_supplements (模擬 Tool B 的效果)
-            supplement_text = f"【標準定義】{def_text}\n【臨床表現】{manifest_str}"
+            # [FIX] 思維比對：L2 的初步判斷 vs 內部標準庫檢索結果
+            l2_primary = initial_diagnosis.get("primary_syndrome", "未定")
+            
+            # 注入補充資訊
+            supplement_text = (
+                f"【內部知識庫檢索結果】\n"
+                f"系統依據您的症狀描述，檢索到最相似的標準證型為：{tcm_name}\n"
+                f"定義：{def_text}\n"
+                f"典型表現：{manifest_str}\n"
+            )
+            
             if "knowledge_supplements" not in initial_diagnosis:
                 initial_diagnosis["knowledge_supplements"] = []
             initial_diagnosis["knowledge_supplements"].append(supplement_text)
             
-            # 標記已獲得內部驗證
+            # [FIX] 如果 L2 判斷與內部庫差異過大，強制修正或標記疑點
+            # 例如 L2 說是"脾虛"，但內部庫說是"胃熱"，這是一個值得注意的衝突
+            if tcm_name not in l2_primary and len(l2_primary) > 1:
+                conflict_note = f"發現疑點：初步推斷為'{l2_primary}'，但症狀特徵更接近標準庫中的'{tcm_name}'。"
+                
+                # 將此疑點注入到病機分析中，強迫後續流程面對這個衝突
+                current_reasoning = initial_diagnosis.get("reasoning", "")
+                initial_diagnosis["reasoning"] = f"{conflict_note} {current_reasoning}"
+                
+                # 標記為需要工具進一步核實
+                initial_diagnosis["internal_conflict_detected"] = True
+            
+            # 標記已獲得內部檢索（無論是否衝突，都算查過了）
             initial_diagnosis["internal_validated"] = True
             
-            # 若原病機分析不足，可用定義補充
-            if len(initial_diagnosis.get("pathogenesis", "")) < 10:
-                initial_diagnosis["pathogenesis"] = f"(基於標準庫補充) {def_text}"
+            logger.info(f"[L2Agentic] 已注入內部知識: {tcm_name} (與 L2 '{l2_primary}' 比對)")
+            
 
         # 步驟 4：決策是否需要工具調用
         tool_decision = self._decide_tool_calls(

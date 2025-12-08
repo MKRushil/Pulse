@@ -122,7 +122,7 @@ class FourLayerSCBR:
         # 🆕 初始化 L2 Agentic 診斷器
         if self.agentic_enabled and self.cfg:
             try:
-                self.l2_agentic = L2AgenticDiagnosis(config=self.cfg, search_engine=self.SE)
+                self.l2_agentic = L2AgenticDiagnosis(config=self.cfg, search_engine=self.SE,embed_client=self.embed)
                 logger.info("[L2Agentic] 初始化完成 (含內部知識庫連線)")
             except Exception as e:
                 logger.warning(f"[L2Agentic] 初始化失敗: {e}，將降級為傳統 L2 模式")

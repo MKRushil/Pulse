@@ -161,3 +161,582 @@
 2025-12-09 00:28:54 - s_cbr.SCBREngine - INFO - ✅ 診斷完成 [SCBR-20251209-002815-75b617d7] 耗時: 39.14s
 2025-12-09 00:28:54 - s_cbr.SCBREngine - INFO -    輪次: 1, 可繼續: True
 2025-12-09 00:28:54 - s_cbr.SCBR-API - INFO - ✅ 診斷完成 [IP: 127.0.0.1] 耗時: 39.14s
+2025-12-09 00:29:28 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:29:28 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:29:28 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:29:28 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:29:28 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:29:28 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:29:28 - L2AgenticDiagnosis - INFO - [L2Agentic] 初始化完成 - 工具調用已啟用
+2025-12-09 00:29:28 - s_cbr.FourLayerPipeline - INFO - [L2Agentic] 初始化完成 (含內部知識庫連線)
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:29:28 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO - 
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:29:29 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:29:30 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:29:31 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:29:31 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:29:31 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:35:22 - s_cbr.SCBR-API - INFO - 📥 收到診斷請求 [IP: 127.0.0.1]
+2025-12-09 00:35:22 - s_cbr.SCBR-API - INFO -    問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:35:22 - s_cbr.SCBR-API - INFO -    Session ID: None
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO - 🌀 啟動診斷 [SCBR-20251209-003522-e6ab8a3e]
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO -    問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO -    session_id: None
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO -    continue_spiral: False
+2025-12-09 00:35:22 - s_cbr.DialogManager - INFO - 🆕 創建會話: bbf1f778***
+2025-12-09 00:35:22 - s_cbr.DialogManager - INFO -    初始問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:35:22 - s_cbr.DialogManager - INFO -    當前會話總數: 1
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO -    會話ID: bbf1f778-a168-4760-bc45-da0b1872fe28
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO -    當前輪次: 1
+2025-12-09 00:35:22 - s_cbr.SCBREngine - INFO -    累積問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:35:22 - s_cbr.FourLayerPipeline - INFO - [L1] 使用 Agentic NLU 模式
+2025-12-09 00:35:31 - s_cbr.LLMClient - WARNING - ⚠️ 輸出過濾：檢測到 1 處敏感資訊
+2025-12-09 00:35:31 - s_cbr.FourLayerPipeline - INFO - [L1 FINAL RESULT] L1 狀態: ok
+2025-12-09 00:35:31 - s_cbr.FourLayerPipeline - INFO - [L1 AGENTIC DECISION]
+  Overall Confidence: 0.800
+  Decided Alpha: 0.6
+  Strategy Type: balanced
+  Expected Quality: high
+2025-12-09 00:35:31 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL] 使用 Agentic 智能檢索
+2025-12-09 00:35:31 - AgenticRetrieval - INFO - [AgenticRetrieval] 開始智能檢索 - Alpha: 0.6, 策略: balanced, 預期品質: high
+2025-12-09 00:35:31 - AgenticRetrieval - INFO - [AgenticRetrieval] 執行檢索 #1 - Alpha: 0.60
+2025-12-09 00:35:32 - AgenticRetrieval - INFO - [AgenticRetrieval] 向量生成成功 - 維度: 1024
+2025-12-09 00:35:32 - s_cbr.SearchEngine - INFO - [SearchEngine] 智能檢索啟動 - Index: TCMCase, Alpha: 0.60, 向量: 是, Limit: 3
+2025-12-09 00:35:32 - s_cbr.SearchEngine - INFO - 🔎 TCMCase 啟動檢索: Mode=HYBRID, α=0.60, 查詢字串長度=34 (這幾天胃很不舒服，感覺脹脹的，按下去更痛...)
+2025-12-09 00:35:32 - s_cbr.SearchEngine - INFO - 🔎 TCMCase HYBRID α=0.6, qdim=1024, fields=['full_text'], props=['gender', 'raw_data', 'jieba_tokens', 'syndrome_terms', 'pulse_terms', 'case_id', 'diagnosis', 'tongue_terms', 'treatment_principle', 'zangfu_terms', 'symptom_terms', 'suggestion', 'chief_complaint', 'visit_date', 'patient_id', 'age', 'created_at', 'updated_at', 'full_text', 'treatment_terms']
+2025-12-09 00:35:32 - s_cbr.SearchEngine - INFO - 📊 TCMCase 搜索: 3 個結果
+2025-12-09 00:35:32 - s_cbr.SearchEngine - INFO - [SearchEngine] 智能檢索完成 - 返回 3 個結果
+2025-12-09 00:35:32 - AgenticRetrieval - INFO - [AgenticRetrieval] 檢索完成 - 找到 3 個案例, 品質: 0.716
+2025-12-09 00:35:32 - AgenticRetrieval - INFO - [AgenticRetrieval] ✅ 檢索成功 (品質: 0.716)
+2025-12-09 00:35:32 - s_cbr.FourLayerPipeline - INFO - [AGENTIC RETRIEVAL]
+  初始 Alpha: 0.60
+  最終 Alpha: 0.60
+  嘗試次數: 1
+  品質評分: 0.716
+  Fallback: 否
+2025-12-09 00:35:32 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL RESULT] 成功找到 3 個案例. Top 3 範例: [{'case_id': 'CASE_20251005211408_M508_dfea1255', 'score': '0.6000'}, {'case_id': 'CASE_20251005212325_M456_ea0fddb3', 'score': '0.5904'}, {'case_id': 'CASE_20251005211456_V993_ae529307', 'score': '0.5783'}]
+2025-12-09 00:35:39 - s_cbr.FourLayerPipeline - INFO - [L2] 使用 Agentic 增強模式
+2025-12-09 00:35:39 - L2AgenticDiagnosis - INFO - [L2Agentic] 使用 enhance_diagnosis 適配方法
+2025-12-09 00:35:39 - L2AgenticDiagnosis - INFO - [L2Agentic] 評估結果
+  案例完整度: 0.70
+  診斷置信度: 0.73
+2025-12-09 00:35:39 - s_cbr.SearchEngine - INFO - 🔎 TCM 啟動檢索: Mode=BM25-only, α=0.70, 查詢字串長度=8 (脾虛（初步傾向）...)
+2025-12-09 00:35:39 - s_cbr.SearchEngine - INFO - 🔎 TCM BM25-only α=0.7, qdim=0, fields=['bm25_text'], props=['gbt_code', 'subcategory', 'name_zh', 'category', 'name_en', 'tcm_id', 'vector_text', 'associated_western_diseases', 'definition', 'clinical_manifestations']
+2025-12-09 00:35:39 - s_cbr.SearchEngine - INFO - 📊 TCM 搜索: 0 個結果
+2025-12-09 00:35:39 - L2AgenticDiagnosis - INFO - [L2Agentic] 觸發 Tool A (尋求 ICD-11 標準化背書)
+2025-12-09 00:35:39 - L2AgenticDiagnosis - INFO - [L2Agentic] 並行執行 1 個工具調用
+2025-12-09 00:35:39 - primp - INFO - response: https://www.bing.com/search?q=site%3Aicd.who.int%2Fct11%2Ficd11_mms%2Fzh+%E8%84%BE%E8%99%9B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89 200
+2025-12-09 00:35:40 - primp - INFO - response: https://www.bing.com/search?q=site%3Aicd.who.int%2Fct11%2Ficd11_mms%2Fzh+%E8%84%BE%E8%99%9B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89&first=11&FORM=PERE 200
+2025-12-09 00:35:41 - primp - INFO - response: https://www.bing.com/search?q=site%3Aicd.who.int%2Fct11%2Ficd11_mms%2Fzh+%E8%84%BE%E8%99%9B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89&first=21&FORM=PERE1 200
+2025-12-09 00:35:42 - primp - INFO - response: https://www.bing.com/search?q=site%3Aicd.who.int%2Fct11%2Ficd11_mms%2Fzh+%E8%84%BE%E8%99%9B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89&first=31&FORM=PERE2 200
+2025-12-09 00:35:43 - primp - INFO - response: https://www.bing.com/search?q=site%3Aicd.who.int%2Fct11%2Ficd11_mms%2Fzh+%E8%84%BE%E8%99%9B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89&first=41&FORM=PERE3 200
+2025-12-09 00:35:43 - L2AgenticDiagnosis - INFO - [L2Agentic] 增強完成
+  驗證狀態: validated
+  工具調用數: 1
+  置信度提升: +0.15
+2025-12-09 00:35:43 - s_cbr.FourLayerPipeline - INFO - [L2 AGENTIC ENHANCEMENT]
+  驗證狀態: validated
+  工具調用數: 1
+  置信度提升: +0.15
+  案例完整度: 0.70
+  診斷置信度: 0.73
+2025-12-09 00:35:43 - s_cbr.FourLayerPipeline - INFO - [L2 DIAGNOSIS SUMMARY] 錨定 ID: CASE_20251005212325_M456_ea0fddb3, 證型: 脾虛（初步傾向）, 覆蓋度: 0.60
+2025-12-09 00:35:55 - s_cbr.FourLayerPipeline - INFO - [L3 REVIEW STATUS] 審核結果: rewritten
+2025-12-09 00:36:03 - s_cbr.DialogManager - INFO - 📊 記錄第 1 輪結果到會話 bbf1f778***
+2025-12-09 00:36:03 - s_cbr.SCBREngine - INFO - ✅ 診斷完成 [SCBR-20251209-003522-e6ab8a3e] 耗時: 40.66s
+2025-12-09 00:36:03 - s_cbr.SCBREngine - INFO -    輪次: 1, 可繼續: True
+2025-12-09 00:36:03 - s_cbr.SCBR-API - INFO - ✅ 診斷完成 [IP: 127.0.0.1] 耗時: 40.66s
+2025-12-09 00:48:19 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:48:19 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:48:19 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:48:19 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:48:19 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:48:19 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:48:19 - L2AgenticDiagnosis - INFO - [L2Agentic] 初始化完成 - 工具調用已啟用
+2025-12-09 00:48:19 - s_cbr.FourLayerPipeline - INFO - [L2Agentic] 初始化完成 (含內部知識庫連線)
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:48:19 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO - 
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:48:20 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:48:21 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:48:21 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:48:21 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:48:21 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:49:06 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:49:06 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:49:06 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:49:06 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:49:06 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:49:06 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:49:06 - L2AgenticDiagnosis - INFO - [L2Agentic] 初始化完成 - 工具調用已啟用
+2025-12-09 00:49:06 - s_cbr.FourLayerPipeline - INFO - [L2Agentic] 初始化完成 (含內部知識庫連線)
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:49:06 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO - 
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:49:06 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:49:08 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:49:08 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:49:08 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:49:08 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:49:16 - s_cbr.SCBR-API - INFO - 📥 收到診斷請求 [IP: 127.0.0.1]
+2025-12-09 00:49:16 - s_cbr.SCBR-API - INFO -    問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:49:16 - s_cbr.SCBR-API - INFO -    Session ID: None
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO - 🌀 啟動診斷 [SCBR-20251209-004916-d9671192]
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO -    問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO -    session_id: None
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO -    continue_spiral: False
+2025-12-09 00:49:16 - s_cbr.DialogManager - INFO - 🆕 創建會話: 2c1684bb***
+2025-12-09 00:49:16 - s_cbr.DialogManager - INFO -    初始問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:49:16 - s_cbr.DialogManager - INFO -    當前會話總數: 1
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO -    會話ID: 2c1684bb-d58e-47f2-9928-cdc3e5b756fc
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO -    當前輪次: 1
+2025-12-09 00:49:16 - s_cbr.SCBREngine - INFO -    累積問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:49:16 - s_cbr.FourLayerPipeline - INFO - [L1] 使用 Agentic NLU 模式
+2025-12-09 00:49:25 - s_cbr.LLMClient - WARNING - ⚠️ 輸出過濾：檢測到 1 處敏感資訊
+2025-12-09 00:49:25 - s_cbr.FourLayerPipeline - INFO - [L1 FINAL RESULT] L1 狀態: ok
+2025-12-09 00:49:25 - s_cbr.FourLayerPipeline - INFO - [L1 AGENTIC DECISION]
+  Overall Confidence: 0.650
+  Decided Alpha: 0.6
+  Strategy Type: balanced
+  Expected Quality: medium
+2025-12-09 00:49:25 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL] 使用 Agentic 智能檢索
+2025-12-09 00:49:25 - AgenticRetrieval - INFO - [AgenticRetrieval] 開始智能檢索 - Alpha: 0.6, 策略: balanced, 預期品質: medium
+2025-12-09 00:49:25 - AgenticRetrieval - INFO - [AgenticRetrieval] 執行檢索 #1 - Alpha: 0.60
+2025-12-09 00:49:26 - AgenticRetrieval - INFO - [AgenticRetrieval] 向量生成成功 - 維度: 1024
+2025-12-09 00:49:26 - s_cbr.SearchEngine - INFO - [SearchEngine] 智能檢索啟動 - Index: TCMCase, Alpha: 0.60, 向量: 是, Limit: 3
+2025-12-09 00:49:26 - s_cbr.SearchEngine - INFO - 🔎 TCMCase 啟動檢索: Mode=HYBRID, α=0.60, 查詢字串長度=34 (這幾天胃很不舒服，感覺脹脹的，按下去更痛...)
+2025-12-09 00:49:26 - s_cbr.SearchEngine - INFO - 🔎 TCMCase HYBRID α=0.6, qdim=1024, fields=['full_text'], props=['suggestion', 'pulse_terms', 'treatment_terms', 'full_text', 'gender', 'case_id', 'syndrome_terms', 'treatment_principle', 'visit_date', 'age', 'raw_data', 'chief_complaint', 'zangfu_terms', 'tongue_terms', 'updated_at', 'jieba_tokens', 'patient_id', 'diagnosis', 'created_at', 'symptom_terms']
+2025-12-09 00:49:26 - s_cbr.SearchEngine - INFO - 📊 TCMCase 搜索: 3 個結果
+2025-12-09 00:49:26 - s_cbr.SearchEngine - INFO - [SearchEngine] 智能檢索完成 - 返回 3 個結果
+2025-12-09 00:49:26 - AgenticRetrieval - INFO - [AgenticRetrieval] 檢索完成 - 找到 3 個案例, 品質: 0.716
+2025-12-09 00:49:26 - AgenticRetrieval - INFO - [AgenticRetrieval] ✅ 檢索成功 (品質: 0.716)
+2025-12-09 00:49:26 - s_cbr.FourLayerPipeline - INFO - [AGENTIC RETRIEVAL]
+  初始 Alpha: 0.60
+  最終 Alpha: 0.60
+  嘗試次數: 1
+  品質評分: 0.716
+  Fallback: 否
+2025-12-09 00:49:26 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL RESULT] 成功找到 3 個案例. Top 3 範例: [{'case_id': 'CASE_20251005211408_M508_dfea1255', 'score': '0.6000'}, {'case_id': 'CASE_20251005212325_M456_ea0fddb3', 'score': '0.5904'}, {'case_id': 'CASE_20251005211456_V993_ae529307', 'score': '0.5783'}]
+2025-12-09 00:49:33 - s_cbr.FourLayerPipeline - INFO - [L2] 使用 Agentic 增強模式
+2025-12-09 00:49:33 - L2AgenticDiagnosis - INFO - [L2Agentic] 使用 enhance_diagnosis 適配方法
+2025-12-09 00:49:33 - L2AgenticDiagnosis - INFO - [L2Agentic] 評估結果
+  案例完整度: 0.70
+  診斷置信度: 0.68
+2025-12-09 00:49:33 - L2AgenticDiagnosis - WARNING - [L2Agentic] 內部知識庫查詢失敗: 'L2AgenticDiagnosis' object has no attribute 'embed'
+2025-12-09 00:49:33 - L2AgenticDiagnosis - INFO - [L2Agentic] 觸發 Tool C (置信度不足: 0.68)
+2025-12-09 00:49:33 - L2AgenticDiagnosis - INFO - [L2Agentic] 並行執行 1 個工具調用
+2025-12-09 00:49:33 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism 200
+2025-12-09 00:49:34 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=11&FORM=PERE 200
+2025-12-09 00:49:37 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=21&FORM=PERE1 200
+2025-12-09 00:49:38 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=31&FORM=PERE2 200
+2025-12-09 00:49:39 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=41&FORM=PERE3 200
+2025-12-09 00:49:39 - L2AgenticDiagnosis - INFO - [L2Agentic] 增強完成
+  驗證狀態: validated
+  工具調用數: 1
+  置信度提升: +0.05
+2025-12-09 00:49:39 - s_cbr.FourLayerPipeline - INFO - [L2 AGENTIC ENHANCEMENT]
+  驗證狀態: validated
+  工具調用數: 1
+  置信度提升: +0.05
+  案例完整度: 0.70
+  診斷置信度: 0.68
+2025-12-09 00:49:39 - s_cbr.FourLayerPipeline - INFO - [L2 DIAGNOSIS SUMMARY] 錨定 ID: CASE_20251005212325_M456_ea0fddb3, 證型: 脾虛證型（初步傾向）, 覆蓋度: 0.60
+2025-12-09 00:49:46 - s_cbr.FourLayerPipeline - INFO - [L3 REVIEW STATUS] 審核結果: rewritten
+2025-12-09 00:49:53 - s_cbr.DialogManager - INFO - 📊 記錄第 1 輪結果到會話 2c1684bb***
+2025-12-09 00:49:53 - s_cbr.SCBREngine - INFO - ✅ 診斷完成 [SCBR-20251209-004916-d9671192] 耗時: 37.24s
+2025-12-09 00:49:53 - s_cbr.SCBREngine - INFO -    輪次: 1, 可繼續: True
+2025-12-09 00:49:53 - s_cbr.SCBR-API - INFO - ✅ 診斷完成 [IP: 127.0.0.1] 耗時: 37.24s
+2025-12-09 00:52:06 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:52:06 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:52:06 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:52:06 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:52:06 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:52:06 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:52:06 - s_cbr.FourLayerPipeline - WARNING - [L2Agentic] 初始化失敗: name 'embed_client' is not defined，將降級為傳統 L2 模式
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:52:06 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO - 
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:52:07 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:52:08 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:52:09 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:52:09 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:52:09 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:53:32 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:53:32 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:53:32 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:53:32 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:53:32 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:53:32 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:53:32 - s_cbr.FourLayerPipeline - WARNING - [L2Agentic] 初始化失敗: name 'embed_client' is not defined，將降級為傳統 L2 模式
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:53:32 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO - 
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:53:33 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:53:34 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:53:35 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:53:35 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:53:35 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:53:58 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:53:58 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:53:58 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:53:58 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:53:58 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:53:58 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:53:58 - s_cbr.FourLayerPipeline - WARNING - [L2Agentic] 初始化失敗: name 'embed_client' is not defined，將降級為傳統 L2 模式
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:53:58 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO - 
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:53:59 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:54:00 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:54:00 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:54:00 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:54:00 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:55:30 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:55:30 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:55:30 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:55:30 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:55:30 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:55:30 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:55:30 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:55:30 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:55:31 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:55:31 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:55:31 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:55:31 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:55:31 - s_cbr.FourLayerPipeline - WARNING - [L2Agentic] 初始化失敗: name 'embed_client' is not defined，將降級為傳統 L2 模式
+2025-12-09 00:55:31 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:55:31 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO - 
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:55:31 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:55:33 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:55:33 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:55:33 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:55:33 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:56:05 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:56:05 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:56:05 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:56:05 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:56:05 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:56:05 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:56:05 - s_cbr.FourLayerPipeline - WARNING - [L2Agentic] 初始化失敗: L2AgenticDiagnosis.__init__() got an unexpected keyword argument 'embed_client'，將降級為傳統 L2 模式
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:56:05 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO - 
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:56:06 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:56:08 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:56:08 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:56:08 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:56:22 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:56:22 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:56:22 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:56:22 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:56:22 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:56:22 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:56:22 - s_cbr.FourLayerPipeline - WARNING - [L2Agentic] 初始化失敗: L2AgenticDiagnosis.__init__() got an unexpected keyword argument 'embed_client'，將降級為傳統 L2 模式
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:56:22 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO - 
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:56:23 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:56:24 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:56:24 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:56:24 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:56:24 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:56:46 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 00:56:46 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 00:56:46 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 00:56:46 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 00:56:46 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 00:56:46 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 00:56:46 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 00:56:46 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 00:56:47 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 00:56:47 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 00:56:47 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 00:56:47 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 00:56:47 - L2AgenticDiagnosis - INFO - [L2Agentic] 初始化完成 - 工具調用已啟用
+2025-12-09 00:56:47 - s_cbr.FourLayerPipeline - INFO - [L2Agentic] 初始化完成 (含內部知識庫連線)
+2025-12-09 00:56:47 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 00:56:47 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO - 
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 00:56:47 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 00:56:49 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 00:56:49 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 00:56:49 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 00:56:49 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
+2025-12-09 00:56:57 - s_cbr.SCBR-API - INFO - 📥 收到診斷請求 [IP: 127.0.0.1]
+2025-12-09 00:56:57 - s_cbr.SCBR-API - INFO -    問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:56:57 - s_cbr.SCBR-API - INFO -    Session ID: None
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO - 🌀 啟動診斷 [SCBR-20251209-005657-e2516340]
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO -    問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO -    session_id: None
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO -    continue_spiral: False
+2025-12-09 00:56:57 - s_cbr.DialogManager - INFO - 🆕 創建會話: 05338c81***
+2025-12-09 00:56:57 - s_cbr.DialogManager - INFO -    初始問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:56:57 - s_cbr.DialogManager - INFO -    當前會話總數: 1
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO -    會話ID: 05338c81-b3b9-4f2a-ad02-8e2e8d02e29c
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO -    當前輪次: 1
+2025-12-09 00:56:57 - s_cbr.SCBREngine - INFO -    累積問題: 這幾天胃很不舒服，感覺脹脹的，按下去更痛，有點噁心想吐，大便比較稀。...
+2025-12-09 00:56:57 - s_cbr.FourLayerPipeline - INFO - [L1] 使用 Agentic NLU 模式
+2025-12-09 00:57:05 - s_cbr.LLMClient - WARNING - ⚠️ 輸出過濾：檢測到 1 處敏感資訊
+2025-12-09 00:57:05 - s_cbr.FourLayerPipeline - INFO - [L1 FINAL RESULT] L1 狀態: ok
+2025-12-09 00:57:05 - s_cbr.FourLayerPipeline - INFO - [L1 AGENTIC DECISION]
+  Overall Confidence: 0.650
+  Decided Alpha: 0.55
+  Strategy Type: balanced
+  Expected Quality: medium
+2025-12-09 00:57:05 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL] 使用 Agentic 智能檢索
+2025-12-09 00:57:05 - AgenticRetrieval - INFO - [AgenticRetrieval] 開始智能檢索 - Alpha: 0.55, 策略: balanced, 預期品質: medium
+2025-12-09 00:57:05 - AgenticRetrieval - INFO - [AgenticRetrieval] 執行檢索 #1 - Alpha: 0.55
+2025-12-09 00:57:06 - AgenticRetrieval - INFO - [AgenticRetrieval] 向量生成成功 - 維度: 1024
+2025-12-09 00:57:06 - s_cbr.SearchEngine - INFO - [SearchEngine] 智能檢索啟動 - Index: TCMCase, Alpha: 0.55, 向量: 是, Limit: 3
+2025-12-09 00:57:06 - s_cbr.SearchEngine - INFO - 🔎 TCMCase 啟動檢索: Mode=HYBRID, α=0.55, 查詢字串長度=34 (這幾天胃很不舒服，感覺脹脹的，按下去更痛...)
+2025-12-09 00:57:06 - s_cbr.SearchEngine - INFO - 🔎 TCMCase HYBRID α=0.55, qdim=1024, fields=['full_text'], props=['zangfu_terms', 'syndrome_terms', 'full_text', 'jieba_tokens', 'suggestion', 'diagnosis', 'updated_at', 'created_at', 'visit_date', 'treatment_principle', 'tongue_terms', 'gender', 'symptom_terms', 'raw_data', 'treatment_terms', 'case_id', 'age', 'patient_id', 'chief_complaint', 'pulse_terms']
+2025-12-09 00:57:07 - s_cbr.SearchEngine - INFO - 📊 TCMCase 搜索: 3 個結果
+2025-12-09 00:57:07 - s_cbr.SearchEngine - INFO - [SearchEngine] 智能檢索完成 - 返回 3 個結果
+2025-12-09 00:57:07 - AgenticRetrieval - INFO - [AgenticRetrieval] 檢索完成 - 找到 3 個案例, 品質: 0.681
+2025-12-09 00:57:07 - AgenticRetrieval - INFO - [AgenticRetrieval] ✅ 檢索成功 (品質: 0.681)
+2025-12-09 00:57:07 - s_cbr.FourLayerPipeline - INFO - [AGENTIC RETRIEVAL]
+  初始 Alpha: 0.55
+  最終 Alpha: 0.55
+  嘗試次數: 1
+  品質評分: 0.681
+  Fallback: 否
+2025-12-09 00:57:07 - s_cbr.FourLayerPipeline - INFO - [RETRIEVAL RESULT] 成功找到 3 個案例. Top 3 範例: [{'case_id': 'CASE_20251005211408_M508_dfea1255', 'score': '0.5500'}, {'case_id': 'CASE_20251005212325_M456_ea0fddb3', 'score': '0.5412'}, {'case_id': 'CASE_20251005211456_V993_ae529307', 'score': '0.5301'}]
+2025-12-09 00:57:13 - s_cbr.FourLayerPipeline - INFO - [L2] 使用 Agentic 增強模式
+2025-12-09 00:57:13 - L2AgenticDiagnosis - INFO - [L2Agentic] 使用 enhance_diagnosis 適配方法
+2025-12-09 00:57:13 - L2AgenticDiagnosis - INFO - [L2Agentic] 評估結果
+  案例完整度: 0.50
+  診斷置信度: 0.68
+2025-12-09 00:57:15 - L2AgenticDiagnosis - INFO - [L2Agentic] 內部知識庫查詢: '這幾天胃很不舒服，感覺脹脹的，按下去更痛...' (Alpha=0.9, Vector=Yes)
+2025-12-09 00:57:15 - s_cbr.SearchEngine - INFO - 🔎 TCM 啟動檢索: Mode=HYBRID, α=0.90, 查詢字串長度=34 (這幾天胃很不舒服，感覺脹脹的，按下去更痛...)
+2025-12-09 00:57:15 - s_cbr.SearchEngine - INFO - 🔎 TCM HYBRID α=0.9, qdim=1024, fields=['vector_text', 'name_zh', 'clinical_manifestations'], props=['definition', 'clinical_manifestations', 'associated_western_diseases', 'subcategory', 'name_en', 'gbt_code', 'category', 'name_zh', 'tcm_id', 'vector_text']
+2025-12-09 00:57:15 - s_cbr.SearchEngine - INFO - 📊 TCM 搜索: 1 個結果
+2025-12-09 00:57:15 - L2AgenticDiagnosis - INFO - [L2Agentic] 內部知識庫命中: 濕熱腰痛證 (Score: 0.900)
+2025-12-09 00:57:15 - L2AgenticDiagnosis - INFO - [L2Agentic] 已注入內部知識: 濕熱腰痛證
+2025-12-09 00:57:15 - L2AgenticDiagnosis - INFO - [L2Agentic] 內部知識庫已滿足知識缺口，跳過 Tool B
+2025-12-09 00:57:15 - L2AgenticDiagnosis - INFO - [L2Agentic] 觸發 Tool C (置信度不足: 0.68)
+2025-12-09 00:57:15 - L2AgenticDiagnosis - INFO - [L2Agentic] 並行執行 1 個工具調用
+2025-12-09 00:57:15 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism 200
+2025-12-09 00:57:16 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=11&FORM=PERE 200
+2025-12-09 00:57:17 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=21&FORM=PERE1 200
+2025-12-09 00:57:18 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=31&FORM=PERE2 200
+2025-12-09 00:57:19 - primp - INFO - response: https://www.bing.com/search?q=%28site%3Atcmip.cn+OR+site%3Ancbi.nlm.nih.gov%29+%E8%84%BE%E8%99%9B%E8%AD%89%E5%9E%8B%EF%BC%88%E5%88%9D%E6%AD%A5%E5%82%BE%E5%90%91%EF%BC%89+mechanism&first=41&FORM=PERE3 200
+2025-12-09 00:57:19 - L2AgenticDiagnosis - INFO - [L2Agentic] 增強完成
+  驗證狀態: validated
+  工具調用數: 1
+  置信度提升: +0.15
+2025-12-09 00:57:19 - s_cbr.FourLayerPipeline - INFO - [L2 AGENTIC ENHANCEMENT]
+  驗證狀態: validated
+  工具調用數: 1
+  置信度提升: +0.15
+  案例完整度: 0.50
+  診斷置信度: 0.68
+2025-12-09 00:57:19 - s_cbr.FourLayerPipeline - INFO - [L2 DIAGNOSIS SUMMARY] 錨定 ID: CASE_20251005212325_M456_ea0fddb3, 證型: 脾虛證型（初步傾向）, 覆蓋度: 0.60
+2025-12-09 00:57:25 - s_cbr.FourLayerPipeline - INFO - [L3 REVIEW STATUS] 審核結果: rewritten
+2025-12-09 00:57:32 - s_cbr.DialogManager - INFO - 📊 記錄第 1 輪結果到會話 05338c81***
+2025-12-09 00:57:32 - s_cbr.SCBREngine - INFO - ✅ 診斷完成 [SCBR-20251209-005657-e2516340] 耗時: 35.43s
+2025-12-09 00:57:32 - s_cbr.SCBREngine - INFO -    輪次: 1, 可繼續: True
+2025-12-09 00:57:32 - s_cbr.SCBR-API - INFO - ✅ 診斷完成 [IP: 127.0.0.1] 耗時: 35.43s
+2025-12-09 01:22:16 - s_cbr.RateLimiter - INFO - ✅ RateLimiter 初始化完成
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ RateLimiter 初始化成功
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ OWASP映射器初始化成功
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ 安全模組初始化完成
+2025-12-09 01:22:16 - s_cbr.DialogManager - INFO - ✅ 對話管理器初始化完成 (max_sessions=100)
+2025-12-09 01:22:16 - s_cbr.LLMClient - INFO - ✅ LLM客戶端初始化: model=meta/llama-3.3-70b-instruct, max_tokens=4000, timeout=30.0s
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ LLM 客戶端初始化成功
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ EmbedClient 初始化成功
+2025-12-09 01:22:16 - s_cbr.SearchEngine - INFO - [SearchEngine] Connected to Weaviate
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ SearchEngine 初始化成功
+2025-12-09 01:22:16 - AgenticRetrieval - INFO - [AgenticRetrieval] 初始化完成 - 品質門檻: 0.65, 最大 fallback: 3
+2025-12-09 01:22:16 - s_cbr.FourLayerPipeline - INFO - [FourLayerPipeline] TCMTools 工具庫已掛載
+2025-12-09 01:22:16 - L2AgenticDiagnosis - INFO - [L2Agentic] 初始化完成 - 工具調用已啟用
+2025-12-09 01:22:16 - s_cbr.FourLayerPipeline - INFO - [L2Agentic] 初始化完成 (含內部知識庫連線)
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ 四層 SCBR 管線初始化完成
+2025-12-09 01:22:16 - s_cbr.SCBREngine - INFO - ✅ S-CBR Engine 初始化完成 (含安全防護)
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO - 🚀 TCM S-CBR Backend v2.2 啟動
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO - 📦 已載入模組:
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    ✅ S-CBR 螺旋推理引擎
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    ✅ ANC 病例管理系統
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO - 
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO - 🔗 可用端點:
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    - 螺旋推理: /api/scbr/v2/*
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    - 病例保存: POST /api/case/save
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    - 病例查詢: GET /api/case/get/{case_id}
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    - 病例搜索: POST /api/case/search
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    - 病例統計: GET /api/case/stats
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO -    - 健康檢查: GET /healthz
+2025-12-09 01:22:17 - s_cbr.backend.main - INFO - ============================================================
+2025-12-09 01:22:18 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/meta "HTTP/1.1 200 OK"
+2025-12-09 01:22:19 - httpx - INFO - HTTP Request: GET https://pypi.org/pypi/weaviate-client/json "HTTP/1.1 200 OK"
+2025-12-09 01:22:19 - httpx - INFO - HTTP Request: GET http://localhost:8080/v1/schema/TCMCase "HTTP/1.1 200 OK"
+2025-12-09 01:22:19 - s_cbr.backend.main - INFO - ✅ ANC 病例處理器初始化成功
