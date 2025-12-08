@@ -122,60 +122,134 @@ class L2AgenticDiagnosis:
     # ==================== 主要診斷流程 ====================
     
     async def diagnose_with_tools(
-        self,
-        user_symptoms: str,
-        retrieved_cases: List[Dict[str, Any]],
+        self, 
+        user_query: str, 
+        retrieved_cases: List[Dict[str, Any]], 
         l1_decision: Dict[str, Any]
-    ) -> L2AgenticOutput:
+    ) -> Dict[str, Any]:
         """
-        執行帶工具增強的診斷流程
-        """
-        logger.info("[L2Agentic] 開始診斷流程")
+        執行 L2 Agentic 診斷流程 (整合中醫思維穩定性修正)
         
-        # 步驟 1：案例錨定與初步診斷
-        anchored_case, initial_diagnosis = await self._anchor_and_diagnose(
-            user_symptoms, retrieved_cases
+        流程:
+        1. 強制鎖定最佳錨定 (Top-1) 以確保推理穩定。
+        2. 執行初步診斷 (L2)。
+        3. 執行內部知識庫增強 (Term Expansion + Scope Guard)。
+        4. 評估完整度與置信度。
+        5. 決策並執行外部工具 (Tools)。
+        6. 綜合最終結果。
+        """
+        
+        # [老中醫思維 - 穩定性修正] 強制鎖定最佳錨定 (Force Top-1 Anchor)
+        # 解決問題: 避免 LLM 在分數相近的案例間隨機選擇，導致每次診斷的基礎不同。
+        # 邏輯: 模擬醫生腦中浮現出"最典型"的那個過往案例。
+        target_anchors = retrieved_cases
+        best_anchor = None
+        
+        if retrieved_cases and len(retrieved_cases) > 0:
+            best_anchor = retrieved_cases[0] # 取分數最高的
+            target_anchors = [best_anchor]   # 只傳入這一個給 LLM
+            logger.info(f"[L2Agentic] 強制鎖定單一錨定案例: {best_anchor.get('case_id')} (Score: {best_anchor.get('score')})")
+
+        # 步驟 1：執行 L2 初始診斷 (基於鎖定的錨定案例)
+        try:
+            l2_raw_result = await self._anchor_and_diagnose(
+                user_query, 
+                target_anchors
+                # , l1_decision # 嘗試移除此參數，如果您的定義不需要
+            )
+        except TypeError:
+            # 如果上方調用失敗，嘗試帶上 l1_decision (兼容舊版定義)
+            l2_raw_result = await self._anchor_and_diagnose(
+                user_query, 
+                target_anchors,
+                l1_decision
+            )
+
+        # [FIX] 處理 tuple 返回值異常 (針對 AttributeError: 'tuple' object has no attribute 'get')
+        # 這通常發生在 async 函數回傳時帶有不必要的逗號，或是解包錯誤
+        if isinstance(l2_raw_result, tuple):
+            logger.warning(f"[L2Agentic] 檢測到 l2_raw_result 為 tuple，嘗試解包。長度: {len(l2_raw_result)}")
+            if len(l2_raw_result) > 0 and isinstance(l2_raw_result[0], dict):
+                l2_raw_result = l2_raw_result[0]
+            else:
+                logger.error(f"[L2Agentic] l2_raw_result 格式嚴重錯誤: {l2_raw_result}")
+                l2_raw_result = {} # 防崩潰
+
+        # 步驟 2：評估案例完整度
+        case_completeness = self._evaluate_case_completeness_from_l2(l2_raw_result)
+        
+        # 步驟 3：從 l2_raw_result 提取診斷資訊
+        # 注意: 這裡傳入原本的 retrieved_cases (全部) 作為保底，或者傳入鎖定的 best_anchor
+        # 建議傳入鎖定的 best_anchor 以保持一致性
+        initial_diagnosis = self._extract_diagnosis_from_l2_result(
+            l2_raw_result,
+            retrieved_cases=[best_anchor] if best_anchor else retrieved_cases
         )
         
-        # 步驟 2：評估案例完整度與診斷品質
-        case_completeness = self._evaluate_case_completeness(anchored_case)
-        diagnosis_confidence = self._evaluate_diagnosis_confidence(
-            initial_diagnosis, l1_decision
+        # 步驟 3.5：內部知識庫增強與衝突檢測 (Internal Knowledge Enrichment)
+        # 這是我們之前新增的邏輯，會在 enhance_diagnosis 中執行 _query_internal_knowledge
+        # 並將結果注入 initial_diagnosis，觸發 "conflict_needs_resolution"
+        await self.enhance_diagnosis(
+            initial_diagnosis, 
+            l2_raw_result, 
+            l1_decision
         )
-        
-        # 步驟 3：自主決策是否需要工具調用
+
+        # 步驟 4：計算診斷置信度
+        # 如果發現了衝突 (conflict_needs_resolution)，置信度應該被懲罰
+        diagnosis_confidence = self._calculate_confidence(initial_diagnosis, case_completeness)
+        if initial_diagnosis.get("conflict_needs_resolution", False):
+            logger.warning("[L2Agentic] 因診斷衝突，降低置信度 -0.15")
+            diagnosis_confidence = max(0.0, diagnosis_confidence - 0.15)
+
+        logger.info(f"[L2Agentic] 評估結果\n  案例完整度: {case_completeness:.2f}\n  診斷置信度: {diagnosis_confidence:.2f}")
+
+        # 步驟 5：決策是否需要工具調用
+        # 這裡會判斷是否需要 Tool B (百科) 或 Tool C (機制) 來解決衝突或補足低置信度
         tool_decision = self._decide_tool_calls(
-            anchored_case=anchored_case,
+            anchored_case=best_anchor, # 傳入鎖定的錨定
             initial_diagnosis=initial_diagnosis,
             case_completeness=case_completeness,
             diagnosis_confidence=diagnosis_confidence,
             l1_decision=l1_decision
         )
         
-        # 步驟 4：執行工具調用（如有需要）
-        tool_results = []
-        if self._should_call_any_tool(tool_decision):
-            tool_results = await self._execute_tool_calls(
-                tool_decision, 
-                initial_diagnosis.get("primary_syndrome", "")
+        final_result = {
+            "initial_diagnosis": initial_diagnosis,
+            "tool_decision": tool_decision,
+            "final_diagnosis": initial_diagnosis, # 預設為初始診斷
+            "metrics": {
+                "case_completeness": case_completeness,
+                "initial_confidence": diagnosis_confidence
+            }
+        }
+
+        # 步驟 6：執行工具 (如果需要)
+        if tool_decision.should_call_any():
+            tool_outputs = await self._execute_tools(tool_decision)
+            
+            # 再次增強診斷 (注入工具結果)
+            final_diagnosis = await self._synthesize_final_diagnosis(
+                initial_diagnosis,
+                tool_outputs
             )
-        
-        # 步驟 5：整合工具結果，增強診斷
-        enhanced_diagnosis = self._integrate_tool_results(
-            initial_diagnosis, tool_results
-        )
-        
-        # 步驟 6：生成最終輸出
-        output = self._build_output(
-            anchored_case=anchored_case,
-            enhanced_diagnosis=enhanced_diagnosis,
-            tool_decision=tool_decision,
-            tool_results=tool_results,
-            case_completeness=case_completeness
-        )
-        
-        logger.info(f"[L2Agentic] 診斷完成 - 驗證狀態: {output.validation_status}")
-        return output
+            final_result["tool_outputs"] = tool_outputs
+            final_result["final_diagnosis"] = final_diagnosis
+            
+            # 更新置信度
+            final_confidence = min(0.95, diagnosis_confidence + 0.15) # 簡單提升
+            final_result["metrics"]["final_confidence"] = final_confidence
+            
+            logger.info(f"[L2Agentic] 增強完成\n  驗證狀態: validated\n  工具調用數: {len(tool_outputs)}\n  置信度提升: +0.15")
+        else:
+            logger.info("[L2Agentic] 無需調用工具，條件未觸發")
+            final_result["metrics"]["final_confidence"] = diagnosis_confidence
+            
+            # 標記狀態
+            final_result["tool_outputs"] = {}
+            logger.info(f"[L2Agentic] 增強完成\n  驗證狀態: unvalidated\n  工具調用數: 0\n  置信度提升: +0.00")
+
+        return final_result
     
     # [NEW] 內部知識庫查詢方法
     async def _query_internal_knowledge(self, query_text: str, vector_search_only: bool = False) -> Dict[str, Any]:

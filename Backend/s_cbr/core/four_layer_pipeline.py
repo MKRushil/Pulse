@@ -408,65 +408,86 @@ class FourLayerSCBR:
 
         
         # 3. L2: 生成層 (Diagnosis Layer)
-        l2_payload = {
-            "layer": "L2_CASE_ANCHORED_DIAGNOSIS",
-            "input": {
-                "user_accumulated_query": user_query,
-                "retrieved_cases": cases,
-                "round_count": round_count,
-                "previous_diagnosis": previous_diagnosis if previous_diagnosis else {}
-            }
-        }
-
-        # 3.1 傳統 L2 診斷（LLM 推理）
-        l2_raw_result = await call_llm_with_prompt(
-            self.llm, 
-            self.prompts_dir / "l2_case_anchored_diagnosis_prompt.txt", 
-            l2_payload, 
-            temperature=0.1
-        )
-
-        # 3.2 L2 Agentic 增強（如果啟用）
+        l2_raw_result = {}
+        
+        # [MODIFIED] 根據模式選擇執行路徑
         if self.agentic_enabled and self.l2_agentic:
-            logger.info("[L2] 使用 Agentic 增強模式")
+            logger.info("[L2] 使用 Agentic 增強模式 (v2.3 全託管流程)")
             
-            # 執行工具增強診斷
-            l2_agentic_output = await self.l2_agentic.enhance_diagnosis(
-                l2_raw_result=l2_raw_result,
-                l1_decision=l1,
-                retrieved_cases=cases
+            # 執行全託管診斷 (包含 鎖定錨定 -> 推理 -> 內部知識檢索 -> 工具調用 -> 綜合)
+            # 這裡呼叫的是我們剛在 l2_agentic_diagnosis.py 中更新的 diagnose_with_tools
+            agentic_result = await self.l2_agentic.diagnose_with_tools(
+                user_query=user_query,
+                retrieved_cases=cases,
+                l1_decision=l1
             )
             
-            # 將增強資訊添加到結果中
+            # [關鍵] 將 Agentic 的最終診斷 (Final Diagnosis) 重構為系統通用的 l2_raw_result 格式
+            # 這樣 L3 (安全審核) 和 L4 (呈現) 才能看到被 Agentic 修正過的高品質內容
+            final_diag = agentic_result.get("final_diagnosis", {})
+            metrics = agentic_result.get("metrics", {})
+            tool_outputs = agentic_result.get("tool_outputs", {})
+            
+            # 重建 l2_raw_result 結構
+            l2_raw_result = {
+                "tcm_inference": {
+                    "primary_pattern": final_diag.get("primary_syndrome", "未定"),
+                    "pathogenesis": final_diag.get("pathogenesis", ""),
+                    "treatment_principle": final_diag.get("treatment_principle", ""),
+                    # 這裡將包含 '發現疑點...' 的 reasoning 注入，讓 L4 呈現給用戶看
+                    "syndrome_analysis": final_diag.get("reasoning", "") 
+                },
+                "coverage_evaluation": {
+                    "coverage_ratio": metrics.get("case_completeness", 0.0),
+                    "missing_info": []
+                },
+                "selected_case": {
+                    # 嘗試從 initial_diagnosis 拿回錨定資訊，若無則標記為 Agentic 合成
+                    "case_id": agentic_result.get("initial_diagnosis", {}).get("anchored_case_id", "Agentic_Synthesized"),
+                    "diagnosis": "Agentic Optimization"
+                },
+                "knowledge_supplements": final_diag.get("knowledge_supplements", [])
+            }
+
+            # 填充 result 結構
             result['l2'] = l2_raw_result
             result['l2_agentic_metadata'] = {
-                "validation_status": l2_agentic_output.validation_status,
-                "tool_calls": len(l2_agentic_output.tool_results),
-                "confidence_boost": l2_agentic_output.confidence_boost,
-                "case_completeness": l2_agentic_output.case_completeness,
-                "diagnosis_confidence": l2_agentic_output.diagnosis_confidence
+                "validation_status": "validated" if tool_outputs else "unvalidated",
+                "tool_calls": len(tool_outputs),
+                "confidence_boost": 0.15 if tool_outputs else 0.0,
+                "case_completeness": metrics.get("case_completeness", 0.0),
+                "diagnosis_confidence": metrics.get("final_confidence", 0.0)
             }
             
-            # 將工具增強的資訊添加到結果中供後續層使用
-            if l2_agentic_output.authority_references:
-                result['l2']['authority_references'] = l2_agentic_output.authority_references
-            if l2_agentic_output.knowledge_supplements:
-                result['l2']['knowledge_supplements'] = l2_agentic_output.knowledge_supplements
-            if l2_agentic_output.modern_evidence:
-                result['l2']['modern_evidence'] = l2_agentic_output.modern_evidence
-            
-            # 記錄工具調用詳情
+            # 將工具輸出傳遞給 result (供前端或除錯使用)
+            if tool_outputs:
+                result['l2']['tool_outputs'] = tool_outputs
+
             logger.info(
-                f"[L2 AGENTIC ENHANCEMENT]\n"
-                f"  驗證狀態: {l2_agentic_output.validation_status}\n"
-                f"  工具調用數: {len(l2_agentic_output.tool_results)}\n"
-                f"  置信度提升: +{l2_agentic_output.confidence_boost:.2f}\n"
-                f"  案例完整度: {l2_agentic_output.case_completeness:.2f}\n"
-                f"  診斷置信度: {l2_agentic_output.diagnosis_confidence:.2f}"
+                f"[L2 AGENTIC COMPLETE]\n"
+                f"  最終診斷: {l2_raw_result['tcm_inference']['primary_pattern']}\n"
+                f"  工具調用: {len(tool_outputs)}\n"
+                f"  包含疑點分析: {'是' if '疑點' in l2_raw_result['tcm_inference']['syndrome_analysis'] else '否'}"
             )
+
         else:
-            # 傳統模式（無工具增強）
-            logger.info("[L2] 使用傳統模式（無工具增強）")
+            # === 傳統模式 ===
+            logger.info("[L2] 使用傳統模式 (無 Agentic)")
+            l2_payload = {
+                "layer": "L2_CASE_ANCHORED_DIAGNOSIS",
+                "input": {
+                    "user_accumulated_query": user_query,
+                    "retrieved_cases": cases,
+                    "round_count": round_count,
+                    "previous_diagnosis": previous_diagnosis if previous_diagnosis else {}
+                }
+            }
+            l2_raw_result = await call_llm_with_prompt(
+                self.llm, 
+                self.prompts_dir / "l2_case_anchored_diagnosis_prompt.txt", 
+                l2_payload, 
+                temperature=0.1
+            )
             result['l2'] = l2_raw_result
 
         # 🚨 [日誌點 3: L2 案例錨定摘要]
@@ -508,7 +529,29 @@ class FourLayerSCBR:
         # 🚨 L4 實際 LLM 調用 (使用溫度 0.1)
         l4_result = await call_llm_with_prompt(self.llm, self.prompts_dir / "l4_presentation_prompt.txt", l4_payload, temperature=0.1)
         result['l4'] = l4_result
-        result['diagnosis'] = l4_result.get('presentation', {})
+        
+        # [FIX] 前端防崩潰處理：確保 diagnosis 是字串
+        presentation = l4_result.get('presentation', "")
+        
+        if isinstance(presentation, dict):
+            # 如果 L4 回傳的是結構化物件 (例如包含 title/content)，優先取內容
+            if "content" in presentation:
+                result['diagnosis'] = presentation["content"]
+            elif "message" in presentation:
+                result['diagnosis'] = presentation["message"]
+            else:
+                # 否則將整個字典轉為易讀的字串
+                lines = []
+                for k, v in presentation.items():
+                    # 過濾掉非必要的 metadata
+                    if k not in ["type", "status"]:
+                        lines.append(f"**{k}**: {v}")
+                result['diagnosis'] = "\n\n".join(lines)
+        elif isinstance(presentation, list):
+            result['diagnosis'] = "\n".join([str(x) for x in presentation])
+        else:
+            # 已經是字串或 None
+            result['diagnosis'] = str(presentation) if presentation else "診斷生成異常，請稍後再試。"
         
         # 檢查收斂 (依據 SCBR 文件 [10.2] 的收斂條件)
         coverage_ratio = l2_raw_result.get('coverage_evaluation', {}).get('coverage_ratio', 0.0)
