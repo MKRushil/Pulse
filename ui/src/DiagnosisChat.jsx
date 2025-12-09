@@ -127,7 +127,7 @@ export default function DiagnosisChat() {
       setCurrentDiagnosis(data);
 
       // 構建回應訊息
-      const rawResponse = data.final_text || data.text || data.answer || "[系統] 未取得回應";
+      const rawResponse = data.diagnosis || data.final_text || data.text || data.answer || "[系統] 未取得回應";
       const out = analyzeOutput(rawResponse);
       const responseText = out.sanitizedText;
       

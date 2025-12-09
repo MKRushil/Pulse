@@ -128,100 +128,60 @@ class L2AgenticDiagnosis:
         l1_decision: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
-        執行 L2 Agentic 診斷流程 (整合中醫思維穩定性修正)
-        
-        流程:
-        1. 強制鎖定最佳錨定 (Top-1) 以確保推理穩定。
-        2. 執行初步診斷 (L2)。
-        3. 執行內部知識庫增強 (Term Expansion + Scope Guard)。
-        4. 評估完整度與置信度。
-        5. 決策並執行外部工具 (Tools)。
-        6. 綜合最終結果。
+        執行 L2 Agentic 診斷流程 (修復參數傳遞與類型轉換)
         """
-        
-        # [老中醫思維 - 穩定性修正] 強制鎖定最佳錨定 (Force Top-1 Anchor)
-        # 解決問題: 避免 LLM 在分數相近的案例間隨機選擇，導致每次診斷的基礎不同。
-        # 邏輯: 模擬醫生腦中浮現出"最典型"的那個過往案例。
+        # 1. [穩定性] 強制鎖定最佳錨定 (Top-1)
         target_anchors = retrieved_cases
         best_anchor = None
-        
         if retrieved_cases and len(retrieved_cases) > 0:
-            best_anchor = retrieved_cases[0] # 取分數最高的
-            target_anchors = [best_anchor]   # 只傳入這一個給 LLM
+            best_anchor = retrieved_cases[0]
+            target_anchors = [best_anchor]
             logger.info(f"[L2Agentic] 強制鎖定單一錨定案例: {best_anchor.get('case_id')} (Score: {best_anchor.get('score')})")
 
-        # 步驟 1：執行 L2 初始診斷 (基於鎖定的錨定案例)
+        # 2. 執行初步診斷 (L2)
+        # [FIX] 處理 _anchor_and_diagnose 參數數量不定的問題
         try:
-            l2_raw_result = await self._anchor_and_diagnose(
-                user_query, 
-                target_anchors
-                # , l1_decision # 嘗試移除此參數，如果您的定義不需要
-            )
+            l2_raw_result = await self._anchor_and_diagnose(user_query, target_anchors)
         except TypeError:
-            # 如果上方調用失敗，嘗試帶上 l1_decision (兼容舊版定義)
-            l2_raw_result = await self._anchor_and_diagnose(
-                user_query, 
-                target_anchors,
-                l1_decision
-            )
+            # 兼容舊版定義 (多一個 l1_decision)
+            l2_raw_result = await self._anchor_and_diagnose(user_query, target_anchors, l1_decision)
 
-        # [FIX] 處理 tuple 返回值異常 (針對 AttributeError: 'tuple' object has no attribute 'get')
-        # 這通常發生在 async 函數回傳時帶有不必要的逗號，或是解包錯誤
+        # [FIX] 處理 tuple 返回值 (針對 AttributeError: tuple has no attribute get)
+        initial_diagnosis = l2_raw_result
         if isinstance(l2_raw_result, tuple):
-            logger.warning(f"[L2Agentic] 檢測到 l2_raw_result 為 tuple，嘗試解包。長度: {len(l2_raw_result)}")
-            if len(l2_raw_result) > 0 and isinstance(l2_raw_result[0], dict):
-                l2_raw_result = l2_raw_result[0]
+            # 根據您的代碼，tuple 結構通常是 (anchored_case, diagnosis_dict)
+            if len(l2_raw_result) >= 2:
+                initial_diagnosis = l2_raw_result[1]
+                logger.info("[L2Agentic] 成功從 tuple 解包出診斷字典")
             else:
-                logger.error(f"[L2Agentic] l2_raw_result 格式嚴重錯誤: {l2_raw_result}")
-                l2_raw_result = {} # 防崩潰
+                initial_diagnosis = l2_raw_result[0] if len(l2_raw_result) > 0 else {}
 
-        # 步驟 2：評估案例完整度
-        case_completeness = self._evaluate_case_completeness_from_l2(l2_raw_result)
-        
-        # 步驟 3：從 l2_raw_result 提取診斷資訊
-        # 注意: 這裡傳入原本的 retrieved_cases (全部) 作為保底，或者傳入鎖定的 best_anchor
-        # 建議傳入鎖定的 best_anchor 以保持一致性
-        initial_diagnosis = self._extract_diagnosis_from_l2_result(
-            l2_raw_result,
-            retrieved_cases=[best_anchor] if best_anchor else retrieved_cases
+        # 3. 調用增強流程 (Enhance Diagnosis)
+        # [CRITICAL FIX] 使用關鍵字參數 (keyword arguments) 確保順序正確，避免 KeyError: 0
+        # 之前錯誤將 l1_decision 傳給了 retrieved_cases
+        l2_agentic_output = await self.enhance_diagnosis(
+            l2_raw_result=initial_diagnosis,
+            l1_decision=l1_decision,
+            retrieved_cases=target_anchors  # 這裡必須傳入列表！
         )
         
-        # 步驟 3.5：內部知識庫增強與衝突檢測 (Internal Knowledge Enrichment)
-        # 這是我們之前新增的邏輯，會在 enhance_diagnosis 中執行 _query_internal_knowledge
-        # 並將結果注入 initial_diagnosis，觸發 "conflict_needs_resolution"
-        await self.enhance_diagnosis(
-            initial_diagnosis, 
-            l2_raw_result, 
-            l1_decision
-        )
-
-        # 步驟 4：計算診斷置信度
-        # 如果發現了衝突 (conflict_needs_resolution)，置信度應該被懲罰
-        diagnosis_confidence = self._calculate_confidence(initial_diagnosis, case_completeness)
-        if initial_diagnosis.get("conflict_needs_resolution", False):
-            logger.warning("[L2Agentic] 因診斷衝突，降低置信度 -0.15")
-            diagnosis_confidence = max(0.0, diagnosis_confidence - 0.15)
-
-        logger.info(f"[L2Agentic] 評估結果\n  案例完整度: {case_completeness:.2f}\n  診斷置信度: {diagnosis_confidence:.2f}")
-
-        # 步驟 5：決策是否需要工具調用
-        # 這裡會判斷是否需要 Tool B (百科) 或 Tool C (機制) 來解決衝突或補足低置信度
-        tool_decision = self._decide_tool_calls(
-            anchored_case=best_anchor, # 傳入鎖定的錨定
-            initial_diagnosis=initial_diagnosis,
-            case_completeness=case_completeness,
-            diagnosis_confidence=diagnosis_confidence,
-            l1_decision=l1_decision
-        )
-        
-        final_result = {
-            "initial_diagnosis": initial_diagnosis,
-            "tool_decision": tool_decision,
-            "final_diagnosis": initial_diagnosis, # 預設為初始診斷
+        # 4. [格式轉換] 將 dataclass 轉換為 Dict，以符合 FourLayerPipeline 的預期
+        # 如果不轉，FourLayerPipeline 裡的 isinstance(x, dict) 會失敗
+        return {
+            "final_diagnosis": {
+                "primary_syndrome": l2_agentic_output.syndrome_analysis,
+                "reasoning": l2_agentic_output.diagnosis_reasoning,
+                "pathogenesis": l2_agentic_output.anchored_case.get("pathogenesis", ""),
+                "treatment_principle": l2_agentic_output.anchored_case.get("treatment", ""),
+                "knowledge_supplements": l2_agentic_output.knowledge_supplements
+            },
             "metrics": {
-                "case_completeness": case_completeness,
-                "initial_confidence": diagnosis_confidence
-            }
+                "case_completeness": l2_agentic_output.coverage_score,
+                "final_confidence": l2_agentic_output.coverage_score + l2_agentic_output.confidence_boost
+            },
+            "tool_outputs": {r.tool_name: r.content for r in l2_agentic_output.tool_results},
+            "tool_decision": l2_agentic_output.tool_decisions,
+            "initial_diagnosis": initial_diagnosis
         }
 
         # 步驟 6：執行工具 (如果需要)
@@ -733,23 +693,36 @@ class L2AgenticDiagnosis:
     async def _anchor_and_diagnose(
         self,
         user_symptoms: str,
-        retrieved_cases: List[Dict[str, Any]]
+        retrieved_cases: List[Dict[str, Any]],
+        l1_decision: Dict[str, Any] = None  # 確保參數簽名兼容
     ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
-        執行案例錨定與初步診斷（原有 L2 邏輯）
+        執行案例錨定與初步診斷 (修復欄位讀取)
         """
         if not retrieved_cases:
-            return {}, {"error": "無可用案例"}
+            return {}, {"primary_syndrome": "待分析", "reasoning": "無可用案例"}
         
         anchored_case = retrieved_cases[0]
         
+        # [FIX] 鍵名兼容性處理 (Key Compatibility)
+        # 資料庫中的 key 可能是 diagnosis, syndrome, 或 primary_pattern
+        syndrome_name = (
+            anchored_case.get("diagnosis") or 
+            anchored_case.get("syndrome") or 
+            anchored_case.get("primary_pattern") or 
+            "待分析"
+        )
+        
+        # 簡單的推理文字生成
+        reasoning = f"基於錨定案例 {anchored_case.get('case_id', 'Unknown')} ({syndrome_name}) 進行推斷。"
+        
         initial_diagnosis = {
-            "primary_syndrome": anchored_case.get("syndrome", "待分析"),
+            "primary_syndrome": syndrome_name,
             "secondary_syndromes": [],
-            "pathogenesis": anchored_case.get("pathogenesis", ""),
-            "treatment_principle": anchored_case.get("treatment", ""),
+            "pathogenesis": anchored_case.get("pathogenesis", "") or anchored_case.get("mechanism", ""),
+            "treatment_principle": anchored_case.get("treatment", "") or anchored_case.get("treatment_principle", ""),
             "confidence": 0.7,
-            "reasoning": "基於案例相似度推斷"
+            "reasoning": reasoning
         }
         
         return anchored_case, initial_diagnosis
